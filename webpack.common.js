@@ -23,6 +23,11 @@ module.exports = {
           { loader: 'raw-loader' },
           { loader: 'less-loader' }
         ]
+      },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader'
       }
     ]
   },
@@ -36,7 +41,7 @@ module.exports = {
     alias: {
       // jquery: 'jquery/src/jquery'
     },
-    extensions: ['.js', '.less', '.html', '.vue'],
+    extensions: ['.js', '.less', '.html', '.vue', '.gql'],
     mainFiles: ['index', '_index']
   }
 }

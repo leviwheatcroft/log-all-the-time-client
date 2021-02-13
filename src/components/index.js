@@ -1,5 +1,7 @@
-const { default: Demo } = require('./Demo')
+const { default: Root } = require('./Root')
+const { default: Login } = require('./Login')
 
 module.exports = {
-  Demo
+  Root,
+  Login
 }
