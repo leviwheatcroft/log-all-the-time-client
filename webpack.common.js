@@ -18,12 +18,37 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.less$/,
+        test: /\.css$/,
         use: [
-          { loader: 'raw-loader' },
-          { loader: 'less-loader' }
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false
+            }
+          }
         ]
       },
+      {
+        test: /\.less$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false
+            }
+          },
+          'less-loader'
+        ]
+      },
+      // {
+      //   test: /\.less$/,
+      //   use: [
+      //     { loader: 'raw-loader' },
+      //     { loader: 'less-loader' }
+      //   ]
+      // },
       {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,

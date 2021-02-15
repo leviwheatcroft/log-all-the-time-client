@@ -1,13 +1,11 @@
-const { default: Login } = require('../Login')
 const { default: EntryNew } = require('../EntryNew')
 const { default: Recent } = require('../Recent')
 
-const Root = {
+const PageDashboard = {
   components: {
-    Login,
-    Recent,
-    EntryNew
+    EntryNew,
+    Recent
   }
 }
 
-module.exports = Root
+module.exports = PageDashboard

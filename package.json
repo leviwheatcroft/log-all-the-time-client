@@ -7,7 +7,8 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.production.js",
     "webpack": "webpack --watch --config webpack.development.js",
-    "browsersync": "node browsersync"
+    "browsersync": "node browsersync",
+    "pug": "pug -o build -b src/pages src/pages/index.pug"
   },
   "dependencies": {
     "@apollo/client": "^3.3.9",
@@ -31,11 +32,14 @@
     "less": "^4.1.1",
     "less-loader": "^8.0.0",
     "pug": "^3.0.0",
+    "pug-cli": "^1.0.0-alpha6",
     "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "vue": "^2.6.12",
     "vue-apollo": "^3.0.7",
     "vue-loader": "^15.9.6",
+    "vue-router": "^3.5.1",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^5.21.2",
     "webpack-bundle-size-analyzer": "^3.1.0",

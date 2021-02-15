@@ -1,12 +1,19 @@
 const { default: Vue } = require('vue')
 const { default: VueApollo } = require('vue-apollo')
-const { Root } = require('./src/components')
+const { default: VueRouter } = require('vue-router')
 const { apolloProvider } = require('./src/apollo')
+const {
+  routes,
+  App
+} = require('./src/components')
 
+Vue.use(VueRouter)
 Vue.use(VueApollo)
+const router = new VueRouter({ routes })
 
 new Vue({
-  render (h) { return h(Root) },
-  apolloProvider
+  render (h) { return h(App) },
+  apolloProvider,
+  router
   // render: function (h) { return h(Demo) }
 }).$mount('#app')
