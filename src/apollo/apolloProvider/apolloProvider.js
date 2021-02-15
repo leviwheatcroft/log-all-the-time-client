@@ -14,6 +14,7 @@ const httpLink = createHttpLink({
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
+  // link: httpLink,
   link: from([
     // order is important
     getAuthHeaderLink({ getClient }),
@@ -30,14 +31,14 @@ function getClient () {
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
-  defaultOptions: {
-    query: {
-      errorPolicy: 'all'
-    },
-    mutate: {
-      errorPolicy: 'all'
-    }
-  }
+  // defaultOptions: {
+  //   query: {
+  //     errorPolicy: 'all'
+  //   },
+  //   mutate: {
+  //     errorPolicy: 'all'
+  //   }
+  // }
 })
 
 module.exports = {

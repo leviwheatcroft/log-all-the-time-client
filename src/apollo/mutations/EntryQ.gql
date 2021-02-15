@@ -1,0 +1,10 @@
+query EntryQ {
+  EntryQ {
+    raw
+    date
+    timeStart
+    timeEnd
+    duration
+    tags
+  }
+}

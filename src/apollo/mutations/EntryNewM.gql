@@ -1,0 +1,11 @@
+mutation EntryNewM($entry: EntryI!) {
+  EntryNewM(entry: $entry) {
+    id
+    raw
+    date
+    timeStart
+    timeEnd
+    duration
+    tags
+  }
+}

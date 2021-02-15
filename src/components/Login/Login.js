@@ -15,6 +15,12 @@ const Login = {
         }
       })
       console.log('result', result)
+      const {
+        accessToken,
+        refreshToken
+      } = result.data.UserLoginM
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
     }
   }
 }
