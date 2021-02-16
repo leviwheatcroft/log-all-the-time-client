@@ -1,10 +1,15 @@
 query EntryQ {
   EntryQ {
+    id
     raw
+    description
     date
     timeStart
     timeEnd
     duration
-    tags
+    tags {
+      id
+      tag
+    }
   }
 }

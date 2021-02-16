@@ -1,2 +1,3 @@
 .entry-display
-  p {{ entry.raw }}
+  .tag(v-for='tag in entry.tags') {{ tag.tag }}
+  .description {{ entry.raw }}

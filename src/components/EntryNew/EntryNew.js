@@ -1,19 +1,61 @@
-const { default: EntryEditInput } = require('../EntryEditInput')
-const { default: Submit } = require('./Submit')
+const {
+  mutations: {
+    EntryNewM,
+    EntryQ
+  }
+} = require('../../apollo')
+const { scrapeDate } = require('./scrapeDate')
+const { scrapeTags } = require('./scrapeTags')
+const { scrapeTime } = require('./scrapeTime')
+const { scrapeDuration } = require('./scrapeDuration')
+
+const middlewares = [
+  scrapeDate,
+  scrapeDuration,
+  scrapeTags,
+  scrapeTime
+]
 
 const EntryNew = {
-  components: {
-    EntryEditInput,
-    Submit
-  },
   data () {
     return {
+      raw: '',
       entry: {}
     }
   },
-  methods: {
-    update (entry) {
+  watch: {
+    raw (raw) {
+      const entry = { raw }
+      middlewares.forEach((m) => {
+        try {
+          m(entry)
+        } catch (err) {
+          if (m.code === 'VALIDATION_ERROR')
+            console.log('validation error')
+          else
+            throw err
+        }
+      })
       this.$data.entry = entry
+    }
+  },
+  methods: {
+    async submit () {
+      const {
+        entry
+      } = this.$data
+      await this.$apollo.mutate({
+        mutation: EntryNewM,
+        variables: {
+          entry
+        },
+        update: (store, { data: { EntryNewM } }) => {
+          const data = store.readQuery({ query: EntryQ })
+
+          data.EntryQ.push(EntryNewM)
+          store.writeQuery({ query: EntryQ, data })
+        }
+      })
     }
   }
 }

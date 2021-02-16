@@ -2,6 +2,7 @@ mutation EntryNewM($entry: EntryI!) {
   EntryNewM(entry: $entry) {
     id
     raw
+    description
     date
     timeStart
     timeEnd

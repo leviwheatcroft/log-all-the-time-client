@@ -27,6 +27,7 @@ const Recent = {
       //   }
       // `,
       update (result) {
+        console.log(result.EntryQ)
         return result.EntryQ
       }
     }
