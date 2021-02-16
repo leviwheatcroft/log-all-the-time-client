@@ -1,6 +1,7 @@
 const { default: Vue } = require('vue')
 const { default: VueApollo } = require('vue-apollo')
 const { default: VueRouter } = require('vue-router')
+const dayjs = require('dayjs')
 const { apolloProvider } = require('./src/apollo')
 const {
   routes,
@@ -9,6 +10,7 @@ const {
 
 Vue.use(VueRouter)
 Vue.use(VueApollo)
+Vue.prototype.$dayjs = dayjs
 const router = new VueRouter({ routes })
 
 new Vue({

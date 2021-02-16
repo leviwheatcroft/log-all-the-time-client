@@ -1,3 +1,4 @@
 .entry-display
+  .date(v-if='entry.date') {{ $dayjs(entry.date).format('D MMM') }}
   .tag(v-for='tag in entry.tags') {{ tag.tag }}
-  .description {{ entry.raw }}
+  .description {{ entry.description }}

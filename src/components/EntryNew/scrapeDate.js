@@ -1,8 +1,15 @@
+const dayjs = require('dayjs')
+const CustomParseFormat = require('dayjs/plugin/customParseFormat')
 const { MultiDateError } = require('../../error')
+
+dayjs.extend(CustomParseFormat)
 
 function scrapeDate (entry) {
   const {
     raw
+  } = entry
+  let {
+    description
   } = entry
 
   const regExp = / ?(\d{2}[/.-]\d{2}[/.-]\d{2,4}) ?/g
@@ -16,7 +23,20 @@ function scrapeDate (entry) {
   if (regExp.exec(raw))
     throw new MultiDateError('Entries can only have one date')
 
-  entry.date = new Date(result[1])
+  regExp.lastIndex = 0
+
+  description = description.replace(regExp, '')
+
+  const formats = [
+    'DD/MM/YY',
+    'DD/MM/YYYY',
+    'DD.MM.YY',
+    'DD.MM.YYYY',
+    'DD-MM-YY',
+    'DD-MM-YYYY'
+  ]
+  entry.description = description
+  entry.date = dayjs(result[1], formats).toDate()
 }
 
 module.exports = { scrapeDate }

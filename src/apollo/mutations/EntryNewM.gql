@@ -7,6 +7,9 @@ mutation EntryNewM($entry: EntryI!) {
     timeStart
     timeEnd
     duration
-    tags
+    tags {
+      id
+      tag
+    }
   }
 }

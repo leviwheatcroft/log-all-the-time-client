@@ -25,7 +25,8 @@ const EntryNew = {
   },
   watch: {
     raw (raw) {
-      const entry = { raw }
+      const description = raw
+      const entry = { raw, description }
       middlewares.forEach((m) => {
         try {
           m(entry)
