@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 const CustomParseFormat = require('dayjs/plugin/customParseFormat')
-const { MultiDateError } = require('../../error')
+const { MultiDateError } = require('../../../error')
 
 dayjs.extend(CustomParseFormat)
 

@@ -4,17 +4,7 @@ const {
     EntryQ
   }
 } = require('../../apollo')
-const { scrapeDate } = require('./scrapeDate')
-const { scrapeTags } = require('./scrapeTags')
-const { scrapeTime } = require('./scrapeTime')
-const { scrapeDuration } = require('./scrapeDuration')
-
-const middlewares = [
-  scrapeDate,
-  scrapeDuration,
-  scrapeTags,
-  scrapeTime
-]
+const { scrapers }  =require('./scrapers')
 
 const EntryNew = {
   data () {
@@ -27,11 +17,11 @@ const EntryNew = {
     raw (raw) {
       const description = raw
       const entry = { raw, description }
-      middlewares.forEach((m) => {
+      scrapers.forEach((s) => {
         try {
-          m(entry)
+          s(entry)
         } catch (err) {
-          if (m.code === 'VALIDATION_ERROR')
+          if (err.code === 'VALIDATION_ERROR')
             console.log('validation error')
           else
             throw err

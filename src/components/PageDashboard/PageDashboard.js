@@ -1,9 +1,9 @@
-const { default: EntryNew } = require('../EntryNew')
+const { default: EntryEdit } = require('../EntryEdit')
 const { default: Recent } = require('../Recent')
 
 const PageDashboard = {
   components: {
-    EntryNew,
+    EntryEdit,
     Recent
   }
 }
