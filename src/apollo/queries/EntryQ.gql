@@ -1,5 +1,5 @@
-query EntryQ {
-  EntryQ {
+query EntryQ($limit: Int) {
+  EntryQ(limit: $limit) {
     id
     raw
     description
