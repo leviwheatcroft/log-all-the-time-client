@@ -1,0 +1,25 @@
+query EntryQ(
+  $limit: Int
+  $dateFrom: Date
+  $dateTo: Date
+  $tags: String
+) {
+  EntryFilterQ(
+    limit: $limit
+    dateFrom: $dateFrom
+    dateTo: $dateTo
+    tags: $tags
+  ) {
+    id
+    raw
+    description
+    date
+    timeStart
+    timeEnd
+    duration
+    tags {
+      id
+      tag
+    }
+  }
+}

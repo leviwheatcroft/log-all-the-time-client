@@ -1,0 +1,8 @@
+.report-filters
+  label From:
+    input.dateFrom(v-model='dateFrom')
+  label To:
+    input.dateTo(v-model='dateTo')
+  label Tags:
+    input.tags(v-model='tags')
+  button.submit(@click='apply') Apply
