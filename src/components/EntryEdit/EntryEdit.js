@@ -70,16 +70,21 @@ const EntryNew = {
           if (idx !== -1)
             this.$set(cache.EntryQ, idx, result)
           else
-            cache.EntryQ.push(result)
+            cache.EntryQ.unshift(result)
 
           store.writeQuery({ query: EntryQ, data: cache })
         },
         optimisticResponse: {
           __typename: 'Mutation',
           EntryUpsertM: {
+            ...localEntry,
             __typename: 'Entry',
             id: -1,
-            ...localEntry
+            tags: localEntry.tags.map((tag) => ({
+              __typename: 'Tag',
+              id: -1,
+              tag
+            }))
           }
         }
       })
