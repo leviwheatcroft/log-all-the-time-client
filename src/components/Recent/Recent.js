@@ -1,7 +1,9 @@
-const { default: EntryDisplay } = require('../EntryDisplay')
+// const { default: EntryDisplay } = require('../EntryDisplay')
+// const { default: EntryEdit } = require('../EntryEdit')
+const { default: RecentEntry } = require('../RecentEntry')
 
 const {
-  mutations: {
+  queries: {
     EntryQ
   }
 } = require('../../apollo')
@@ -9,33 +11,27 @@ const {
 const Recent = {
   data () {
     return {
-      entries: []
+      entries: [],
+      editing: false
     }
   },
   apollo: {
     entries: {
       query: EntryQ,
-      // query: gql`query EntryQ {
-      //     EntryQ {
-      //       raw
-      //       date
-      //       timeStart
-      //       timeEnd
-      //       duration
-      //       tags
-      //     }
-      //   }
-      // `,
-      update (result) {
-        console.log(result.EntryQ)
-        return result.EntryQ
+      update ({ EntryQ }) {
+        return EntryQ
       }
     }
   },
   components: {
-    EntryDisplay
+    RecentEntry
   },
-  methods: {}
+  methods: {
+    edit (id) {
+      const entry = this.entries.find((e) => e.id === id)
+      entry.editing = true
+    }
+  }
 }
 
 module.exports = Recent

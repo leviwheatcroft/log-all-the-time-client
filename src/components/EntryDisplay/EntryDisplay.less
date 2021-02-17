@@ -4,17 +4,21 @@
   display: flex;
   flex-direction: flex-row;
   align-items: flex-start;
-  .date {
+  .date,
+  .tag,
+  .duration {
     padding: 0.6rem;
     margin: 0.6rem;
-    background-color: @blue;
     border-radius: 3px;
   }
+  .duration {
+    background-color: @blue;
+  }
+  .date {
+    background-color: @blue;
+  }
   .tag {
-    padding: 0.6rem;
-    margin: 0.6rem;
     background-color: @green;
-    border-radius: 3px;
   }
   .description {
     padding: 0.6rem;
