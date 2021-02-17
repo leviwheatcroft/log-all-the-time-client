@@ -1,5 +1,5 @@
-const { resolvers } = require('./resolvers')
-const { errors } = require('./errors')
+const resolvers = require('./resolvers')
+const errors = require('./errors')
 
 module.exports = {
   resolvers,

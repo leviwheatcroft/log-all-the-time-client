@@ -1,6 +1,6 @@
 const {
   mutations: {
-    EntryUpdateM
+    EntryAddM
   },
   queries: {
     EntryQ
@@ -8,21 +8,16 @@ const {
 } = require('../../apollo')
 
 const { resolvers: { resolve } } = require('../../lib')
-console.log(require('../../lib'))
 
-const EntryEdit = {
+const EntryNew = {
   data () {
     return {
-      raw: this.entry.raw
+      raw: ''
     }
   },
-  props: [
-    'entry'
-  ],
   methods: {
     async submit () {
       const entry = resolve({
-        id: this.entry.id,
         date: null,
         timeStart: null,
         timeEnd: null,
@@ -31,28 +26,26 @@ const EntryEdit = {
         raw: this.$data.raw,
         description: this.$data.raw
       })
-      this.$emit('unedit')
       await this.$apollo.mutate({
-        mutation: EntryUpdateM,
+        mutation: EntryAddM,
         variables: {
           entry
         },
         update: (store, ctx) => {
           const {
             data: {
-              EntryUpdateM: result
+              EntryAddM: result
             }
           } = ctx
 
           const data = store.readQuery({ query: EntryQ })
-          const idx = data.EntryQ.findIndex((c) => c.id === result.id)
-          this.$set(data.EntryQ, idx, result)
-
+          data.EntryQ.unshift(result)
           store.writeQuery({ query: EntryQ, data })
         },
         optimisticResponse: {
           __typename: 'Mutation',
-          EntryUpdateM: {
+          EntryAddM: {
+            id: -1,
             __typename: 'Entry',
             ...entry,
             tags: entry.tags.map((tag) => ({
@@ -67,4 +60,4 @@ const EntryEdit = {
   }
 }
 
-module.exports = EntryEdit
+module.exports = EntryNew

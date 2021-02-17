@@ -1,5 +1,5 @@
-mutation EntryUpsertM($entry: EntryI!) {
-  EntryUpsertM(entry: $entry) {
+mutation EntryUpdateM($entry: EntryI!) {
+  EntryUpdateM(entry: $entry) {
     id
     raw
     description

@@ -1,0 +1,15 @@
+mutation EntryAddM($entry: EntryI!) {
+  EntryAddM(entry: $entry) {
+    id
+    raw
+    description
+    date
+    timeStart
+    timeEnd
+    duration
+    tags {
+      id
+      tag
+    }
+  }
+}

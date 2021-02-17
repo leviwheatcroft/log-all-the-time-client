@@ -12,6 +12,21 @@ const resolvers = [
   whitespace
 ]
 
+function resolve (entry) {
+  resolvers.forEach((resolver) => {
+    try {
+      resolver(entry)
+    } catch (err) {
+      if (err.code === 'VALIDATION_ERROR')
+        console.log('validation error')
+      else
+        throw err
+    }
+  })
+  return entry
+}
+
 module.exports = {
-  resolvers
+  resolvers,
+  resolve
 }
