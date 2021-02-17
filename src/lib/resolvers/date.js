@@ -1,10 +1,10 @@
 const dayjs = require('dayjs')
 const CustomParseFormat = require('dayjs/plugin/customParseFormat')
-const { MultiDateError } = require('../../../error')
+const { MultiDateError } = require('../errors')
 
 dayjs.extend(CustomParseFormat)
 
-function scrapeDate (entry) {
+function date (entry) {
   const {
     raw
   } = entry
@@ -39,4 +39,4 @@ function scrapeDate (entry) {
   entry.date = dayjs(result[1], formats).toDate()
 }
 
-module.exports = { scrapeDate }
+module.exports = { date }

@@ -1,5 +1,5 @@
 
-function scrapeTags (entry) {
+function tags (entry) {
   const regExps = [
     /\s?#(\S*)/g,
     /\s?\((.*?)\)\s?/g
@@ -26,4 +26,4 @@ function scrapeTags (entry) {
   entry.tags = tags
 }
 
-module.exports = { scrapeTags }
+module.exports = { tags }

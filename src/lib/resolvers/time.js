@@ -1,5 +1,5 @@
 
-function scrapeTime (entry) {
+function time (entry) {
   // const {
   //   raw
   // } = entry
@@ -19,4 +19,4 @@ function scrapeTime (entry) {
 
 }
 
-module.exports = { scrapeTime }
+module.exports = { time }

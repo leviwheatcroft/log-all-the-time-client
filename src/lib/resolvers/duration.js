@@ -1,4 +1,4 @@
-function scrapeDuration (entry) {
+function duration (entry) {
   const formats = [
     {
       // example: "1h" or "123h"
@@ -37,4 +37,4 @@ function scrapeDuration (entry) {
   entry.description = description
 }
 
-module.exports = { scrapeDuration }
+module.exports = { duration }

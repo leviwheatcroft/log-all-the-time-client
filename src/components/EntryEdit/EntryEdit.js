@@ -7,7 +7,7 @@ const {
   }
 } = require('../../apollo')
 
-const { scrapers } = require('./scrapers')
+const { resolvers } = require('../../lib')
 
 const EntryNew = {
   data () {
@@ -31,7 +31,7 @@ const EntryNew = {
       localEntry.description = raw
       localEntry.raw = raw
 
-      scrapers.forEach((s) => {
+      resolvers.forEach((s) => {
         try {
           s(localEntry)
         } catch (err) {
