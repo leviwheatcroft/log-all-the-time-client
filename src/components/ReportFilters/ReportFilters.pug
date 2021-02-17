@@ -1,8 +1,12 @@
 .report-filters
-  label From:
-    input.dateFrom(v-model='dateFrom')
-  label To:
-    input.dateTo(v-model='dateTo')
+  label Dates:
+    date-picker(
+      v-model='dateRange'
+      type='date'
+      range
+      format='DD/MM/YY'
+      input-class='tl-input'
+    )
   label Tags:
     input.tags(v-model='tags')
   button.submit(@click='apply') Apply
