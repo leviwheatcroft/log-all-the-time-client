@@ -6,13 +6,11 @@ const ReportFilters = {
   },
   computed: {
     dateFrom () { return this.dateRange[0] },
-    dateTo () { return this.dateRange[0] }
+    dateTo () { return this.dateRange[1] }
   },
   data () {
     return {
       dateRange: [new Date(), new Date()],
-      dateFrom: '',
-      dateTo: '',
       tags: ''
     }
   },
@@ -22,7 +20,7 @@ const ReportFilters = {
         dateFrom,
         dateTo,
         tags
-      } = this.$data
+      } = this
       this.$emit('apply', { dateFrom, dateTo, tags })
     }
   }
