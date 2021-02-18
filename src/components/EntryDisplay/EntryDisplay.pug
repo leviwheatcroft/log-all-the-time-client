@@ -8,4 +8,5 @@
       }).format('HH:mm')
     }}
   .tag(v-for='tag in entry.tags') {{ tag.tag }}
+  .spacer
   .description(@click="$emit('edit')") {{ entry.description }}

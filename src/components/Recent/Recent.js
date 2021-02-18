@@ -18,8 +18,8 @@ const Recent = {
   apollo: {
     entries: {
       query: EntryQ,
-      update ({ EntryQ }) {
-        return EntryQ
+      update ({ EntryQ: entries }) {
+        return entries
       }
     }
   },

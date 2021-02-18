@@ -3,7 +3,22 @@
 .entry-display {
   display: flex;
   flex-direction: flex-row;
-  align-items: flex-start;
+  align-items: center;
+  font-family: 'montserrat';
+  font-size: 1.4rem;
+  color: @dark-font;
+  .date,
+  .tag,
+  .duration,
+  .description {
+    flex-grow: 0;
+  }
+  .spacer {
+    flex-grow: 1;
+    margin: 0 2.4rem;
+    height: 1px;
+    background-color: #f0f0f0;
+  }
   .date,
   .tag,
   .duration {
@@ -11,10 +26,10 @@
     margin: 0.6rem;
     border-radius: 3px;
   }
-  .duration {
+  .date {
     background-color: @blue;
   }
-  .date {
+  .duration {
     background-color: @blue;
   }
   .tag {

@@ -16,8 +16,8 @@ const ReportBody = {
           ...this.tags ? { tags: this.tags } : {}
         }
       },
-      update ({ EntryFilterQ }) {
-        return EntryFilterQ
+      update ({ EntryFilterQ: entries }) {
+        return entries
       }
     }
   },
