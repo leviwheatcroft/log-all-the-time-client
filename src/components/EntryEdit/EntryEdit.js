@@ -8,7 +8,6 @@ const {
 } = require('../../apollo')
 
 const { resolvers: { resolve } } = require('../../lib')
-console.log(require('../../lib'))
 
 const EntryEdit = {
   data () {

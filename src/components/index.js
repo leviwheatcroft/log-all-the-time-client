@@ -12,7 +12,10 @@ const routes = [
   },
   {
     path: '/report',
-    component: PageReport
+    component: PageReport,
+    props: {
+
+    }
   }
 ]
 

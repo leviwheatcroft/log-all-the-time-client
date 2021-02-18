@@ -1,4 +1,5 @@
 const { default: DatePicker } = require('vue2-datepicker')
+const { reduce, state } = require('../../store')
 
 const ReportFilters = {
   components: {
@@ -10,7 +11,8 @@ const ReportFilters = {
   },
   data () {
     return {
-      dateRange: [new Date(), new Date()],
+      state,
+      dateRange: [state.filters.dateFrom, state.filters.dateTo],
       tags: ''
     }
   },
@@ -21,7 +23,10 @@ const ReportFilters = {
         dateTo,
         tags
       } = this
-      this.$emit('apply', { dateFrom, dateTo, tags })
+      reduce({
+        action: 'UPDATE_REPORT_FILTER',
+        data: { dateFrom, dateTo, tags }
+      })
     }
   }
 }

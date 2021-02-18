@@ -4,17 +4,14 @@ const {
     EntryFilterQ
   }
 } = require('../../apollo')
+const { state } = require('../../store')
 
 const ReportBody = {
   apollo: {
     entries: {
       query: EntryFilterQ,
       variables () {
-        return {
-          ...this.dateFrom ? { dateFrom: this.dateFrom } : {},
-          ...this.dateTo ? { dateTo: this.dateTo } : {},
-          ...this.tags ? { tags: this.tags } : {}
-        }
+        return this.state.filters
       },
       update ({ EntryFilterQ: entries }) {
         return entries
@@ -25,13 +22,11 @@ const ReportBody = {
     EntryDisplay
   },
   data () {
-    return { entries: [] }
-  },
-  props: [
-    'dateFrom',
-    'dateTo',
-    'tags'
-  ]
+    return {
+      state,
+      entries: []
+    }
+  }
 }
 
 module.exports = ReportBody
