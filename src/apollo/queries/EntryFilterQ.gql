@@ -1,4 +1,4 @@
-query EntryQ(
+query EntryFilterQ(
   $limit: Int
   $dateFrom: Date
   $dateTo: Date
