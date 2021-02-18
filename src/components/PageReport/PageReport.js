@@ -7,10 +7,13 @@ const PageReport = {
     ReportFilters
   },
   data () {
+    // const dateFrom = new Date()
+    // dateFrom.setHours(0, 0, 0, 0)
+    // const dateTo = new Date(dateFrom)
+    // dateTo.setDate(dateTo.getDate() + 1)
     const dateFrom = new Date()
     dateFrom.setHours(0, 0, 0, 0)
-    const dateTo = new Date(dateFrom)
-    dateTo.setDate(dateTo.getDate() + 1)
+    const dateTo = dateFrom
     return {
       dateFrom,
       dateTo,
