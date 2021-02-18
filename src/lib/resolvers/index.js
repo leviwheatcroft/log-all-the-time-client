@@ -12,7 +12,9 @@ const resolvers = [
   whitespace
 ]
 
-function resolve (entry) {
+function resolve (entry = '') {
+  if (typeof entry === 'string')
+    entry = { raw: entry, description: entry }
   resolvers.forEach((resolver) => {
     try {
       resolver(entry)
