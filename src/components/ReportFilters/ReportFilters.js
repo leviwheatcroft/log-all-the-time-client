@@ -16,10 +16,6 @@ const ReportFilters = {
   components: {
     DatePicker
   },
-  computed: {
-    dateFrom () { return this.dateRange[0] },
-    dateTo () { return this.dateRange[1] }
-  },
   data () {
     return {
       state,
@@ -75,10 +71,10 @@ const ReportFilters = {
     },
     apply () {
       const {
-        dateFrom,
-        dateTo,
-        tags
+        dateRange: [dateFrom, dateTo]
       } = this
+      const tagsRaw = this.$el.querySelector('input.tags').value
+      const tags = tagsRaw.split(/,/).map((s) => s.trim()).filter((s) => s)
       reduce({
         action: 'UPDATE_REPORT_FILTER',
         data: { dateFrom, dateTo, tags }

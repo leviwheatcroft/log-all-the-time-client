@@ -2,7 +2,7 @@ query EntryFilterQ(
   $limit: Int
   $dateFrom: Date
   $dateTo: Date
-  $tags: String
+  $tags: [String]
 ) {
   EntryFilterQ(
     limit: $limit

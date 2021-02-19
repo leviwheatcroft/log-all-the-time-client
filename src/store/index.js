@@ -5,7 +5,7 @@ function getInitialState () {
     filters: {
       dateFrom: midnight,
       dateTo: midnight,
-      tags: ''
+      tags: []
     }
   }
 }

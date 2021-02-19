@@ -1,0 +1,3 @@
+function getSegmentsCommaSep (string) {
+  return
+}
