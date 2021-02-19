@@ -8,5 +8,12 @@
       input-class='tl-input'
     )
   label Tags:
-    input.tags(v-model='tags')
+    .input-container
+      input.tags(@input='tagsInput' @keydown='tagsKeydown')
+      .suggestions(v-if='suggestions.length > 0')
+        .suggestion(
+          v-for='suggestion in suggestions'
+          :key='suggestion.id'
+          @click='clickSuggestion(suggestion.id)'
+        ) {{ suggestion.tag }}
   button.submit(@click='apply') Apply

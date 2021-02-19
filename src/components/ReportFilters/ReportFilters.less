@@ -8,8 +8,24 @@
   padding: 1.2rem;
   border: 1px solid @dark;
   border-radius: 3px;
-  /deep/ input,
-  input {
+  /deep/ input {
     margin: 0 1.2rem;
+  }
+  .input-container {
+    position: relative;
+    margin: 0 1.2rem;
+    input {
+      margin: 0;
+    }
+    .suggestions {
+      position: absolute;
+      top: 2.4rem;
+      background-color: @green;
+      width: 100%;
+      cursor: pointer;
+      .suggestion {
+        padding: 1.2rem;
+      }
+    }
   }
 }
