@@ -1,19 +1,21 @@
 .report-filters
-  label Dates:
-    date-picker(
-      v-model='dateRange'
-      type='date'
-      range
-      format='DD/MM/YY'
-      input-class='tl-input'
-    )
-  label Tags:
-    .input-container
-      input.tags(@input='tagsInput' @keydown='tagsKeydown')
-      .suggestions(v-if='suggestions.length > 0')
-        .suggestion(
-          v-for='suggestion in suggestions'
-          :key='suggestion.id'
-          @click='clickSuggestion(suggestion.id)'
-        ) {{ suggestion.tag }}
+  label(for='date-filter') Dates:
+  date-picker(
+    v-model='dateRange'
+    type='date'
+    range
+    format='DD/MM/YY'
+    input-class='tl-input'
+    :input-attr='{ id: "date-filter" }'
+  )
+  .spacer
+  label(for='tags-filter') Tags:
+  .input-container
+    input#tags-filter.tags(@input='tagsInput' @keydown='tagsKeydown')
+    .suggestions(v-if='suggestions.length > 0')
+      .suggestion(
+        v-for='suggestion in suggestions'
+        :key='suggestion.id'
+        @click='clickSuggestion(suggestion.id)'
+      ) {{ suggestion.tag }}
   button.submit(@click='apply') Apply
