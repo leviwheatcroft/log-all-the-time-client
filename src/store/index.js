@@ -16,15 +16,23 @@ const reducers = [
   function updateTagsFilter (payload, state) {
     const {
       action,
-      data: { dateFrom, dateTo, tags }
+      data: {
+        dateFrom,
+        dateTo,
+        tags
+      }
     } = payload
     if (action !== 'UPDATE_REPORT_FILTER')
       return
+
+    // Object.entries(data).forEach(([k, v]) => {
+    //   state.filters[k] = v
+    // })
     state.filters = {
       ...state.filters,
-      dateFrom,
-      dateTo,
-      tags
+      ...dateFrom ? { dateFrom } : {},
+      ...dateTo ? { dateTo } : {},
+      ...tags ? { tags } : {}
     }
   }
 

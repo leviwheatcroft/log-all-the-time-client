@@ -17,10 +17,22 @@ const ReportFilters = {
     DatePicker
   },
   data () {
+    const {
+      filters: { dateFrom, dateTo }
+    } = state
     return {
       state,
-      dateRange: [state.filters.dateFrom, state.filters.dateTo],
+      dateRange: [dateFrom, dateTo],
       suggestions: []
+    }
+  },
+  watch: {
+    'state.filters': function stateFiltersDateFrom () {
+      const {
+        dateFrom,
+        dateTo
+      } = this.state.filters
+      this.dateRange = [dateFrom, dateTo]
     }
   },
   methods: {
@@ -73,8 +85,9 @@ const ReportFilters = {
       const {
         dateRange: [dateFrom, dateTo]
       } = this
-      const tagsRaw = this.$el.querySelector('input.tags').value
-      const tags = tagsRaw.split(/,/).map((s) => s.trim()).filter((s) => s)
+      const tagsString = this.$el.querySelector('input.tags').value
+      const tags = tagsString.split(/,/).map((s) => s.trim()).filter((s) => s)
+
       reduce({
         action: 'UPDATE_REPORT_FILTER',
         data: { dateFrom, dateTo, tags }

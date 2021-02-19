@@ -29,21 +29,17 @@ const ReportBody = {
   },
   methods: {
     clickTag (tag) {
-      let {
+      const {
         tags
       } = this.state.filters
-      if (tags.length === 0)
-        tags = tag
-      else if (/,\s?$/.test(tags))
-        tags = `${tags} ${tag}`
-      else
-        tags = `${tags}, ${tag}`
+      tags.push(tag)
       reduce({
         action: 'UPDATE_REPORT_FILTER',
         data: { tags }
       })
     },
     clickDate (date) {
+      date = new Date(date)
       reduce({
         action: 'UPDATE_REPORT_FILTER',
         data: { dateFrom: date, dateTo: date }

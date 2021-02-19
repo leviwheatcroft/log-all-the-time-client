@@ -11,7 +11,13 @@
   .spacer
   label(for='tags-filter') Tags:
   .input-container
-    input#tags-filter.tags(@input='tagsInput' @keydown='tagsKeydown')
+    // value is not bound, component only updates to this when state changes
+    // we listen to @input et cetera and micromanage the state change
+    input#tags-filter.tags(
+      @input='tagsInput'
+      @keydown='tagsKeydown'
+      :value="state.filters.tags.join(', ')"
+    )
     .suggestions(v-if='suggestions.length > 0')
       .suggestion(
         v-for='suggestion in suggestions'
