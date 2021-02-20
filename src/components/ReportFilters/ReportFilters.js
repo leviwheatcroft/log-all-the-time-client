@@ -8,7 +8,8 @@ const {
 const {
   stringOps: {
     replaceCursorSegmentCommaSep,
-    getCursorSegmentCommaSep
+    getCursorSegmentCommaSep,
+    asTagsString
   }
 } = require('../../lib')
 
@@ -18,11 +19,12 @@ const ReportFilters = {
   },
   data () {
     const {
-      filters: { dateFrom, dateTo }
+      filters: { dateFrom, dateTo, tags }
     } = state
     return {
       state,
       dateRange: [dateFrom, dateTo],
+      tagsString: asTagsString(tags),
       suggestions: []
     }
   },
@@ -32,6 +34,9 @@ const ReportFilters = {
     },
     'state.filters.dateTo': function stateFiltersDateTo () {
       this.dateRange.splice(1, 1, this.state.filters.dateTo)
+    },
+    'state.filters.tags': function stateFiltersTags () {
+      this.tagsString = asTagsString(this.state.filters.tags)
     }
   },
   methods: {
@@ -43,14 +48,16 @@ const ReportFilters = {
       this.$data.suggestions = []
       const input = this.$el.querySelector('input.tags')
       const {
-        value,
         selectionStart: cursor
       } = input
+      const {
+        tagsString
+      } = this
       const replaced = [
-        replaceCursorSegmentCommaSep(value, cursor, tag.tag),
-        cursor === value.length ? ', ' : ''
+        replaceCursorSegmentCommaSep(tagsString, cursor, tag.tag),
+        cursor === tagsString.length ? ', ' : ''
       ].join('')
-      input.value = replaced
+      this.tagsString = replaced
     },
     tagsKeydown (event) {
       if (event.keyCode !== 9)
@@ -60,10 +67,12 @@ const ReportFilters = {
     },
     async tagsInput ({ target }) {
       const {
-        value,
         selectionStart: cursor
       } = target
-      const tagPartial = getCursorSegmentCommaSep(value, cursor)
+      const {
+        tagsString
+      } = this
+      const tagPartial = getCursorSegmentCommaSep(tagsString, cursor)
       if (tagPartial.length < 3)
         return
       const result = await this.$apollo.query({

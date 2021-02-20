@@ -4,8 +4,12 @@ const {
 const {
   getCursorSegmentCommaSep
 } = require('./getCursorSegmentCommaSep')
+const {
+  asTagsString
+} = require('./asTagsString')
 
 module.exports = {
   getCursorSegmentCommaSep,
-  replaceCursorSegmentCommaSep
+  replaceCursorSegmentCommaSep,
+  asTagsString
 }

@@ -16,7 +16,7 @@
     input#tags-filter.tags(
       @input='tagsInput'
       @keydown='tagsKeydown'
-      :value="state.filters.tags.join(', ')"
+      v-model="tagsString"
     )
     .suggestions(v-if='suggestions.length > 0')
       .suggestion(
