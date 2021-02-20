@@ -58,6 +58,8 @@ const ReportFilters = {
         cursor === tagsString.length ? ', ' : ''
       ].join('')
       this.tagsString = replaced
+      input.focus()
+      input.setSelectionRange(replaced.length, replaced.length)
     },
     tagsKeydown (event) {
       if (event.keyCode !== 9)
