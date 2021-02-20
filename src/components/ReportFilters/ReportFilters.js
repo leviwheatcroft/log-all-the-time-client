@@ -27,12 +27,11 @@ const ReportFilters = {
     }
   },
   watch: {
-    'state.filters': function stateFiltersDateFrom () {
-      const {
-        dateFrom,
-        dateTo
-      } = this.state.filters
-      this.dateRange = [dateFrom, dateTo]
+    'state.filters.dateFrom': function stateFiltersDateFrom () {
+      this.dateRange.splice(0, 1, this.state.filters.dateFrom)
+    },
+    'state.filters.dateTo': function stateFiltersDateTo () {
+      this.dateRange.splice(1, 1, this.state.filters.dateTo)
     }
   },
   methods: {
@@ -86,11 +85,10 @@ const ReportFilters = {
         dateRange: [dateFrom, dateTo]
       } = this
       const tagsString = this.$el.querySelector('input.tags').value
-      const tags = tagsString.split(/,/).map((s) => s.trim()).filter((s) => s)
-
       reduce({
-        action: 'UPDATE_REPORT_FILTER',
-        data: { dateFrom, dateTo, tags }
+        FILTER_DATE_FROM: { dateFrom },
+        FILTER_DATE_TO: { dateTo },
+        FILTER_TAGS_REPLACE: { tagsString }
       })
     }
   }

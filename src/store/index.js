@@ -1,3 +1,8 @@
+const { filterDateFrom } = require('./filterDateFrom')
+const { filterDateTo } = require('./filterDateTo')
+const { filterTagsAppend } = require('./filterTagsAppend')
+const { filterTagsReplace } = require('./filterTagsReplace')
+
 function getInitialState () {
   const midnight = new Date()
   midnight.setHours(0, 0, 0, 0)
@@ -13,33 +18,16 @@ function getInitialState () {
 const state = getInitialState()
 
 const reducers = [
-  function updateTagsFilter (payload, state) {
-    const {
-      action,
-      data: {
-        dateFrom,
-        dateTo,
-        tags
-      }
-    } = payload
-    if (action !== 'UPDATE_REPORT_FILTER')
-      return
-
-    // Object.entries(data).forEach(([k, v]) => {
-    //   state.filters[k] = v
-    // })
-    state.filters = {
-      ...state.filters,
-      ...dateFrom ? { dateFrom } : {},
-      ...dateTo ? { dateTo } : {},
-      ...tags ? { tags } : {}
-    }
-  }
-
+  filterDateFrom,
+  filterDateTo,
+  filterTagsAppend,
+  filterTagsReplace
 ]
 
-function reduce (payload) {
-  reducers.forEach((r) => r(payload, state))
+function reduce (actions) {
+  Object.entries(actions).forEach(([type, data]) => {
+    reducers.forEach((r) => r({ type, data }, state))
+  })
 }
 
 module.exports = {

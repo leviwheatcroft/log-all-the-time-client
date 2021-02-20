@@ -11,7 +11,12 @@ const ReportBody = {
     entries: {
       query: EntryFilterQ,
       variables () {
-        return this.state.filters
+        const {
+          dateFrom,
+          dateTo,
+          tags
+        } = this.state.filters
+        return { dateFrom, dateTo, tags }
       },
       update ({ EntryFilterQ: entries }) {
         return entries
@@ -28,21 +33,16 @@ const ReportBody = {
     }
   },
   methods: {
-    clickTag (tag) {
-      const {
-        tags
-      } = this.state.filters
-      tags.push(tag)
+    clickTag (tagString) {
       reduce({
-        action: 'UPDATE_REPORT_FILTER',
-        data: { tags }
+        FILTER_TAGS_APPEND: { tagString }
       })
     },
     clickDate (date) {
       date = new Date(date)
       reduce({
-        action: 'UPDATE_REPORT_FILTER',
-        data: { dateFrom: date, dateTo: date }
+        FILTER_DATE_FROM: { dateFrom: date },
+        FILTER_DATE_TO: { dateTo: date }
       })
     }
   }
