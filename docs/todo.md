@@ -24,3 +24,8 @@ presently webpack includes a workaround...
 ```
 
 https://github.com/vuejs/vue-style-loader/issues/50
+
+## [ ] auth
+
+ - [ ] redirect to /login if not logged in
+ - [ ] show notification if not logged in due to refresh token expiry
