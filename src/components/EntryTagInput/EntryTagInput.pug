@@ -2,15 +2,31 @@
   .input-container
     input(
       v-model="tagPartial"
+      @focus="hasFocus = true"
+      @blur="hasFocus = false"
     )
-    .suggestions(v-if="tagPartial.length > 0")
+    .suggestions(v-if="hasFocus")
+
+      // recentTags
       .suggestion(
+        v-if="tagPartial.length === 0"
+        v-for="suggestion in recentTags"
+        :key="suggestion.id"
+        @click="clickSuggestion(suggestion.tag)"
+      ) {{ suggestion.tag }}
+
+      // suggestions from partial
+      .suggestion(
+        v-if="tagPartial.length >= 3"
         v-for="suggestion in suggestions"
         :key="suggestion.id"
         @click="clickSuggestion(suggestion.tag)"
       ) {{ suggestion.tag }}
+
+      // new tag
       .suggestion(
         @click='clickAddSuggestion'
+        v-if="tagPartial.length > 0"
       ) New Tag: {{ tagPartial }}
   .tag-container
     .tag(
