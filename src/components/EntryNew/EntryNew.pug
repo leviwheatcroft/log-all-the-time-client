@@ -1,3 +1,13 @@
 .entry-new
-  input(v-model='raw')
-  button.submit(@click='submit') Send
+  .row
+    .date {{ $dayjs(date).format('DD MMM') }}
+  .row
+    input.duration(v-model='duration')
+    input.description(v-model='description')
+    button.submit(@click='submit') Send
+  .row
+    EntryTagInput(
+      :tagNames='tagNames'
+      @tagAdded='tagAdded'
+      @tagRemoved='tagRemoved'
+    )

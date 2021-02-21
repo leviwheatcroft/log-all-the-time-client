@@ -1,0 +1,36 @@
+@import "../../styles/colors.less";
+
+.entry-tag-input {
+  display: flex;
+  flex-direction: flex-row;
+  .input-container,
+  .tag-container {
+    display: flex;
+    flex-direction: flex-row;
+    align-items: center;
+    .tag {
+      background-color: @green;
+      padding: 0.6rem;
+      margin: 0.6rem;
+      border-radius: 3px;
+    }
+  }
+  .input-container {
+    position: relative;
+    margin: 0 1.2rem;
+    input {
+      margin: 0;
+      padding: 0.6rem;
+    }
+    .suggestions {
+      position: absolute;
+      top: 2.4rem;
+      background-color: @green;
+      width: 100%;
+      cursor: pointer;
+      .suggestion {
+        padding: 1.2rem;
+      }
+    }
+  }
+}

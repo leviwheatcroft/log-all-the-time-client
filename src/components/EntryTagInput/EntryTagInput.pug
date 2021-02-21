@@ -1,0 +1,21 @@
+.entry-tag-input
+  .input-container
+    input(
+      v-model="tagPartial"
+    )
+    .suggestions(v-if="tagPartial.length > 0")
+      .suggestion(
+        v-for="suggestion in suggestions"
+        :key="suggestion.id"
+        @click="clickSuggestion(suggestion.tag)"
+      ) {{ suggestion.tag }}
+      .suggestion(
+        @click='clickAddSuggestion'
+      ) New Tag: {{ tagPartial }}
+  .tag-container
+    .tag(
+      v-for="tagName in tagNames"
+      :tagName='tagName'
+      :key='tagName'
+      @click="$emit('tagRemoved', tagName)"
+    ) {{ tagName }}
