@@ -1,6 +1,7 @@
 const { default: App } = require('./App')
 const { default: PageDashboard } = require('./PageDashboard')
 const { default: PageReport } = require('./PageReport')
+const { default: PageLogin } = require('./PageLogin')
 
 // don't include components here to be consumed by other components, as that
 // will create a circular reference.
@@ -12,10 +13,11 @@ const routes = [
   },
   {
     path: '/report',
-    component: PageReport,
-    props: {
-
-    }
+    component: PageReport
+  },
+  {
+    path: '/login',
+    component: PageLogin
   }
 ]
 

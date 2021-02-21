@@ -5,13 +5,23 @@ const {
 } = require('../../apollo')
 
 const Login = {
+  data () {
+    return {
+      email: 'email@address.com',
+      password: 'foo'
+    }
+  },
   methods: {
-    async login () {
+    async clickSubmit () {
+      const {
+        email,
+        password
+      } = this
       const result = await this.$apollo.mutate({
         mutation: UserLoginM,
         variables: {
-          password: 'foo',
-          email: 'email@address.com'
+          password,
+          email
         }
       })
       console.log('result', result)

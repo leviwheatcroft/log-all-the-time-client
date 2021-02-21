@@ -1,2 +1,12 @@
-div(v-on:click='login')
-  p demo login
+.login
+  .row
+    label(for="email") Email:
+    input#email.email(v-model="email")
+  .row
+    label(for="password") Password:
+    input#password.password(
+      v-model="password"
+      type="password"
+    )
+  .row
+    button.submit(@click='clickSubmit') Log In
