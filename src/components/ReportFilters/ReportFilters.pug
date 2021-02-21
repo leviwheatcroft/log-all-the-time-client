@@ -23,5 +23,5 @@
         v-for='suggestion in suggestions'
         :key='suggestion.id'
         @click='clickSuggestion(suggestion.id)'
-      ) {{ suggestion.tag }}
+      ) {{ suggestion.tagName }}
   button.submit(@click='apply') Apply

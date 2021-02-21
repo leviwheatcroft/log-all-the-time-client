@@ -26,26 +26,26 @@ const EntryTagInput = {
     }
   },
   computed: {
-    recentTags () {
-      // TODO how often does this run?
-      console.log('compute recentTags')
-      const { cache } = this.$apollo.getClient()
-      const { EntryQ: entries } = cache.readQuery({ query: EntryQ })
-      const recentTags = []
-      entries.some((entry) => {
-        entry.tags.some((t) => {
-          if (recentTags.findIndex((_t) => t.tag === _t.tag) === -1)
-            recentTags.push(t)
-          if (recentTags.length === 6)
-            return true
-          return false
-        })
-        if (recentTags.length === 6)
-          return true
-        return false
-      })
-      return recentTags
-    }
+    // recentTags () {
+    //   // TODO how often does this run?
+    //   console.log('compute recentTags')
+    //   const { cache } = this.$apollo.getClient()
+    //   const { EntryQ: entries } = cache.readQuery({ query: EntryQ })
+    //   const recentTags = []
+    //   entries.some((entry) => {
+    //     entry.tags.some((t) => {
+    //       if (recentTags.findIndex((_t) => t.tag === _t.tag) === -1)
+    //         recentTags.push(t)
+    //       if (recentTags.length === 6)
+    //         return true
+    //       return false
+    //     })
+    //     if (recentTags.length === 6)
+    //       return true
+    //     return false
+    //   })
+    //   return recentTags
+    // }
   },
   props: [
     'tagNames'

@@ -19,7 +19,7 @@ query EntryFilterQ(
     duration
     tags {
       id
-      tag
+      tagName
     }
   }
 }

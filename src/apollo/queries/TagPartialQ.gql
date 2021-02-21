@@ -5,6 +5,6 @@ query TagPartialQ(
     tagPartial: $tagPartial
   ) {
     id
-    tag
+    tagName
   }
 }

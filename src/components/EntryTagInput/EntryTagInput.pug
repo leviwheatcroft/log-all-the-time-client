@@ -13,7 +13,7 @@
         v-for="suggestion in recentTags"
         :key="suggestion.id"
         @click="clickSuggestion(suggestion.tag)"
-      ) {{ suggestion.tag }}
+      ) {{ suggestion.tagName }}
 
       // suggestions from partial
       .suggestion(
@@ -21,7 +21,7 @@
         v-for="suggestion in suggestions"
         :key="suggestion.id"
         @click="clickSuggestion(suggestion.tag)"
-      ) {{ suggestion.tag }}
+      ) {{ suggestion.tagName }}
 
       // new tag
       .suggestion(

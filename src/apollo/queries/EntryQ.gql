@@ -9,7 +9,7 @@ query EntryQ($limit: Int) {
     duration
     tags {
       id
-      tag
+      tagName
     }
   }
 }

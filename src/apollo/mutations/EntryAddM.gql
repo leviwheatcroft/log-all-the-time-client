@@ -9,7 +9,7 @@ mutation EntryAddM($entry: EntryI!) {
     duration
     tags {
       id
-      tag
+      tagName
     }
   }
 }
