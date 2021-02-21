@@ -9,6 +9,7 @@ const { default: DatePicker } = require('vue2-datepicker')
 // } = require('../../apollo')
 //
 // const { resolvers: { resolve } } = require('../../lib')
+const { reduce, state } = require('../../store')
 const { default: EntryTagInput } = require('../EntryTagInput')
 
 const EntryNew = {
@@ -16,9 +17,19 @@ const EntryNew = {
     EntryTagInput,
     DatePicker
   },
+  watch: {
+    date (date) {
+      reduce({
+        SET_LAST_SELECTED_DATE: { date }
+      })
+    }
+  },
   data () {
+    const {
+      lastSelectedDate: date
+    } = state
     return {
-      date: new Date(),
+      date,
       duration: '',
       description: '',
       tagNames: []

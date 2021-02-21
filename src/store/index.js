@@ -2,11 +2,13 @@ const { filterDateFrom } = require('./filterDateFrom')
 const { filterDateTo } = require('./filterDateTo')
 const { filterTagsAppend } = require('./filterTagsAppend')
 const { filterTagsReplace } = require('./filterTagsReplace')
+const { setLastSelectedDate } = require('./setLastSelectedDate')
 
 function getInitialState () {
   const midnight = new Date()
   midnight.setHours(0, 0, 0, 0)
   return {
+    lastSelectedDate: new Date(),
     filters: {
       dateFrom: midnight,
       dateTo: midnight,
@@ -21,7 +23,8 @@ const reducers = [
   filterDateFrom,
   filterDateTo,
   filterTagsAppend,
-  filterTagsReplace
+  filterTagsReplace,
+  setLastSelectedDate
 ]
 
 function reduce (actions) {
