@@ -1,3 +1,4 @@
+const { default: DatePicker } = require('vue2-datepicker')
 // const {
 //   mutations: {
 //     EntryAddM
@@ -12,14 +13,15 @@ const { default: EntryTagInput } = require('../EntryTagInput')
 
 const EntryNew = {
   components: {
-    EntryTagInput
+    EntryTagInput,
+    DatePicker
   },
   data () {
     return {
       date: new Date(),
       duration: '',
       description: '',
-      tagNames: ['one', 'two', 'three']
+      tagNames: []
     }
   },
   methods: {

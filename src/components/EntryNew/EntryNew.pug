@@ -1,6 +1,10 @@
 .entry-new
   .row
-    .date {{ $dayjs(date).format('DD MMM') }}
+    date-picker(
+      v-model='date'
+      format='DD/MM/YY'
+      type='date'
+    )
   .row
     input.duration(v-model='duration')
     input.description(v-model='description')
