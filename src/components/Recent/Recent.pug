@@ -1,2 +1,8 @@
 .recent
-  RecentEntry(v-for='entry in entries' :key='entry.id' :entry='entry')
+  EntryList(
+    v-for='entry in entries'
+    :key='entry.id'
+    :entry='entry'
+    :clickTag='clickTag'
+    :clickDate='clickTag'
+  )

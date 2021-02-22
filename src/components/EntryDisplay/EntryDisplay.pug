@@ -14,5 +14,5 @@
   .spacer
   .tag(
     v-for='tag in entry.tags'
-    @click="$emit('clickTag', tag.tag)"
+    @click="$emit('clickTag', tag.id)"
   ) {{ tag.tagName }}

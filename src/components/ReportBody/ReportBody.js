@@ -33,9 +33,9 @@ const ReportBody = {
     }
   },
   methods: {
-    clickTag (tagString) {
+    clickTag (tagName) {
       reduce({
-        FILTER_TAGS_APPEND: { tagString }
+        FILTER_TAGS_APPEND: { tagName }
       })
     },
     clickDate (date) {

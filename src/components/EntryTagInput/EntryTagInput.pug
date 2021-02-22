@@ -5,16 +5,7 @@
       @focus="hasFocus = true"
       @blur="hasFocus = false"
     )
-    .suggestions(v-if="hasFocus")
-
-      // recentTags
-      .suggestion(
-        v-if="tagPartial.length === 0"
-        v-for="suggestion in recentTags"
-        :key="suggestion.id"
-        @click="clickSuggestion(suggestion.tag)"
-      ) {{ suggestion.tagName }}
-
+    .suggestions(v-if="tagPartial.length > 0")
       // suggestions from partial
       .suggestion(
         v-if="tagPartial.length >= 3"

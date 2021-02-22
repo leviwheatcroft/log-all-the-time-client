@@ -1,6 +1,7 @@
 // const { default: EntryDisplay } = require('../EntryDisplay')
 // const { default: EntryEdit } = require('../EntryEdit')
-const { default: RecentEntry } = require('../RecentEntry')
+const { default: EntryList } = require('../EntryList')
+const { reduce } = require('../../store')
 
 const {
   queries: {
@@ -24,9 +25,23 @@ const Recent = {
     }
   },
   components: {
-    RecentEntry
+    EntryList
   },
   methods: {
+    clickTag (tagName) {
+      reduce({
+        FILTER_TAGS_APPEND: { tagName }
+      })
+      this.$router.push('/report')
+    },
+    clickDate (date) {
+      date = new Date(date)
+      reduce({
+        FILTER_DATE_FROM: { dateFrom: date },
+        FILTER_DATE_TO: { dateTo: date }
+      })
+      this.$router.push('/report')
+    },
     edit (id) {
       const entry = this.entries.find((e) => e.id === id)
       entry.editing = true

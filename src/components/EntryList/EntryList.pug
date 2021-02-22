@@ -1,0 +1,13 @@
+.recent-entry
+  EntryEdit(
+    v-if='editing'
+    :entry='entry'
+    @unedit='editing = false'
+  )
+  EntryDisplay(
+    v-if='!editing'
+    :entry='entry'
+    @edit='editing = true'
+    @clickTag='clickTag'
+    @clickDate='clickDate'
+  )

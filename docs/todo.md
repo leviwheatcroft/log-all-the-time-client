@@ -33,3 +33,35 @@ https://github.com/vuejs/vue-style-loader/issues/50
 ## [ ] dateLocales
 
 see dateLocales.md
+
+## [ ] EntryNew Recent Tags
+
+getting recent entries
+
+```
+computed: {
+  recentTags () {
+    // TODO how often does this run?
+    console.log('compute recentTags')
+    const { cache } = this.$apollo.getClient()
+    const { EntryQ: entries } = cache.readQuery({ query: EntryQ })
+    const recentTags = []
+    entries.some((entry) => {
+      entry.tags.some((t) => {
+        if (recentTags.findIndex((_t) => t.tag === _t.tag) === -1)
+          recentTags.push(t)
+        if (recentTags.length === 6)
+          return true
+        return false
+      })
+      if (recentTags.length === 6)
+        return true
+      return false
+    })
+    return recentTags
+  }
+},
+```
+
+
+## [ ] EntryNew Sticky Tags
