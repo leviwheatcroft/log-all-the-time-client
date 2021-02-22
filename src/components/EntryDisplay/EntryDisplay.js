@@ -32,7 +32,8 @@ const EntryDisplay = {
       this.clickTagHandler(tag)
     },
     clickDate (date) {
-      check.assert.date(date)
+      check.assert.integer(date)
+      date = new Date(date)
       this.clickDateHandler(date)
     }
   }

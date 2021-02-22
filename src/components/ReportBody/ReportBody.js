@@ -1,3 +1,4 @@
+const check = require('check-types')
 const { default: EntryList } = require('../EntryList')
 const {
   queries: {
@@ -36,13 +37,15 @@ const ReportBody = {
     }
   },
   methods: {
-    clickTagHandler (tagName) {
+    clickTagHandler (tag) {
+      check.assert.containsKey(tag, 'id')
+      check.assert.containsKey(tag, 'tagName')
       reduce({
-        FILTER_TAGS_APPEND: { tagName }
+        FILTER_TAGS_APPEND: { tag }
       })
     },
     clickDateHandler (date) {
-      date = new Date(date)
+      check.assert.date(date)
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },
         FILTER_DATE_TO: { dateTo: date }

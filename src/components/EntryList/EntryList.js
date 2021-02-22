@@ -1,12 +1,5 @@
 const { default: EntryDisplay } = require('../EntryDisplay')
 const { default: EntryEdit } = require('../EntryEdit')
-const { reduce } = require('../../store')
-
-// const {
-//   mutations: {
-//     EntryQ
-//   }
-// } = require('../../apollo')
 
 const EntryList = {
   props: {
@@ -17,10 +10,10 @@ const EntryList = {
           return true
       }
     },
-    clickTag: {
+    clickTagHandler: {
       type: Function
     },
-    clickDate: {
+    clickDateHandler: {
       type: Function
     }
   },
@@ -34,17 +27,6 @@ const EntryList = {
     EntryEdit
   },
   methods: {
-    clickTagHandler (tag) {
-      reduce({
-        FILTER_TAGS_APPEND: { tag }
-      })
-    },
-    clickDateHandler (date) {
-      reduce({
-        FILTER_DATE_FROM: { dateFrom: date },
-        FILTER_DATE_TO: { dateTo: date }
-      })
-    }
   }
 }
 
