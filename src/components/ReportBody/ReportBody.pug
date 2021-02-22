@@ -1,8 +1,8 @@
 .report-body
-  EntryDisplay(
-    v-for='entry in entries'
-    :key='entry.id'
-    :entry='entry'
-    @clickTag='clickTag'
-    @clickDate='clickDate'
+  EntryList(
+    v-for="entry in entries"
+    :key="entry.id"
+    :entry="entry"
+    :clickTagHandler="clickTagHandler"
+    :clickDateHandler="clickDateHandler"
   )

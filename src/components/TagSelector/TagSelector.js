@@ -43,7 +43,7 @@ const TagSelector = {
       this.reset()
     },
     clickTagRemove (id) {
-      const tag = this.tagSuggestions.find((t) => t.id === id)
+      const tag = this.selectedTags.find((t) => t.id === id)
       check.assert.not.undefined(tag)
       this.tagRemoveHandler(tag)
     },

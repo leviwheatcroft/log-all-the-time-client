@@ -1,7 +1,5 @@
 const { default: DatePicker } = require('vue2-datepicker')
-const {
-  assert
-} = require('@sindresorhus/is')
+const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { default: TagSelector } = require('../TagSelector')
 // const {
@@ -49,7 +47,7 @@ const ReportFilters = {
     },
     tagRemoveHandler (tag) {
       const idx = this.tags.findIndex((t) => t.id === tag.id)
-      assert.truthy(idx !== -1)
+      check.assert.greater(idx, -1)
       this.tags.splice(idx, 1)
     },
     // clickSuggestion (tagId) {

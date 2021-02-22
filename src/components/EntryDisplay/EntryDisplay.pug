@@ -1,7 +1,7 @@
 .entry-display
   .date(
     v-if='entry.date'
-    @click="$emit('clickDate', entry.date)"
+    @click="clickDate(entry.date)"
   ) {{ $dayjs(entry.date).format('D MMM') }}
   .duration(v-if='entry.duration').
     {{
@@ -14,5 +14,5 @@
   .spacer
   .tag(
     v-for='tag in entry.tags'
-    @click="$emit('clickTag', tag.id)"
+    @click="clickTag(tag)"
   ) {{ tag.tagName }}

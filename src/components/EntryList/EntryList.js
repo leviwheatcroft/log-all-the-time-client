@@ -1,6 +1,6 @@
 const { default: EntryDisplay } = require('../EntryDisplay')
 const { default: EntryEdit } = require('../EntryEdit')
-/* eslint-disable no-prototype-builtins */
+const { reduce } = require('../../store')
 
 // const {
 //   mutations: {
@@ -34,7 +34,17 @@ const EntryList = {
     EntryEdit
   },
   methods: {
-
+    clickTagHandler (tag) {
+      reduce({
+        FILTER_TAGS_APPEND: { tag }
+      })
+    },
+    clickDateHandler (date) {
+      reduce({
+        FILTER_DATE_FROM: { dateFrom: date },
+        FILTER_DATE_TO: { dateTo: date }
+      })
+    }
   }
 }
 

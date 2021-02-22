@@ -1,4 +1,4 @@
-const { default: EntryDisplay } = require('../EntryDisplay')
+const { default: EntryList } = require('../EntryList')
 const {
   queries: {
     EntryFilterQ
@@ -27,7 +27,7 @@ const ReportBody = {
     }
   },
   components: {
-    EntryDisplay
+    EntryList
   },
   data () {
     return {
@@ -36,12 +36,12 @@ const ReportBody = {
     }
   },
   methods: {
-    clickTag (tagName) {
+    clickTagHandler (tagName) {
       reduce({
         FILTER_TAGS_APPEND: { tagName }
       })
     },
-    clickDate (date) {
+    clickDateHandler (date) {
       date = new Date(date)
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },

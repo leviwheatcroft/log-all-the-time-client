@@ -7,7 +7,7 @@
   EntryDisplay(
     v-if='!editing'
     :entry='entry'
+    :clickTagHandler="clickTagHandler"
+    :clickDateHandler="clickDateHandler"
     @edit='editing = true'
-    @clickTag='clickTag'
-    @clickDate='clickDate'
   )
