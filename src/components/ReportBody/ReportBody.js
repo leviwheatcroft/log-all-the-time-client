@@ -1,5 +1,5 @@
 const check = require('check-types')
-const { default: EntryList } = require('../EntryList')
+const { default: EntryListItem } = require('../EntryListItem')
 const {
   queries: {
     EntryFilterQ
@@ -28,7 +28,7 @@ const ReportBody = {
     }
   },
   components: {
-    EntryList
+    EntryListItem
   },
   data () {
     return {

@@ -1,7 +1,7 @@
 const { default: EntryDisplay } = require('../EntryDisplay')
 const { default: EntryEdit } = require('../EntryEdit')
 
-const EntryList = {
+const EntryListItem = {
   props: {
     entry: {
       type: Object,
@@ -30,4 +30,4 @@ const EntryList = {
   }
 }
 
-module.exports = EntryList
+module.exports = EntryListItem

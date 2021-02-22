@@ -1,6 +1,6 @@
 // const { default: EntryDisplay } = require('../EntryDisplay')
 // const { default: EntryEdit } = require('../EntryEdit')
-const { default: EntryList } = require('../EntryList')
+const { default: EntryListItem } = require('../EntryListItem')
 const { reduce } = require('../../store')
 
 const {
@@ -25,7 +25,7 @@ const Recent = {
     }
   },
   components: {
-    EntryList
+    EntryListItem
   },
   methods: {
     clickTag (tagName) {
