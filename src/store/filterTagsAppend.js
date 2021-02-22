@@ -1,13 +1,18 @@
+const {
+  assert
+} = require('@sindresorhus/is')
+
 function filterTagsAppend (payload, state) {
   const {
     type,
-    data: { tagString }
+    data: { tag }
   } = payload
   if (type !== 'FILTER_TAGS_APPEND')
     return
-  if (typeof tagString !== 'string')
-    throw new RangeError('typeof tagString is not string')
-  state.filters.tags.push(tagString)
+  assert.object(tag)
+  assert.string(tag.id)
+  assert.string(tag.tagName)
+  state.filters.tags.push(tag)
 }
 
 module.exports = {
