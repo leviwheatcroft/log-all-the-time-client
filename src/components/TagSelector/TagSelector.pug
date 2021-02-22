@@ -1,0 +1,28 @@
+.tag-selector
+  .tag-partial-container
+    input.tag-partial(
+      v-model='tagPartial'
+      @keydown='keydownTagPartial'
+    )
+    .tag-suggestions(v-if="tagPartial.length > 0")
+      // suggestions from partial
+      .tag-suggestion(
+        v-if="tagPartial.length >= 3"
+        v-for="tagSuggestion in tagSuggestions"
+        :key="tagSuggestion.id"
+        @click="clickTagSuggestion(tagSuggestion.id)"
+      ) {{ tagSuggestion.tagName }}
+
+      // new tag
+      .tag-suggestion(
+        @click="clickTagNew"
+        v-if="tagPartial.length > 0"
+      ) New Tag: {{ tagPartial }}
+
+  .tag-container
+    .tag(
+      v-for="selectedTag in selectedTags"
+      :tag="selectedTag"
+      :key="selectedTag.id"
+      @click="clickTagRemove(selectedTag.id)"
+    ) {{ selectedTag.tagName }}

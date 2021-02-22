@@ -1,0 +1,35 @@
+@import "../../styles/colors.less";
+
+.tag-selector {
+  display: flex;
+  flex-direction: flex-row;
+  .tag-partial-container {
+    position: relative;
+    margin: 0 1.2rem;
+    input {
+      margin: 0;
+      padding: 0.6rem;
+    }
+    .tag-suggestions {
+      position: absolute;
+      top: 2.4rem;
+      background-color: @green;
+      width: 100%;
+      cursor: pointer;
+      .tag-suggestion {
+        padding: 1.2rem;
+      }
+    }
+  }
+  .tag-container {
+    display: flex;
+    flex-direction: flex-row;
+    align-items: center;
+    .tag {
+      background-color: @green;
+      padding: 0.6rem;
+      margin: 0.6rem;
+      border-radius: 3px;
+    }
+  }
+}

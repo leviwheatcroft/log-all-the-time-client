@@ -1,21 +1,26 @@
 const { default: DatePicker } = require('vue2-datepicker')
+const {
+  assert
+} = require('@sindresorhus/is')
 const { reduce, state } = require('../../store')
-const {
-  queries: {
-    TagPartialQ
-  }
-} = require('../../apollo')
-const {
-  stringOps: {
-    replaceCursorSegmentCommaSep,
-    getCursorSegmentCommaSep,
-    asTagsString
-  }
-} = require('../../lib')
+const { default: TagSelector } = require('../TagSelector')
+// const {
+//   queries: {
+//     TagPartialQ
+//   }
+// } = require('../../apollo')
+// const {
+//   stringOps: {
+//     replaceCursorSegmentCommaSep,
+//     getCursorSegmentCommaSep,
+//     asTagsString
+//   }
+// } = require('../../lib')
 
 const ReportFilters = {
   components: {
-    DatePicker
+    DatePicker,
+    TagSelector
   },
   data () {
     const {
@@ -24,8 +29,7 @@ const ReportFilters = {
     return {
       state,
       dateRange: [dateFrom, dateTo],
-      tagsString: asTagsString(tags),
-      suggestions: []
+      tags: [...tags]
     }
   },
   watch: {
@@ -36,70 +40,78 @@ const ReportFilters = {
       this.dateRange.splice(1, 1, this.state.filters.dateTo)
     },
     'state.filters.tags': function stateFiltersTags () {
-      this.tagsString = asTagsString(this.state.filters.tags)
+      this.tags = [...this.state.filters.tags]
     }
   },
   methods: {
-    clickSuggestion (tagId) {
-      this.selectSuggestion(tagId)
+    tagAddHandler (tag) {
+      this.tags.push(tag)
     },
-    selectSuggestion (tagId) {
-      const tag = this.suggestions.find((s) => s.id === tagId)
-      this.$data.suggestions = []
-      const input = this.$el.querySelector('input.tags')
-      const {
-        selectionStart: cursor
-      } = input
-      const {
-        tagsString
-      } = this
-      const replaced = [
-        replaceCursorSegmentCommaSep(tagsString, cursor, tag.tag),
-        cursor === tagsString.length ? ', ' : ''
-      ].join('')
-      this.tagsString = replaced
-      input.focus()
-      input.setSelectionRange(replaced.length, replaced.length)
+    tagRemoveHandler (tag) {
+      const idx = this.tags.findIndex((t) => t.id === tag.id)
+      assert.truthy(idx !== -1)
+      this.tags.splice(idx, 1)
     },
-    tagsKeydown (event) {
-      if (event.keyCode !== 9)
-        return
-      event.preventDefault()
-      this.selectSuggestion(this.suggestions[0].id)
-    },
-    async tagsInput ({ target }) {
-      const {
-        selectionStart: cursor
-      } = target
-      const {
-        tagsString
-      } = this
-      const tagPartial = getCursorSegmentCommaSep(tagsString, cursor)
-      if (tagPartial.length < 3)
-        return
-      const result = await this.$apollo.query({
-        query: TagPartialQ,
-        variables: {
-          tagPartial
-        }
-      })
-      const {
-        data: {
-          TagPartialQ: suggestions
-        }
-      } = result
-
-      this.$data.suggestions = suggestions
-    },
+    // clickSuggestion (tagId) {
+    //   this.selectSuggestion(tagId)
+    // },
+    // selectSuggestion (tagId) {
+    //   const tag = this.suggestions.find((s) => s.id === tagId)
+    //   this.$data.suggestions = []
+    //   const input = this.$el.querySelector('input.tags')
+    //   const {
+    //     selectionStart: cursor
+    //   } = input
+    //   const {
+    //     tagsString
+    //   } = this
+    //   const replaced = [
+    //     replaceCursorSegmentCommaSep(tagsString, cursor, tag.tag),
+    //     cursor === tagsString.length ? ', ' : ''
+    //   ].join('')
+    //   this.tagsString = replaced
+    //   input.focus()
+    //   input.setSelectionRange(replaced.length, replaced.length)
+    // },
+    // tagsKeydown (event) {
+    //   if (event.keyCode !== 9)
+    //     return
+    //   event.preventDefault()
+    //   this.selectSuggestion(this.suggestions[0].id)
+    // },
+    // async tagsInput ({ target }) {
+    //   const {
+    //     selectionStart: cursor
+    //   } = target
+    //   const {
+    //     tagsString
+    //   } = this
+    //   const tagPartial = getCursorSegmentCommaSep(tagsString, cursor)
+    //   if (tagPartial.length < 3)
+    //     return
+    //   const result = await this.$apollo.query({
+    //     query: TagPartialQ,
+    //     variables: {
+    //       tagPartial
+    //     }
+    //   })
+    //   const {
+    //     data: {
+    //       TagPartialQ: suggestions
+    //     }
+    //   } = result
+    //
+    //   this.$data.suggestions = suggestions
+    // },
     apply () {
       const {
-        dateRange: [dateFrom, dateTo]
+        dateRange: [dateFrom, dateTo],
+        tags
       } = this
-      const tagsString = this.$el.querySelector('input.tags').value
       reduce({
         FILTER_DATE_FROM: { dateFrom },
         FILTER_DATE_TO: { dateTo },
-        FILTER_TAGS_REPLACE: { tagsString }
+        FILTER_TAGS_REPLACE: { tags }
       })
     }
   }

@@ -13,9 +13,12 @@ const ReportBody = {
       variables () {
         const {
           dateFrom,
-          dateTo,
+          dateTo
+        } = this.state.filters
+        let {
           tags
         } = this.state.filters
+        tags = tags.map((t) => t.id)
         return { dateFrom, dateTo, tags }
       },
       update ({ EntryFilterQ: entries }) {

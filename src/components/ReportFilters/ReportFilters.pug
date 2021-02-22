@@ -9,19 +9,9 @@
     :input-attr='{ id: "date-filter" }'
   )
   .spacer
-  label(for='tags-filter') Tags:
-  .input-container
-    // value is not bound, component only updates to this when state changes
-    // we listen to @input et cetera and micromanage the state change
-    input#tags-filter.tags(
-      @input='tagsInput'
-      @keydown='tagsKeydown'
-      v-model="tagsString"
-    )
-    .suggestions(v-if='suggestions.length > 0')
-      .suggestion(
-        v-for='suggestion in suggestions'
-        :key='suggestion.id'
-        @click='clickSuggestion(suggestion.id)'
-      ) {{ suggestion.tagName }}
+  TagSelector(
+    :selectedTags="tags"
+    :tagAddHandler="tagAddHandler"
+    :tagRemoveHandler="tagRemoveHandler"
+  )
   button.submit(@click='apply') Apply

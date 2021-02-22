@@ -1,7 +1,6 @@
-const {
-  assert,
-  is
-} = require('@sindresorhus/is')
+const is = require('@sindresorhus/is')
+
+const { assert } = is
 
 function filterTagsReplace (payload, state) {
   const {
@@ -11,8 +10,6 @@ function filterTagsReplace (payload, state) {
   if (type !== 'FILTER_TAGS_REPLACE')
     return
   assert.array(tags, (t) => is.string(t.id) && is.string(t.tagName))
-  if (typeof tagsString !== 'string')
-    throw new RangeError('typeof tagsString is not string')
   state.filters.tags = tags
 }
 
