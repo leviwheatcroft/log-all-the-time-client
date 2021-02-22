@@ -1,6 +1,4 @@
-const is = require('@sindresorhus/is')
-
-const { assert } = is
+const check = require('check-types')
 
 function filterTagsReplace (payload, state) {
   const {
@@ -9,7 +7,8 @@ function filterTagsReplace (payload, state) {
   } = payload
   if (type !== 'FILTER_TAGS_REPLACE')
     return
-  assert.array(tags, (t) => is.string(t.id) && is.string(t.tagName))
+  check.assert.array.of.containsKey(tags, 'id')
+  check.assert.array.of.containsKey(tags, 'tagName')
   state.filters.tags = tags
 }
 

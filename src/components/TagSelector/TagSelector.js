@@ -1,12 +1,10 @@
 // const { reduce, state } = require('../../store')
-const is = require('@sindresorhus/is')
+const check = require('check-types')
 const {
   queries: {
     TagPartialQ
   }
 } = require('../../apollo')
-
-const { assert } = is
 
 const TagSelector = {
   apollo: {
@@ -40,15 +38,13 @@ const TagSelector = {
     },
     clickTagSuggestion (id) {
       const tag = this.tagSuggestions.find((t) => t.id === id)
-      if (is.undefined(tag))
-        throw new TypeError()
+      check.assert.not.undefined(tag)
       this.tagAddHandler(tag)
       this.reset()
     },
     clickTagRemove (id) {
       const tag = this.tagSuggestions.find((t) => t.id === id)
-      if (is.undefined(tag))
-        throw new TypeError()
+      check.assert.not.undefined(tag)
       this.tagRemoveHandler(tag)
     },
     clickTagNew (tagName) {
@@ -61,9 +57,7 @@ const TagSelector = {
       required: true,
       type: Array,
       validator (selectedTags) {
-        return is.array(selectedTags, (t) => {
-          return is.string(t.id) && is.string(t.tagName)
-        })
+        return check.array.of.containsKey(selectedTags, 'tagName')
       }
     },
     tagAddHandler: {

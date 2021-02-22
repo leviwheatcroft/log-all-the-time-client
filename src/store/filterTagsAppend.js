@@ -1,6 +1,4 @@
-const {
-  assert
-} = require('@sindresorhus/is')
+const check = require('check-types')
 
 function filterTagsAppend (payload, state) {
   const {
@@ -9,9 +7,8 @@ function filterTagsAppend (payload, state) {
   } = payload
   if (type !== 'FILTER_TAGS_APPEND')
     return
-  assert.object(tag)
-  assert.string(tag.id)
-  assert.string(tag.tagName)
+  check.assert.containsKey(tag, 'id')
+  check.assert.containsKey(tag, 'tagName')
   state.filters.tags.push(tag)
 }
 
