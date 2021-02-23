@@ -1,4 +1,4 @@
-const { default: EntryNew } = require('../EntryNew')
+const { default: EntryInput } = require('../EntryInput')
 const { default: EntryList } = require('../EntryList')
 const {
   queries: {
@@ -28,7 +28,7 @@ const PageDashboard = {
     }
   },
   components: {
-    EntryNew,
+    EntryInput,
     EntryList
   },
   methods: {

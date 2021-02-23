@@ -1,3 +1,5 @@
+const { default: DatePicker } = require('vue2-datepicker')
+const { default: TagSelector } = require('../TagSelector')
 const {
   mutations: {
     EntryUpdateM
@@ -6,19 +8,61 @@ const {
     EntryQ
   }
 } = require('../../apollo')
+const {
+  types: {
+    isEntry,
+    isTag
+  }
+} = require('../../lib')
 
 const { resolvers: { resolve } } = require('../../lib')
 
-const EntryEdit = {
+const EntryInput = {
+  components: {
+    TagSelector,
+    DatePicker
+  },
   data () {
+    const {
+      id,
+      date,
+      duration,
+      description,
+      tags
+    } = this.entry
     return {
-      raw: this.entry.raw
+      id,
+      date,
+      duration,
+      description,
+      tags
     }
   },
-  props: [
-    'entry'
-  ],
+  props: {
+    entry: {
+      required: false,
+      type: Object,
+      validator (entry) {
+        if (!entry)
+          return
+        return isEntry(entry)
+      }
+    }
+  },
   methods: {
+    tagAddHandler (tag) {
+      if (!isTag(tag))
+        throw new TypeError('tag is not tag')
+      this.tags.push(tag)
+    },
+    tagRemoveHandler (tag) {
+      if (!isTag(tag))
+        throw new TypeError('tag is not tag')
+      const idx = this.tags.findIndex((t) => t.id === tag.id)
+      if (idx === -1)
+        throw new RangeError('tag not in tags')
+      this.tags.splice(idx, 1)
+    },
     async submit () {
       const entry = resolve({
         id: this.entry.id,
@@ -30,7 +74,7 @@ const EntryEdit = {
         raw: this.$data.raw,
         description: this.$data.raw
       })
-      this.$emit('unedit')
+      this.$emit('submit')
       await this.$apollo.mutate({
         mutation: EntryUpdateM,
         variables: {
@@ -66,4 +110,4 @@ const EntryEdit = {
   }
 }
 
-module.exports = EntryEdit
+module.exports = EntryInput

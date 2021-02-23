@@ -1,0 +1,17 @@
+.entry-input
+  .row
+    date-picker(
+      v-model="date"
+      format="DD/MM/YY"
+      type="date"
+    )
+  .row
+    input.duration(v-model="duration")
+    input.description(v-model="description")
+    button.submit(@click="submit") Send
+  .row
+    TagSelector(
+      :selectedTags="tags"
+      :tagAddHandler="tagAddHandler"
+      :tagRemoveHandler="tagRemoveHandler"
+    )
