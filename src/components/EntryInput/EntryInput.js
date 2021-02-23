@@ -12,6 +12,11 @@ const {
   types: {
     isEntry,
     isTag
+  },
+  stringOps: {
+    parseHumanDuration,
+    durationAsHHMM,
+    durationFromHHMM
   }
 } = require('../../lib')
 
@@ -32,7 +37,7 @@ const EntryInput = {
       return {
         id,
         date: new Date(date),
-        duration,
+        duration: durationAsHHMM(duration),
         description,
         tags
       }
@@ -62,8 +67,8 @@ const EntryInput = {
     }
   },
   methods: {
-    blurDuration (duration) {
-      parseDuration(duration)
+    blurDuration () {
+      this.duration = durationAsHHMM(parseHumanDuration(this.duration))
     },
     tagAddHandler (tag) {
       if (!isTag(tag))
@@ -101,7 +106,7 @@ const EntryInput = {
       const entry = {
         ...id ? { id } : {},
         date,
-        duration: parseInt(duration, 10) || 0,
+        duration: durationFromHHMM(duration),
         description,
         tags
       }

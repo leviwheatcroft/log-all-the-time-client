@@ -26,3 +26,8 @@ test('parseHumanDuration 4', (t) => {
   const duration = parseHumanDuration(humanDurationString)
   t.is(duration, 135)
 })
+test('parseHumanDuration 5', (t) => {
+  const humanDurationString = '01:00'
+  const duration = parseHumanDuration(humanDurationString)
+  t.is(duration, 60)
+})

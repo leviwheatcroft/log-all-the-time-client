@@ -30,6 +30,38 @@ const regExps = [
     parser (match) {
       return parseFloat(match[1]) * 60
     }
+  },
+  {
+    // strings like:
+    // 0:01 1:30
+    regExp: /^(\d{1,3}):(\d{2})$/,
+    parser (match) {
+      return (parseInt(match[1], 10) * 60) + parseInt(match[2], 10)
+    }
+  },
+  {
+    // strings like:
+    // 1 2 3 4
+    regExp: /^([1234])$/,
+    parser (match) {
+      return parseInt(match[1], 10) * 60
+    }
+  },
+  {
+    // strings like:
+    // 5 6 7 8 9
+    regExp: /^([56789])$/,
+    parser (match) {
+      return parseInt(match[1], 10)
+    }
+  },
+  {
+    // strings like:
+    // 5 6 7 8 9
+    regExp: /^(\d{2,3})$/,
+    parser (match) {
+      return parseInt(match[1], 10)
+    }
   }
 ]
 
@@ -41,6 +73,8 @@ function parseHumanDuration (humanDurationString) {
       parsed = parser(match)
     return match
   })
+  if (!parsed)
+    throw new RangeError('unparseable human duration')
   return parsed
 }
 
