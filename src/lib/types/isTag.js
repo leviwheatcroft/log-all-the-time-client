@@ -6,7 +6,7 @@ function isTag (tag) {
     tagName
   } = tag
   return (
-    check.string(id),
+    check.string(id) &&
     check.string(tagName)
   )
 }

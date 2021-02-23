@@ -1,15 +1,11 @@
 const {
-  replaceCursorSegmentCommaSep
-} = require('./replaceCursorSegmentCommaSep')
-const {
-  getCursorSegmentCommaSep
-} = require('./getCursorSegmentCommaSep')
-const {
-  asTagsString
-} = require('./asTagsString')
+  parseHumanDuration,
+  durationAsHHMM,
+  durationFromHHMM
+} = require('./duration')
 
 module.exports = {
-  getCursorSegmentCommaSep,
-  replaceCursorSegmentCommaSep,
-  asTagsString
+  parseHumanDuration,
+  durationAsHHMM,
+  durationFromHHMM
 }

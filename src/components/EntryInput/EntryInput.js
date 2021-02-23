@@ -62,6 +62,9 @@ const EntryInput = {
     }
   },
   methods: {
+    blurDuration (duration) {
+      parseDuration(duration)
+    },
     tagAddHandler (tag) {
       if (!isTag(tag))
         throw new TypeError('tag is not tag')

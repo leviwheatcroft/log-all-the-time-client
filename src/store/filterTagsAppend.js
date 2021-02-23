@@ -1,4 +1,8 @@
-const check = require('check-types')
+const {
+  types: {
+    isTag
+  }
+} = require('../lib')
 
 function filterTagsAppend (payload, state) {
   const {
@@ -7,8 +11,9 @@ function filterTagsAppend (payload, state) {
   } = payload
   if (type !== 'FILTER_TAGS_APPEND')
     return
-  check.assert.containsKey(tag, 'id')
-  check.assert.containsKey(tag, 'tagName')
+
+  if (!isTag(tag))
+    throw new TypeError('tag is not tag')
   state.filters.tags.push(tag)
 }
 

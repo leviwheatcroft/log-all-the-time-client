@@ -1,4 +1,8 @@
-const check = require('check-types')
+const {
+  types: {
+    isTag
+  }
+} = require('../lib')
 
 function filterTagsReplace (payload, state) {
   const {
@@ -7,8 +11,8 @@ function filterTagsReplace (payload, state) {
   } = payload
   if (type !== 'FILTER_TAGS_REPLACE')
     return
-  check.assert.array.of.containsKey(tags, 'id')
-  check.assert.array.of.containsKey(tags, 'tagName')
+  if (!tags.every(isTag))
+    throw new TypeError('tag is not tag')
   state.filters.tags = tags
 }
 

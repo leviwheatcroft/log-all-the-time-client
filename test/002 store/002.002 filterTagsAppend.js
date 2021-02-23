@@ -10,24 +10,32 @@ test.beforeEach(() => {
 })
 
 test.serial('filterTagsAppend 1', (t) => {
-  const tagString = 'dummyTag'
-  reduce({ FILTER_TAGS_APPEND: { tagString } })
-  t.deepEqual(state.filters.tags, ['dummyTag'])
+  const tag = {
+    id: '',
+    tagName: 'testTag'
+  }
+  reduce({ FILTER_TAGS_APPEND: { tag } })
+  t.deepEqual(state.filters.tags, [tag])
 })
 test.serial('filterTagsAppend 2', (t) => {
-  const tagString = 'dummyTag'
-  reduce({ FILTER_TAGS_APPEND: { tagString } })
-  reduce({ FILTER_TAGS_APPEND: { tagString } })
-  t.deepEqual(state.filters.tags, ['dummyTag', 'dummyTag'])
+  const tag = {
+    id: '',
+    tagName: 'dummyTag'
+  }
+  reduce({ FILTER_TAGS_APPEND: { tag } })
+  reduce({ FILTER_TAGS_APPEND: { tag } })
+  t.deepEqual(state.filters.tags, [tag, tag])
 })
 test.serial('filterTagsAppend 3', (t) => {
-  const tagString = ['dummyTag']
+  const tag = {
+    tagName: 'testTag'
+  }
   t.throws(
     () => {
-      reduce({ FILTER_TAGS_APPEND: { tagString } })
+      reduce({ FILTER_TAGS_APPEND: { tag } })
     },
     {
-      instanceOf: RangeError
+      instanceOf: TypeError
     }
   )
 })
