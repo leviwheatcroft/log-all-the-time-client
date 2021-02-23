@@ -1,0 +1,12 @@
+mutation EntryUpsertM($entry: EntryI!) {
+  EntryUpsertM(entry: $entry) {
+    id
+    description
+    date
+    duration
+    tags {
+      id
+      tagName
+    }
+  }
+}

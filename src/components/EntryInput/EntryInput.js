@@ -2,7 +2,7 @@ const { default: DatePicker } = require('vue2-datepicker')
 const { default: TagSelector } = require('../TagSelector')
 const {
   mutations: {
-    EntryUpdateM
+    EntryUpsertM
   },
   queries: {
     EntryQ
@@ -14,8 +14,6 @@ const {
     isTag
   }
 } = require('../../lib')
-
-const { resolvers: { resolve } } = require('../../lib')
 
 const EntryInput = {
   components: {
@@ -81,39 +79,61 @@ const EntryInput = {
       this.$emit('cancel')
     },
     async clickSubmit () {
-      const entry = resolve({
-        id: this.entry.id,
-        date: null,
-        timeStart: null,
-        timeEnd: null,
-        duration: null,
-        tags: [],
-        raw: this.$data.raw,
-        description: this.$data.raw
-      })
+      const {
+        id,
+        date,
+        duration,
+        description,
+        tags
+      } = this
+
+      // clear local entry
+      if (!this.entry) {
+        this.date = new Date()
+        this.duration = ''
+        this.description = ''
+        this.tags = []
+      }
+
+      const entry = {
+        ...id ? { id } : {},
+        date,
+        duration: parseInt(duration, 10) || 0,
+        description,
+        tags
+      }
       this.$emit('submit')
       await this.$apollo.mutate({
-        mutation: EntryUpdateM,
+        mutation: EntryUpsertM,
         variables: {
           entry
         },
         update: (store, ctx) => {
           const {
             data: {
-              EntryUpdateM: result
+              EntryUpsertM: result
             }
           } = ctx
 
           const data = store.readQuery({ query: EntryQ })
           const idx = data.EntryQ.findIndex((c) => c.id === result.id)
-          this.$set(data.EntryQ, idx, result)
+          if (idx !== -1)
+            data.EntryQ.splice(idx, 1, result)
+          else
+            data.EntryQ.push(result)
+
+          // this clears out any optimistic responses without considering
+          // which response we actually have. Only an issue if there's more
+          // than one EntryUpsertM in flight
+          data.EntryQ = data.EntryQ.filter((e) => e.id !== 'newId')
 
           store.writeQuery({ query: EntryQ, data })
         },
         optimisticResponse: {
           __typename: 'Mutation',
-          EntryUpdateM: {
+          EntryUpsertM: {
             __typename: 'Entry',
+            ...entry.id ? {} : { id: 'newId' },
             ...entry,
             tags: entry.tags.map((tag) => ({
               __typename: 'Tag',
