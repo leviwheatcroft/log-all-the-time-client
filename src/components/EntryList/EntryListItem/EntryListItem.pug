@@ -1,8 +1,8 @@
 .entry-list-item
-  EntryEdit(
+  EntryInput(
     v-if='editing'
     :entry='entry'
-    @unedit='editing = false'
+    @submit='editing = false'
   )
   EntryDisplay(
     v-if='!editing'

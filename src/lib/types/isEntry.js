@@ -16,7 +16,7 @@ function isEntry (entry) {
   //   throw new TypeError('entry tags is not array')
   return (
     check.string(id) &&
-    check.date(date) &&
+    check.integer(date) &&
     check.array(tags)
   )
 }

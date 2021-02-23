@@ -23,19 +23,28 @@ const EntryInput = {
     DatePicker
   },
   data () {
-    const {
-      id,
-      date,
-      duration,
-      description,
-      tags
-    } = this.entry
+    if (this.entry) {
+      const {
+        id,
+        date,
+        duration,
+        description,
+        tags
+      } = this.entry
+      return {
+        id,
+        date: new Date(date),
+        duration,
+        description,
+        tags
+      }
+    }
     return {
-      id,
-      date,
-      duration,
-      description,
-      tags
+      id: '',
+      date: new Date(),
+      duration: '',
+      description: '',
+      tags: []
     }
   },
   props: {

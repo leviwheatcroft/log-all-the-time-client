@@ -1,5 +1,5 @@
 const { default: EntryDisplay } = require('./EntryDisplay')
-const { default: EntryEdit } = require('../../EntryEdit')
+const { default: EntryInput } = require('../../EntryInput')
 
 const EntryListItem = {
   props: {
@@ -24,7 +24,7 @@ const EntryListItem = {
   },
   components: {
     EntryDisplay,
-    EntryEdit
+    EntryInput
   },
   methods: {
   }
