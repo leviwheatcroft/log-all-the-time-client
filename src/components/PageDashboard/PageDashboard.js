@@ -1,5 +1,7 @@
+const check = require('check-types')
 const { default: EntryInput } = require('../EntryInput')
 const { default: EntryList } = require('../EntryList')
+const { reduce } = require('../../store')
 const {
   queries: {
     EntryQ
@@ -22,7 +24,6 @@ const PageDashboard = {
       //   return { dateFrom, dateTo, tags }
       // },
       update ({ EntryQ: entries }) {
-        console.log(entries)
         return entries
       }
     }
@@ -33,10 +34,20 @@ const PageDashboard = {
   },
   methods: {
     clickTagHandler (tag) {
-
+      check.assert.containsKey(tag, 'id')
+      check.assert.containsKey(tag, 'tagName')
+      reduce({
+        FILTER_TAGS_APPEND: { tag }
+      })
+      this.$router.push('/report')
     },
     clickDateHandler (date) {
-
+      check.assert.date(date)
+      reduce({
+        FILTER_DATE_FROM: { dateFrom: date },
+        FILTER_DATE_TO: { dateTo: date }
+      })
+      this.$router.push('/report')
     }
   }
 }
