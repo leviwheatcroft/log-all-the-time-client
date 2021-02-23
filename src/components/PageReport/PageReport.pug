@@ -1,4 +1,8 @@
 .page.page-report
   .container
     ReportFilters
-    ReportBody
+    EntryList(
+      :entries="entries"
+      :clickTagHandler="clickTagHandler"
+      :clickDateHandler="clickDateHandler"
+    )

@@ -1,0 +1,8 @@
+.entry-list
+  EntryListItem(
+    v-for="entry in entries"
+    :key="entry.id"
+    :entry="entry"
+    :clickTagHandler="clickTagHandler"
+    :clickDateHandler="clickDateHandler"
+  )

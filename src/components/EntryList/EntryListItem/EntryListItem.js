@@ -1,5 +1,5 @@
-const { default: EntryDisplay } = require('../EntryDisplay')
-const { default: EntryEdit } = require('../EntryEdit')
+const { default: EntryDisplay } = require('./EntryDisplay')
+const { default: EntryEdit } = require('../../EntryEdit')
 
 const EntryListItem = {
   props: {

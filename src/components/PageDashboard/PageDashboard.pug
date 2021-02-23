@@ -1,4 +1,8 @@
 .page.page-dashboard
   .container
     EntryNew
-    Recent
+    EntryList(
+      :entries="entries"
+      :clickTagHandler="clickTagHandler"
+      :clickDateHandler="clickDateHandler"
+    )
