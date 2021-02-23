@@ -1,3 +1,5 @@
+const check = require('check-types')
+
 const { default: DatePicker } = require('vue2-datepicker')
 const { default: TagSelector } = require('../TagSelector')
 const {
@@ -11,7 +13,8 @@ const {
 const {
   types: {
     isEntry,
-    isTag
+    isTag,
+    isNewTag
   },
   stringOps: {
     parseHumanDuration,
@@ -70,15 +73,20 @@ const EntryInput = {
     blurDuration () {
       this.duration = durationAsHHMM(parseHumanDuration(this.duration))
     },
+    tagNewHandler (tag) {
+      if (!isNewTag(tag))
+        throw new TypeError('tag is not newTag')
+      this.tags.push(tag)
+    },
     tagAddHandler (tag) {
       if (!isTag(tag))
         throw new TypeError('tag is not tag')
       this.tags.push(tag)
     },
     tagRemoveHandler (tag) {
-      if (!isTag(tag))
-        throw new TypeError('tag is not tag')
-      const idx = this.tags.findIndex((t) => t.id === tag.id)
+      if (!isTag(tag) && !isNewTag(tag))
+        throw new TypeError('tag is not tag or newTag')
+      const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
       if (idx === -1)
         throw new RangeError('tag not in tags')
       this.tags.splice(idx, 1)
@@ -108,7 +116,9 @@ const EntryInput = {
         date,
         duration: durationFromHHMM(duration),
         description,
-        tags
+
+        // strip __typename
+        tags: tags.map((t) => ({ id: t.id, tagName: t.tagName }))
       }
       this.$emit('submit')
       await this.$apollo.mutate({
@@ -145,8 +155,8 @@ const EntryInput = {
             ...entry,
             tags: entry.tags.map((tag) => ({
               __typename: 'Tag',
-              id: -1,
-              tag
+              ...tag.id ? {} : { id: 'newId' },
+              ...tag
             }))
           }
         }

@@ -16,7 +16,7 @@
       // new tag
       .tag-suggestion(
         @click="clickTagNew"
-        v-if="tagPartial.length > 0"
+        v-if="tagPartial.length > 0 && tagNewHandler"
       ) New Tag: {{ tagPartial }}
 
   .tag-container

@@ -30,10 +30,13 @@ const TagSelector = {
       if (event.keyCode !== 9)
         return
       event.preventDefault()
-      if (this.tagSuggestions.length)
+      if (this.tagSuggestions.length) {
         this.tagAddHandler(this.tagSuggestions[0])
-      else
-        this.tagNewHandler({ tagName: this.tagPartial })
+      } else if (this.tagNewHandler) {
+        const tagName = this.tagPartial
+        const tag = { tagName }
+        this.tagNewHandler(tag)
+      }
       this.reset()
     },
     clickTagSuggestion (id) {
@@ -47,7 +50,8 @@ const TagSelector = {
       check.assert.not.undefined(tag)
       this.tagRemoveHandler(tag)
     },
-    clickTagNew (tagName) {
+    clickTagNew () {
+      const tagName = this.tagPartial
       const tag = { tagName }
       this.tagNewHandler(tag)
     }
