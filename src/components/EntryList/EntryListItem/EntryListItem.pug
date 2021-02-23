@@ -1,13 +1,15 @@
 .entry-list-item
   EntryInput(
-    v-if='editing'
-    :entry='entry'
-    @submit='editing = false'
+    v-if="editing"
+    :entry="entry"
+    :cancelable="true"
+    @submit="editing = false"
+    @cancel="editing = false"
   )
   EntryDisplay(
-    v-if='!editing'
-    :entry='entry'
+    v-if="!editing"
+    :entry="entry"
     :clickTagHandler="clickTagHandler"
     :clickDateHandler="clickDateHandler"
-    @edit='editing = true'
+    @edit="editing = true"
   )

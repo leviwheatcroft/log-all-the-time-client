@@ -48,6 +48,11 @@ const EntryInput = {
     }
   },
   props: {
+    cancelable: {
+      required: false,
+      default: false,
+      type: Boolean
+    },
     entry: {
       required: false,
       type: Object,
@@ -72,7 +77,10 @@ const EntryInput = {
         throw new RangeError('tag not in tags')
       this.tags.splice(idx, 1)
     },
-    async submit () {
+    clickCancel () {
+      this.$emit('cancel')
+    },
+    async clickSubmit () {
       const entry = resolve({
         id: this.entry.id,
         date: null,

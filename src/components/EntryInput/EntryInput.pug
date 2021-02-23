@@ -5,10 +5,14 @@
       format="DD/MM/YY"
       type="date"
     )
+    button.cancel(
+      v-if="cancelable"
+      @click="clickCancel"
+    ) Cancel
   .row
     input.duration(v-model="duration")
     input.description(v-model="description")
-    button.submit(@click="submit") Send
+    button.submit(@click="clickSubmit") Send
   .row
     TagSelector(
       :selectedTags="tags"
