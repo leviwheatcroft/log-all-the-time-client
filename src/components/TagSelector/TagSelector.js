@@ -27,9 +27,13 @@ const TagSelector = {
       this.tagSuggestions = []
     },
     keydownTagPartial (event) {
-      if (event.keyCode !== 9)
+      if (
+        event.keyCode !== 9 &&
+        event.keyCode !== 13
+      )
         return
-      event.preventDefault()
+      // don't preventDefault, tab should move to next field
+      // event.preventDefault()
       if (this.tagSuggestions.length) {
         this.tagAddHandler(this.tagSuggestions[0])
       } else if (this.tagNewHandler) {
@@ -75,6 +79,10 @@ const TagSelector = {
     tagNewHandler: {
       required: false,
       type: Function
+    },
+    inputTabindex: {
+      required: false,
+      type: Number
     }
   }
 

@@ -1,6 +1,7 @@
 .tag-selector
   .tag-partial-container
     input.tag-partial(
+      :tabindex="inputTabindex ? inputTabindex : ''"
       v-model='tagPartial'
       @keydown='keydownTagPartial'
     )

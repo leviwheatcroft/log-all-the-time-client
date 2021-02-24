@@ -1,6 +1,7 @@
 .entry-input
   .row
     date-picker(
+      :input-attr="{ tabindex: 1 }"
       v-model="date"
       format="DD/MM/YY"
       type="date"
@@ -11,13 +12,21 @@
     ) Cancel
   .row
     input.duration(
+    tabindex="2"
       v-model="duration"
       @blur="blurDuration"
     )
-    input.description(v-model="description")
-    button.submit(@click="clickSubmit") Send
+    input.description(
+      tabindex="3"
+      v-model="description"
+    )
+    button.submit(
+      tabindex="5"
+      @click="clickSubmit"
+    ) Send
   .row
     TagSelector(
+      :inputTabindex="4"
       :selectedTags="tags"
       :tagNewHandler="tagNewHandler"
       :tagAddHandler="tagAddHandler"
