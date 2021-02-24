@@ -1,3 +1,5 @@
+@import "../../styles/colors.less";
+
 .entry-input {
   .row {
     display: flex;
@@ -19,6 +21,14 @@
   .date {
     margin: 1.2rem;
     padding: 0.6rem;
+  }
+  .duration,
+  .description {
+    border: 1px solid @grey;
+    border-radius: 3px;
+    &:focus {
+      outline: 1px auto @grey;
+    }
   }
   input {
     flex-grow: 1;

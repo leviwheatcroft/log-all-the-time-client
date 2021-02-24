@@ -1,4 +1,5 @@
 .tag-selector
+  icon-tag
   .tag-partial-container
     input.tag-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"
@@ -19,11 +20,15 @@
         @click="clickTagNew"
         v-if="tagPartial.length > 0 && tagNewHandler"
       ) New Tag: {{ tagPartial }}
-
+  .spacer(
+    @click="clickSpacer"
+  )
   .tag-container
     .tag(
       v-for="selectedTag in selectedTags"
       :tag="selectedTag"
       :key="selectedTag.id"
       @click="clickTagRemove(selectedTag.id)"
-    ) {{ selectedTag.tagName }}
+    )
+      icon-tag
+      | {{ selectedTag.tagName }}

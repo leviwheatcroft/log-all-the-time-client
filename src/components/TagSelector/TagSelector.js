@@ -1,6 +1,9 @@
 // const { reduce, state } = require('../../store')
 const check = require('check-types')
 const {
+  IconTag
+} = require('../../icons')
+const {
   queries: {
     TagPartialQ
   }
@@ -16,12 +19,18 @@ const TagSelector = {
       variables () { return { tagPartial: this.tagPartial } }
     }
   },
+  components: {
+    IconTag
+  },
   data () {
     return {
       tagPartial: ''
     }
   },
   methods: {
+    clickSpacer () {
+      this.$el.querySelector('input.tag-partial').focus()
+    },
     reset () {
       this.tagPartial = ''
       this.tagSuggestions = []
