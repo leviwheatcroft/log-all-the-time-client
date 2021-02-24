@@ -2,17 +2,23 @@
   .date(
     v-if='entry.date'
     @click="clickDate(entry.date)"
-  ) {{ $dayjs(entry.date).format('D MMM') }}
-  .duration(v-if='entry.duration').
-    {{
-      $dayjs.duration({
-        h: Math.floor(entry.duration / 60),
-        m: entry.duration % 60
-      }).format('HH:mm')
-    }}
+  )
+    icon-calendar
+    | {{ $dayjs(entry.date).format('D MMM') }}
+  .duration(v-if='entry.duration')
+    icon-clock
+    .
+      {{
+        $dayjs.duration({
+          h: Math.floor(entry.duration / 60),
+          m: entry.duration % 60
+        }).format('HH:mm')
+      }}
   .description(@click="$emit('edit')") {{ entry.description }}
   .spacer
   .tag(
     v-for='tag in entry.tags'
     @click="clickTag(tag)"
-  ) {{ tag.tagName }}
+  )
+    icon-tag
+    | {{ tag.tagName }}

@@ -4,6 +4,13 @@
   align-items: center;
   display: flex;
   flex-direction: flex-row;
+  svg {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 2px;
+    margin-right: 6px;
+  }
   .date,
   .tag,
   .duration,
@@ -32,13 +39,14 @@
   }
   .date {
     background-color: @blue;
-    min-width: 6rem;
+    min-width: 7rem;
   }
   .duration {
     background-color: @blue;
-    min-width: 4rem;
+    min-width: 6rem;
   }
   .tag {
+    white-space: nowrap;
     background-color: @green;
   }
   .description {

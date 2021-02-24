@@ -1,6 +1,16 @@
 const check = require('check-types')
+const {
+  IconCalendar,
+  IconClock,
+  IconTag
+} = require('../../../../icons')
 
 const EntryDisplay = {
+  components: {
+    IconCalendar,
+    IconClock,
+    IconTag
+  },
   props: {
     entry: {
       required: true,
