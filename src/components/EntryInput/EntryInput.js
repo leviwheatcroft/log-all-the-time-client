@@ -1,4 +1,7 @@
 const check = require('check-types')
+const {
+  IconSend
+} = require('../../icons')
 
 const { default: DatePicker } = require('vue2-datepicker')
 const { default: TagSelector } = require('../TagSelector')
@@ -26,7 +29,8 @@ const {
 const EntryInput = {
   components: {
     TagSelector,
-    DatePicker
+    DatePicker,
+    IconSend
   },
   data () {
     if (this.entry) {
