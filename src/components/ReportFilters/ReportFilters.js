@@ -2,6 +2,7 @@ const { default: DatePicker } = require('vue2-datepicker')
 const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { default: TagSelector } = require('../TagSelector')
+const { midnightUtc } = require('../../lib')
 
 const ReportFilters = {
   components: {
@@ -44,8 +45,8 @@ const ReportFilters = {
         tags
       } = this
       reduce({
-        FILTER_DATE_FROM: { dateFrom },
-        FILTER_DATE_TO: { dateTo },
+        FILTER_DATE_FROM: { dateFrom: midnightUtc(dateFrom) },
+        FILTER_DATE_TO: { dateTo: midnightUtc(dateTo) },
         FILTER_TAGS_REPLACE: { tags }
       })
     }

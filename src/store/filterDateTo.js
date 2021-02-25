@@ -1,3 +1,10 @@
+const check = require('check-types')
+const {
+  types: {
+    isMidnightUtc
+  }
+} = require('../lib')
+
 function filterDateTo (payload, state) {
   const {
     type,
@@ -5,8 +12,10 @@ function filterDateTo (payload, state) {
   } = payload
   if (type !== 'FILTER_DATE_TO')
     return
-  if (!(dateTo instanceof Date))
-    throw new RangeError('dateTo is not instanceof Date')
+  if (!check.date(dateTo))
+    throw new RangeError('dateFrom is not instanceof Date')
+  if (!isMidnightUtc(dateTo))
+    throw new RangeError('dateFrom is not midnightUtc')
   state.filters.dateTo = dateTo
 }
 

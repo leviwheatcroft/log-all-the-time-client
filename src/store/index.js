@@ -3,10 +3,10 @@ const { filterDateTo } = require('./filterDateTo')
 const { filterTagsAppend } = require('./filterTagsAppend')
 const { filterTagsReplace } = require('./filterTagsReplace')
 const { setLastSelectedDate } = require('./setLastSelectedDate')
+const { midnightUtc } = require('../lib')
 
 function getInitialState () {
-  const midnight = new Date()
-  midnight.setHours(0, 0, 0, 0)
+  const midnight = midnightUtc(new Date())
   return {
     lastSelectedDate: new Date(),
     filters: {

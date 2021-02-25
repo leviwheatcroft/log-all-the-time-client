@@ -1,9 +1,11 @@
-const check = require('check-types')
+const { default: DatePicker } = require('vue2-datepicker')
 const {
   IconSend
 } = require('../../icons')
+const {
+  midnightUtc
+} = require('../../lib')
 
-const { default: DatePicker } = require('vue2-datepicker')
 const { default: TagSelector } = require('../TagSelector')
 const {
   mutations: {
@@ -57,22 +59,6 @@ const EntryInput = {
       tags: []
     }
   },
-  props: {
-    cancelable: {
-      required: false,
-      default: false,
-      type: Boolean
-    },
-    entry: {
-      required: false,
-      type: Object,
-      validator (entry) {
-        if (!entry)
-          return
-        return isEntry(entry)
-      }
-    }
-  },
   methods: {
     blurDuration () {
       this.duration = durationAsHHMM(parseHumanDuration(this.duration))
@@ -117,7 +103,7 @@ const EntryInput = {
 
       const entry = {
         ...id ? { id } : {},
-        date,
+        date: midnightUtc(date),
         duration: durationFromHHMM(duration),
         description,
 
@@ -165,6 +151,27 @@ const EntryInput = {
           }
         }
       })
+    }
+  },
+  props: {
+    cancelable: {
+      required: false,
+      default: false,
+      type: Boolean
+    },
+    deletable: {
+      required: false,
+      default: false,
+      type: Boolean
+    },
+    entry: {
+      required: false,
+      type: Object,
+      validator (entry) {
+        if (!entry)
+          return
+        return isEntry(entry)
+      }
     }
   }
 }
