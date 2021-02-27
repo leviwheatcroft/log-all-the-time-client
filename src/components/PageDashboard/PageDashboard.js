@@ -1,6 +1,7 @@
 const check = require('check-types')
 const { default: EntryInput } = require('../EntryInput')
 const { default: EntryList } = require('../EntryList')
+const { default: DurationByDay } = require('../DurationByDay')
 const { reduce } = require('../../store')
 const {
   queries: {
@@ -33,7 +34,8 @@ const PageDashboard = {
   },
   components: {
     EntryInput,
-    EntryList
+    EntryList,
+    DurationByDay
   },
   methods: {
     clickTagHandler (tag) {

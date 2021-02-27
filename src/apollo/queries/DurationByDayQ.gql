@@ -1,0 +1,6 @@
+query DurationByDayQ($dateFrom: Date!, $dateTo: Date!) {
+  DurationByDayQ(dateFrom: $dateFrom, dateTo: $dateTo) {
+    id
+    duration
+  }
+}

@@ -1,13 +1,13 @@
-const resolvers = require('./resolvers')
+const dates = require('./dates')
 const errors = require('./errors')
+const resolvers = require('./resolvers')
 const stringOps = require('./stringOps')
 const types = require('./types')
-const { midnightUtc } = require('./midnightUtc')
 
 module.exports = {
-  types,
-  resolvers,
+  dates,
   errors,
+  resolvers,
   stringOps,
-  midnightUtc
+  types
 }

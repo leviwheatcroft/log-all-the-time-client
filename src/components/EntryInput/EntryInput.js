@@ -4,9 +4,6 @@ const {
   IconTrash2,
   IconX
 } = require('../../icons')
-const {
-  midnightUtc
-} = require('../../lib')
 
 const { default: TagSelector } = require('../TagSelector')
 const {
@@ -19,6 +16,9 @@ const {
   }
 } = require('../../apollo')
 const {
+  dates: {
+    midnightUtc
+  },
   types: {
     isEntry,
     isTag,
@@ -30,6 +30,9 @@ const {
     durationFromHHMM
   }
 } = require('../../lib')
+const {
+  reduce
+} = require('../../store')
 
 const EntryInput = {
   components: {
@@ -66,6 +69,8 @@ const EntryInput = {
   },
   methods: {
     blurDuration () {
+      if (this.duration.length === 0)
+        return
       this.duration = durationAsHHMM(parseHumanDuration(this.duration))
     },
     tagNewHandler (tag) {
@@ -96,23 +101,26 @@ const EntryInput = {
       const {
         id
       } = entry
+
+      // update durationsByDay
+      reduce({
+        DURATIONS_BY_DAY_REMOVE: {
+          date: new Date(this.entry.date),
+          duration: this.entry.duration
+        }
+      })
       this.$emit('delete')
       await this.$apollo.mutate({
         mutation: EntryDeleteM,
         variables: {
           id
         },
-        update (store, ctx) {
-          const {
-            data: {
-              EntryDeleteM: result
-            }
-          } = ctx
+        update (store) {
           const data = store.readQuery({ query: EntryQ })
           const idx = data.EntryQ.findIndex((e) => e.id === id)
           if (idx === -1)
             throw new RangeError('deleted non existant entry?')
-          data.EntryQ.splice(idx, 1, result)
+          data.EntryQ.splice(idx, 1)
           store.writeQuery({ query: EntryQ, data })
         },
         optimisticResponse: {
@@ -132,6 +140,20 @@ const EntryInput = {
         description,
         tags
       } = this
+
+      // update durationsByDay
+      reduce({
+        ...this.entry ? {
+          DURATIONS_BY_DAY_REMOVE: {
+            date: new Date(this.entry.date),
+            duration: this.entry.duration
+          }
+        } : {},
+        DURATIONS_BY_DAY_ADD: {
+          date: midnightUtc(date),
+          duration: durationFromHHMM(duration)
+        }
+      })
 
       // clear local entry
       if (!this.entry) {
@@ -169,7 +191,7 @@ const EntryInput = {
           if (idx !== -1)
             data.EntryQ.splice(idx, 1, result)
           else
-            data.EntryQ.push(result)
+            data.EntryQ.unshift(result)
 
           // this clears out any optimistic responses without considering
           // which response we actually have. Only an issue if there's more
@@ -209,7 +231,6 @@ const EntryInput = {
       required: false,
       type: Object,
       validator (entry) {
-        console.log(entry)
         if (!entry)
           return
         return isEntry(entry)

@@ -4,7 +4,6 @@ query EntryQ($limit: Int) {
     description
     date
     duration
-    deleted
     tags {
       id
       tagName

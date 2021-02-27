@@ -2,7 +2,11 @@ const { default: DatePicker } = require('vue2-datepicker')
 const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { default: TagSelector } = require('../TagSelector')
-const { midnightUtc } = require('../../lib')
+const {
+  dates: {
+    midnightUtc
+  }
+} = require('../../lib')
 
 const ReportFilters = {
   components: {

@@ -5,7 +5,9 @@ const {
   IconTag
 } = require('../../../../icons')
 const {
-  midnightUtc
+  dates: {
+    midnightUtc
+  }
 } = require('../../../../lib')
 
 const EntryDisplay = {
