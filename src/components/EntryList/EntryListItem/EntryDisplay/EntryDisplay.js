@@ -4,6 +4,9 @@ const {
   IconClock,
   IconTag
 } = require('../../../../icons')
+const {
+  midnightUtc
+} = require('../../../../lib')
 
 const EntryDisplay = {
   components: {
@@ -43,7 +46,7 @@ const EntryDisplay = {
     },
     clickDate (date) {
       check.assert.integer(date)
-      date = new Date(date)
+      date = midnightUtc(new Date(date))
       this.clickDateHandler(date)
     }
   }

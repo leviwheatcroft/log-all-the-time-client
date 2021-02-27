@@ -7,6 +7,9 @@ const {
     EntryQ
   }
 } = require('../../apollo')
+const {
+  types: { isMidnightUtc }
+} = require('../../lib')
 
 const PageDashboard = {
   apollo: {
@@ -43,6 +46,9 @@ const PageDashboard = {
     },
     clickDateHandler (date) {
       check.assert.date(date)
+      console.log(date)
+      if (!isMidnightUtc(date))
+        throw new RangeError('date is not midnightUtc')
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },
         FILTER_DATE_TO: { dateTo: date }

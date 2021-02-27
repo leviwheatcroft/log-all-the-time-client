@@ -11,11 +11,8 @@ query EntryFilterQ(
     tags: $tags
   ) {
     id
-    raw
     description
     date
-    timeStart
-    timeEnd
     duration
     tags {
       id
