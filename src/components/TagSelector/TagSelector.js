@@ -41,6 +41,8 @@ const TagSelector = {
         event.keyCode !== 13
       )
         return
+      if (this.tagPartial === "")
+        return
       // don't preventDefault, tab should move to next field
       // event.preventDefault()
       if (this.tagSuggestions.length) {

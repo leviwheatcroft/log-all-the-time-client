@@ -150,6 +150,7 @@ const EntryInput = {
         // strip __typename
         tags: tags.map((t) => ({ id: t.id, tagName: t.tagName }))
       }
+      this.$el.querySelector('input.duration').focus()
       this.$emit('submit')
       await this.$apollo.mutate({
         mutation: EntryUpsertM,
