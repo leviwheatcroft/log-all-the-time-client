@@ -5,10 +5,14 @@ const { default: IconCalendar } = require('./IconCalendar')
 const { default: IconClock } = require('./IconClock')
 const { default: IconTag } = require('./IconTag')
 const { default: IconSend } = require('./IconSend')
+const { default: IconTrash2 } = require('./IconTrash2')
+const { default: IconX } = require('./IconX')
 
 module.exports = {
   IconCalendar,
   IconClock,
   IconTag,
-  IconSend
+  IconSend,
+  IconTrash2,
+  IconX
 }

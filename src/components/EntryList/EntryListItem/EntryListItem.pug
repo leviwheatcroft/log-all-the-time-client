@@ -3,6 +3,8 @@
     v-if="editing"
     :entry="entry"
     :cancelable="true"
+    :deletable="true"
+    @delete="editing = false"
     @submit="editing = false"
     @cancel="editing = false"
   )

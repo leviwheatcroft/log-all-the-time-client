@@ -1,6 +1,8 @@
 const { default: DatePicker } = require('vue2-datepicker')
 const {
-  IconSend
+  IconSend,
+  IconTrash2,
+  IconX
 } = require('../../icons')
 const {
   midnightUtc
@@ -9,7 +11,8 @@ const {
 const { default: TagSelector } = require('../TagSelector')
 const {
   mutations: {
-    EntryUpsertM
+    EntryUpsertM,
+    EntryDeleteM
   },
   queries: {
     EntryQ
@@ -32,7 +35,9 @@ const EntryInput = {
   components: {
     TagSelector,
     DatePicker,
-    IconSend
+    IconSend,
+    IconX,
+    IconTrash2
   },
   data () {
     if (this.entry) {
@@ -83,6 +88,41 @@ const EntryInput = {
     },
     clickCancel () {
       this.$emit('cancel')
+    },
+    async clickDelete () {
+      const {
+        entry
+      } = this
+      const {
+        id
+      } = entry
+      this.$emit('delete')
+      await this.$apollo.mutate({
+        mutation: EntryDeleteM,
+        variables: {
+          id
+        },
+        update (store, ctx) {
+          const {
+            data: {
+              EntryDeleteM: result
+            }
+          } = ctx
+          const data = store.readQuery({ query: EntryQ })
+          const idx = data.EntryQ.findIndex((e) => e.id === id)
+          if (idx === -1)
+            throw new RangeError('deleted non existant entry?')
+          data.EntryQ.splice(idx, 1, result)
+          store.writeQuery({ query: EntryQ, data })
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          EntryDeleteM: {
+            ...entry,
+            deleted: true
+          }
+        }
+      })
     },
     async clickSubmit () {
       const {
@@ -168,6 +208,7 @@ const EntryInput = {
       required: false,
       type: Object,
       validator (entry) {
+        console.log(entry)
         if (!entry)
           return
         return isEntry(entry)

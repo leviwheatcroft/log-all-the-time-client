@@ -1,10 +1,9 @@
-query EntryQ($limit: Int) {
-  EntryQ(limit: $limit) {
+mutation EntryDeleteM($id: ObjectId!) {
+  EntryDeleteM(id: $id) {
     id
     description
     date
     duration
-    deleted
     tags {
       id
       tagName

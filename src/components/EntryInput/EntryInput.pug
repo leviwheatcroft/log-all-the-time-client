@@ -6,10 +6,17 @@
       format="DD/MM/YY"
       type="date"
     )
+    .spacer
+    button.delete(
+      v-if="deletable"
+      @click="clickDelete"
+    )
+      icon-trash-2
     button.cancel(
       v-if="cancelable"
       @click="clickCancel"
-    ) Cancel
+    )
+      icon-x
   .row
     input.duration(
     tabindex="2"

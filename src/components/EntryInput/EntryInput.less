@@ -6,6 +6,12 @@
     flex-direction: row;
     align-items: center;
     width: 100%;
+    .spacer {
+      flex-grow: 1;
+    }
+    > * {
+      flex-grow: 0;
+    }
   }
   /deep/ .mx-datepicker {
     width: 10rem;
