@@ -29,6 +29,14 @@
     )
   .row
     .spacer
+    .container-export
+      a.download
+      button.export(
+        @click='exportCsv'
+      )
+        .icon-container
+          icon-download
+        span Export
     .container-submit
       button.submit(
         @click='apply'

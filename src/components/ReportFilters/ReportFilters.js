@@ -2,7 +2,14 @@ const { default: DatePicker } = require('vue2-datepicker')
 const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { default: TagSelector } = require('../TagSelector')
+
 const {
+  queries: {
+    EntryFilterAsCsvQ
+  }
+} = require('../../apollo')
+const {
+  IconDownload,
   IconCalendar,
   IconFileText,
   IconX
@@ -17,6 +24,7 @@ const ReportFilters = {
   components: {
     DatePicker,
     IconCalendar,
+    IconDownload,
     IconFileText,
     IconX,
     TagSelector
@@ -61,6 +69,39 @@ const ReportFilters = {
         FILTER_DATE_TO: { dateTo: midnightUtc(dateTo) },
         FILTER_TAGS_REPLACE: { tags }
       })
+    },
+    async exportCsv () {
+      const {
+        dateRange: [dateFrom, dateTo],
+        tags
+      } = this
+      const result = await this.$apollo.query({
+        query: EntryFilterAsCsvQ,
+        variables: {
+          dateFrom: midnightUtc(dateFrom),
+          dateTo: midnightUtc(dateTo),
+          tags
+        }
+      })
+      const {
+        data: {
+          EntryFilterAsCsvQ: csv
+        }
+      } = result
+
+      const filename = 'export.csv'
+      const blob = new Blob([csv], { type: 'text/csv' })
+
+      // https://stackoverflow.com/a/33542499/441930
+      if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveBlob(blob, filename)
+        return
+      }
+      const a = this.$el.querySelector('a.download')
+      a.href = window.URL.createObjectURL(blob)
+      a.download = filename
+      a.click()
+      window.URL.revokeObjectURL(a.href)
     }
   }
 }

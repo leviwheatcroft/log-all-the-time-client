@@ -1,0 +1,13 @@
+query EntryFilterAsCsvQ(
+  $limit: Int
+  $dateFrom: Date
+  $dateTo: Date
+  $tags: [ObjectId]
+) {
+  EntryFilterAsCsvQ(
+    limit: $limit
+    dateFrom: $dateFrom
+    dateTo: $dateTo
+    tags: $tags
+  )
+}
