@@ -1,7 +1,7 @@
 query EntryFilterAsCsvQ(
   $limit: Int
-  $dateFrom: Date
-  $dateTo: Date
+  $dateFrom: DateMidnightUtc
+  $dateTo: DateMidnightUtc
   $dateFormat: String
   $durationFormat: String
   $tags: [ObjectId]
