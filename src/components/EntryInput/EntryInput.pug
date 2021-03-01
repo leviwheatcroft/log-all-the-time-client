@@ -20,13 +20,13 @@
         .icon-container
           icon-edit-3
         input.description(
-          tabindex="3"
+          tabindex="1"
           v-model="description"
         )
   .row
     .container-tag-selector.grow
       tag-selector(
-        :inputTabindex="4"
+        :inputTabindex="2"
         :selectedTags="tags"
         :tagNewHandler="tagNewHandler"
         :tagAddHandler="tagAddHandler"
@@ -38,7 +38,7 @@
         .icon-container
           icon-calendar
         date-picker(
-          :input-attr="{ tabindex: 1 }"
+          :input-attr="{ tabindex: 3 }"
           :clearable="false"
           v-model="date"
           format="DD/MM/YY"
@@ -53,7 +53,7 @@
         .icon-container
           icon-clock
         input.duration(
-          tabindex="2"
+          tabindex="4"
           v-model="duration"
           @blur="blurDuration"
         )

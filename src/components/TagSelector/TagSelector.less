@@ -4,10 +4,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-width: 1px;
-  border-style: solid;
-  border-color: @dark;
-  border-radius: 3px;
+  // border-width: 1px;
+  // border-style: solid;
+  // border-color: @dark;
+  // border-radius: 3px;
+  background-color: @unfocusField;
   height: 3.4rem;
   width: 100%;
   // margin: 0 1.2rem;
@@ -21,7 +22,8 @@
     }
   }
   &:focus-within {
-    outline: 1px auto @grey;
+    background-color: @focusField;
+    // outline: 1px auto @grey;
   }
   .tag-partial-container {
     flex-grow: 0;
@@ -30,6 +32,7 @@
 
     input {
       // background-color: blue;
+      background-color: transparent;
       border: none;
       outline: none;
       padding: 0.6rem;
