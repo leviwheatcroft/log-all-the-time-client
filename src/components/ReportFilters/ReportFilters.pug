@@ -28,19 +28,53 @@
       :tagRemoveHandler="tagRemoveHandler"
     )
   .row
-    .spacer
-    .container-export
-      a.download
-      button.export(
-        @click='exportCsv'
+    .container-button.container-button-bare
+      button(
+        @click="showExportOptions = !showExportOptions"
       )
-        .icon-container
-          icon-download
         span Export
-    .container-submit
+        .icon-container
+          icon-chevron-down(
+            v-if="!showExportOptions"
+          )
+          icon-chevron-up(
+            v-if="showExportOptions"
+          )
+    .spacer
+    .container-button
       button.submit(
         @click='apply'
       )
         .icon-container
           icon-file-text
         span Apply
+  .export-options(
+    v-if="showExportOptions"
+  )
+    h3 Export Options
+    .row
+      .container-export-date-format
+        .faux-input
+          .icon-container
+            icon-calendar
+          input.export-date-format(
+            v-model='exportDateFormat'
+          )
+    .row
+      .container-export-duration-format
+        .faux-input
+          .icon-container
+            icon-clock
+          input.export-duration-format(
+            v-model='exportDurationFormat'
+          )
+    .row
+      .spacer
+      .container-button
+        a.download
+        button.export(
+          @click='exportCsv'
+        )
+          .icon-container
+            icon-download
+          span Export

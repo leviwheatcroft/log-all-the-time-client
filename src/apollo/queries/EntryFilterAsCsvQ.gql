@@ -2,12 +2,16 @@ query EntryFilterAsCsvQ(
   $limit: Int
   $dateFrom: Date
   $dateTo: Date
+  $dateFormat: String
+  $durationFormat: String
   $tags: [ObjectId]
 ) {
   EntryFilterAsCsvQ(
     limit: $limit
     dateFrom: $dateFrom
     dateTo: $dateTo
+    dateFormat: $dateFormat
+    durationFormat: $durationFormat
     tags: $tags
   )
 }

@@ -12,7 +12,10 @@ const {
   IconDownload,
   IconCalendar,
   IconFileText,
-  IconX
+  IconX,
+  IconChevronUp,
+  IconChevronDown,
+  IconClock
 } = require('../../icons')
 const {
   dates: {
@@ -27,7 +30,10 @@ const ReportFilters = {
     IconDownload,
     IconFileText,
     IconX,
-    TagSelector
+    TagSelector,
+    IconChevronUp,
+    IconChevronDown,
+    IconClock
   },
   data () {
     const {
@@ -36,7 +42,10 @@ const ReportFilters = {
     return {
       state,
       dateRange: [dateFrom, dateTo],
-      tags: [...tags]
+      tags: [...tags],
+      showExportOptions: false,
+      exportDateFormat: 'DD/MM/YY',
+      exportDurationFormat: 'HH:mm'
     }
   },
   watch: {
@@ -73,13 +82,17 @@ const ReportFilters = {
     async exportCsv () {
       const {
         dateRange: [dateFrom, dateTo],
-        tags
+        tags,
+        exportDateFormat: dateFormat,
+        exportDurationFormat: durationFormat
       } = this
       const result = await this.$apollo.query({
         query: EntryFilterAsCsvQ,
         variables: {
           dateFrom: midnightUtc(dateFrom),
           dateTo: midnightUtc(dateTo),
+          dateFormat,
+          durationFormat,
           tags
         }
       })
