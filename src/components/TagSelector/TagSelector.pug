@@ -1,7 +1,7 @@
-.tag-selector
+.tag-selector.faux-input.grow
   .icon-container
     icon-tag
-  .tag-partial-container
+  .tag-partial-container.grow
     input.tag-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"
       v-model='tagPartial'
@@ -21,10 +21,7 @@
         @click="clickTagNew"
         v-if="tagPartial.length > 0 && tagNewHandler"
       ) New Tag: {{ tagPartial }}
-  .spacer(
-    @click="clickSpacer"
-  )
-  .tag-container
+  .tag-container.no-grow
     .tag(
       v-for="selectedTag in selectedTags"
       :tag="selectedTag"

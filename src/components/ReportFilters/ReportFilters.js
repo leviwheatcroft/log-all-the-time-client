@@ -3,6 +3,11 @@ const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { default: TagSelector } = require('../TagSelector')
 const {
+  IconCalendar,
+  IconFileText,
+  IconX
+} = require('../../icons')
+const {
   dates: {
     midnightUtc
   }
@@ -11,6 +16,9 @@ const {
 const ReportFilters = {
   components: {
     DatePicker,
+    IconCalendar,
+    IconFileText,
+    IconX,
     TagSelector
   },
   data () {

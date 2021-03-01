@@ -1,17 +1,38 @@
-.report-filters
-  label(for='date-filter') Dates:
-  date-picker(
-    v-model='dateRange'
-    type='date'
-    range
-    format='DD/MM/YY'
-    input-class='tl-input'
-    :input-attr='{ id: "date-filter" }'
-  )
-  .spacer
-  TagSelector(
-    :selectedTags="tags"
-    :tagAddHandler="tagAddHandler"
-    :tagRemoveHandler="tagRemoveHandler"
-  )
-  button.submit(@click='apply') Apply
+.report-filters.input-box
+  .row
+    .container-datepicker.no-grow
+      .faux-input
+        .icon-container
+          icon-calendar
+        date-picker(
+          :input-attr="{ tabindex: 1 }"
+          :clearable="true"
+          v-model='dateRange'
+          type='date'
+          range
+          format='DD/MM/YY'
+        )
+          template(
+            v-slot:icon-calendar
+          )
+            .empty
+          template(
+            v-slot:icon-clear
+          )
+            .icon-container
+              icon-x
+  .row
+    tag-selector(
+      :selectedTags="tags"
+      :tagAddHandler="tagAddHandler"
+      :tagRemoveHandler="tagRemoveHandler"
+    )
+  .row
+    .spacer
+    .container-submit
+      button.submit(
+        @click='apply'
+      )
+        .icon-container
+          icon-file-text
+        span Apply

@@ -1,42 +1,9 @@
 @import "../../styles/colors.less";
+@import "../../styles/inputBox.less";
 
 .tag-selector {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  // border-width: 1px;
-  // border-style: solid;
-  // border-color: @dark;
-  // border-radius: 3px;
-  background-color: @unfocusField;
-  height: 3.4rem;
-  width: 100%;
-  // margin: 0 1.2rem;
-  // padding: 1px;
-  .icon-container {
-    flex-grow: 0;
-    > svg {
-      width: 1.8rem;
-      height: 1.8rem;
-      top: 2px;
-    }
-  }
-  &:focus-within {
-    background-color: @focusField;
-    // outline: 1px auto @grey;
-  }
   .tag-partial-container {
-    flex-grow: 0;
     position: relative;
-    // margin: 0 1.2rem;
-
-    input {
-      // background-color: blue;
-      background-color: transparent;
-      border: none;
-      outline: none;
-      padding: 0.6rem;
-    }
     .tag-suggestions {
       z-index: 1;
       position: absolute;
@@ -49,12 +16,7 @@
       }
     }
   }
-  .spacer {
-    flex-grow: 1;
-    cursor: text;
-  }
   .tag-container {
-    flex-grow: 0;
     display: flex;
     flex-direction: flex-row;
     align-items: center;
