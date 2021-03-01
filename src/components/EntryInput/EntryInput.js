@@ -1,5 +1,8 @@
 const { default: DatePicker } = require('vue2-datepicker')
 const {
+  IconCalendar,
+  IconClock,
+  IconEdit3,
   IconSend,
   IconTrash2,
   IconX
@@ -36,11 +39,14 @@ const {
 
 const EntryInput = {
   components: {
-    TagSelector,
     DatePicker,
+    IconCalendar,
+    IconClock,
+    IconEdit3,
     IconSend,
+    IconTrash2,
     IconX,
-    IconTrash2
+    TagSelector
   },
   data () {
     if (this.entry) {
