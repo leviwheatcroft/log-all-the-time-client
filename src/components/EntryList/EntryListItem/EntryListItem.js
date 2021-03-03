@@ -15,6 +15,10 @@ const EntryListItem = {
     },
     clickDateHandler: {
       type: Function
+    },
+    showUser: {
+      type: Boolean,
+      required: true
     }
   },
   data () {

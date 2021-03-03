@@ -5,6 +5,12 @@
   )
     icon-calendar
     | {{ $dayjs(entry.date).format('D MMM') }}
+  .user(
+    v-if="showUser"
+    :style="{ backgroundColor: hexFromString(entry.user.username) }"
+  )
+    icon-user
+    | {{ entry.user.username }}
   .duration(v-if='entry.duration')
     icon-clock
     .
@@ -19,6 +25,7 @@
   .tag(
     v-for='tag in entry.tags'
     @click="clickTag(tag)"
+    :style="{ backgroundColor: hexFromString(tag.tagName) }"
   )
     icon-tag
     | {{ tag.tagName }}

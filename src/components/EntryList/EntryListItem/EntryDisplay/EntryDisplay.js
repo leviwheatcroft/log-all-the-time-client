@@ -2,11 +2,15 @@ const check = require('check-types')
 const {
   IconCalendar,
   IconClock,
-  IconTag
+  IconTag,
+  IconUser
 } = require('../../../../icons')
 const {
   dates: {
     midnightUtc
+  },
+  colors: {
+    hexFromString
   }
 } = require('../../../../lib')
 
@@ -14,7 +18,8 @@ const EntryDisplay = {
   components: {
     IconCalendar,
     IconClock,
-    IconTag
+    IconTag,
+    IconUser
   },
   props: {
     entry: {
@@ -34,6 +39,10 @@ const EntryDisplay = {
     clickDateHandler: {
       required: true,
       type: Function
+    },
+    showUser: {
+      required: true,
+      type: Boolean
     }
   },
   data () {
@@ -41,6 +50,9 @@ const EntryDisplay = {
     }
   },
   methods: {
+    hexFromString (str) {
+      return hexFromString(str)
+    },
     clickTag (tag) {
       check.assert.containsKey(tag, 'id')
       check.assert.containsKey(tag, 'tagName')

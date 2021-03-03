@@ -1,7 +1,7 @@
 query EntryFilterQ(
   $limit: Int
-  $dateFrom: Date
-  $dateTo: Date
+  $dateFrom: DateMidnightUtc
+  $dateTo: DateMidnightUtc
   $tags: [ObjectId]
 ) {
   EntryFilterQ(
@@ -12,6 +12,10 @@ query EntryFilterQ(
   ) {
     id
     description
+    user {
+      id
+      username
+    }
     date
     duration
     tags {

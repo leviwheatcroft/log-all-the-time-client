@@ -11,6 +11,7 @@
   EntryDisplay(
     v-if="!editing"
     :entry="entry"
+    :showUser="showUser"
     :clickTagHandler="clickTagHandler"
     :clickDateHandler="clickDateHandler"
     @edit="editing = true"
