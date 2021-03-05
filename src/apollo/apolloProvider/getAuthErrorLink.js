@@ -15,11 +15,7 @@ const errorHandlers = {
 
 function getHandler (graphQLErrors = []) {
   const handlerName = graphQLErrors
-    .map((e) => {
-      if (!e.extensions)
-        return null
-      return e.extensions.name
-    })
+    .map(({ code }) => code)
     .find((name) => errorHandlers[name])
   return handlerName ? errorHandlers[handlerName] : false
 }

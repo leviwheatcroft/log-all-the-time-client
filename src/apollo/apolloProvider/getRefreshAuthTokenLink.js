@@ -28,15 +28,7 @@ const refreshHandlers = {
 
 function getHandler (graphQLErrors = []) {
   const handlerName = graphQLErrors
-    .map((e) => {
-      if (!e.extensions)
-        return null
-      return e.extensions.code
-    })
-    // .map((e) => {
-    //   console.log(e)
-    //   return e
-    // })
+    .map(({ code }) => code)
     .find((code) => refreshHandlers[code])
   return handlerName ? refreshHandlers[handlerName] : false
 }
