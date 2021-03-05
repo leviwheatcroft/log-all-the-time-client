@@ -1,5 +1,11 @@
-mutation UserLoginM($password: String!, $email: String!) {
-  UserLoginM(password: $password, email: $email) {
+mutation UserLoginM(
+  $password: String!
+  $email: String!
+) {
+  UserLoginM(
+    password: $password
+    email: $email
+  ) {
     accessToken,
     refreshToken
   }
