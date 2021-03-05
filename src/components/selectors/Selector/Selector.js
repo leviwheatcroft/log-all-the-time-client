@@ -1,24 +1,9 @@
-// const { reduce, state } = require('../../store')
 const check = require('check-types')
 const {
   IconTag
-} = require('../../icons')
-const {
-  queries: {
-    TagPartialQ
-  }
-} = require('../../apollo')
+} = require('../../../icons')
 
-const TagSelector = {
-  apollo: {
-    tagSuggestions: {
-      query: TagPartialQ,
-      skip () { return this.tagPartial.length <= 3 },
-      throttle: 500,
-      update ({ TagPartialQ: tagSuggestions }) { return tagSuggestions },
-      variables () { return { tagPartial: this.tagPartial } }
-    }
-  },
+const Selector = {
   components: {
     IconTag
   },
@@ -41,7 +26,7 @@ const TagSelector = {
         event.keyCode !== 13
       )
         return
-      if (this.tagPartial === "")
+      if (this.tagPartial === '')
         return
       // don't preventDefault, tab should move to next field
       // event.preventDefault()
@@ -99,4 +84,4 @@ const TagSelector = {
 
 }
 
-module.exports = TagSelector
+module.exports = Selector

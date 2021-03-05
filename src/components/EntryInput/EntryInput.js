@@ -8,7 +8,9 @@ const {
   IconX
 } = require('../../icons')
 
-const { default: TagSelector } = require('../TagSelector')
+const {
+  TagSelector
+} = require('../selectors')
 const {
   mutations: {
     EntryUpsertM,

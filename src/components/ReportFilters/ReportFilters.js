@@ -1,7 +1,7 @@
 const { default: DatePicker } = require('vue2-datepicker')
 const check = require('check-types')
 const { reduce, state } = require('../../store')
-const { default: TagSelector } = require('../TagSelector')
+const { TagSelector } = require('../selectors')
 
 const {
   queries: {
