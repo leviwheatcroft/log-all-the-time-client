@@ -42,7 +42,6 @@ const TagSelector = {
     }
   },
   computed: {
-    // eslint-disable-next-line no-return-assign
     selectedItems () {
       return this.tags.map((tag) => {
         return {

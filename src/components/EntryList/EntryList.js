@@ -35,6 +35,10 @@ const EntryList = {
       required: true,
       type: Function
     },
+    clickUserHandler: {
+      required: true,
+      type: Function
+    },
     showUser: {
       required: true,
       type: Boolean

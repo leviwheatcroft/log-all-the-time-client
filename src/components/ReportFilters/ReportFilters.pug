@@ -28,6 +28,12 @@
       :tagRemoveHandler="tagRemoveHandler"
     )
   .row
+    user-selector(
+      :users="users"
+      :userAddHandler="userAddHandler"
+      :userRemoveHandler="userRemoveHandler"
+    )
+  .row
     .container-button.container-button-bare
       button(
         @click="showExportOptions = !showExportOptions"

@@ -6,6 +6,11 @@ const {
   IconUser
 } = require('../../../../icons')
 const {
+  types: {
+    isUser
+  }
+} = require('../../../../lib')
+const {
   dates: {
     midnightUtc
   },
@@ -40,6 +45,10 @@ const EntryDisplay = {
       required: true,
       type: Function
     },
+    clickUserHandler: {
+      required: true,
+      type: Function
+    },
     showUser: {
       required: true,
       type: Boolean
@@ -62,6 +71,11 @@ const EntryDisplay = {
       check.assert.integer(date)
       date = midnightUtc(new Date(date))
       this.clickDateHandler(date)
+    },
+    clickUser (user) {
+      if (!isUser(user))
+        throw new RangeError('user is not user')
+      this.clickUserHandler(user)
     }
   }
 }

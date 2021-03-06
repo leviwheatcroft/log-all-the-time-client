@@ -2,6 +2,7 @@ const { default: DatePicker } = require('vue2-datepicker')
 const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { TagSelector } = require('../selectors')
+const { UserSelector } = require('../selectors')
 
 const {
   queries: {
@@ -33,16 +34,23 @@ const ReportFilters = {
     TagSelector,
     IconChevronUp,
     IconChevronDown,
-    IconClock
+    IconClock,
+    UserSelector
   },
   data () {
     const {
-      filters: { dateFrom, dateTo, tags }
+      filters: {
+        dateFrom,
+        dateTo,
+        tags,
+        users
+      }
     } = state
     return {
       state,
       dateRange: [dateFrom, dateTo],
       tags: [...tags],
+      users: [...users],
       showExportOptions: false,
       exportDateFormat: 'DD/MM/YY',
       exportDurationFormat: 'HH:mm'
@@ -57,6 +65,9 @@ const ReportFilters = {
     },
     'state.filters.tags': function stateFiltersTags () {
       this.tags = [...this.state.filters.tags]
+    },
+    'state.filters.users': function stateFiltersUsers () {
+      this.users = [...this.state.filters.users]
     }
   },
   methods: {
@@ -68,15 +79,25 @@ const ReportFilters = {
       check.assert.greater(idx, -1)
       this.tags.splice(idx, 1)
     },
+    userAddHandler (user) {
+      this.users.push(user)
+    },
+    userRemoveHandler (user) {
+      const idx = this.users.findIndex((u) => u.id === user.id)
+      check.assert.greater(idx, -1)
+      this.users.splice(idx, 1)
+    },
     apply () {
       const {
         dateRange: [dateFrom, dateTo],
-        tags
+        tags,
+        users
       } = this
       reduce({
         FILTER_DATE_FROM: { dateFrom: midnightUtc(dateFrom) },
         FILTER_DATE_TO: { dateTo: midnightUtc(dateTo) },
-        FILTER_TAGS_REPLACE: { tags }
+        FILTER_TAGS_REPLACE: { tags },
+        FILTER_USERS_REPLACE: { users }
       })
     },
     async exportCsv () {

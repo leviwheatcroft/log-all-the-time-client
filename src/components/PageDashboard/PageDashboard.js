@@ -9,7 +9,9 @@ const {
   }
 } = require('../../apollo')
 const {
-  types: { isMidnightUtc }
+  types: {
+    isMidnightUtc
+  }
 } = require('../../lib')
 
 const PageDashboard = {
@@ -48,7 +50,6 @@ const PageDashboard = {
     },
     clickDateHandler (date) {
       check.assert.date(date)
-      console.log(date)
       if (!isMidnightUtc(date))
         throw new RangeError('date is not midnightUtc')
       reduce({

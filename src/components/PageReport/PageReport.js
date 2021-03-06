@@ -8,6 +8,11 @@ const {
   }
 } = require('../../apollo')
 const { state } = require('../../store')
+const {
+  types: {
+    isUser
+  }
+} = require('../../lib')
 
 const PageReport = {
   apollo: {
@@ -52,6 +57,13 @@ const PageReport = {
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },
         FILTER_DATE_TO: { dateTo: date }
+      })
+    },
+    clickUserHandler (user) {
+      if (!isUser(user))
+        throw new RangeError('user is not user')
+      reduce({
+        FILTER_USERS_APPEND: { user }
       })
     }
   }

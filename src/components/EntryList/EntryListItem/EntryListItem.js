@@ -16,6 +16,9 @@ const EntryListItem = {
     clickDateHandler: {
       type: Function
     },
+    clickUserHandler: {
+      type: Function
+    },
     showUser: {
       type: Boolean,
       required: true

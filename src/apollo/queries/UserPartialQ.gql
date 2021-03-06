@@ -1,0 +1,10 @@
+query UserPartialQ(
+  $userPartial: String
+) {
+  UserPartialQ(
+    userPartial: $userPartial
+  ) {
+    id
+    username
+  }
+}

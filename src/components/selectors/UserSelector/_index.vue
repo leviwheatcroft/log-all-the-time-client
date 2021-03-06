@@ -1,3 +1,2 @@
-<template lang="pug" src="../Selector/Selector.pug">foo</template>
+<template lang="pug" src="./UserSelector.pug">foo</template>
 <script src="./UserSelector.js"></script>
-<style lang="less" scoped src="../Selector/Selector.less"></style>

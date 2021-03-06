@@ -8,6 +8,7 @@
   .user(
     v-if="showUser"
     :style="{ backgroundColor: hexFromString(entry.user.username) }"
+    @click="clickUser(entry.user)"
   )
     icon-user
     | {{ entry.user.username }}
