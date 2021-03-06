@@ -2,8 +2,8 @@ query EntryFilterQ(
   $limit: Int
   $dateFrom: DateMidnightUtc
   $dateTo: DateMidnightUtc
-  $tags: [ObjectId]
-  $users: [ObjectId]
+  $tags: [ObjectId!]
+  $users: [ObjectId!]
 ) {
   EntryFilterQ(
     limit: $limit

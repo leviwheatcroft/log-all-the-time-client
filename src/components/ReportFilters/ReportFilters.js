@@ -89,13 +89,19 @@ const ReportFilters = {
     },
     apply () {
       const {
-        dateRange: [dateFrom, dateTo],
         tags,
         users
       } = this
+      let {
+        dateRange: [dateFrom, dateTo]
+      } = this
+      if (dateFrom)
+        dateFrom = midnightUtc(dateFrom)
+      if (dateTo)
+        dateTo = midnightUtc(dateTo)
       reduce({
-        FILTER_DATE_FROM: { dateFrom: midnightUtc(dateFrom) },
-        FILTER_DATE_TO: { dateTo: midnightUtc(dateTo) },
+        FILTER_DATE_FROM: { dateFrom },
+        FILTER_DATE_TO: { dateTo },
         FILTER_TAGS_REPLACE: { tags },
         FILTER_USERS_REPLACE: { users }
       })

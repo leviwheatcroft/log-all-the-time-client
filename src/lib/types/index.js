@@ -7,8 +7,11 @@ const { isArray } = require('./isArray')
 const { isFalse } = require('./isFalse')
 const { isFunction } = require('./isFunction')
 const { isUndefined } = require('./isUndefined')
+const { isDate } = require('./isDate')
+const { isNull } = require('./isNull')
 
 module.exports = {
+  isDate,
   isEntry,
   isTag,
   isUser,
@@ -17,5 +20,6 @@ module.exports = {
   isArray,
   isFalse,
   isFunction,
-  isUndefined
+  isUndefined,
+  isNull
 }
