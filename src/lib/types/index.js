@@ -5,6 +5,7 @@ const { isMidnightUtc } = require('./isMidnightUtc')
 const { isArray } = require('./isArray')
 const { isFalse } = require('./isFalse')
 const { isFunction } = require('./isFunction')
+const { isUndefined } = require('./isUndefined')
 
 module.exports = {
   isEntry,
@@ -13,5 +14,6 @@ module.exports = {
   isMidnightUtc,
   isArray,
   isFalse,
-  isFunction
+  isFunction,
+  isUndefined
 }

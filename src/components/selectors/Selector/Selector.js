@@ -117,8 +117,8 @@ const Selector = {
       default: false,
       validator (itemNewHandler) {
         return (
-          isFunction(itemNewHandler) ||
-          isFalse(itemNewHandler)
+          isFalse(itemNewHandler) ||
+          isFunction(itemNewHandler)
         )
       }
     },

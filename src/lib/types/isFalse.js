@@ -1,7 +1,5 @@
-const check = require('check-types')
-
 function isFalse (_false) {
-  return check.function(_false)
+  return _false === false
 }
 
 module.exports = {

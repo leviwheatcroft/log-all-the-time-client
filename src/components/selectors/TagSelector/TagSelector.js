@@ -82,8 +82,8 @@ const TagSelector = {
       default: false,
       validator (tagNewHandler) {
         return (
-          isFunction(tagNewHandler) ||
-          isFalse(tagNewHandler)
+          isFalse(tagNewHandler) ||
+          isFunction(tagNewHandler)
         )
       }
     }
