@@ -82,6 +82,7 @@ const EntryInput = {
       this.duration = durationAsHHMM(parseHumanDuration(this.duration))
     },
     tagNewHandler (tag) {
+      tag.tagName = tag.itemName
       if (!isNewTag(tag))
         throw new TypeError('tag is not newTag')
       this.tags.push(tag)

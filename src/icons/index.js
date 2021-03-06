@@ -13,6 +13,7 @@ const { default: IconX } = require('./IconX')
 const { default: IconChevronUp } = require('./IconChevronUp')
 const { default: IconChevronDown } = require('./IconChevronDown')
 const { default: IconUser } = require('./IconUser')
+const { default: IconLoader } = require('./IconLoader')
 
 module.exports = {
   IconCalendar,
@@ -26,5 +27,6 @@ module.exports = {
   IconChevronUp,
   IconChevronDown,
   IconX,
+  IconLoader,
   IconUser
 }

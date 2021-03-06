@@ -1,80 +1,126 @@
 const check = require('check-types')
 const {
-  IconTag
+  IconX,
+  IconLoader
 } = require('../../../icons')
+const {
+  types: {
+    isFunction,
+    isFalse
+  },
+  colors: {
+    hexFromString
+  }
+} = require('../../../lib')
 
 const Selector = {
   components: {
-    IconTag
+    IconX,
+    IconLoader
   },
   data () {
     return {
-      tagPartial: ''
+      itemPartial: ''
     }
   },
   methods: {
-    clickSpacer () {
-      this.$el.querySelector('input.tag-partial').focus()
+    // clickSpacer () {
+    //   this.$el.querySelector('input.item-partial').focus()
+    // },
+    hexFromString (string) {
+      return hexFromString(string)
+    },
+    clickItemNew (item) {
+      this.itemNewHandler(item)
+      this.reset()
+    },
+    clickItemAdd (item) {
+      this.itemAddHandler(item)
+      this.reset()
     },
     reset () {
-      this.tagPartial = ''
-      this.tagSuggestions = []
+      this.itemPartial = ''
     },
-    keydownTagPartial (event) {
+    keydownItemPartial (event) {
       if (
         event.keyCode !== 9 &&
         event.keyCode !== 13
       )
         return
-      if (this.tagPartial === '')
+      if (this.itemPartial === '')
         return
       // don't preventDefault, tab should move to next field
       // event.preventDefault()
-      if (this.tagSuggestions.length) {
-        this.tagAddHandler(this.tagSuggestions[0])
-      } else if (this.tagNewHandler) {
-        const tagName = this.tagPartial
-        const tag = { tagName }
-        this.tagNewHandler(tag)
+      if (this.itemSuggestions.length) {
+        this.itemAddHandler(this.itemSuggestions[0])
+      } else if (this.itemNewHandler) {
+        const itemName = this.itemPartial
+        const item = { itemName }
+        this.itemNewHandler(item)
       }
       this.reset()
-    },
-    clickTagSuggestion (id) {
-      const tag = this.tagSuggestions.find((t) => t.id === id)
-      check.assert.not.undefined(tag)
-      this.tagAddHandler(tag)
-      this.reset()
-    },
-    clickTagRemove (id) {
-      const tag = this.selectedTags.find((t) => t.id === id)
-      check.assert.not.undefined(tag)
-      this.tagRemoveHandler(tag)
-    },
-    clickTagNew () {
-      const tagName = this.tagPartial
-      const tag = { tagName }
-      this.tagNewHandler(tag)
     }
   },
+  model: {
+    prop: 'selectedItems',
+    event: 'change'
+  },
   props: {
-    selectedTags: {
+    selectedItems: {
       required: true,
       type: Array,
-      validator (selectedTags) {
-        return check.array.of.containsKey(selectedTags, 'tagName')
+      validator (items) {
+        if (!check.array(items))
+          return false
+        return items.every((i) => {
+          return (
+            (
+              check.string(i.id) ||
+              i.id === false
+            ) &&
+            check.string(i.itemName)
+          )
+        })
       }
     },
-    tagAddHandler: {
+    itemSuggestions: {
+      required: true,
+      type: Array,
+      validator (items) {
+        if (!check.array(items))
+          return false
+        return items.every((i) => {
+          return (
+            (
+              check.string(i.id) ||
+              check.undefined(i.id)
+            ) &&
+            check.string(i.itemName)
+          )
+        })
+      }
+    },
+    inputItemPartialHandler: {
       required: true,
       type: Function
     },
-    tagRemoveHandler: {
+    itemAddHandler: {
       required: true,
       type: Function
     },
-    tagNewHandler: {
+    itemRemoveHandler: {
+      required: true,
+      type: Function
+    },
+    itemNewHandler: {
       required: false,
-      type: Function
+      default: false,
+      validator (itemNewHandler) {
+        return (
+          isFunction(itemNewHandler) ||
+          isFalse(itemNewHandler)
+        )
+      }
     },
     inputTabindex: {
       required: false,

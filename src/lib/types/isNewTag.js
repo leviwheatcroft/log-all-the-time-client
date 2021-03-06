@@ -1,12 +1,12 @@
 const check = require('check-types')
 
-function isNewTag (tag) {
+function isNewTag (_newTag) {
   const {
     id,
     tagName
-  } = tag
+  } = _newTag
   return (
-    check.undefined(id) &&
+    id === false &&
     check.string(tagName)
   )
 }
