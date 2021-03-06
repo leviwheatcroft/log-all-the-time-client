@@ -3,12 +3,14 @@ query EntryFilterQ(
   $dateFrom: DateMidnightUtc
   $dateTo: DateMidnightUtc
   $tags: [ObjectId]
+  $users: [ObjectId]
 ) {
   EntryFilterQ(
     limit: $limit
     dateFrom: $dateFrom
     dateTo: $dateTo
     tags: $tags
+    users: $users
   ) {
     id
     description

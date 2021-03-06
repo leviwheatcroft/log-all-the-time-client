@@ -27,7 +27,16 @@ const PageReport = {
           tags
         } = this.state.filters
         tags = tags.map((t) => t.id)
-        return { dateFrom, dateTo, tags }
+        let {
+          users
+        } = this.state.filters
+        users = users.map((t) => t.id)
+        return {
+          dateFrom,
+          dateTo,
+          tags,
+          users
+        }
       },
       update ({ EntryFilterQ: entries }) {
         return entries
