@@ -1,4 +1,3 @@
-const check = require('check-types')
 const { default: EntryList } = require('../EntryList')
 const { default: ReportFilters } = require('../ReportFilters')
 const { reduce } = require('../../store')
@@ -10,7 +9,9 @@ const {
 const { state } = require('../../store')
 const {
   types: {
-    isUser
+    isUser,
+    isTag,
+    isDate
   }
 } = require('../../lib')
 
@@ -62,22 +63,29 @@ const PageReport = {
   },
   methods: {
     clickTagHandler (tag) {
-      check.assert.containsKey(tag, 'id')
-      check.assert.containsKey(tag, 'tagName')
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       reduce({
         FILTER_TAGS_APPEND: { tag }
       })
     },
     clickDateHandler (date) {
-      check.assert.date(date)
+      console.assert(
+        isDate(date),
+        { date, msg: 'date is not date' }
+      )
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },
         FILTER_DATE_TO: { dateTo: date }
       })
     },
     clickUserHandler (user) {
-      if (!isUser(user))
-        throw new RangeError('user is not user')
+      console.assert(
+        isUser(user),
+        { user, msg: 'user is not user' }
+      )
       reduce({
         FILTER_USERS_APPEND: { user }
       })

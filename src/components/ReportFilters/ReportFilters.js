@@ -1,9 +1,13 @@
 const { default: DatePicker } = require('vue2-datepicker')
-const check = require('check-types')
 const { reduce, state } = require('../../store')
 const { TagSelector } = require('../selectors')
 const { UserSelector } = require('../selectors')
-
+const {
+  types: {
+    isUser,
+    isTag
+  }
+} = require('../../lib')
 const {
   queries: {
     EntryFilterAsCsvQ
@@ -72,19 +76,41 @@ const ReportFilters = {
   },
   methods: {
     tagAddHandler (tag) {
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       this.tags.push(tag)
     },
     tagRemoveHandler (tag) {
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       const idx = this.tags.findIndex((t) => t.id === tag.id)
-      check.assert.greater(idx, -1)
+      console.assert(
+        idx !== -1,
+        { tags: this.tags, tag, msg: 'tag not in tags' }
+      )
       this.tags.splice(idx, 1)
     },
     userAddHandler (user) {
+      console.assert(
+        isUser(user),
+        { user, msg: 'user is not user' }
+      )
       this.users.push(user)
     },
     userRemoveHandler (user) {
+      console.assert(
+        isUser(user),
+        { user, msg: 'user is not user' }
+      )
       const idx = this.users.findIndex((u) => u.id === user.id)
-      check.assert.greater(idx, -1)
+      console.assert(
+        idx !== -1,
+        { tags: this.users, user, msg: 'tag not in tags' }
+      )
       this.users.splice(idx, 1)
     },
     apply () {

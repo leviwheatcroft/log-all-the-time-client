@@ -1,4 +1,3 @@
-const check = require('check-types')
 const {
   IconX,
   IconLoader
@@ -6,7 +5,8 @@ const {
 const {
   types: {
     isFunction,
-    isFalse
+    isFalse,
+    isItems
   },
   colors: {
     hexFromString
@@ -70,34 +70,22 @@ const Selector = {
       required: true,
       type: Array,
       validator (items) {
-        if (!check.array(items))
-          return false
-        return items.every((i) => {
-          return (
-            (
-              check.string(i.id) ||
-              i.id === false
-            ) &&
-            check.string(i.itemName)
-          )
-        })
+        console.assert(
+          isItems(items),
+          { items, msg: 'items is not items' }
+        )
+        return true
       }
     },
     itemSuggestions: {
       required: true,
       type: Array,
       validator (items) {
-        if (!check.array(items))
-          return false
-        return items.every((i) => {
-          return (
-            (
-              check.string(i.id) ||
-              check.undefined(i.id)
-            ) &&
-            check.string(i.itemName)
-          )
-        })
+        console.assert(
+          isItems(items),
+          { items, msg: 'items is not items' }
+        )
+        return true
       }
     },
     inputItemPartialHandler: {
@@ -116,10 +104,11 @@ const Selector = {
       required: false,
       default: false,
       validator (itemNewHandler) {
-        return (
-          isFalse(itemNewHandler) ||
-          isFunction(itemNewHandler)
+        console.assert(
+          isFalse(itemNewHandler) || isFunction(itemNewHandler),
+          { itemNewHandler, msg: 'itemNewHandler is not function or false' }
         )
+        return true
       }
     },
     inputTabindex: {

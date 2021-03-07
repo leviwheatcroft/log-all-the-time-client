@@ -83,21 +83,29 @@ const EntryInput = {
     },
     tagNewHandler (tag) {
       tag.tagName = tag.itemName
-      if (!isNewTag(tag))
-        throw new TypeError('tag is not newTag')
+      console.assert(
+        isNewTag(tag),
+        { tag, msg: 'tag is not newTag' }
+      )
       this.tags.push(tag)
     },
     tagAddHandler (tag) {
-      if (!isTag(tag))
-        throw new TypeError('tag is not tag')
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       this.tags.push(tag)
     },
     tagRemoveHandler (tag) {
-      if (!isTag(tag) && !isNewTag(tag))
-        throw new TypeError('tag is not tag or newTag')
+      console.assert(
+        isTag(tag) || isNewTag(tag),
+        { tag, msg: 'tag is not tag or newTag' }
+      )
       const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
-      if (idx === -1)
-        throw new RangeError('tag not in tags')
+      console.assert(
+        idx !== -1,
+        { tags: this.tags, tag, msg: 'tag not in tags' }
+      )
       this.tags.splice(idx, 1)
     },
     clickCancel () {
@@ -127,8 +135,10 @@ const EntryInput = {
         update (store) {
           const data = store.readQuery({ query: EntryQ })
           const idx = data.EntryQ.findIndex((e) => e.id === id)
-          if (idx === -1)
-            throw new RangeError('deleted non existant entry?')
+          console.assert(
+            idx !== -1,
+            { entries: data.EntryQ, entry, msg: 'entry not in entries' }
+          )
           data.EntryQ.splice(idx, 1)
           store.writeQuery({ query: EntryQ, data })
         },

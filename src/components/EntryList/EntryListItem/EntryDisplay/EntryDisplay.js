@@ -1,4 +1,3 @@
-const check = require('check-types')
 const {
   IconCalendar,
   IconClock,
@@ -7,7 +6,10 @@ const {
 } = require('../../../../icons')
 const {
   types: {
-    isUser
+    isUser,
+    isInteger,
+    isTag,
+    isEntry
   }
 } = require('../../../../lib')
 const {
@@ -31,10 +33,11 @@ const EntryDisplay = {
       required: true,
       type: Object,
       validator (entry) {
-        return (
-          check.containsKey(entry, 'id') &&
-          check.containsKey(entry, 'description')
+        console.assert(
+          isEntry(entry),
+          { entry, msg: 'entry is not entry' }
         )
+        return true
       }
     },
     clickTagHandler: {
@@ -63,18 +66,25 @@ const EntryDisplay = {
       return hexFromString(str)
     },
     clickTag (tag) {
-      check.assert.containsKey(tag, 'id')
-      check.assert.containsKey(tag, 'tagName')
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       this.clickTagHandler(tag)
     },
     clickDate (date) {
-      check.assert.integer(date)
+      console.assert(
+        isInteger(date),
+        { date, msg: 'date is not integer' }
+      )
       date = midnightUtc(new Date(date))
       this.clickDateHandler(date)
     },
     clickUser (user) {
-      if (!isUser(user))
-        throw new RangeError('user is not user')
+      console.assert(
+        isUser(user),
+        { user, msg: 'user is not user' }
+      )
       this.clickUserHandler(user)
     }
   }

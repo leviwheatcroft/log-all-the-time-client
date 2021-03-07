@@ -1,7 +1,11 @@
-const check = require('check-types')
 const { default: EntryListItem } = require('./EntryListItem')
 const { default: Fields } = require('./Fields')
 const { state } = require('../../store')
+const {
+  types: {
+    isEntries
+  }
+} = require('../../lib')
 
 const EntryList = {
   components: {
@@ -34,16 +38,11 @@ const EntryList = {
       required: false,
       type: Array,
       validator (entries) {
-        return entries.every((e) => {
-          return (
-            check.containsKey(e, 'id') &&
-            // check.string(e, e.id) &&
-            check.containsKey(e, 'description') &&
-            // check.string(e, e.description) &&
-            check.containsKey(e, 'tags')
-            // check.array(e, e.tags)
-          )
-        })
+        console.assert(
+          isEntries(entries),
+          { entries, msg: 'entries is not entries' }
+        )
+        return true
       }
     },
     clickTagHandler: {

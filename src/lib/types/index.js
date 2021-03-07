@@ -1,27 +1,35 @@
-const { isEntry } = require('./isEntry')
-const { isTag } = require('./isTag')
-const { isUser } = require('./isUser')
-const { isNewTag } = require('./isNewTag')
-const { isMidnightUtc } = require('./isMidnightUtc')
 const { isArray } = require('./isArray')
+const { isBoolean } = require('./isBoolean')
+const { isDate } = require('./isDate')
+const { isEntries } = require('./isEntries')
+const { isEntry } = require('./isEntry')
 const { isFalse } = require('./isFalse')
 const { isFunction } = require('./isFunction')
-const { isUndefined } = require('./isUndefined')
-const { isDate } = require('./isDate')
+const { isInteger } = require('./isInteger')
+const { isItem } = require('./isItem')
+const { isItems } = require('./isItems')
+const { isMidnightUtc } = require('./isMidnightUtc')
+const { isNewTag } = require('./isNewTag')
 const { isNull } = require('./isNull')
-const { isBoolean } = require('./isBoolean')
+const { isTag } = require('./isTag')
+const { isUndefined } = require('./isUndefined')
+const { isUser } = require('./isUser')
 
 module.exports = {
+  isArray,
   isBoolean,
   isDate,
+  isEntries,
   isEntry,
-  isTag,
-  isUser,
-  isNewTag,
-  isMidnightUtc,
-  isArray,
   isFalse,
   isFunction,
+  isInteger,
+  isItem,
+  isItems,
+  isMidnightUtc,
+  isNewTag,
+  isNull,
+  isTag,
   isUndefined,
-  isNull
+  isUser
 }

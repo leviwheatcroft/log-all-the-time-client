@@ -1,4 +1,3 @@
-const check = require('check-types')
 const { default: EntryInput } = require('../EntryInput')
 const { default: EntryList } = require('../EntryList')
 const { default: DurationByDay } = require('../DurationByDay')
@@ -10,7 +9,8 @@ const {
 } = require('../../apollo')
 const {
   types: {
-    isMidnightUtc
+    isMidnightUtc,
+    isTag
   }
 } = require('../../lib')
 
@@ -53,17 +53,20 @@ const PageDashboard = {
   },
   methods: {
     clickTagHandler (tag) {
-      check.assert.containsKey(tag, 'id')
-      check.assert.containsKey(tag, 'tagName')
+      console.assert(
+        isTag(tag),
+        { tag, msg: 'tag is not tag' }
+      )
       reduce({
         FILTER_TAGS_APPEND: { tag }
       })
       this.$router.push('/report')
     },
     clickDateHandler (date) {
-      check.assert.date(date)
-      if (!isMidnightUtc(date))
-        throw new RangeError('date is not midnightUtc')
+      console.assert(
+        isMidnightUtc(date),
+        { date, msg: 'date is not midnightUtc' }
+      )
       reduce({
         FILTER_DATE_FROM: { dateFrom: date },
         FILTER_DATE_TO: { dateTo: date }
