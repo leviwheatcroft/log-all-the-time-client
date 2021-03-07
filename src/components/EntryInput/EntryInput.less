@@ -1,6 +1,22 @@
 @import "../../styles/colors.less";
 @import "../../styles/inputBox.less";
 
+.row.button-bar {
+  justify-content: flex-end;
+  margin-top: 0;
+  button {
+    background-color: @white;
+    border: none;
+    outline: none;
+    .icon-container {
+      color: @light40;
+      svg {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+  }
+}
 button.submit {
   .icon-container {
     top: 4px;

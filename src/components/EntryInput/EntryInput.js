@@ -76,6 +76,9 @@ const EntryInput = {
     }
   },
   methods: {
+    blurSave () {
+      this.$el.querySelector('input.description').focus()
+    },
     blurDuration () {
       if (this.duration.length === 0)
         return

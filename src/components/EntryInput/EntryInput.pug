@@ -1,18 +1,18 @@
 .entry-input.input-box
-  .row(
+  .row.button-bar(
     v-if="deletable || cancelable"
   )
-    .container-delete
-      button.delete(
-        v-if="deletable"
-        @click="clickDelete"
-      )
+    button.delete(
+      v-if="deletable"
+      @click="clickDelete"
+    )
+      .icon-container
         icon-trash-2
-    .container-cancel
-      button.cancel(
-        v-if="cancelable"
-        @click="clickCancel"
-      )
+    button.cancel(
+      v-if="cancelable"
+      @click="clickCancel"
+    )
+      .icon-container
         icon-x
   .row
     .container-description.grow
@@ -62,6 +62,7 @@
       button.submit(
         tabindex="5"
         @click="clickSubmit"
+        @blur="blurSave"
       )
         .icon-container
           icon-send
