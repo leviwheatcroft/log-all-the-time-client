@@ -17,7 +17,9 @@
         }).format('HH:mm')
       }}
   .description(@click="$emit('edit')") {{ entry.description }}
-  .spacer
+  .spacer(
+    v-if="fieldsToggle.tags || fieldsToggle.user"
+  )
   .tag(
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
