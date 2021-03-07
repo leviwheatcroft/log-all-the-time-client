@@ -9,8 +9,10 @@ const { isFunction } = require('./isFunction')
 const { isUndefined } = require('./isUndefined')
 const { isDate } = require('./isDate')
 const { isNull } = require('./isNull')
+const { isBoolean } = require('./isBoolean')
 
 module.exports = {
+  isBoolean,
   isDate,
   isEntry,
   isTag,

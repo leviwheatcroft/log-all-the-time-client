@@ -1,0 +1,22 @@
+.fields
+  .icon-container(
+    v-if="fieldsToggleBoundaries.date === null"
+    @click="clickField('date')"
+  )
+    icon-calendar
+  .icon-container(
+    v-if="fieldsToggleBoundaries.duration === null"
+    @click="clickField('duration')"
+  )
+    icon-clock
+  .icon-container(
+    v-if="fieldsToggleBoundaries.tags === null"
+    @click="clickField('tags')"
+  )
+    icon-tag
+  .icon-container(
+    v-if="fieldsToggleBoundaries.user === null"
+    @click="clickField('user')"
+  )
+    icon-user
+    

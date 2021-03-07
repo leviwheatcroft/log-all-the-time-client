@@ -1,5 +1,5 @@
 .entry-list-item
-  EntryInput(
+  entry-input(
     v-if="editing"
     :entry="entry"
     :cancelable="true"
@@ -8,10 +8,10 @@
     @submit="editing = false"
     @cancel="editing = false"
   )
-  EntryDisplay(
+  entry-display(
     v-if="!editing"
     :entry="entry"
-    :showUser="showUser"
+    :fieldsToggle="fieldsToggle"
     :clickTagHandler="clickTagHandler"
     :clickDateHandler="clickDateHandler"
     :clickUserHandler="clickUserHandler"

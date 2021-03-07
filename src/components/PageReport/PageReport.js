@@ -49,6 +49,13 @@ const PageReport = {
   },
   data () {
     return {
+      fieldsToggleBoundaries: {
+        date: null,
+        description: true,
+        duration: null,
+        tags: null,
+        user: null
+      },
       state,
       entries: []
     }

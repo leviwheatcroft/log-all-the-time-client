@@ -1,8 +1,9 @@
 .page.page-report
   .container
-    ReportFilters
-    EntryList(
+    report-filters
+    entry-list(
       :entries="entries"
+      :fieldsToggleBoundaries="fieldsToggleBoundaries"
       :clickTagHandler="clickTagHandler"
       :clickDateHandler="clickDateHandler"
       :clickUserHandler="clickUserHandler"

@@ -46,12 +46,12 @@ const EntryDisplay = {
       type: Function
     },
     clickUserHandler: {
-      required: true,
+      required: false,
       type: Function
     },
-    showUser: {
+    fieldsToggle: {
       required: true,
-      type: Boolean
+      type: Object
     }
   },
   data () {

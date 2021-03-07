@@ -1,9 +1,28 @@
 const check = require('check-types')
 const { default: EntryListItem } = require('./EntryListItem')
+const { default: Fields } = require('./Fields')
+const { state } = require('../../store')
 
 const EntryList = {
   components: {
-    EntryListItem
+    EntryListItem,
+    Fields
+  },
+  data () {
+    return {
+      stateFieldsToggle: state.entryList.fieldsToggle
+    }
+  },
+  computed: {
+    fieldsToggle () {
+      const fieldsToggle = Object.fromEntries(
+        Object.entries(this.stateFieldsToggle).map(([key, value]) => {
+          const boundary = this.fieldsToggleBoundaries[key]
+          return boundary === null ? [key, value] : [key, boundary]
+        })
+      )
+      return fieldsToggle
+    }
   },
   methods: {
 
@@ -36,12 +55,12 @@ const EntryList = {
       type: Function
     },
     clickUserHandler: {
-      required: true,
+      required: false,
       type: Function
     },
-    showUser: {
+    fieldsToggleBoundaries: {
       required: true,
-      type: Boolean
+      type: Object
     }
   }
 }

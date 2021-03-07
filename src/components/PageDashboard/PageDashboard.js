@@ -39,6 +39,18 @@ const PageDashboard = {
     EntryList,
     DurationByDay
   },
+  data () {
+    return {
+      fieldsToggleBoundaries: {
+        date: null,
+        description: true,
+        duration: null,
+        tags: null,
+        user: false
+      },
+      entries: []
+    }
+  },
   methods: {
     clickTagHandler (tag) {
       check.assert.containsKey(tag, 'id')

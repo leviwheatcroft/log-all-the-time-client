@@ -1,11 +1,13 @@
 .entry-display
   .date(
-    v-if='entry.date'
+    v-if="fieldsToggle.date"
     @click="clickDate(entry.date)"
   )
     icon-calendar
     | {{ $dayjs(entry.date).format('D MMM') }}
-  .duration(v-if='entry.duration')
+  .duration(
+    v-if="fieldsToggle.duration"
+  )
     icon-clock
     .
       {{
@@ -17,14 +19,15 @@
   .description(@click="$emit('edit')") {{ entry.description }}
   .spacer
   .tag(
-    v-for='tag in entry.tags'
+    v-if="fieldsToggle.tags"
+    v-for="tag in entry.tags"
     @click="clickTag(tag)"
     :style="{ backgroundColor: hexFromString(tag.tagName) }"
   )
     icon-tag
     | {{ tag.tagName }}
   .user(
-    v-if="showUser"
+    v-if="fieldsToggle.user"
     :style="{ backgroundColor: hexFromString(entry.user.username) }"
     @click="clickUser(entry.user)"
   )

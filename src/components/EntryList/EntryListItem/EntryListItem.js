@@ -19,8 +19,8 @@ const EntryListItem = {
     clickUserHandler: {
       type: Function
     },
-    showUser: {
-      type: Boolean,
+    fieldsToggle: {
+      type: Object,
       required: true
     }
   },

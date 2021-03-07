@@ -1,10 +1,14 @@
 .entry-list
-  EntryListItem(
+  fields(
+    :fieldsToggle="fieldsToggle"
+    :fieldsToggleBoundaries="fieldsToggleBoundaries"
+  )
+  entry-list-item(
     v-for="entry in entries"
     :key="entry.id"
     :entry="entry"
     :clickTagHandler="clickTagHandler"
     :clickDateHandler="clickDateHandler"
     :clickUserHandler="clickUserHandler"
-    :showUser="showUser"
+    :fieldsToggle="fieldsToggle"
   )
