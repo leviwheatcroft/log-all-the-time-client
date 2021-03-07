@@ -1,13 +1,11 @@
-const check = require('check-types')
-
 function isTag (tag) {
   const {
     id,
     tagName
   } = tag
   return (
-    check.string(id) &&
-    check.string(tagName)
+    typeof id === 'string' &&
+    typeof tagName === 'string'
   )
 }
 

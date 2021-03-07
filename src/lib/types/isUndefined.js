@@ -1,7 +1,5 @@
-const check = require('check-types')
-
 function isUndefined (_undefined) {
-  return check.undefined(_undefined)
+  return _undefined === undefined
 }
 
 module.exports = {

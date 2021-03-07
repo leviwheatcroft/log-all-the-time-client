@@ -1,7 +1,5 @@
-const check = require('check-types')
-
-function isArray (array) {
-  return check.array(array)
+function isArray (_array) {
+  return Array.isArray(_array)
 }
 
 module.exports = {

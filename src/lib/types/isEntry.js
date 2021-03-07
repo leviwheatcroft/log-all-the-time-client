@@ -1,23 +1,17 @@
-const check = require('check-types')
-
-function isEntry (entry) {
+function isEntry (_entry) {
   const {
     id,
     date,
-    // duration,
-    // description,
+    duration,
+    description,
     tags
-  } = entry
-  // if (!check.string(id))
-  //   throw new TypeError('entry id is not string')
-  // if (!check.date(date))
-  //   throw new TypeError('entry date is not date')
-  // if (!check.array(tags))
-  //   throw new TypeError('entry tags is not array')
+  } = _entry
   return (
-    check.string(id) &&
-    check.integer(date) &&
-    check.array(tags)
+    typeof id === 'string' &&
+    typeof date === 'number' &&
+    typeof duration === 'number' && duration % 1 === 0 &&
+    typeof description === 'string' &&
+    Array.isArray(tags)
   )
 }
 

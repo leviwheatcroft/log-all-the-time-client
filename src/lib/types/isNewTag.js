@@ -1,5 +1,3 @@
-const check = require('check-types')
-
 function isNewTag (_newTag) {
   const {
     id,
@@ -7,7 +5,7 @@ function isNewTag (_newTag) {
   } = _newTag
   return (
     id === false &&
-    check.string(tagName)
+    typeof tagName === 'string'
   )
 }
 

@@ -1,13 +1,15 @@
-const check = require('check-types')
+const {
+  isDate
+} = require('./isDate')
 
-function isMidnightUtc (date) {
-  if (!check.date(date))
+function isMidnightUtc (_date) {
+  if (!isDate(_date))
     return false
   return (
-    date.getUTCHours() === 0 &&
-    date.getUTCMinutes() === 0 &&
-    date.getUTCSeconds() === 0 &&
-    date.getUTCMilliseconds() === 0
+    _date.getUTCHours() === 0 &&
+    _date.getUTCMinutes() === 0 &&
+    _date.getUTCSeconds() === 0 &&
+    _date.getUTCMilliseconds() === 0
   )
 }
 
