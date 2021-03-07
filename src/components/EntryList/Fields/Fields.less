@@ -1,8 +1,39 @@
 @import "../../../styles/colors.less";
 
 .fields {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.2rem 0.6rem;
   .icon-container {
+    color: @light60;
     display: inline;
     cursor: pointer;
+    border: 2px solid @light40;
+    margin-left: -2px;
+    padding: 0.3rem;
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      margin-left: 0;
+    }
+    &:last-child {
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+    &.active {
+      background-color: @light90;
+      color: @light10;
+      svg {
+
+      }
+    }
+    svg {
+
+      // width: 14px;
+      // height: 14px;
+      width: 16px;
+      height: 16px;
+      top: 2px;
+    }
   }
 }
