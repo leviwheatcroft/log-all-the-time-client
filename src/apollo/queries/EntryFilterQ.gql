@@ -1,5 +1,6 @@
 query EntryFilterQ(
   $limit: Int
+  $offset: Int
   $dateFrom: DateMidnightUtc
   $dateTo: DateMidnightUtc
   $tags: [ObjectId!]
@@ -7,22 +8,26 @@ query EntryFilterQ(
 ) {
   EntryFilterQ(
     limit: $limit
+    offset: $offset
     dateFrom: $dateFrom
     dateTo: $dateTo
     tags: $tags
     users: $users
   ) {
-    id
-    description
-    user {
+    docs {
       id
-      username
+      description
+      user {
+        id
+        username
+      }
+      date
+      duration
+      tags {
+        id
+        tagName
+      }
     }
-    date
-    duration
-    tags {
-      id
-      tagName
-    }
+    hasMore
   }
 }

@@ -60,6 +60,14 @@ const EntryList = {
     fieldsToggleBoundaries: {
       required: true,
       type: Object
+    },
+    fetchMoreEntries: {
+      required: false,
+      type: Function
+    },
+    hasMoreEntries: {
+      required: false,
+      type: Boolean
     }
   }
 }

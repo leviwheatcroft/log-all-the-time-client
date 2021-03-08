@@ -19,28 +19,19 @@ const PageReport = {
   apollo: {
     entries: {
       query: EntryFilterQ,
+      loadingKey: 'loading',
       variables () {
-        const {
-          dateFrom,
-          dateTo
-        } = this.state.filters
-        let {
-          tags
-        } = this.state.filters
-        tags = tags.map((t) => t.id)
-        let {
-          users
-        } = this.state.filters
-        users = users.map((t) => t.id)
+        const limit = 6
+        const offset = 0
         return {
-          dateFrom,
-          dateTo,
-          tags,
-          users
+          ...this.queryFilters,
+          limit,
+          offset
         }
       },
-      update ({ EntryFilterQ: entries }) {
-        return entries
+      update ({ EntryFilterQ: { docs, hasMore } }) {
+        this.hasMore = hasMore
+        return docs
       }
     }
   },
@@ -49,6 +40,18 @@ const PageReport = {
     ReportFilters
   },
   data () {
+    const {
+      dateFrom,
+      dateTo
+    } = state.filters
+    let {
+      tags
+    } = state.filters
+    tags = tags.map((t) => t.id)
+    let {
+      users
+    } = state.filters
+    users = users.map((t) => t.id)
     return {
       fieldsToggleBoundaries: {
         date: null,
@@ -58,10 +61,29 @@ const PageReport = {
         user: null
       },
       state,
-      entries: []
+      loading: 0,
+      entries: [],
+      queryFilters: {
+        dateFrom,
+        dateTo,
+        tags,
+        users
+      }
     }
   },
   methods: {
+    fetchMoreEntries () {
+      if (!this.hasMore)
+        console.error('no more pages to fetch')
+      const variables = {
+        ...this.queryFilters,
+        offset: this.entries.length,
+        limit: 6
+      }
+      this.$apollo.queries.entries.fetchMore({
+        variables
+      })
+    },
     clickTagHandler (tag) {
       console.assert(
         isTag(tag),

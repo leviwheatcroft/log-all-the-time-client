@@ -1,6 +1,5 @@
-const { from, ApolloClient } = require('@apollo/client/core')
+const { from, ApolloClient, InMemoryCache } = require('@apollo/client/core')
 const { createHttpLink } = require('apollo-link-http')
-const { InMemoryCache } = require('apollo-cache-inmemory')
 const { default: VueApollo } = require('vue-apollo')
 const { APOLLO_URI } = require('../../../config')
 const { getAuthHeaderLink } = require('./getAuthHeaderLink')
@@ -11,7 +10,27 @@ const httpLink = createHttpLink({
   uri: APOLLO_URI
 })
 
-const cache = new InMemoryCache()
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        EntryFilterQ: {
+          keyArgs: false,
+          merge (existing, incoming) {
+            const docs = [
+              ...existing ? existing.docs : [],
+              ...incoming.docs
+            ]
+            return {
+              ...incoming,
+              docs
+            }
+          }
+        }
+      }
+    }
+  }
+})
 
 const apolloClient = new ApolloClient({
   // link: httpLink,
@@ -30,7 +49,7 @@ function getClient () {
 }
 
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
+  defaultClient: apolloClient
   // defaultOptions: {
   //   query: {
   //     errorPolicy: 'all'

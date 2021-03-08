@@ -12,3 +12,7 @@
     :clickUserHandler="clickUserHandler"
     :fieldsToggle="fieldsToggle"
   )
+  button(
+    v-if="hasMoreEntries"
+    @click="fetchMoreEntries"
+  ) more
