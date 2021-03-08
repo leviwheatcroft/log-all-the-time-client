@@ -4,7 +4,7 @@ const {
     isDate,
     isNull
   }
-} = require('../lib')
+} = require('../../lib')
 
 function filterDateTo (payload, state) {
   const {

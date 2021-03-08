@@ -2,7 +2,7 @@ const {
   types: {
     isUser
   }
-} = require('../lib')
+} = require('../../lib')
 
 function filterUsersReplace (payload, state) {
   const {

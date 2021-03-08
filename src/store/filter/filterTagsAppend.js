@@ -2,7 +2,7 @@ const {
   types: {
     isTag
   }
-} = require('../lib')
+} = require('../../lib')
 
 function filterTagsAppend (payload, state) {
   const {
