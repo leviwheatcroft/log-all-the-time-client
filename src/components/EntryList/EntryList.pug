@@ -4,6 +4,7 @@
     :fieldsToggleBoundaries="fieldsToggleBoundaries"
   )
   entry-list-item(
+    v-if="!entry.deleted"
     v-for="entry in entries"
     :key="entry.id"
     :entry="entry"

@@ -14,6 +14,8 @@ function remove (payload, state) {
   const day = state.durationByDay.days.find((d) => {
     return d.date.valueOf() === date.valueOf()
   })
+  if (!day)
+    return
   day.duration -= duration
 }
 

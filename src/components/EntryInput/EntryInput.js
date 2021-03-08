@@ -1,4 +1,5 @@
 const { default: DatePicker } = require('vue2-datepicker')
+const gql = require('graphql-tag')
 const {
   IconCalendar,
   IconClock,
@@ -17,7 +18,8 @@ const {
     EntryDeleteM
   },
   queries: {
-    EntryQ
+    EntryQ,
+    EntryFilterQ
   }
 } = require('../../apollo')
 const {
@@ -136,14 +138,39 @@ const EntryInput = {
           id
         },
         update (store) {
-          const data = store.readQuery({ query: EntryQ })
-          const idx = data.EntryQ.findIndex((e) => e.id === id)
-          console.assert(
-            idx !== -1,
-            { entries: data.EntryQ, entry, msg: 'entry not in entries' }
-          )
-          data.EntryQ.splice(idx, 1)
-          store.writeQuery({ query: EntryQ, data })
+          store.writeFragment({
+            id: `Entry:${entry.id}`,
+            fragment: gql`
+              fragment MyEntry on Entry {
+                deleted
+              }
+            `,
+            data: {
+              deleted: true
+            }
+          })
+          // const entryQ = store.readQuery({ query: EntryQ })
+          // if (entryQ) {
+          //   store.writeQuery({
+          //     query: EntryQ,
+          //     data: {
+          //       EntryQ: entryQ.EntryQ.filter((e) => e.id !== id)
+          //     }
+          //   })
+          // }
+          //
+          // const entryFilterQ = store.readQuery({ query: EntryFilterQ })
+          // if (entryFilterQ) {
+          //   store.writeQuery({
+          //     query: EntryFilterQ,
+          //     data: {
+          //       EntryFilterQ: {
+          //         ...entryFilterQ.EntryFilterQ,
+          //         docs: EntryFilterQ.EntryFilterQ.docs((e) => e.id !== id)
+          //       }
+          //     }
+          //   })
+          // }
         },
         optimisticResponse: {
           __typename: 'Mutation',

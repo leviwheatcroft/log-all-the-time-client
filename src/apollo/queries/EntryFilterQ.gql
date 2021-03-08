@@ -17,6 +17,7 @@ query EntryFilterQ(
     docs {
       id
       description
+      deleted
       user {
         id
         username

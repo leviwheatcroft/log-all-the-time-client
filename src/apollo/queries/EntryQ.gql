@@ -2,6 +2,7 @@ query EntryQ($limit: Int) {
   EntryQ(limit: $limit) {
     id
     description
+    deleted
     date
     duration
     tags {
