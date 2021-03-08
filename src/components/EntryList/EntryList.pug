@@ -3,6 +3,12 @@
     :fieldsToggle="fieldsToggle"
     :fieldsToggleBoundaries="fieldsToggleBoundaries"
   )
+  .no-entries(
+    v-if="!entries.length"
+  )
+    | No Entries
+    .icon-container
+      icon-meh
   entry-list-item(
     v-if="!entry.deleted"
     v-for="entry in entries"

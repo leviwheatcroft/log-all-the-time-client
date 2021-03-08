@@ -3,7 +3,8 @@ const { default: EntryListItem } = require('./EntryListItem')
 const { default: Fields } = require('./Fields')
 const { state } = require('../../store')
 const {
-  IconLoader
+  IconLoader,
+  IconMeh
 } = require('../../icons')
 const {
   types: {
@@ -15,7 +16,8 @@ const EntryList = {
   components: {
     EntryListItem,
     Fields,
-    IconLoader
+    IconLoader,
+    IconMeh
   },
   data () {
     return {
