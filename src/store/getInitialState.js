@@ -29,6 +29,10 @@ function getInitialState () {
       dateFrom: offsetByDays(midnight, -7),
       dateTo: midnight,
       days: []
+    },
+    auth: {
+      loggedIn: localStorage.getItem('accessToken') !== null,
+      user: {}
     }
   }
 }

@@ -1,6 +1,7 @@
 const durationByDay = require('./durationByDay')
 const entryList = require('./entryList')
 const filter = require('./filter')
+const auth = require('./auth')
 const { setLastSelectedDate } = require('./setLastSelectedDate')
 const { getInitialState } = require('./getInitialState')
 
@@ -10,6 +11,7 @@ const reducers = [
   ...durationByDay,
   ...entryList,
   ...filter,
+  ...auth,
   setLastSelectedDate
 ]
 

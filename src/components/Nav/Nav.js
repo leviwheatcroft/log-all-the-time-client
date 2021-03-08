@@ -1,8 +1,27 @@
-const { Login } = require('../index')
+const { state } = require('../../store')
+const {
+  IconLoader
+} = require('../../icons')
 
 const Nav = {
+  data () {
+    const {
+      auth
+    } = state
+    return {
+      auth
+    }
+  },
   components: {
-    Login
+    IconLoader
+  },
+  computed: {
+    loggedIn () {
+      return this.auth.loggedIn
+    },
+    username () {
+      return this.auth.user.username
+    }
   }
 }
 

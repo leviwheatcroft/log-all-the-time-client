@@ -5,4 +5,17 @@ div
     router-link(to='/') Dashboard
     router-link(to='/report') Report
     .spacer
-    router-link(to='/login') Log In
+    router-link(
+      v-if="!loggedIn"
+      to='/login'
+    ) Log In
+    .loggingIn(
+      v-if="loggedIn && !username"
+    )
+      | Logging In ...
+      .icon-container.spin
+        icon-loader
+    router-link(
+      v-if="username"
+      to="/profile"
+    ) {{ username }}
