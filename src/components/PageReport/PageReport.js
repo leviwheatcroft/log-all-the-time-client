@@ -65,6 +65,7 @@ const PageReport = {
         tags: null,
         user: null
       },
+      hasMore: true,
       rawFilters,
       loading: 0,
       entries: []

@@ -2,11 +2,11 @@
   .container
     report-filters
     entry-list(
-      :entries="entries"
-      :fieldsToggleBoundaries="fieldsToggleBoundaries"
-      :clickTagHandler="clickTagHandler"
       :clickDateHandler="clickDateHandler"
+      :clickTagHandler="clickTagHandler"
       :clickUserHandler="clickUserHandler"
+      :entries="entries"
       :fetchMoreEntries="fetchMoreEntries"
+      :fieldsToggleBoundaries="fieldsToggleBoundaries"
       :loading="loading"
     )

@@ -3,8 +3,10 @@
     entry-input
     duration-by-day
     entry-list(
-      :entries="entries"
-      :clickTagHandler="clickTagHandler"
       :clickDateHandler="clickDateHandler"
+      :clickTagHandler="clickTagHandler"
+      :entries="entries"
+      :fetchMoreEntries="fetchMoreEntries"
       :fieldsToggleBoundaries="fieldsToggleBoundaries"
+      :loading="loading"
     )

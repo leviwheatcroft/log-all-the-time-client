@@ -4,7 +4,7 @@ const { default: DurationByDay } = require('../DurationByDay')
 const { reduce } = require('../../store')
 const {
   queries: {
-    EntryQ
+    EntryFilterQ
   }
 } = require('../../apollo')
 const {
@@ -17,20 +17,19 @@ const {
 const PageDashboard = {
   apollo: {
     entries: {
-      query: EntryQ,
-      // variables () {
-      //   const {
-      //     dateFrom,
-      //     dateTo
-      //   } = this.state.filters
-      //   let {
-      //     tags
-      //   } = this.state.filters
-      //   tags = tags.map((t) => t.id)
-      //   return { dateFrom, dateTo, tags }
-      // },
-      update ({ EntryQ: entries }) {
-        return entries
+      query: EntryFilterQ,
+      variables () {
+        const limit = 24
+        const offset = 0
+        return {
+          ...this.filters,
+          limit,
+          offset
+        }
+      },
+      update ({ EntryFilterQ: { docs, hasMore } }) {
+        this.hasMore = hasMore
+        return docs
       }
     }
   },
@@ -41,6 +40,10 @@ const PageDashboard = {
   },
   data () {
     return {
+      filters: {
+        self: true,
+        sortBy: 'created'
+      },
       fieldsToggleBoundaries: {
         date: null,
         description: true,
@@ -48,7 +51,9 @@ const PageDashboard = {
         tags: null,
         user: false
       },
-      entries: []
+      entries: [],
+      loading: 0,
+      hasMore: true
     }
   },
   methods: {
@@ -72,6 +77,20 @@ const PageDashboard = {
         FILTER_DATE_TO: { dateTo: date }
       })
       this.$router.push('/report')
+    },
+    fetchMoreEntries () {
+      if (this.loading)
+        return
+      if (!this.hasMore)
+        return
+      const variables = {
+        ...this.filters,
+        offset: this.entries.length,
+        limit: 24
+      }
+      this.$apollo.queries.entries.fetchMore({
+        variables
+      })
     }
   }
 }

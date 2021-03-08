@@ -5,6 +5,7 @@ query EntryFilterQ(
   $dateTo: DateMidnightUtc
   $tags: [ObjectId!]
   $users: [ObjectId!]
+  $self: Boolean
 ) {
   EntryFilterQ(
     limit: $limit
@@ -13,6 +14,7 @@ query EntryFilterQ(
     dateTo: $dateTo
     tags: $tags
     users: $users
+    self: $self
   ) {
     docs {
       id
