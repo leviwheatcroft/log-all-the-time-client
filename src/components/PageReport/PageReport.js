@@ -21,10 +21,10 @@ const PageReport = {
       query: EntryFilterQ,
       loadingKey: 'loading',
       variables () {
-        const limit = 6
+        const limit = 12
         const offset = 0
         return {
-          ...this.queryFilters,
+          ...this.filters,
           limit,
           offset
         }
@@ -39,19 +39,24 @@ const PageReport = {
     EntryList,
     ReportFilters
   },
+  computed: {
+    filters () {
+      const {
+        dateFrom,
+        dateTo,
+        tags,
+        users
+      } = this.rawFilters
+      return {
+        dateFrom,
+        dateTo,
+        tags: tags.map(({ id }) => id),
+        users: users.map(({ id }) => id)
+      }
+    }
+  },
   data () {
-    const {
-      dateFrom,
-      dateTo
-    } = state.filters
-    let {
-      tags
-    } = state.filters
-    tags = tags.map((t) => t.id)
-    let {
-      users
-    } = state.filters
-    users = users.map((t) => t.id)
+    const { filters: rawFilters } = state
     return {
       fieldsToggleBoundaries: {
         date: null,
@@ -60,25 +65,21 @@ const PageReport = {
         tags: null,
         user: null
       },
-      state,
+      rawFilters,
       loading: 0,
-      entries: [],
-      queryFilters: {
-        dateFrom,
-        dateTo,
-        tags,
-        users
-      }
+      entries: []
     }
   },
   methods: {
     fetchMoreEntries () {
+      if (this.loading)
+        return
       if (!this.hasMore)
-        console.error('no more pages to fetch')
+        return
       const variables = {
-        ...this.queryFilters,
+        ...this.filters,
         offset: this.entries.length,
-        limit: 6
+        limit: 12
       }
       this.$apollo.queries.entries.fetchMore({
         variables

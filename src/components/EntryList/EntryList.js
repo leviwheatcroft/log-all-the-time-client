@@ -1,6 +1,10 @@
+const _throttle = require('lodash/throttle')
 const { default: EntryListItem } = require('./EntryListItem')
 const { default: Fields } = require('./Fields')
 const { state } = require('../../store')
+const {
+  IconLoader
+} = require('../../icons')
 const {
   types: {
     isEntries
@@ -10,7 +14,8 @@ const {
 const EntryList = {
   components: {
     EntryListItem,
-    Fields
+    Fields,
+    IconLoader
   },
   data () {
     return {
@@ -29,7 +34,22 @@ const EntryList = {
     }
   },
   methods: {
-
+    onResize: _throttle(function onResize () {
+      this.viewportHeight = Math.max(
+        document.documentElement.clientHeight || 0,
+        window.innerHeight || 0
+      )
+    }, 250),
+    onScroll: _throttle(function onScroll () {
+      if (this.loading)
+        return
+      const {
+        bottom
+      } = this.$el.getBoundingClientRect()
+      // console.log(`bottom: ${bottom}, vpHeight: ${this.viewportHeight}`)
+      if ((bottom - this.viewportHeight) < this.viewportHeight)
+        this.fetchMoreEntries()
+    }, 250)
   },
   props: {
     entries: {
@@ -65,10 +85,22 @@ const EntryList = {
       required: false,
       type: Function
     },
-    hasMoreEntries: {
+    loading: {
       required: false,
-      type: Boolean
+      type: Number
     }
+  },
+  updated () {
+    // this.$nextTick(this.onResize.bind(this))
+  },
+  mounted () {
+    const vm = this
+    this.onResize()
+    document.addEventListener(
+      'scroll',
+      vm.onScroll
+    )
+    window.addEventListener('resize', vm.onResize.bind(vm))
   }
 }
 

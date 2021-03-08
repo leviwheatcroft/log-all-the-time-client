@@ -15,7 +15,12 @@ const cache = new InMemoryCache({
     Query: {
       fields: {
         EntryFilterQ: {
-          keyArgs: false,
+          keyArgs: [
+            'dateFrom',
+            'dateTo',
+            'tags',
+            'users'
+          ],
           merge (existing, incoming) {
             const docs = [
               ...existing ? existing.docs : [],

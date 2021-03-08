@@ -12,7 +12,9 @@
     :clickUserHandler="clickUserHandler"
     :fieldsToggle="fieldsToggle"
   )
-  button(
-    v-if="hasMoreEntries"
-    @click="fetchMoreEntries"
-  ) more
+  .loading(
+    v-if="loading"
+  )
+    | Loading more entries ...
+    .icon-container.spin
+      icon-loader
