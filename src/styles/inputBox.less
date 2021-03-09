@@ -24,41 +24,10 @@
   }
 }
 
-// ========================================================= container-submit ==
-.container-button {
-  button {
-    background-color: @unfocusField;
-    border: 1px solid transparent;
-    // background-color: blue;
-    height: 3.6rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    outline: none;
-    &:focus {
-      background-color: @focusField;
-    }
-    .icon-container {
-      > svg {
-        position: relative;
-        top: 0.3rem;
-        width: 1.8rem;
-        height: 1.8rem;
-      }
-    }
-  }
-}
-.container-button-bare {
-  button {
-    background-color: transparent;
-    &:focus {
-      background-color: transparent;
-    }
-  }
-}
+
 // ----------------------------------------------------- container-datepicker --
 .container-datepicker {
-  /deep/ .mx-input {
+  .mx-input {
     border: none;
     box-shadow: none;
     --webkit-box-shadow: none;

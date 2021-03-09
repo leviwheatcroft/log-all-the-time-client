@@ -5,7 +5,7 @@ function authLogIn (payload, state) {
   } = payload
   if (type !== 'USER_LOG_IN')
     return
-
+  state.auth.loggedIn = true
   state.auth.user = user
 }
 

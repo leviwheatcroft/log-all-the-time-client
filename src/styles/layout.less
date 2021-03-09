@@ -19,3 +19,31 @@
   width: 100%;
   max-width: 960px;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.6rem 0;
+  &.justify-center {
+    justify-content: center;
+  }
+  &.justify-end {
+    justify-content: flex-end;
+  }
+  &.justify-start {
+    justify-content: flex-start;
+  }
+  &.justify-between {
+    justify-content: space-between;
+  }
+  .grow,
+  .spacer {
+    flex-grow: 1;
+  }
+  .no-grow {
+    flex-grow: 0;
+  }
+  > * {
+    margin: 0 0.6rem;
+  }
+}

@@ -4,7 +4,7 @@ function authLogOut (payload, state) {
   } = payload
   if (type !== 'USER_LOG_OUT')
     return
-
+  state.auth.loggedIn = false
   state.auth.user = {}
 }
 

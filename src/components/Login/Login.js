@@ -1,10 +1,26 @@
 const {
   mutations: {
     UserLoginM
+  },
+  queries: {
+    SelfQ
   }
 } = require('../../apollo')
+const {
+  IconAtSign,
+  IconKey,
+  IconLogIn
+} = require('../../icons')
+const {
+  reduce
+} = require('../../store')
 
 const Login = {
+  components: {
+    IconAtSign,
+    IconKey,
+    IconLogIn
+  },
   data () {
     return {
       email: 'email@address.com',
@@ -17,20 +33,30 @@ const Login = {
         email,
         password
       } = this
-      const result = await this.$apollo.mutate({
+      const logInResult = await this.$apollo.mutate({
         mutation: UserLoginM,
         variables: {
           password,
           email
         }
       })
-      console.log('result', result)
       const {
         accessToken,
         refreshToken
-      } = result.data.UserLoginM
+      } = logInResult.data.UserLoginM
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
+
+      const userResult = await this.$apollo.query({
+        query: SelfQ
+      })
+      const {
+        data: { SelfQ: user }
+      } = userResult
+      reduce({
+        USER_LOG_IN: { user }
+      })
+      this.$router.push({ name: 'dashboard' })
     }
   }
 }

@@ -1,12 +1,28 @@
-.login
-  .row
-    label(for="email") Email:
-    input#email.email(v-model="email")
-  .row
-    label(for="password") Password:
-    input#password.password(
-      v-model="password"
-      type="password"
-    )
-  .row
-    button.submit(@click='clickSubmit') Log In
+.login.row.justify-center
+  .box
+    h1 Log In
+    .row.justify-between
+      label(for="email") Email:
+      .faux-input
+        .icon-container
+          icon-at-sign
+        input#email.email(
+          v-model="email"
+        )
+    .row.justify-between
+      label(for="password") Password:
+      .faux-input
+        .icon-container
+          icon-key
+        input#password.password(
+          v-model="password"
+          type="password"
+        )
+    .row
+      .spacer
+      button.button.submit(
+        @click='clickSubmit'
+      )
+        .icon-container
+          icon-log-in
+        | Log In

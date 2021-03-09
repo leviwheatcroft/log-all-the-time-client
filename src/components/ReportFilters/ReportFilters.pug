@@ -35,7 +35,7 @@
     )
   .row
     .container-button.container-button-bare
-      button(
+      button.button.button-bare(
         @click="showExportOptions = !showExportOptions"
       )
         span Export
@@ -48,7 +48,7 @@
           )
     .spacer
     .container-button
-      button.submit(
+      button.button.submit(
         @click='apply'
       )
         .icon-container
@@ -78,7 +78,7 @@
       .spacer
       .container-button
         a.download
-        button.export(
+        button.button.export(
           @click='exportCsv'
         )
           .icon-container

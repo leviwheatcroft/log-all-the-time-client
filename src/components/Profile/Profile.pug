@@ -1,42 +1,51 @@
-.profile
-  h1 {{ username }}
-  .row
-    label(for="username") Username:
-    .faux-input
-      .icon-container
-        icon-user
-      input#username.username(
-        v-model="username"
+.profile.row.justify-center
+  .box
+    h1 {{ username }}
+    .row
+      .spacer
+      button.button.logOut(
+        @click="logOut"
       )
-  .row
-    label(for="email") Email:
-    .faux-input
-      .icon-container
-        icon-at-sign
-      input#email.email(
-        v-model="email"
-      )
-  .row
-    label(for="password") Password:
-    .faux-input
-      .icon-container
-        icon-key
-      input#password.password(
-        type="password"
-        v-model="password"
-      )
-  .row
-    label(for="confirm-password") Confirm Password:
-    .faux-input
-      .icon-container
-        icon-key
-      input#confirm-password.confirm-password(
-        type="password"
-        v-model="confirmPassword"
-      )
-  .row
-    .spacer
-    button.submit(@click='clickSubmit')
-      .icon-container
-        icon-save
-      | Update
+        .icon-container
+          icon-log-out
+        | Log Out
+    //- .row.justify-between
+    //-   label(for="username") Username:
+    //-   .faux-input
+    //-     .icon-container
+    //-       icon-user
+    //-     input#username.username(
+    //-       v-model="username"
+    //-     )
+    //- .row.justify-between
+    //-   label(for="email") Email:
+    //-   .faux-input
+    //-     .icon-container
+    //-       icon-at-sign
+    //-     input#email.email(
+    //-       v-model="email"
+    //-     )
+    //- .row.justify-between
+    //-   label(for="password") Password:
+    //-   .faux-input
+    //-     .icon-container
+    //-       icon-key
+    //-     input#password.password(
+    //-       type="password"
+    //-       v-model="password"
+    //-     )
+    //- .row.justify-between
+    //-   label(for="confirm-password") Confirm Password:
+    //-   .faux-input
+    //-     .icon-container
+    //-       icon-key
+    //-     input#confirm-password.confirm-password(
+    //-       type="password"
+    //-       v-model="confirmPassword"
+    //-     )
+    //- .row.justify-between
+    //-   .spacer
+    //-   button.button.submit(@click='clickSubmit')
+    //-     .icon-container
+    //-       icon-save
+    //-     | Update

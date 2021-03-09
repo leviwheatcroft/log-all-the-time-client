@@ -18,6 +18,8 @@ const { default: IconMeh } = require('./IconMeh')
 const { default: IconSave } = require('./IconSave')
 const { default: IconAtSign } = require('./IconAtSign')
 const { default: IconKey } = require('./IconKey')
+const { default: IconLogOut } = require('./IconLogOut')
+const { default: IconLogIn } = require('./IconLogIn')
 
 module.exports = {
   IconCalendar,
@@ -36,5 +38,7 @@ module.exports = {
   IconMeh,
   IconSave,
   IconKey,
-  IconAtSign
+  IconAtSign,
+  IconLogOut,
+  IconLogIn
 }
