@@ -1,19 +1,19 @@
-const { default: EntryList } = require('../EntryList')
-const { default: ReportFilters } = require('../ReportFilters')
-const { reduce } = require('../../store')
+const { default: EntryList } = require('../../EntryList')
+const { default: ReportFilters } = require('../../ReportFilters')
+const { reduce } = require('../../../store')
 const {
   queries: {
     EntryFilterQ
   }
-} = require('../../apollo')
-const { state } = require('../../store')
+} = require('../../../apollo')
+const { state } = require('../../../store')
 const {
   types: {
     isUser,
     isTag,
     isDate
   }
-} = require('../../lib')
+} = require('../../../lib')
 
 const PageReport = {
   apollo: {

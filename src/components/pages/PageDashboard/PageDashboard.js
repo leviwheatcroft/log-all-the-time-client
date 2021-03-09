@@ -1,18 +1,18 @@
-const { default: EntryInput } = require('../EntryInput')
-const { default: EntryList } = require('../EntryList')
-const { default: DurationByDay } = require('../DurationByDay')
-const { reduce } = require('../../store')
+const { default: EntryInput } = require('../../EntryInput')
+const { default: EntryList } = require('../../EntryList')
+const { default: DurationByDay } = require('../../DurationByDay')
+const { reduce } = require('../../../store')
 const {
   queries: {
     EntryFilterQ
   }
-} = require('../../apollo')
+} = require('../../../apollo')
 const {
   types: {
     isMidnightUtc,
     isTag
   }
-} = require('../../lib')
+} = require('../../../lib')
 
 const PageDashboard = {
   apollo: {

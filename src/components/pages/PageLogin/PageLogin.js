@@ -1,4 +1,4 @@
-const { default: Login } = require('../Login')
+const { default: Login } = require('../../Login')
 
 const PageLogin = {
   components: {
