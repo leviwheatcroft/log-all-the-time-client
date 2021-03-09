@@ -1,7 +1,7 @@
 const { default: App } = require('./App')
-const { default: PageDashboard } = require('./PageDashboard')
-const { default: PageReport } = require('./PageReport')
-const { default: PageLogin } = require('./PageLogin')
+const { default: PageDashboard } = require('./pages/PageDashboard')
+const { default: PageReport } = require('./pages/PageReport')
+const { default: PageLogin } = require('./pages/PageLogin')
 
 // don't include components here to be consumed by other components, as that
 // will create a circular reference.
