@@ -3,6 +3,7 @@ const {
 } = require('../store')
 
 function authentication (to, from, next) {
+  console.log('auth', state.auth)
   if (
     to.name !== 'login' &&
     !state.auth.loggedIn

@@ -1,38 +1,37 @@
 const { onError } = require('@apollo/link-error')
-const { Observable } = require('@apollo/client/core')
+
+const { reduce } = require('../../store')
 
 const errorHandlers = {
-  async AUTH_REFRESH_TIMEOUT () {
-    console.log('AUTH_REFRESH_TIMEOUT')
-  },
-  async AUTH_FAILED () {
-    console.log('AUTH_FAILED')
-  },
-  async UNAUTHORIZED () {
-    console.log('UNAUTHORIZED')
+  // it would be nice to use vue router for the redirects here, but getting a
+  // reference to vue-router here would be complex, and these arrors won't
+  // occur during normal operation anyway, so `window.location.href` is an
+  // easy work around.
+  AUTH_INACTIVE_USER (err) {
+    console.error(err.message)
+    reduce({ USER_LOG_OUT: {} })
+    window.location.href = '/#/login'
   }
+  // async AUTH_REFRESH_TIMEOUT () {
+  //   console.log('AUTH_REFRESH_TIMEOUT')
+  // },
+  // async AUTH_FAILED () {
+  //   console.log('AUTH_FAILED')
+  // },
+  // async UNAUTHORIZED () {
+  //   console.log('UNAUTHORIZED')
+  // }
 }
 
-function getHandler (graphQLErrors = []) {
-  const handlerName = graphQLErrors
-    .map(({ code }) => code)
-    .find((name) => errorHandlers[name])
-  return handlerName ? errorHandlers[handlerName] : false
-}
-
-function getAuthErrorLink () {
+function getAuthErrorLink (ctx) {
   return onError(({
-    graphQLErrors,
-    // operation,
-    response
+    graphQLErrors
   }) => {
-    const handler = getHandler(graphQLErrors)
-    if (!handler)
-      return
-
-    return new Observable(async (observer) => {
-      await handler()
-      observer.next(response)
+    graphQLErrors.forEach((err) => {
+      if (errorHandlers[err.code])
+        errorHandlers[err.code](err, ctx)
+      else
+        console.error('unhandled error:', err)
     })
   })
 }
