@@ -2,7 +2,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   target: 'web',
   output: {
     filename: 'timelog.js'

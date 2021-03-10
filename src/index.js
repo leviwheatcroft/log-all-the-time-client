@@ -6,13 +6,13 @@ const duration = require('dayjs/plugin/duration')
 
 dayjs.extend(duration)
 
-const { apolloProvider } = require('./src/apollo')
+const { apolloProvider } = require('./apollo')
 const {
   App
-} = require('./src/components')
+} = require('./components')
 const {
   router
-} = require('./src/router')
+} = require('./router')
 
 Vue.use(VueRouter)
 Vue.use(VueApollo)
