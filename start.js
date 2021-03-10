@@ -3,7 +3,7 @@ const finalhandler = require('finalhandler')
 // eslint-disable-next-line import/no-extraneous-dependencies
 const http = require('http')
 
-const serve = serveStatic('assets')
+const serve = serveStatic('build')
 
 function start () {
   const server = http.createServer((req, res) => {
