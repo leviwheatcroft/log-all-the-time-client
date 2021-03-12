@@ -1,15 +1,17 @@
-const UserLoginM = require('./UserLoginM.gql')
-const EntryUpdateM = require('./EntryUpdateM.gql')
 const EntryAddM = require('./EntryAddM.gql')
-const UserRefreshM = require('./UserRefreshM.gql')
-const EntryUpsertM = require('./EntryUpsertM.gql')
 const EntryDeleteM = require('./EntryDeleteM.gql')
+const EntryUpdateM = require('./EntryUpdateM.gql')
+const EntryUpsertM = require('./EntryUpsertM.gql')
+const UserLoginM = require('./UserLoginM.gql')
+const UserRefreshM = require('./UserRefreshM.gql')
+const UserRegisterM = require('./UserRegisterM.gql')
 
 module.exports = {
-  UserRefreshM,
-  UserLoginM,
-  EntryUpdateM,
   EntryAddM,
+  EntryDeleteM,
+  EntryUpdateM,
   EntryUpsertM,
-  EntryDeleteM
+  UserLoginM,
+  UserRefreshM,
+  UserRegisterM,
 }

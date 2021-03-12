@@ -18,7 +18,7 @@ module.exports = {
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
-    'comma-dangle': ['error', 'never'],
+    'comma-dangle': ['error', 'only-multiline'],
     'semi': ['error', 'never'],
     'space-before-function-paren': ['error', 'always'],
     'nonblock-statement-body-position': ['error', 'below'],

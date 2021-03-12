@@ -15,6 +15,9 @@ const errorHandlers = {
     // reduce({ USER_LOG_OUT: {} })
     // window.location.href = '/#/login'
   },
+  AUTH_BAD_EMAIL () {},
+  AUTH_BAD_PASSWORD () {},
+  NEW_USER_ERROR () {},
   NO_CONNECTION (err) {
     const detail = { err }
     const customEvent = new CustomEvent('NO_CONNECTION', { detail })

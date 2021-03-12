@@ -1,6 +1,14 @@
-.login.row.justify-center
+.register.row.justify-center
   .box
-    h1 Log In
+    h1 Register
+    .row.justify-between
+      label(for="username") Username:
+      .faux-input
+        .icon-container
+          icon-user
+        input#username.username(
+          v-model="username"
+        )
     .row.justify-between
       label(for="email") Email:
       .faux-input
@@ -18,6 +26,15 @@
           v-model="password"
           type="password"
         )
+    .row.justify-between
+      label(for="confirm-password") Confirm Password:
+      .faux-input
+        .icon-container
+          icon-key
+        input#confirm-password.confirm-password(
+          v-model="confirmPassword"
+          type="password"
+        )
     .row.justify-center.alert-container
       .alert.error(
         v-if="error"
@@ -26,14 +43,14 @@
     .row
       button.button.button-bare
         .icon-container
-          icon-loader
+          icon-log-in
         router-link(
-          :to="{ name: 'register' }"
-        ) Register
+          :to="{ name: 'login' }"
+        ) Log In
       .spacer
       button.button.submit(
         @click='clickSubmit'
       )
         .icon-container
-          icon-log-in
-        | Log In
+          icon-loader
+        | Register
