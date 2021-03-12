@@ -1,14 +1,16 @@
-const { from, ApolloClient, InMemoryCache } = require('@apollo/client/core')
-const { createHttpLink } = require('apollo-link-http')
+const {
+  from,
+  ApolloClient,
+  InMemoryCache,
+  HttpLink
+} = require('@apollo/client/core')
 const { default: VueApollo } = require('vue-apollo')
 const { APOLLO_URI } = require('../../../config')
 const { getAuthHeaderLink } = require('./getAuthHeaderLink')
 const { getAuthErrorLink } = require('./getAuthErrorLink')
 const { getRefreshAuthTokenLink } = require('./getRefreshAuthTokenLink')
 
-const httpLink = createHttpLink({
-  uri: APOLLO_URI
-})
+const httpLink = new HttpLink({ uri: APOLLO_URI })
 
 const cache = new InMemoryCache({
   typePolicies: {
