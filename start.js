@@ -9,9 +9,14 @@ function start () {
   const server = http.createServer((req, res) => {
     serve(req, res, finalhandler)
   })
-  server.listen({ port: 3000 }, () => {
+  server.on('error', (err) => console.error(err))
+  server.listen({ host: '0.0.0.0', port: 3000 }, () => {
+    const {
+      address,
+      port
+    } = server.address()
     // eslint-disable-next-line no-console
-    console.log('Listening on port 3000')
+    console.log(`🚀  Server ready at http://${address}:${port}`)
   })
 }
 
