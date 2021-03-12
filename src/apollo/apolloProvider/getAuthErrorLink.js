@@ -34,9 +34,14 @@ const errorHandlers = {
 function getAuthErrorLink (ctx) {
   return onError((onErrorContext) => {
     const {
+      // response,
       graphQLErrors,
       networkError
     } = onErrorContext
+    // you could squelch graphQLErrors here by setting response.errors = []
+    // but it's a bit pointless because the error will just show up somewhere
+    // else, like the component that issued the query or mutation won't get
+    // the data it's expecting
     if (graphQLErrors) {
       graphQLErrors.forEach((err) => {
         if (errorHandlers[err.code])
