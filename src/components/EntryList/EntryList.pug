@@ -11,13 +11,14 @@
       icon-meh
   entry-list-item(
     v-if="!entry.deleted"
-    v-for="entry in entries"
+    v-for="(entry, idx) in entries"
     :key="entry.id"
     :entry="entry"
     :clickTagHandler="clickTagHandler"
     :clickDateHandler="clickDateHandler"
     :clickUserHandler="clickUserHandler"
     :fieldsToggle="fieldsToggle"
+    :idx="idx + 1"
   )
   .loading(
     v-if="loading"

@@ -1,6 +1,7 @@
 .entry-list-item
   entry-input(
     v-if="editing"
+    :idx="idx"
     :entry="entry"
     :cancelable="true"
     :deletable="true"

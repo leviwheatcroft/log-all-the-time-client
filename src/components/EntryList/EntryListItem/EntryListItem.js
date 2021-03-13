@@ -22,6 +22,10 @@ const EntryListItem = {
     fieldsToggle: {
       type: Object,
       required: true
+    },
+    idx: {
+      type: Number,
+      required: true
     }
   },
   data () {

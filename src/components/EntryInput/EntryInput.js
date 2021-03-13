@@ -52,30 +52,54 @@ const EntryInput = {
     TagSelector
   },
   data () {
-    if (this.entry) {
-      const {
-        id,
-        date,
-        duration,
-        description,
-        tags
-      } = this.entry
-      return {
-        id,
-        date: new Date(date),
-        duration: durationAsHHMM(duration),
-        description,
-        tags
-      }
-    }
+    const isNewEntry = !this.entry
+    const tabindex = this.idx * 5
+    const {
+      date = Date.now(),
+      description,
+      duration = '',
+      id = '',
+      tags = [],
+    } = this.entry || {}
+
     return {
-      id: '',
-      date: new Date(),
-      duration: '',
-      description: '',
-      tags: [],
-      isNewEntry: !this.entry
+      date: new Date(date),
+      description,
+      duration: duration ? durationAsHHMM(duration) : '',
+      id,
+      isNewEntry,
+      tabindex,
+      tags,
     }
+    //
+    // if (isNewEntry) {
+    //   const {
+    //     id,
+    //     date,
+    //     duration,
+    //     description,
+    //     tags,
+    //     idx
+    //   } = this.entry
+    //   return {
+    //     id,
+    //     date: new Date(date),
+    //     duration: durationAsHHMM(duration),
+    //     description,
+    //     tags,
+    //     tabindex: idx * 5,
+    //     isNewEntry,
+    //   }
+    // }
+    // return {
+    //   id: '',
+    //   date: new Date(),
+    //   duration: '',
+    //   description: '',
+    //   tags: [],
+    //   isNewEntry: !this.entry,
+    //   tabindex: idx * 5
+    // }
   },
   methods: {
     blurSave () {
@@ -274,6 +298,13 @@ const EntryInput = {
       })
     }
   },
+  mounted () {
+    // editing an existing entry should focus the input, but the input box
+    // at the top for new entries should not focus on mount
+    if (this.isNewEntry)
+      return
+    this.$el.querySelector('input.description').focus()
+  },
   props: {
     cancelable: {
       required: false,
@@ -293,6 +324,11 @@ const EntryInput = {
           return
         return isEntry(entry)
       }
+    },
+    idx: {
+      required: false,
+      type: Number,
+      default: 0
     }
   }
 }

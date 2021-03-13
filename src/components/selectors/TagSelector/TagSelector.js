@@ -89,6 +89,10 @@ const TagSelector = {
           isFunction(tagNewHandler)
         )
       }
+    },
+    inputTabindex: {
+      required: true,
+      type: Number
     }
   }
 }
