@@ -18,6 +18,11 @@ const errorHandlers = {
   AUTH_BAD_EMAIL () {},
   AUTH_BAD_PASSWORD () {},
   NEW_USER_ERROR () {},
+  AUTH_FAILED (err) {
+    const detail = { err }
+    const customEvent = new CustomEvent('AUTH_FAILED', { detail })
+    document.dispatchEvent(customEvent)
+  },
   NO_CONNECTION (err) {
     const detail = { err }
     const customEvent = new CustomEvent('NO_CONNECTION', { detail })

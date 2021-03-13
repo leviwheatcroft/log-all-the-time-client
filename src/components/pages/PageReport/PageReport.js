@@ -51,7 +51,8 @@ const PageReport = {
         dateFrom,
         dateTo,
         tags: tags.map(({ id }) => id),
-        users: users.map(({ id }) => id)
+        users: users.map(({ id }) => id),
+        sort: { date: 'desc', createdAt: 'desc' }
       }
     }
   },

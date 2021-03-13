@@ -77,7 +77,8 @@ const Register = {
       localStorage.setItem('refreshToken', refreshToken)
 
       const userResult = await this.$apollo.query({
-        query: SelfQ
+        query: SelfQ,
+        fetchPolicy: 'network-only'
       })
       const {
         data: { SelfQ: user }
@@ -85,6 +86,7 @@ const Register = {
       reduce({
         USER_LOG_IN: { user }
       })
+
       this.$router.push({ name: 'dashboard' })
     }
   }
