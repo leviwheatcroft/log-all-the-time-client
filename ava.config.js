@@ -2,8 +2,13 @@
 export default {
   files: [
     'test/001 lib-stringOps/*',
-    'test/002 store/*'
+    'test/002 store/*',
+    'test/003 lib/*'
   ],
   concurrency: 5,
-  verbose: true
+  verbose: true,
+  require: [
+    './test/setupBrowserEnv.js',
+    './test/patchConsoleAssert.js'
+  ]
 }
