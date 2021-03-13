@@ -55,7 +55,8 @@ const UserSelector = {
   methods: {
     inputItemPartialHandler (itemPartial) {
       this.itemPartial = itemPartial
-    }
+    },
+    resetHandler () {}
   },
   props: {
     users: {

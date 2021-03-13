@@ -36,7 +36,10 @@ const EntryFilterQ = {
       hasMore = incoming.hasMore
 
     let prepend = false
-    if (incoming.docs.length === 1) {
+    if (
+      existing.docs.length > 0 && // don't bother if there's no existing docs
+      incoming.docs.length === 1 // only when single doc from mutation
+    ) {
       // annoyingly, docs are just references at this time, so you need
       // to extract the fields we need
       const incomingDoc = {

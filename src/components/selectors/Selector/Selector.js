@@ -40,6 +40,7 @@ const Selector = {
     },
     reset () {
       this.itemPartial = ''
+      this.resetHandler()
     },
     keydownItemPartial (event) {
       if (
@@ -114,6 +115,10 @@ const Selector = {
     inputTabindex: {
       required: false,
       type: Number
+    },
+    resetHandler: {
+      required: true,
+      type: Function
     }
   }
 
