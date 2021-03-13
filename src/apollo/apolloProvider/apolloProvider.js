@@ -8,36 +8,12 @@ const { default: VueApollo } = require('vue-apollo')
 const { APOLLO_URI } = require('../../../config')
 const { getAuthHeaderLink } = require('./getAuthHeaderLink')
 const { getAuthErrorLink } = require('./getAuthErrorLink')
+const { typePolicies } = require('./typePolicies')
 const { getRefreshAuthTokenLink } = require('./getRefreshAuthTokenLink')
 
 const httpLink = new HttpLink({ uri: APOLLO_URI })
 
-const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        EntryFilterQ: {
-          keyArgs: [
-            'dateFrom',
-            'dateTo',
-            'tags',
-            'users'
-          ],
-          merge (existing, incoming) {
-            const docs = [
-              ...existing ? existing.docs : [],
-              ...incoming.docs
-            ]
-            return {
-              ...incoming,
-              docs
-            }
-          }
-        }
-      }
-    }
-  }
-})
+const cache = new InMemoryCache({ typePolicies })
 
 const apolloClient = new ApolloClient({
   // link: httpLink,

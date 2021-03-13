@@ -55,7 +55,7 @@ const Selector = {
         this.itemAddHandler(this.itemSuggestions[0])
       } else if (this.itemNewHandler) {
         const itemName = this.itemPartial
-        const item = { itemName }
+        const item = { id: false, itemName }
         this.itemNewHandler(item)
       }
       this.reset()

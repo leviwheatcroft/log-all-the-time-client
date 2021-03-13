@@ -27,6 +27,12 @@ const PageDashboard = {
           offset
         }
       },
+      // skip () {
+      //   console.log('skipper', this.entries.length)
+      //
+      //   return this.entries.length !== 0
+      // },
+      nextFetchPolicy: 'cache-only',
       update ({ EntryFilterQ: { docs, hasMore } }) {
         this.hasMore = hasMore
         return docs
@@ -42,7 +48,7 @@ const PageDashboard = {
     return {
       filters: {
         self: true,
-        sortBy: 'created'
+        sort: { createdAt: 'desc' }
       },
       fieldsToggleBoundaries: {
         date: null,
@@ -83,6 +89,7 @@ const PageDashboard = {
         return
       if (!this.hasMore)
         return
+      console.log('fm')
       const variables = {
         ...this.filters,
         offset: this.entries.length,

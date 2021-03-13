@@ -24,8 +24,12 @@ const TagSelector = {
       skip () { return this.itemPartial.length < 3 },
       throttle: 500,
       update ({ TagPartialQ: itemSuggestions }) {
-        // eslint-disable-next-line no-return-assign
-        itemSuggestions.forEach((i) => i.itemName = i.tagName)
+        itemSuggestions = itemSuggestions.map((i) => {
+          return {
+            ...i,
+            itemName: i.tagName
+          }
+        })
         return itemSuggestions
       },
       variables () { return { tagPartial: this.itemPartial } }

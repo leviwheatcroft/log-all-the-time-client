@@ -1,5 +1,6 @@
 function sortBefore (a, b, sort) {
   let isBefore
+
   // eslint-disable-next-line array-callback-return
   Object.entries(sort).some(([key, direction]) => {
     const _a = a[key].valueOf ? a[key].valueOf() : a[key]

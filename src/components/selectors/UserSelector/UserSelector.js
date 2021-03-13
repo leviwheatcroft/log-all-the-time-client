@@ -21,8 +21,12 @@ const UserSelector = {
       skip () { return this.itemPartial.length < 3 },
       throttle: 500,
       update ({ UserPartialQ: itemSuggestions }) {
-        // eslint-disable-next-line no-return-assign
-        itemSuggestions.forEach((i) => i.itemName = i.username)
+        itemSuggestions = itemSuggestions.map((i) => {
+          return {
+            ...i,
+            itemName: i.username
+          }
+        })
         return itemSuggestions
       },
       variables () { return { userPartial: this.itemPartial } }

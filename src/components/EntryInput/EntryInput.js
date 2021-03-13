@@ -18,7 +18,6 @@ const {
     EntryDeleteM
   },
   queries: {
-    EntryQ,
     EntryFilterQ
   }
 } = require('../../apollo')
@@ -149,28 +148,6 @@ const EntryInput = {
               deleted: true
             }
           })
-          // const entryQ = store.readQuery({ query: EntryQ })
-          // if (entryQ) {
-          //   store.writeQuery({
-          //     query: EntryQ,
-          //     data: {
-          //       EntryQ: entryQ.EntryQ.filter((e) => e.id !== id)
-          //     }
-          //   })
-          // }
-          //
-          // const entryFilterQ = store.readQuery({ query: EntryFilterQ })
-          // if (entryFilterQ) {
-          //   store.writeQuery({
-          //     query: EntryFilterQ,
-          //     data: {
-          //       EntryFilterQ: {
-          //         ...entryFilterQ.EntryFilterQ,
-          //         docs: EntryFilterQ.EntryFilterQ.docs((e) => e.id !== id)
-          //       }
-          //     }
-          //   })
-          // }
         },
         optimisticResponse: {
           __typename: 'Mutation',
@@ -218,8 +195,12 @@ const EntryInput = {
         duration: durationFromHHMM(duration),
         description,
 
-        // strip __typename
-        tags: tags.map((t) => ({ id: t.id, tagName: t.tagName }))
+        // strip __typename (existing tags)
+        // strip id: false (new tags)
+        tags: tags.map((t) => ({
+          ...t.id !== false ? { id: t.id } : {},
+          tagName: t.tagName
+        }))
       }
       this.$el.querySelector('input.duration').focus()
       this.$emit('submit')
@@ -231,29 +212,30 @@ const EntryInput = {
         update: (store, ctx) => {
           const {
             data: {
-              EntryUpsertM: result
+              EntryUpsertM: upsertedEntry
             }
           } = ctx
 
-          const data = store.readQuery({ query: EntryQ })
-          const idx = data.EntryQ.findIndex((c) => c.id === result.id)
-          if (idx !== -1)
-            data.EntryQ.splice(idx, 1, result)
-          else
-            data.EntryQ.unshift(result)
-
-          // this clears out any optimistic responses without considering
-          // which response we actually have. Only an issue if there's more
-          // than one EntryUpsertM in flight
-          data.EntryQ = data.EntryQ.filter((e) => e.id !== 'newId')
-
-          store.writeQuery({ query: EntryQ, data })
+          store.writeQuery({
+            query: EntryFilterQ,
+            variables: {
+              self: true,
+              sort: { createdAt: 'desc' }
+            },
+            data: {
+              EntryFilterQ: {
+                __typename: 'Page',
+                docs: [upsertedEntry]
+              }
+            }
+          })
         },
         optimisticResponse: {
           __typename: 'Mutation',
           EntryUpsertM: {
             __typename: 'Entry',
             ...entry.id ? {} : { id: 'newId' },
+            ...entry.createdAt ? {} : { createdAt: new Date() },
             ...entry,
             tags: entry.tags.map((tag) => ({
               __typename: 'Tag',

@@ -4,7 +4,10 @@ function isItem (_item) {
     itemName
   } = _item
   return (
-    typeof id === 'string' &&
+    (
+      typeof id === 'string' ||
+      id === false
+    ) &&
     typeof itemName === 'string'
   )
 }
