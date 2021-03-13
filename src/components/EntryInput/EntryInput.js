@@ -209,7 +209,7 @@ const EntryInput = {
 
       // prep inputs ready for the user to input another entry
       if (isNewEntry) {
-        this.date = new Date()
+        // this.date = new Date()
         this.duration = ''
         this.description = ''
         this.tags = []
