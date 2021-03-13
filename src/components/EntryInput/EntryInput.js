@@ -73,7 +73,8 @@ const EntryInput = {
       date: new Date(),
       duration: '',
       description: '',
-      tags: []
+      tags: [],
+      isNewEntry: !this.entry
     }
   },
   methods: {
@@ -160,16 +161,17 @@ const EntryInput = {
     },
     async clickSubmit () {
       const {
-        id,
         date,
-        duration,
         description,
-        tags
+        duration,
+        id,
+        tags,
+        isNewEntry
       } = this
 
       // update durationsByDay
       reduce({
-        ...this.entry ? {
+        ...!isNewEntry ? {
           DURATIONS_BY_DAY_REMOVE: {
             date: new Date(this.entry.date),
             duration: this.entry.duration
@@ -181,12 +183,13 @@ const EntryInput = {
         }
       })
 
-      // clear local entry
-      if (!this.entry) {
+      // prep inputs ready for the user to input another entry
+      if (isNewEntry) {
         this.date = new Date()
         this.duration = ''
         this.description = ''
         this.tags = []
+        this.$el.querySelector('input.duration').focus()
       }
 
       const entry = {
@@ -202,7 +205,7 @@ const EntryInput = {
           tagName: t.tagName
         }))
       }
-      this.$el.querySelector('input.duration').focus()
+
       this.$emit('submit')
       await this.$apollo.mutate({
         mutation: EntryUpsertM,
@@ -216,27 +219,51 @@ const EntryInput = {
             }
           } = ctx
 
-          store.writeQuery({
-            query: EntryFilterQ,
-            variables: {
-              self: true,
-              sort: { createdAt: 'desc' }
-            },
-            data: {
-              EntryFilterQ: {
-                __typename: 'Page',
-                docs: [upsertedEntry]
+          if (isNewEntry) {
+            // writeQuery will be intercepted by the EnterFilterQ typePolicy
+            // which will determine how to include the new entry in the cached
+            // results for EntryFilterQ
+            store.writeQuery({
+              query: EntryFilterQ,
+              variables: {
+                self: true,
+                sort: { createdAt: 'desc' }
+              },
+              data: {
+                EntryFilterQ: {
+                  __typename: 'Page',
+                  docs: [upsertedEntry]
+                }
               }
-            }
-          })
+            })
+          } else {
+            // writeFragment would be intercepted by a typePolicy, but no
+            // typePolicy exists for Entry.
+            // https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment
+            store.writeFragment({
+              id: `Entry:${entry.id}`,
+              fragment: gql`
+                fragment UpsertedEntry on Entry {
+                  date
+                  duration
+                  description
+                  tags
+                }
+              `,
+              data: upsertedEntry
+            })
+          }
         },
         optimisticResponse: {
           __typename: 'Mutation',
           EntryUpsertM: {
             __typename: 'Entry',
-            ...entry.id ? {} : { id: 'newId' },
-            ...entry.createdAt ? {} : { createdAt: new Date() },
+            id: 'newId',
+            createdAt: Date.now(),
+            // id & createdAt will be overwritten if they exist on entry
             ...entry,
+            // date & tags below will overwrite the values on entry
+            date: entry.date.valueOf(),
             tags: entry.tags.map((tag) => ({
               __typename: 'Tag',
               ...tag.id ? {} : { id: 'newId' },
