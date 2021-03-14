@@ -59,11 +59,14 @@
       )
     .spacer
     .container-button.no-grow
-      button.button.submit(
+      save(
+        :entry="entry"
+        :date="date"
+        :description="description"
+        :duration="duration"
+        :tags="tags"
+        :validate="validate"
+        :isNewEntry="isNewEntry"
         :tabindex="tabindex + 5"
-        @click="clickSubmit"
-        @blur="blurSave"
+        :reset="reset"
       )
-        .icon-container
-          icon-send
-        span Save
