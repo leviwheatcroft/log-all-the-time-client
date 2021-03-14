@@ -1,6 +1,7 @@
 const { isArray } = require('./isArray')
 const { isBoolean } = require('./isBoolean')
 const { isDate } = require('./isDate')
+const { isDateMs } = require('./isDateMs')
 const { isEntries } = require('./isEntries')
 const { isEntry } = require('./isEntry')
 const { isFalse } = require('./isFalse')
@@ -9,6 +10,7 @@ const { isInteger } = require('./isInteger')
 const { isItem } = require('./isItem')
 const { isItems } = require('./isItems')
 const { isMidnightUtc } = require('./isMidnightUtc')
+const { isMidnightUtcMs } = require('./isMidnightUtcMs')
 const { isNewTag } = require('./isNewTag')
 const { isNull } = require('./isNull')
 const { isTag } = require('./isTag')
@@ -19,6 +21,7 @@ module.exports = {
   isArray,
   isBoolean,
   isDate,
+  isDateMs,
   isEntries,
   isEntry,
   isFalse,
@@ -27,9 +30,10 @@ module.exports = {
   isItem,
   isItems,
   isMidnightUtc,
+  isMidnightUtcMs,
   isNewTag,
   isNull,
   isTag,
   isUndefined,
-  isUser
+  isUser,
 }

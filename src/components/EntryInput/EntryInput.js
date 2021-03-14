@@ -1,5 +1,6 @@
 const { default: DatePicker } = require('vue2-datepicker')
 const gql = require('graphql-tag')
+const { default: Delete } = require('./Delete')
 const {
   IconCalendar,
   IconClock,
@@ -14,8 +15,7 @@ const {
 } = require('../selectors')
 const {
   mutations: {
-    EntryUpsertM,
-    EntryDeleteM
+    EntryUpsertM
   },
   queries: {
     EntryFilterQ
@@ -43,6 +43,7 @@ const {
 const EntryInput = {
   components: {
     DatePicker,
+    Delete,
     IconCalendar,
     IconClock,
     IconEdit3,
@@ -71,35 +72,6 @@ const EntryInput = {
       tabindex,
       tags,
     }
-    //
-    // if (isNewEntry) {
-    //   const {
-    //     id,
-    //     date,
-    //     duration,
-    //     description,
-    //     tags,
-    //     idx
-    //   } = this.entry
-    //   return {
-    //     id,
-    //     date: new Date(date),
-    //     duration: durationAsHHMM(duration),
-    //     description,
-    //     tags,
-    //     tabindex: idx * 5,
-    //     isNewEntry,
-    //   }
-    // }
-    // return {
-    //   id: '',
-    //   date: new Date(),
-    //   duration: '',
-    //   description: '',
-    //   tags: [],
-    //   isNewEntry: !this.entry,
-    //   tabindex: idx * 5
-    // }
   },
   methods: {
     blurSave () {
@@ -139,49 +111,6 @@ const EntryInput = {
     },
     clickCancel () {
       this.$emit('cancel')
-    },
-    async clickDelete () {
-      const {
-        entry
-      } = this
-      const {
-        id
-      } = entry
-
-      // update durationsByDay
-      reduce({
-        DURATIONS_BY_DAY_REMOVE: {
-          date: new Date(this.entry.date),
-          duration: this.entry.duration
-        }
-      })
-      this.$emit('delete')
-      await this.$apollo.mutate({
-        mutation: EntryDeleteM,
-        variables: {
-          id
-        },
-        update (store) {
-          store.writeFragment({
-            id: `Entry:${entry.id}`,
-            fragment: gql`
-              fragment MyEntry on Entry {
-                deleted
-              }
-            `,
-            data: {
-              deleted: true
-            }
-          })
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          EntryDeleteM: {
-            ...entry,
-            deleted: true
-          }
-        }
-      })
     },
     async clickSubmit () {
       const {

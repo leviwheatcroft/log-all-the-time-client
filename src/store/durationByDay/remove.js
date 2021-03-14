@@ -1,4 +1,8 @@
-const check = require('check-types')
+const {
+  types: {
+    isMidnightUtc
+  }
+} = require('../../lib')
 
 function remove (payload, state) {
   const {
@@ -7,10 +11,10 @@ function remove (payload, state) {
   } = payload
   if (type !== 'DURATIONS_BY_DAY_REMOVE')
     return
-  if (!check.date(date))
-    throw new TypeError('date is not Date')
-  if (!check.integer(duration))
-    throw new TypeError('duration is not Integer')
+  console.assert(
+    isMidnightUtc(date),
+    { date, message: 'date is not midnightUtcMs' }
+  )
   const day = state.durationByDay.days.find((d) => {
     return d.date.valueOf() === date.valueOf()
   })

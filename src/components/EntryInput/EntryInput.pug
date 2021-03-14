@@ -2,12 +2,10 @@
   .row.button-bar(
     v-if="deletable || cancelable"
   )
-    button.delete(
+    delete(
       v-if="deletable"
-      @click="clickDelete"
+      :entry="entry"
     )
-      .icon-container
-        icon-trash-2
     button.cancel(
       v-if="cancelable"
       @click="clickCancel"
