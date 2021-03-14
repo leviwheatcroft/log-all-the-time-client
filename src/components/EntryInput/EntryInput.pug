@@ -14,12 +14,15 @@
         icon-x
   .row
     .container-description.grow
-      .faux-input
+      .description.faux-input(
+        :class="descriptionValidState.value"
+      )
         .icon-container
           icon-edit-3
         input.description(
           :tabindex="tabindex + 1"
           v-model="description"
+          @change="checkValidState"
         )
   .row
     .container-tag-selector.grow
@@ -50,6 +53,8 @@
       duration(
         :duration="duration"
         :tabindex="tabindex + 4"
+        :validState="durationValidState"
+        @validState="durationValidState = $event"
         @change="duration = $event"
       )
     .spacer

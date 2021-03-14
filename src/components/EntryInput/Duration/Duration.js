@@ -2,9 +2,13 @@ const {
   IconClock,
 } = require('../../../icons')
 const {
+  enums: {
+    ValidState
+  },
   types: {
     isInteger,
-    isEmptyString
+    isEmptyString,
+    isValidState,
   },
   stringOps: {
     parseHumanDuration,
@@ -21,19 +25,10 @@ const Duration = {
     const invalid = false
     return {
       durationRaw,
-      invalid
+      invalid,
     }
   },
   methods: {
-    invalidate () {
-      this.invalid = true
-      this.$el.querySelector('input').addEventListener(
-        'input',
-        // eslint-disable-next-line no-return-assign
-        () => this.invalid = false,
-        { once: true }
-      )
-    },
     blurDuration () {
       if (this.durationRaw.length === 0)
         return
@@ -42,9 +37,11 @@ const Duration = {
         duration = parseHumanDuration(this.durationRaw)
       } catch (err) {
         if (err.code === 'VALIDATION_ERROR')
-          return this.invalidate()
+          return this.$emit('validState', ValidState.invalid)
         throw err
       }
+
+      this.$emit('validState', ValidState.valid)
 
       this.durationRaw = durationAsHHMM(duration)
 
@@ -64,6 +61,16 @@ const Duration = {
     },
     tabindex: {
       required: true
+    },
+    validState: {
+      required: true,
+      validator (validState) {
+        console.assert(
+          isValidState(validState),
+          { validState, msg: 'validState is !ValidState' }
+        )
+        return true
+      }
     }
   }
 }

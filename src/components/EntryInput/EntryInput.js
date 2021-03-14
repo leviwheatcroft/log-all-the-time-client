@@ -22,6 +22,12 @@ const {
   }
 } = require('../../apollo')
 const {
+  errors: {
+    ValidationError
+  },
+  enums: {
+    ValidState
+  },
   dates: {
     midnightUtc
   },
@@ -48,6 +54,8 @@ const EntryInput = {
     TagSelector
   },
   data () {
+    const descriptionValidState = ValidState.unchecked
+    const durationValidState = ValidState.unchecked
     const isNewEntry = !this.entry
     const tabindex = this.idx * 5
     const {
@@ -61,7 +69,9 @@ const EntryInput = {
     return {
       date: new Date(date),
       description,
+      descriptionValidState,
       duration,
+      durationValidState,
       id,
       isNewEntry,
       tabindex,
@@ -72,7 +82,6 @@ const EntryInput = {
     blurSave () {
       this.$el.querySelector('input.description').focus()
     },
-
     tagNewHandler (tag) {
       tag.tagName = tag.itemName
       console.assert(
@@ -100,6 +109,17 @@ const EntryInput = {
       )
       this.tags.splice(idx, 1)
     },
+    checkValidState ({ target }) {
+      if (target.classList.contains('description')) {
+        const {
+          description
+        } = this
+        if (description.length < 3)
+          this.descriptionValidState = ValidState.invalid
+        else
+          this.descriptionValidState = ValidState.valid
+      }
+    },
     clickCancel () {
       this.$emit('cancel')
     },
@@ -112,6 +132,14 @@ const EntryInput = {
         tags,
         isNewEntry
       } = this
+
+      try {
+        this.validate()
+      } catch (err) {
+        if (err.code === 'VALIDATION_ERROR')
+          return
+        throw err
+      }
 
       // update durationsByDay
       reduce({
@@ -216,6 +244,24 @@ const EntryInput = {
           }
         }
       })
+    },
+    validate () {
+      const {
+        descriptionValidState,
+        durationValidState
+      } = this
+
+      if (descriptionValidState === ValidState.unchecked)
+        this.descriptionValidState = ValidState.invalid
+
+      if (durationValidState === ValidState.unchecked)
+        this.durationValidState = ValidState.invalid
+
+      if (
+        descriptionValidState !== ValidState.valid ||
+        durationValidState !== ValidState.valid
+      )
+        throw new ValidationError()
     }
   },
   mounted () {

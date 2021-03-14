@@ -17,6 +17,7 @@ const { isNull } = require('./isNull')
 const { isTag } = require('./isTag')
 const { isUndefined } = require('./isUndefined')
 const { isUser } = require('./isUser')
+const { isValidState } = require('./isValidState')
 
 module.exports = {
   isArray,
@@ -38,4 +39,5 @@ module.exports = {
   isTag,
   isUndefined,
   isUser,
+  isValidState,
 }
