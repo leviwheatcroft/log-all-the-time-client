@@ -1,3 +1,7 @@
+const {
+  ValidationError
+} = require('../errors')
+
 const regExps = [
   {
     // strings like:
@@ -74,7 +78,7 @@ function parseHumanDuration (humanDurationString) {
     return match
   })
   if (!parsed)
-    throw new RangeError('unparseable human duration')
+    throw new ValidationError('duration')
   return parsed
 }
 

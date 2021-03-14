@@ -1,9 +1,9 @@
 const { default: DatePicker } = require('vue2-datepicker')
 const gql = require('graphql-tag')
 const { default: Delete } = require('./Delete')
+const { default: Duration } = require('./Duration')
 const {
   IconCalendar,
-  IconClock,
   IconEdit3,
   IconSend,
   IconTrash2,
@@ -29,11 +29,6 @@ const {
     isEntry,
     isTag,
     isNewTag
-  },
-  stringOps: {
-    parseHumanDuration,
-    durationAsHHMM,
-    durationFromHHMM
   }
 } = require('../../lib')
 const {
@@ -44,8 +39,8 @@ const EntryInput = {
   components: {
     DatePicker,
     Delete,
+    Duration,
     IconCalendar,
-    IconClock,
     IconEdit3,
     IconSend,
     IconTrash2,
@@ -66,7 +61,7 @@ const EntryInput = {
     return {
       date: new Date(date),
       description,
-      duration: duration ? durationAsHHMM(duration) : '',
+      duration,
       id,
       isNewEntry,
       tabindex,
@@ -77,11 +72,7 @@ const EntryInput = {
     blurSave () {
       this.$el.querySelector('input.description').focus()
     },
-    blurDuration () {
-      if (this.duration.length === 0)
-        return
-      this.duration = durationAsHHMM(parseHumanDuration(this.duration))
-    },
+
     tagNewHandler (tag) {
       tag.tagName = tag.itemName
       console.assert(
@@ -132,7 +123,7 @@ const EntryInput = {
         } : {},
         DURATIONS_BY_DAY_ADD: {
           date: midnightUtc(date),
-          duration: durationFromHHMM(duration)
+          duration
         }
       })
 
@@ -148,7 +139,7 @@ const EntryInput = {
       const entry = {
         ...id ? { id } : {},
         date: midnightUtc(date),
-        duration: durationFromHHMM(duration),
+        duration,
         description,
 
         // strip __typename (existing tags)

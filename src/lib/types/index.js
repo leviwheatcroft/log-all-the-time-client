@@ -2,6 +2,7 @@ const { isArray } = require('./isArray')
 const { isBoolean } = require('./isBoolean')
 const { isDate } = require('./isDate')
 const { isDateMs } = require('./isDateMs')
+const { isEmptyString } = require('./isEmptyString')
 const { isEntries } = require('./isEntries')
 const { isEntry } = require('./isEntry')
 const { isFalse } = require('./isFalse')
@@ -22,6 +23,7 @@ module.exports = {
   isBoolean,
   isDate,
   isDateMs,
+  isEmptyString,
   isEntries,
   isEntry,
   isFalse,

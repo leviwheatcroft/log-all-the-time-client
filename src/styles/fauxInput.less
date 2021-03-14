@@ -8,6 +8,9 @@
   &:focus-within {
     background-color: @focusField;
   }
+  &.invalid {
+    background-color: tint(@red, 80%);
+  }
   .icon-container {
     flex-grow: 0;
     > svg {

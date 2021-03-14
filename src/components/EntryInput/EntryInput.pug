@@ -47,14 +47,11 @@
           )
             .empty
     .container-duration.no-grow
-      .faux-input
-        .icon-container
-          icon-clock
-        input.duration(
-          :tabindex="tabindex + 4"
-          v-model="duration"
-          @blur="blurDuration"
-        )
+      duration(
+        :duration="duration"
+        :tabindex="tabindex + 4"
+        @change="duration = $event"
+      )
     .spacer
     .container-button.no-grow
       button.button.submit(

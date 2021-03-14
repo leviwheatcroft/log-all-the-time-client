@@ -1,0 +1,10 @@
+.duration.faux-input(
+  :class="invalid ? 'invalid' : ''"
+)
+  .icon-container
+    icon-clock
+  input.duration(
+    :tabindex="tabindex"
+    v-model="durationRaw"
+    @blur="blurDuration"
+  )
