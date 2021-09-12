@@ -18,6 +18,7 @@
     "@nuxtjs/svg-sprite": "^0.5.2",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
+    "pug-lexer": "^5.0.1",
     "raw-loader": "^4.0.2"
   },
   "devDependencies": {

@@ -15,5 +15,9 @@ module.exports = {
   plugins: [
   ],
   // add your custom rules here
-  rules: {}
+  rules: {
+    curly: ['error', 'multi-or-nest', 'consistent'],
+    'quote-props': ['error', 'as-needed'],
+    'arrow-parens': 'off'
+  }
 }
