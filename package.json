@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/svg-sprite": "^0.5.2",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "raw-loader": "^4.0.2"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
