@@ -1,0 +1,45 @@
+.user-register(
+  class="max-w-3xl mx-auto"
+)
+  .row
+    label(
+      for="email"
+    ) Email
+    input(
+      name="email"
+      v-model="email"
+      placeholder="mcboatface@gmail.com"
+    )
+  .row
+    label(
+      for="username"
+    ) Username
+    input(
+      name="username"
+      v-model="username"
+      placeholder="mcboatface"
+    )
+  .row
+    label(
+      for="password"
+    ) Password
+    input(
+      name="password"
+      v-model="password"
+      type="password"
+      placeholder="password"
+    )
+  .row
+    label(
+      for="password-confirmation"
+    ) Password Confirmation
+    input(
+      name="password-confirmation"
+      v-model="passwordConfirmation"
+      type="password"
+      placeholder="password"
+    )
+  .row
+    button(
+      @click="clickSubmit"
+    ) Submit

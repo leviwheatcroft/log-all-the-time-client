@@ -1,0 +1,6 @@
+query SelfQ {
+  SelfQ {
+    id
+    username
+  }
+}
