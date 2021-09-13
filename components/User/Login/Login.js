@@ -1,6 +1,6 @@
 import {
   AuthState
-} from '../../../enums'
+} from '../../../lib/enums'
 import apollo from '../../../apollo'
 import {
   cookies

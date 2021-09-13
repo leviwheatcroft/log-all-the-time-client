@@ -1,0 +1,42 @@
+// ================================================================ input-box ==
+.theme.input-box {
+  margin: 3.6rem 1.2rem;
+  padding: 1.2rem;
+  box-shadow: inset 0px 0px 3px 0px rgba(192,192,192,1);
+  // -------------------------------------------------------------------- row --
+  .row {
+    display: flex;
+    flex-direction: row;
+    margin: 0.6rem 0;
+    .no-grow {
+      flex-grow: 0;
+    }
+    .grow,
+    .spacer {
+      flex-grow: 1;
+    }
+    > div {
+      padding-right: 0.6rem;
+      &:last-child {
+        padding-right: 0rem;
+      }
+    }
+  }
+
+  // --------------------------------------------------- container-datepicker --
+  .container-datepicker {
+    .mx-input {
+      border: none;
+      box-shadow: none;
+      --webkit-box-shadow: none;
+      // background-color: blue;
+      background-color: transparent;
+      border-radius: 0;
+      // line-height: 1.8rem;
+      height: auto;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

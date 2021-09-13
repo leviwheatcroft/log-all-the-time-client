@@ -1,0 +1,27 @@
+// =============================================================== faux-input ==
+.theme.faux-input {
+  background-color: @unfocusField;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3rem;
+  &:focus-within {
+    background-color: @focusField;
+  }
+  &.invalid {
+    background-color: tint(@red, 80%);
+  }
+  svg.icon {
+    top: 0 !important; // ugh
+    margin: 0.5rem;
+  }
+  input {
+    // background-color: blue;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    width: 100%;
+  }
+}

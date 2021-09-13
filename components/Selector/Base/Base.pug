@@ -1,0 +1,50 @@
+.item-selector.theme.faux-input.grow
+  slot(
+    name="icon-item"
+  )
+  .item-partial-container.grow
+    input.item-partial(
+      :tabindex="inputTabindex ? inputTabindex : ''"
+      v-model='itemPartial'
+      @keydown='keydownItemPartial'
+      @input="inputItemPartialHandler($event.target.value)"
+    )
+    .item-suggestions(v-if="itemPartial.length > 0")
+      // suggestions from partial
+      .item-suggestion(
+        v-if="itemPartial.length >= 3"
+        v-for="itemSuggestion in itemSuggestions"
+        :key="itemSuggestion.id"
+        @click="clickItemAdd(itemSuggestion)"
+        :style="{ backgroundColor: hexFromString(itemSuggestion.itemName) }"
+      )
+        .icon-container
+          slot(
+            name="icon-item"
+          )
+        | {{ itemSuggestion.itemName }}
+
+      // new item
+      .item-suggestion(
+        @click="clickItemNew({ id: false, itemName: itemPartial })"
+        v-if="itemPartial.length > 0 && itemNewHandler"
+      )
+        icon(
+          name="loader"
+        )
+        | New: {{ itemPartial }}
+
+  .item-container.no-grow
+    .item(
+      v-for="selectedItem in selectedItems"
+      :style="{ backgroundColor: hexFromString(selectedItem.itemName) }"
+    )
+      slot(
+        name="icon-item"
+      )
+      | {{ selectedItem.itemName }}
+      icon(
+        class="cursor-pointer"
+        name="x"
+        @click="itemRemoveHandler(selectedItem)"
+      )

@@ -1,0 +1,29 @@
+// ========================================================= container-button ==
+.theme.button {
+  background-color: @unfocusField;
+  border: 1px solid transparent;
+  // background-color: blue;
+  height: 3rem;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+  color: @light10;
+  &:focus {
+    background-color: @focusField;
+  }
+  a {
+    text-decoration: none;
+    color: @light10;
+    &:hover {
+      color: @light10;
+    }
+  }
+}
+.button-bare {
+  background-color: transparent;
+  &:focus {
+    background-color: transparent;
+  }
+}

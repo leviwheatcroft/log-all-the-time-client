@@ -1,11 +1,12 @@
 import {
-  AuthStatus
-} from '../../enums'
-import apollo from '../../apollo'
-import {
+  enums,
   cookies
 } from '../../lib'
+import apollo from '../../apollo'
 
+const {
+  AuthStatus
+} = enums
 const {
   mutations: {
     UserRefreshM

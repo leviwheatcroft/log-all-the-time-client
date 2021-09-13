@@ -1,0 +1,75 @@
+.entry-input.theme.input-box
+  .row.button-bar(
+    v-if="deletable || cancelable"
+  )
+    entry-input-delete(
+      v-if="deletable"
+      :entry="entry"
+    )
+    button.cancel(
+      v-if="cancelable"
+      @click="clickCancel"
+    )
+      icon(
+        name="x"
+      )
+  .row
+    .container-description.grow
+      .description.theme.faux-input(
+        :class="descriptionValidState.value"
+      )
+        icon(
+          name="edit-3"
+        )
+        input.description(
+          :tabindex="tabindex + 1"
+          v-model="description"
+          @change="checkValidState"
+        )
+  .row
+    .container-tag-selector.grow
+      selector-tag(
+        :inputTabindex="tabindex + 2"
+        :tags="tags"
+        :tagNewHandler="tagNewHandler"
+        :tagAddHandler="tagAddHandler"
+        :tagRemoveHandler="tagRemoveHandler"
+      )
+  .row
+    .container-datepicker.no-grow
+      .theme.faux-input
+        icon(
+          name="calendar"
+        )
+        date-picker(
+          :input-attr="{ tabindex: tabindex + 3 }"
+          :clearable="false"
+          v-model="date"
+          format="DD/MM/YY"
+          type="date"
+        )
+          template(
+            v-slot:icon-calendar
+          )
+            .empty
+    .container-duration.no-grow
+      entry-input-duration(
+        :duration="duration"
+        :tabindex="tabindex + 4"
+        :validState="durationValidState"
+        @validState="durationValidState = $event"
+        @change="duration = $event"
+      )
+    .spacer
+    .container-button.no-grow
+      entry-input-save(
+        :entry="entry"
+        :date="date"
+        :description="description"
+        :duration="duration"
+        :tags="tags"
+        :validate="validate"
+        :isNewEntry="isNewEntry"
+        :tabindex="tabindex + 5"
+        :reset="reset"
+      )

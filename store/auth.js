@@ -1,4 +1,4 @@
-import { AuthStatus } from '../enums'
+import { AuthStatus } from '../lib/enums'
 
 export const state = () => ({
   status: AuthStatus.initialising

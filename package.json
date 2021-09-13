@@ -28,7 +28,8 @@
     "pug-lexer": "^5.0.1",
     "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
-    "vue-apollo": "^3.0.7"
+    "vue-apollo": "^3.0.7",
+    "vue2-datepicker": "^3.10.1"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",

@@ -1,0 +1,11 @@
+.duration.theme.faux-input(
+  :class="validState.value"
+)
+  icon(
+    name="clock"
+  )
+  input.duration(
+    :tabindex="tabindex"
+    v-model="durationRaw"
+    @blur="blurDuration"
+  )
