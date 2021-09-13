@@ -1,0 +1,13 @@
+.auth-manager(
+  class="absolute inset-0 z-10 pt-96 background-light-90"
+  v-if="authStatus === AuthStatus.initialising"
+)
+  .panel(
+    class="mx-auto flex flex-row justify-center"
+  )
+    .span
+      | Auth Initialising
+    icon(
+      name="loader"
+    )
+      

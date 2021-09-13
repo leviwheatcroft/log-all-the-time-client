@@ -1,5 +1,5 @@
-const { AuthState } = require('./AuthState')
+const { AuthStatus } = require('./AuthStatus')
 
 module.exports = {
-  AuthState
+  AuthStatus
 }

@@ -1,5 +1,5 @@
 import {
-  AuthState
+  AuthStatus
 } from '../../enums'
 import apollo from '../../apollo'
 import {
@@ -15,28 +15,28 @@ const {
   }
 } = apollo
 
-const AuthInit = {
+const AuthManager = {
   data () {
     return {
-      AuthState
+      AuthStatus
     }
   },
   computed: {
-    authState () {
-      return this.$store.state.authState
+    authStatus () {
+      return this.$store.state.auth.status
     }
   },
   watch: {
-    authState (authState, prev) {
+    authStatus (authStatus, prev) {
       // not sure whether this is necessary
-      if (authState === prev)
+      if (authStatus === prev)
         return
 
       // eslint-disable-next-line default-case
-      switch (authState) {
-        case AuthState.initialising:
+      switch (authStatus) {
+        case AuthStatus.initialising:
           return
-        case AuthState.loggedIn:
+        case AuthStatus.loggedIn:
           if (
             this.$router.currentRoute.name === 'login' ||
             this.$router.currentRoute.name === 'register' ||
@@ -44,18 +44,18 @@ const AuthInit = {
           )
             this.$router.push({ name: 'index' })
           return
-        case AuthState.loggedOut:
+        case AuthStatus.loggedOut:
           if (
             this.$router.currentRoute.name !== 'login' &&
             this.$router.currentRoute.name !== 'register'
           )
             this.$router.push({ name: 'login' })
           return
-        case AuthState.emailPendingVerification:
+        case AuthStatus.emailPendingVerification:
           if (this.$router.currentRoute.name !== 'verify')
             this.$router.push({ name: 'verify' })
           return
-        case AuthState.emailFailedVerification:
+        case AuthStatus.emailFailedVerification:
           if (this.$router.currentRoute.name !== 'badEmail')
             this.$router.push({ name: 'badEmail' })
           return
@@ -68,7 +68,7 @@ const AuthInit = {
     this.$nextTick(async function () {
       const refreshToken = cookies.getRefreshToken()
       if (!refreshToken) {
-        this.$store.commit('authState', AuthState.loggedOut)
+        this.$store.commit('auth/status', AuthStatus.loggedOut)
         return
       }
       const refreshResult = await this.$apollo.mutate({
@@ -84,10 +84,11 @@ const AuthInit = {
       const {
         data: { SelfQ: user }
       } = userResult
-      this.$store.commit('user', { user })
-      this.$store.commit('authState', AuthState.loggedIn)
+
+      this.$store.commit('user/logIn', user.username)
+      this.$store.commit('auth/status', AuthStatus.loggedIn)
     })
   }
 }
 
-export default AuthInit
+export default AuthManager

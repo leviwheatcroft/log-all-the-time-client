@@ -2,7 +2,7 @@ const {
   enumeration
 } = require('./enumeration')
 
-const AuthState = enumeration(
+const AuthStatus = enumeration(
   'initialising',
   'loggedIn',
   'emailPendingVerification',
@@ -11,5 +11,5 @@ const AuthState = enumeration(
 )
 
 module.exports = {
-  AuthState
+  AuthStatus
 }

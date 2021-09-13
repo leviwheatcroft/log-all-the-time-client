@@ -1,8 +1,10 @@
 <template lang="pug">
-  .root
+  .root(
+    class="flex flex-col items-center min-h-screen"
+  )
     svg-symbols
-    auth-init
-    nav
+    auth-manager
+    nav-bar
     nuxt(
       class="flex-grow self-stretch"
     )

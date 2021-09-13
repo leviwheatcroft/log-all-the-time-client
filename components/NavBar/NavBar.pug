@@ -1,0 +1,21 @@
+nav.nav-bar(
+  class="flex flex-row self-stretch py-4 px-8"
+)
+  .brand
+    | Log All The Time
+  .menu
+  .spacer(
+    class="flex-grow"
+  )
+  .profile(
+    v-if="username"
+  )
+    | {{ username }}
+  .log-in(
+    v-if="!username"
+  )
+    nuxt-link(
+      to="/login"
+    ) Log In
+  
+      
