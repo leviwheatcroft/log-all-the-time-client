@@ -27,7 +27,9 @@
           @change="checkValidState"
         )
   .row
-    .container-project-selector.grow
+    .container-project-selector(
+      class="w-1/2"
+    )
       selector-project(
         :inputTabindex="tabindex + 2"
         :project="project"
@@ -35,7 +37,9 @@
         :projectAddHandler="projectAddHandler"
         :projectRemoveHandler="projectRemoveHandler"
       )
-    .container-tag-selector.grow
+    .container-tag-selector(
+      class="w-1/2"
+    )
       selector-tag(
         :inputTabindex="tabindex + 3"
         :tags="tags"

@@ -76,6 +76,10 @@ const Project = {
     }, 500),
     resetHandler () {}
   },
+  mounted () {
+    // eslint-disable-next-line
+    console.log(this.inputTabindex)
+  },
   props: {
     project: {
       required: true,
@@ -94,6 +98,10 @@ const Project = {
     projectRemoveHandler: {
       required: true,
       type: Function
+    },
+    inputTabindex: {
+      required: true,
+      type: Number
     }
   }
 }

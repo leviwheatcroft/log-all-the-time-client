@@ -2,9 +2,21 @@
   slot(
     name="icon-item"
   )
-  .item-partial-container.grow(
-    v-if="isMultiItem || !selectedItems.length"
+  .item-selected-group(
+    class="flex flex-row"
   )
+    .item-selected(
+      class="flex flex-row items-center pl-3 pr-1 m-1 h-8 rounded"
+      v-for="selectedItem in selectedItems"
+      :style="{ backgroundColor: hexFromString(selectedItem.itemName) }"
+    )
+      | {{ selectedItem.itemName }}
+      icon(
+        class="cursor-pointer w-4 h-4"
+        name="x"
+        @click="itemRemoveHandler(selectedItem)"
+      )
+  .item-partial-container.grow
     input.item-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"
       v-model='itemPartial'
@@ -35,22 +47,3 @@
           name="loader"
         )
         | New: {{ itemPartial }}
-
-  .item-selected-group(
-    class="flex flex-row"
-  )
-    .item-selected(
-      class="flex flex-row items-center p-1 m-1 rounded"
-      v-for="selectedItem in selectedItems"
-      :style="{ backgroundColor: hexFromString(selectedItem.itemName) }"
-    )
-      slot(
-        v-if="isMultiItem"
-        name="icon-item"
-      )
-      | {{ selectedItem.itemName }}
-      icon(
-        class="cursor-pointer"
-        name="x"
-        @click="itemRemoveHandler(selectedItem)"
-      )
