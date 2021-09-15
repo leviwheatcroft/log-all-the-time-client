@@ -54,6 +54,11 @@ const Base = {
     event: 'change'
   },
   props: {
+    isMultiItem: {
+      required: false,
+      type: Boolean,
+      default: true
+    },
     selectedItems: {
       required: true,
       type: Array,

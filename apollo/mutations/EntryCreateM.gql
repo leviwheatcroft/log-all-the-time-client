@@ -1,0 +1,26 @@
+mutation EntryCreateM(
+  $entry: EntryI!
+) {
+  EntryCreateM(
+    entry: $entry
+  ) {
+    createdAt
+    date
+    active
+    description
+    duration
+    id
+    project {
+      id
+      projectName
+    }
+    tags {
+      id
+      tagName
+    }
+    user {
+      id
+      username
+    }
+  }
+}

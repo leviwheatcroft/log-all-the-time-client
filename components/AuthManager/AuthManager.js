@@ -86,7 +86,7 @@ const AuthManager = {
         data: { SelfQ: user }
       } = userResult
 
-      this.$store.commit('user/logIn', user.username)
+      this.$store.commit('user/logIn', user)
       this.$store.commit('auth/status', AuthStatus.loggedIn)
     })
   }

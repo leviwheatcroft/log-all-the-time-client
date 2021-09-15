@@ -1,5 +1,11 @@
+const EntryFilterQ = require('./EntryFilterQ')
+const ProjectPartialQ = require('./ProjectPartialQ')
 const SelfQ = require('./SelfQ')
+const TagPartialQ = require('./TagPartialQ')
 
 module.exports = {
-  SelfQ
+  EntryFilterQ,
+  ProjectPartialQ,
+  SelfQ,
+  TagPartialQ,
 }

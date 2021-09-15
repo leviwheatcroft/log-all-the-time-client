@@ -27,9 +27,17 @@
           @change="checkValidState"
         )
   .row
+    .container-project-selector.grow
+      selector-project(
+        :inputTabindex="tabindex + 2"
+        :project="project"
+        :projectNewHandler="projectNewHandler"
+        :projectAddHandler="projectAddHandler"
+        :projectRemoveHandler="projectRemoveHandler"
+      )
     .container-tag-selector.grow
       selector-tag(
-        :inputTabindex="tabindex + 2"
+        :inputTabindex="tabindex + 3"
         :tags="tags"
         :tagNewHandler="tagNewHandler"
         :tagAddHandler="tagAddHandler"
@@ -42,7 +50,7 @@
           name="calendar"
         )
         date-picker(
-          :input-attr="{ tabindex: tabindex + 3 }"
+          :input-attr="{ tabindex: tabindex + 4 }"
           :clearable="false"
           v-model="date"
           format="DD/MM/YY"
@@ -55,7 +63,7 @@
     .container-duration.no-grow
       entry-input-duration(
         :duration="duration"
-        :tabindex="tabindex + 4"
+        :tabindex="tabindex + 5"
         :validState="durationValidState"
         @validState="durationValidState = $event"
         @change="duration = $event"
@@ -66,10 +74,11 @@
         :entry="entry"
         :date="date"
         :description="description"
+        :project="project"
         :duration="duration"
         :tags="tags"
         :validate="validate"
         :isNewEntry="isNewEntry"
-        :tabindex="tabindex + 5"
+        :tabindex="tabindex + 6"
         :reset="reset"
       )

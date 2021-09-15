@@ -1,0 +1,10 @@
+query TagPartialQ(
+  $tagPartial: String
+) {
+  TagPartialQ(
+    tagPartial: $tagPartial
+  ) {
+    id
+    tagName
+  }
+}

@@ -2,7 +2,9 @@ import DatePicker from 'vue2-datepicker'
 import {
   isEntry,
   isTag,
-  isNewTag
+  isNewTag,
+  isProject,
+  isNewProject
 } from '../../lib/types'
 import {
   ValidationError
@@ -26,6 +28,7 @@ const EntryInput = {
       duration = '',
       id = '',
       tags = [],
+      project = false
     } = this.entry || {}
 
     return {
@@ -34,6 +37,7 @@ const EntryInput = {
       descriptionValidState,
       duration,
       durationValidState,
+      project,
       id,
       isNewEntry,
       tabindex,
@@ -67,6 +71,24 @@ const EntryInput = {
         { tags: this.tags, tag, msg: 'tag not in tags' }
       )
       this.tags.splice(idx, 1)
+    },
+    projectNewHandler (project) {
+      project.projectName = project.itemName
+      console.assert(
+        isNewProject(project),
+        { project, msg: 'project is not newProject' }
+      )
+      this.project = project
+    },
+    projectAddHandler (project) {
+      console.assert(
+        isProject(project),
+        { project, msg: 'project is not project' }
+      )
+      this.project = project
+    },
+    projectRemoveHandler () {
+      this.project = false
     },
     checkValidState ({ target }) {
       if (target.classList.contains('description')) {
@@ -105,6 +127,7 @@ const EntryInput = {
       this.duration = ''
       this.description = ''
       this.tags = []
+      this.project = false
       this.$el.querySelector('input.description').focus()
     }
   },

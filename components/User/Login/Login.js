@@ -48,7 +48,7 @@ const Login = {
       const {
         data: { SelfQ: user }
       } = userResult
-      this.$store.commit('user', { user })
+      this.$store.commit('user', user)
       this.$store.commit('authState', AuthState.loggedIn)
     }
   }

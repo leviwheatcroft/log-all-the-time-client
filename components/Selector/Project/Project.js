@@ -1,32 +1,23 @@
 import _throttle from 'lodash/throttle'
 import {
-  isArray,
-  isTag,
-  isNewTag,
-  isFunction,
+  isProject,
+  isNewProject,
   isFalse
 } from '../../../lib/types'
 import {
-  TagPartialQ
+  ProjectPartialQ
 } from '../../../apollo/queries'
 
-const Tag = {
+const Project = {
   data () {
     return {
       itemPartial: '',
-      itemSuggestions: [],
-      lastItemPartial: false,
-      loading: 0
+      itemSuggestions: []
     }
   },
   computed: {
     selectedItems () {
-      return this.tags.map((tag) => {
-        return {
-          ...tag,
-          itemName: tag.tagName
-        }
-      })
+      return this.project ? [this.project] : []
     }
   },
   methods: {
@@ -69,63 +60,42 @@ const Tag = {
       this.lastItemPartial = this.itemPartial
       this.loading += 1
       const result = await this.$apollo.query({
-        query: TagPartialQ,
+        query: ProjectPartialQ,
         loadingKey: 'loading',
-        variables: { tagPartial: this.itemPartial }
+        variables: { projectPartial: this.itemPartial }
       })
-      let { data: { TagPartialQ: itemSuggestions } } = result
+      let { data: { ProjectPartialQ: itemSuggestions } } = result
       itemSuggestions = itemSuggestions.map((i) => {
         return {
           ...i,
-          itemName: i.tagName
+          itemName: i.projectName
         }
       })
       this.itemSuggestions = itemSuggestions
       this.loading -= 1
     }, 500),
-    resetHandler () {
-      this.lastItemPartial = false
-    }
+    resetHandler () {}
   },
   props: {
-    tags: {
+    project: {
       required: true,
-      type: Array,
-      validator (tags) {
-        console.assert(isArray(tags), { tags }, 'malformed Array')
+      validator (project) {
         console.assert(
-          tags.every((t) => isTag(t) || isNewTag(t)),
-          { tags },
-          'malformed Tag'
+          isProject(project) || isNewProject(project) || isFalse(project),
+          'project is not isProject or isNewProject'
         )
         return true
       }
     },
-    tagAddHandler: {
+    projectAddHandler: {
       required: true,
       type: Function
     },
-    tagRemoveHandler: {
+    projectRemoveHandler: {
       required: true,
       type: Function
-    },
-    tagNewHandler: {
-      required: false,
-      default: false,
-      validator (tagNewHandler) {
-        console.assert(
-          isFalse(tagNewHandler) || isFunction(tagNewHandler),
-          { tagNewHandler },
-          'malformed False || Function'
-        )
-        return true
-      }
-    },
-    inputTabindex: {
-      required: true,
-      type: Number
     }
   }
 }
 
-export default Tag
+export default Project

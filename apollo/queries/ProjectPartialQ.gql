@@ -1,0 +1,10 @@
+query ProjectPartialQ(
+  $projectPartial: String
+) {
+  ProjectPartialQ(
+    projectPartial: $projectPartial
+  ) {
+    id
+    projectName
+  }
+}

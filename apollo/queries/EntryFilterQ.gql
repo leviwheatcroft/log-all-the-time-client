@@ -1,0 +1,39 @@
+query EntryFilterQ(
+  $dateFrom: DateMidnightUtc
+  $dateTo: DateMidnightUtc
+  $limit: Int
+  $offset: Int
+  $self: Boolean
+  $sort: SortI
+  $tags: [ObjectId!]
+  $users: [ObjectId!]
+  ) {
+  EntryFilterQ(
+    dateFrom: $dateFrom
+    dateTo: $dateTo
+    limit: $limit
+    offset: $offset
+    self: $self
+    sort: $sort
+    tags: $tags
+    users: $users
+  ) {
+    docs {
+      createdAt
+      date
+      active
+      description
+      duration
+      id
+      tags {
+        id
+        tagName
+      }
+      user {
+        id
+        username
+      }
+    }
+    hasMore
+  }
+}

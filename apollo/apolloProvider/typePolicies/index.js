@@ -1,10 +1,9 @@
-// const { NokoEntry } = require('./NokoEntry')
+const { EntryFilterQ } = require('./EntryFilterQ')
 
 const typePolicies = {
-  // NokoEntry,
   Query: {
     fields: {
-      // EntryFilterQ
+      EntryFilterQ
     }
   }
 }

@@ -1,6 +1,6 @@
 import { gql } from 'graphql-tag'
 import {
-  EntryUpsertM
+  EntryCreateM
 } from '../../../apollo/mutations'
 import {
   EntryFilterQ
@@ -8,8 +8,19 @@ import {
 import {
   midnightUtc
 } from '../../../lib/dates'
+import {
+  getValidatorOr,
+  isFalse,
+  isProject,
+  isNewProject
+} from '../../../lib/types'
 
 const Save = {
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   methods: {
     async clickSave () {
       const {
@@ -17,8 +28,10 @@ const Save = {
         description,
         duration,
         id,
+        project,
         tags,
-        isNewEntry
+        isNewEntry,
+        user
       } = this
 
       try {
@@ -29,24 +42,28 @@ const Save = {
         throw err
       }
 
-      this.$store.commit('durationsByDay/remove', {
-        date: new Date(this.entry.date),
-        duration: this.entry.duration
-      })
-      this.$store.commit('durationsByDay/add', {
-        date: midnightUtc(date),
-        duration
-      })
+      // this.$store.commit('durationsByDay/remove', {
+      //   date: new Date(date),
+      //   duration
+      // })
+      // this.$store.commit('durationsByDay/add', {
+      //   date: midnightUtc(date),
+      //   duration
+      // })
 
       if (isNewEntry)
         this.reset()
 
       const entry = {
         ...id ? { id } : {},
+        active: true,
         date: midnightUtc(date),
         duration,
         description,
-
+        project: {
+          ...project.id ? { id: project.id } : {},
+          projectName: project.projectName
+        },
         // strip __typename (existing tags)
         // strip id: false (new tags)
         tags: tags.map((t) => ({
@@ -56,19 +73,36 @@ const Save = {
       }
 
       this.$emit('submit')
+
       await this.$apollo.mutate({
-        mutation: EntryUpsertM,
+        mutation: EntryCreateM,
         variables: {
           entry
         },
         update: (store, ctx) => {
           const {
             data: {
-              EntryUpsertM: upsertedEntry
+              EntryCreateM: upsertedEntry
             }
           } = ctx
 
           if (isNewEntry) {
+            // we need to resolve hasMore for the EntryFilterQ response
+            // in the unlikely case that EntryFilterQ has never been requested
+            // store.readQuery will return null
+            const cached = store.readQuery({
+              query: EntryFilterQ,
+              variables: {
+                self: true,
+                sort: { createdAt: 'desc' }
+              }
+            })
+            let hasMore
+            if (cached === null)
+              hasMore = false
+            else
+              hasMore = cached.EntryFilterQ.hasMore
+
             // writeQuery will be intercepted by the EnterFilterQ typePolicy
             // which will determine how to include the new entry in the cached
             // results for EntryFilterQ
@@ -81,7 +115,8 @@ const Save = {
               data: {
                 EntryFilterQ: {
                   __typename: 'Page',
-                  docs: [upsertedEntry]
+                  docs: [upsertedEntry],
+                  hasMore
                 }
               }
             })
@@ -96,6 +131,7 @@ const Save = {
                   date
                   duration
                   description
+                  project
                   tags
                 }
               `,
@@ -105,19 +141,26 @@ const Save = {
         },
         optimisticResponse: {
           __typename: 'Mutation',
-          EntryUpsertM: {
+          EntryCreateM: {
             __typename: 'Entry',
             id: 'newId',
+            user,
             createdAt: Date.now(),
             // id & createdAt will be overwritten if they exist on entry
             ...entry,
-            // date & tags below will overwrite the values on entry
+            active: true,
+            // date, tags & project below will overwrite the values on entry
             date: entry.date.valueOf(),
             tags: entry.tags.map((tag) => ({
               __typename: 'Tag',
               ...tag.id ? {} : { id: 'newId' },
               ...tag
-            }))
+            })),
+            project: {
+              __typename: 'Project',
+              ...project.id ? {} : { id: 'newId' },
+              ...project
+            }
           }
         }
       })
@@ -138,6 +181,10 @@ const Save = {
     },
     duration: {
       required: true,
+    },
+    project: {
+      required: true,
+      validator: getValidatorOr(isFalse, isProject, isNewProject)
     },
     tags: {
       required: true,
