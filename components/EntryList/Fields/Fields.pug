@@ -1,0 +1,33 @@
+.fields
+  .icon-container(
+    :class="fieldsToggle.date ? 'active' : ''"
+    v-if="fieldsToggleBoundaries.date === null"
+    @click="clickField('date')"
+  )
+    icon(
+      name="calendar"
+    )
+  .icon-container(
+    :class="fieldsToggle.duration ? 'active' : ''"
+    v-if="fieldsToggleBoundaries.duration === null"
+    @click="clickField('duration')"
+  )
+    icon(
+      name="clock"
+    )
+  .icon-container(
+    :class="fieldsToggle.tags ? 'active' : ''"
+    v-if="fieldsToggleBoundaries.tags === null"
+    @click="clickField('tags')"
+  )
+    icon(
+      name="tag"
+    )
+  .icon-container(
+    :class="fieldsToggle.user ? 'active' : ''"
+    v-if="fieldsToggleBoundaries.user === null"
+    @click="clickField('user')"
+  )
+    icon(
+      name="user"
+    )

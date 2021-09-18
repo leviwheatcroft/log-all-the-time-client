@@ -4,9 +4,9 @@ query EntryFilterQ(
   $limit: Int
   $offset: Int
   $self: Boolean
-  $sort: SortI
-  $tags: [ObjectId!]
-  $users: [ObjectId!]
+  $order: OrderI
+  $tags: [Int!]
+  $users: [Int!]
   ) {
   EntryFilterQ(
     dateFrom: $dateFrom
@@ -14,14 +14,14 @@ query EntryFilterQ(
     limit: $limit
     offset: $offset
     self: $self
-    sort: $sort
+    order: $order
     tags: $tags
     users: $users
   ) {
-    docs {
+  docs {
+    ... on Entry {
       createdAt
       date
-      active
       description
       duration
       id
@@ -34,6 +34,7 @@ query EntryFilterQ(
         username
       }
     }
-    hasMore
+  }
+  hasMore
   }
 }

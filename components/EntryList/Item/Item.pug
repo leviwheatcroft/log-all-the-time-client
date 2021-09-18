@@ -1,0 +1,20 @@
+.entry-list-item
+  entry-input(
+    v-if="editing"
+    :idx="idx"
+    :entry="entry"
+    :cancelable="true"
+    :deletable="true"
+    @delete="editing = false"
+    @submit="editing = false"
+    @cancel="editing = false"
+  )
+  entry-list-item-display(
+    v-if="!editing"
+    :entry="entry"
+    :fieldsToggle="fieldsToggle"
+    :clickTagHandler="clickTagHandler"
+    :clickDateHandler="clickDateHandler"
+    :clickUserHandler="clickUserHandler"
+    @edit="editing = true"
+  )

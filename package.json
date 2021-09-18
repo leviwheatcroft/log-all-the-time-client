@@ -19,6 +19,7 @@
     "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/svg-sprite": "^0.5.2",
     "core-js": "^3.15.1",
+    "dayjs": "^1.10.7",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.12.5",
     "less": "^4.0.0",

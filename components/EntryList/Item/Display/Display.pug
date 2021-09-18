@@ -1,0 +1,59 @@
+.entry-list-item-display(
+  class="flex flex-row items-center"
+)
+  .date(
+    class="cursor-pointer rounded m-2 p-2 background-blue min-content"
+    v-if="fieldsToggle.date"
+    @click="clickDate(entry.date)"
+  )
+    icon(
+      class="mr-1 w-4 h-4 inline -t-2"
+      name="calendar"
+    )
+    | {{ $dayjs(entry.date).format('D MMM') }}
+  .duration(
+    class="cursor-pointer rounded m-2 p-2 background-blue min-content"
+    v-if="fieldsToggle.duration"
+  )
+    icon(
+      class="mr-1 w-4 h-4 inline -t-2"
+      name="clock"
+    )
+    .
+      {{
+        $dayjs.duration({
+          h: Math.floor(entry.duration / 60),
+          m: entry.duration % 60
+        }).format('HH:mm')
+      }}
+  .description(
+    class="cursor-pointer m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
+    @click="$emit('edit')"
+  ) {{ entry.description }}
+  .spacer(
+    class="flex-grow h-px mx-10 min-w-4 bg-gray-300"
+    v-if="fieldsToggle.tags || fieldsToggle.user"
+  )
+  .tag(
+    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap background-green"
+    v-if="fieldsToggle.tags"
+    v-for="tag in entry.tags"
+    @click="clickTag(tag)"
+    :style="{ backgroundColor: hexFromString(tag.tagName) }"
+  )
+    icon(
+      class="mr-1 w-4 h-4 inline -t-2"
+      name="tag"
+    )
+    | {{ tag.tagName }}
+  .user(
+    class="cursor-pointer rounded m-2 p-2"
+    v-if="fieldsToggle.user"
+    :style="{ backgroundColor: hexFromString(entry.user.username) }"
+    @click="clickUser(entry.user)"
+  )
+    icon(
+      class="mr-1 w-4 h-4 inline -t-2"
+      name="user"
+    )
+    | {{ entry.user.username }}

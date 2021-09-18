@@ -9,10 +9,7 @@ import {
   midnightUtc
 } from '../../../lib/dates'
 import {
-  getValidatorOr,
-  isFalse,
-  isProject,
-  isNewProject
+  validator
 } from '../../../lib/types'
 
 const Save = {
@@ -184,7 +181,9 @@ const Save = {
     },
     project: {
       required: true,
-      validator: getValidatorOr(isFalse, isProject, isNewProject)
+      validator (project) {
+        return validator(['isFalse', 'isProject', 'isNewProject'], project)
+      }
     },
     tags: {
       required: true,

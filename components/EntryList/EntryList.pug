@@ -1,0 +1,28 @@
+.entry-list
+  entry-list-fields(
+    :fieldsToggleBoundaries="fieldsToggleBoundaries"
+  )
+  .no-entries(
+    v-if="!entries.length"
+  )
+    | No Entries
+    icon(
+      name="meh"
+    )
+  entry-list-item(
+    v-if="!entry.deleted"
+    v-for="(entry, idx) in entries"
+    :key="entry.id"
+    :entry="entry"
+    :clickTagHandler="clickTagHandler"
+    :clickDateHandler="clickDateHandler"
+    :clickUserHandler="clickUserHandler"
+    :idx="idx + 1"
+  )
+  .loading(
+    v-if="loading"
+  )
+    | Loading more entries ...
+    icon(
+      name="loader"
+    )
