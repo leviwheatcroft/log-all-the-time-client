@@ -3,11 +3,6 @@ import {
 } from '../../../lib/types'
 
 const Item = {
-  computed: {
-    fieldsToggle () {
-      return this.$store.state.entryList.fieldsToggle
-    }
-  },
   props: {
     entry: {
       type: Object,
@@ -24,6 +19,10 @@ const Item = {
     },
     clickProjectHandler: {
       type: Function
+    },
+    fieldsToggle: {
+      required: true,
+      type: Object
     },
     idx: {
       type: Number,

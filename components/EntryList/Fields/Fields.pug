@@ -16,6 +16,14 @@
       name="clock"
     )
   .icon-container(
+    :class="fieldsToggle.project ? 'active' : ''"
+    v-if="fieldsToggleBoundaries.project === null"
+    @click="clickField('project')"
+  )
+    icon(
+      name="folder"
+    )
+  .icon-container(
     :class="fieldsToggle.tags ? 'active' : ''"
     v-if="fieldsToggleBoundaries.tags === null"
     @click="clickField('tags')"

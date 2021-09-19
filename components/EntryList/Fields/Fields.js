@@ -2,11 +2,6 @@ const Fields = {
   data () {
     return {}
   },
-  computed: {
-    fieldsToggle () {
-      return this.$store.state.entryList.fieldsToggle
-    }
-  },
   methods: {
     clickField (field) {
       const currentValue = this.fieldsToggle[field]
@@ -17,7 +12,11 @@ const Fields = {
     fieldsToggleBoundaries: {
       required: true,
       type: Object
-    }
+    },
+    fieldsToggle: {
+      required: true,
+      type: Object
+    },
   }
 }
 

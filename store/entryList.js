@@ -7,6 +7,7 @@ export const state = () => ({
     date: true,
     description: true,
     duration: true,
+    project: true,
     tags: true,
     user: true
   }

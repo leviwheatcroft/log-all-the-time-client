@@ -56,6 +56,7 @@ const PageDashboard = {
         date: null,
         description: true,
         duration: null,
+        project: null,
         tags: null,
         user: false
       },

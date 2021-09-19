@@ -7,7 +7,7 @@ const EntryList = {
   computed: {
     fieldsToggle () {
       return Object.fromEntries(
-        Object.entries(this.$state.entryList.fieldsToggle)
+        Object.entries(this.$store.state.entryList.fieldsToggle)
           .map(([key, value]) => {
             const boundary = this.fieldsToggleBoundaries[key]
             return boundary === null ? [key, value] : [key, boundary]

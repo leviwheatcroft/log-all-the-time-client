@@ -34,7 +34,7 @@ const EntryDisplay = {
     fieldsToggle: {
       required: true,
       type: Object
-    }
+    },
   },
   data () {
     return {

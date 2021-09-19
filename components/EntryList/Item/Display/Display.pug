@@ -32,10 +32,11 @@
   ) {{ entry.description }}
   .spacer(
     class="flex-grow h-px mx-10 min-w-4 bg-gray-300"
-    v-if="fieldsToggle.tags || fieldsToggle.user"
+    v-if="fieldsToggle.tags || fieldsToggle.user || fieldsToggle.project"
   )
   .project(
     class="cursor-pointer rounded m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
+    v-if="fieldsToggle.project"
     @click="clickProject(entry.project)"
     :style="{ backgroundColor: hexFromString(entry.project.projectName) }"
   )
