@@ -5,6 +5,7 @@ query EntryFilterQ(
   $offset: Int
   $self: Boolean
   $order: OrderI
+  $project: Int
   $tags: [Int!]
   $users: [Int!]
   ) {
@@ -16,6 +17,7 @@ query EntryFilterQ(
     self: $self
     order: $order
     tags: $tags
+    project: $project
     users: $users
   ) {
   docs {
@@ -25,6 +27,10 @@ query EntryFilterQ(
       description
       duration
       id
+      project {
+        id,
+        projectName
+      }
       tags {
         id
         tagName

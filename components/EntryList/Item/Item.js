@@ -22,6 +22,9 @@ const Item = {
     clickUserHandler: {
       type: Function
     },
+    clickProjectHandler: {
+      type: Function
+    },
     idx: {
       type: Number,
       required: true

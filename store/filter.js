@@ -8,6 +8,7 @@ import {
 export const state = () => ({
   dateFrom: midnightUtc(new Date()),
   dateTo: midnightUtc(new Date()),
+  project: null,
   tags: [],
   users: []
 })
@@ -31,10 +32,14 @@ export const mutations = {
   },
   dateFrom (state, dateFrom) {
     assert(['isNull', 'isDate'], dateFrom)
-    state.filters.dateFrom = dateFrom
+    state.dateFrom = dateFrom
   },
   dateTo (state, dateTo) {
     assert(['isNull', 'isDate'], dateTo)
-    state.filters.dateTo = dateTo
+    state.dateTo = dateTo
+  },
+  project (state, project) {
+    assert('isProject', project)
+    state.project = project
   }
 }

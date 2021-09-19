@@ -5,6 +5,7 @@
     entry-list(
       :clickDateHandler="clickDateHandler"
       :clickTagHandler="clickTagHandler"
+      :clickProjectHandler="clickProjectHandler"
       :entries="entries"
       :fetchMoreEntries="fetchMoreEntries"
       :fieldsToggleBoundaries="fieldsToggleBoundaries"
@@ -73,6 +74,11 @@ const PageDashboard = {
       validator('isMidnightUtc', date)
       this.$store.commit('filter/dateFrom', date)
       this.$store.commit('filter/dateTo', date)
+      this.$router.push('/report')
+    },
+    clickProjectHandler (project) {
+      validator('isProject', project)
+      this.$store.commit('filter/project', project.id)
       this.$router.push('/report')
     },
     fetchMoreEntries () {

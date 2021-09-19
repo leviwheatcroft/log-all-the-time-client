@@ -53,6 +53,10 @@ const EntryList = {
       required: false,
       type: Function
     },
+    clickProjectHandler: {
+      required: true,
+      type: Function
+    },
     fieldsToggleBoundaries: {
       required: true,
       type: Object

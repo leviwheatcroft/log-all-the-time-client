@@ -27,6 +27,10 @@ const EntryDisplay = {
       required: false,
       type: Function
     },
+    clickProjectHandler: {
+      required: true,
+      type: Function
+    },
     fieldsToggle: {
       required: true,
       type: Object
@@ -48,6 +52,10 @@ const EntryDisplay = {
       assert('isInteger', date)
       date = midnightUtc(new Date(date))
       this.clickDateHandler(date)
+    },
+    clickProject (project) {
+      assert('isProject', project)
+      this.clickProjectHandler(project)
     },
     clickUser (user) {
       assert('isUser', user)

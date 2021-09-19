@@ -34,8 +34,18 @@
     class="flex-grow h-px mx-10 min-w-4 bg-gray-300"
     v-if="fieldsToggle.tags || fieldsToggle.user"
   )
+  .project(
+    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
+    @click="clickProject(entry.project)"
+    :style="{ backgroundColor: hexFromString(entry.project.projectName) }"
+  )
+    icon(
+      class="mr-1 w-4 h-4 inline -t-2"
+      name="folder"
+    )
+    | {{ entry.project.projectName }}
   .tag(
-    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap background-green"
+    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap"
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
     @click="clickTag(tag)"
