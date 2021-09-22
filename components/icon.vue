@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="icon"
+    class="icon inline"
     width="24"
     height="24"
   >

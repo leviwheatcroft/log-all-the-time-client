@@ -1,0 +1,15 @@
+button.button-icon(
+  :class="[{ bare: bare }, 'h-12', 'px-4']"
+)
+  icon(
+    v-if="!after"
+    class="w-6 h-6 mr-4 -t-2"
+    :name="iconName"
+  )
+  slot
+  icon(
+    v-if="after"
+    class="w-6 h-6 ml-4 -t-2"
+    :name="iconName"
+  )
+      

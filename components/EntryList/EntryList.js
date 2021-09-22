@@ -41,22 +41,7 @@ const EntryList = {
       type: Array,
       validator (entries) { return assert('isEntries', entries) }
     },
-    clickTagHandler: {
-      required: true,
-      type: Function
-    },
-    clickDateHandler: {
-      required: true,
-      type: Function
-    },
-    clickUserHandler: {
-      required: false,
-      type: Function
-    },
-    clickProjectHandler: {
-      required: true,
-      type: Function
-    },
+
     fieldsToggleBoundaries: {
       required: true,
       type: Object

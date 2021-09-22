@@ -8,18 +8,6 @@ const Item = {
       type: Object,
       validator (entry) { return assert('isEntry', entry) }
     },
-    clickTagHandler: {
-      type: Function
-    },
-    clickDateHandler: {
-      type: Function
-    },
-    clickUserHandler: {
-      type: Function
-    },
-    clickProjectHandler: {
-      type: Function
-    },
     fieldsToggle: {
       required: true,
       type: Object

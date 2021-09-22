@@ -1,0 +1,12 @@
+.button-icon {
+  background-color: @unfocusField;
+  &:focus {
+    background-color: @focusField;
+  }
+  &.bare {
+    background-color: transparent;
+    &:focus {
+      background-color: transparent;
+    }
+  }
+}

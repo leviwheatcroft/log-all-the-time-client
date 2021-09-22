@@ -3,7 +3,7 @@ import {
   EntryDeleteM
 } from '../../../apollo/mutations'
 import {
-  validator
+  assert
 } from '../../../lib/types'
 
 const Delete = {
@@ -52,7 +52,7 @@ const Delete = {
   props: {
     entry: {
       required: true,
-      validator (entry) { return validator('isEntry', entry) }
+      validator (entry) { return assert('isEntry', entry) }
     }
   }
 }

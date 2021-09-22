@@ -1,0 +1,9 @@
+.error-handler.light-box-background(
+  v-if="errors.length"
+)
+  .light-box
+    component(
+      :is="handlerComponents[errors[0].type]"
+      @resolved="errors.shift()"
+      :error="errors[0]"
+    )

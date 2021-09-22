@@ -9,7 +9,7 @@ import {
   midnightUtc
 } from '../../../lib/dates'
 import {
-  validator
+  assert
 } from '../../../lib/types'
 
 const Save = {
@@ -182,7 +182,7 @@ const Save = {
     project: {
       required: true,
       validator (project) {
-        return validator(['isFalse', 'isProject', 'isNewProject'], project)
+        return assert(['isFalse', 'isProject', 'isNewProject'], project)
       }
     },
     tags: {

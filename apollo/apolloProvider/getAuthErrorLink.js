@@ -28,11 +28,16 @@ const errorHandlers = {
     const customEvent = new CustomEvent('NO_CONNECTION', { detail })
     document.dispatchEvent(customEvent)
   },
-  BAD_PROJECT_ID (err) {
+  AUTH_REFRESH_TIMEOUT (err) {
     const detail = { err }
-    const customEvent = new CustomEvent('BAD_PROJECT_ID', { detail })
+    const customEvent = new CustomEvent('AUTH_REFRESH_TIMEOUT', { detail })
     document.dispatchEvent(customEvent)
-  }
+  },
+  // BAD_PROJECT_ID (err) {
+  //   const detail = { err }
+  //   const customEvent = new CustomEvent('BAD_PROJECT_ID', { detail })
+  //   document.dispatchEvent(customEvent)
+  // }
   // async AUTH_REFRESH_TIMEOUT () {
   //   console.log('AUTH_REFRESH_TIMEOUT')
   // },

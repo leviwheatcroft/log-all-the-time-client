@@ -53,8 +53,8 @@ const Register = {
       const {
         data: { SelfQ: user }
       } = userResult
-      this.$store.commit('user', { user })
-      this.$store.commit('authState', AuthState.loggedIn)
+      this.$store.commit('user/logIn', { user })
+      this.$store.commit('auth/status', AuthState.loggedIn)
     }
   }
 }

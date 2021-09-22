@@ -1,0 +1,84 @@
+.report-filters.theme.input-box
+  .row
+    .container-datepicker.no-grow
+      .theme.faux-input
+        icon(
+          name="calendar"
+        )
+        date-picker(
+          :input-attr="{ tabindex: 1 }"
+          :clearable="true"
+          v-model='dateRange'
+          type='date'
+          range
+          format='DD/MM/YY'
+          value-type="timestamp"
+        )
+          template(
+            v-slot:icon-calendar
+          )
+            .empty
+          template(
+            v-slot:icon-clear
+          )
+            icon(
+              name="x"
+            )
+  .row
+    selector-tag(
+      :tags="tags"
+      :tagAddHandler="tagAddHandler"
+      :tagRemoveHandler="tagRemoveHandler"
+      :inputTabindex="2"
+    )
+  .row
+    selector-user(
+      :users="users"
+      :userAddHandler="userAddHandler"
+      :userRemoveHandler="userRemoveHandler"
+    )
+  .row
+    button-icon(
+      :iconName="showExportOptions ? 'chevron-up' : 'chevron-down'"
+      :after="true"
+      :bare="true"
+      @click="showExportOptions = !showExportOptions"
+    ) Export
+    .spacer
+    button-icon(
+      iconName="file-text"
+      @click='apply'
+    ) Apply
+  .export-options(
+    v-if="showExportOptions"
+  )
+    h3 Export Options
+    .row
+      .container-export-date-format
+        .faux-input
+          icon(
+            name="calendar"
+          )
+          input.export-date-format(
+            v-model='exportDateFormat'
+          )
+    .row
+      .container-export-duration-format
+        .faux-input
+          icon(
+            name="clock"
+          )
+          input.export-duration-format(
+            v-model='exportDurationFormat'
+          )
+    .row
+      .spacer
+      .container-button
+        a.download
+        button.button.export(
+          @click='exportCsv'
+        )
+          icon(
+            name="download"
+          )
+          span Export

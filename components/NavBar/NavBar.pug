@@ -1,9 +1,19 @@
 nav.nav-bar(
   class="flex flex-row self-stretch py-4 px-8"
 )
-  .brand
+  .brand(
+    class="mx-4"
+  )
     | Log All The Time
   .menu
+    nuxt-link(
+      class="mx-4"
+      to="/"
+    ) Dashboard
+    nuxt-link(
+      class="mx-4"
+      to="/reports"
+    ) Reports
   .spacer(
     class="flex-grow"
   )

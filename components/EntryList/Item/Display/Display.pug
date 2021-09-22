@@ -4,7 +4,6 @@
   .date(
     class="cursor-pointer rounded m-2 p-2 background-blue min-content"
     v-if="fieldsToggle.date"
-    @click="clickDate(entry.date)"
   )
     icon(
       class="mr-1 w-4 h-4 inline -t-2"
@@ -37,7 +36,6 @@
   .project(
     class="cursor-pointer rounded m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
     v-if="fieldsToggle.project"
-    @click="clickProject(entry.project)"
     :style="{ backgroundColor: hexFromString(entry.project.projectName) }"
   )
     icon(
@@ -49,7 +47,6 @@
     class="cursor-pointer rounded m-2 p-2 whitespace-nowrap"
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
-    @click="clickTag(tag)"
     :style="{ backgroundColor: hexFromString(tag.tagName) }"
   )
     icon(
@@ -61,7 +58,6 @@
     class="cursor-pointer rounded m-2 p-2"
     v-if="fieldsToggle.user"
     :style="{ backgroundColor: hexFromString(entry.user.username) }"
-    @click="clickUser(entry.user)"
   )
     icon(
       class="mr-1 w-4 h-4 inline -t-2"

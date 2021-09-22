@@ -4,6 +4,7 @@
   )
     svg-symbols
     auth-manager
+    error-handler
     nav-bar
     nuxt(
       class="flex-grow self-stretch"
