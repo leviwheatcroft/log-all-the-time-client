@@ -1,10 +1,13 @@
-.fields
+.fields(
+  class="flex flex-row justify-end my-4 mx-2"
+)
   .icon-container(
     :class="fieldsToggle.date ? 'active' : ''"
     v-if="fieldsToggleBoundaries.date === null"
     @click="clickField('date')"
   )
     icon(
+      class="w-4 h-4 -t-2"
       name="calendar"
     )
   .icon-container(
@@ -13,6 +16,7 @@
     @click="clickField('duration')"
   )
     icon(
+      class="w-4 h-4 -t-2"
       name="clock"
     )
   .icon-container(
@@ -21,6 +25,7 @@
     @click="clickField('project')"
   )
     icon(
+      class="w-4 h-4 -t-2"
       name="folder"
     )
   .icon-container(
@@ -29,6 +34,7 @@
     @click="clickField('tags')"
   )
     icon(
+      class="w-4 h-4 -t-2"
       name="tag"
     )
   .icon-container(
@@ -37,5 +43,6 @@
     @click="clickField('user')"
   )
     icon(
+      class="w-4 h-4 -t-2"
       name="user"
     )

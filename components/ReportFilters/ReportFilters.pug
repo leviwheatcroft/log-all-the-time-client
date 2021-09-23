@@ -38,14 +38,14 @@
       :userRemoveHandler="userRemoveHandler"
     )
   .row
-    button-icon(
+    tpl-button-icon(
       :iconName="showExportOptions ? 'chevron-up' : 'chevron-down'"
       :after="true"
       :bare="true"
       @click="showExportOptions = !showExportOptions"
     ) Export
     .spacer
-    button-icon(
+    tpl-button-icon(
       iconName="file-text"
       @click='apply'
     ) Apply
