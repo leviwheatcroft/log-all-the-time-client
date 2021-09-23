@@ -2,5 +2,6 @@ query SelfQ {
   SelfQ {
     id
     username
+    gravatar
   }
 }
