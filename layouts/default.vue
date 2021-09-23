@@ -9,5 +9,5 @@
     nuxt(
       class="flex-grow self-stretch"
     )
-    footer
+    footer-bar
 </template>
