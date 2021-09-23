@@ -1,10 +1,9 @@
 import _throttle from 'lodash/throttle'
+// TODO: these isX type checks are deprecated
 import {
   isArray,
   isTag,
   isNewTag,
-  isFunction,
-  isFalse
 } from '../../../lib/types'
 import {
   TagPartialQ
@@ -110,16 +109,8 @@ const Tag = {
       type: Function
     },
     tagNewHandler: {
-      required: false,
-      default: false,
-      validator (tagNewHandler) {
-        console.assert(
-          isFalse(tagNewHandler) || isFunction(tagNewHandler),
-          { tagNewHandler },
-          'malformed False || Function'
-        )
-        return true
-      }
+      required: true,
+      type: Function
     },
     inputTabindex: {
       required: true,

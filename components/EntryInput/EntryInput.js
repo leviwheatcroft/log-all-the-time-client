@@ -1,4 +1,5 @@
 import DatePicker from 'vue2-datepicker'
+// TODO: these isX type checks are deprecated
 import {
   isEntry,
   isTag,

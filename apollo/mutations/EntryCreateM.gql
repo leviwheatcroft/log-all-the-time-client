@@ -21,6 +21,7 @@ mutation EntryCreateM(
     user {
       id
       username
+      gravatar
     }
   }
 }

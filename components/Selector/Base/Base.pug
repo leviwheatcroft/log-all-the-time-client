@@ -40,10 +40,12 @@
 
       // new item
       .item-suggestion(
+        class="flex flex-row items-center pl-2 pr-3 border-t-2 border-gray-600"
         @click="clickItemNew({ id: false, itemName: itemPartial })"
         v-if="itemPartial.length > 0 && itemNewHandler"
       )
         icon(
+          class="m-1"
           name="loader"
         )
         | New: {{ itemPartial }}

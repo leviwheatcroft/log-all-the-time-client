@@ -99,6 +99,10 @@ const Project = {
       required: true,
       type: Function
     },
+    projectNewHandler: {
+      required: true,
+      type: Function
+    },
     inputTabindex: {
       required: true,
       type: Number
