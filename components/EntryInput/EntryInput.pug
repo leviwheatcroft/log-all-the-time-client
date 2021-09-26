@@ -1,89 +1,87 @@
-.entry-input.theme.input-box
-  .row.button-bar(
+tpl-shadow-box.entry-input
+  // =========================================== top buttons (cancel, delete) ==
+  div(
     v-if="deletable || cancelable"
+    class="flex flex-row justify-end"
   )
     entry-input-delete(
       v-if="deletable"
       :entry="entry"
     )
-    button.cancel(
+    tpl-button(
+      extraClasses="bare"
       v-if="cancelable"
       @click="clickCancel"
     )
       icon(
         name="x"
       )
-  .row
-    .container-description.grow
-      .description.theme.faux-input(
-        :class="descriptionValidState.value"
-      )
-        icon(
-          name="edit-3"
-        )
-        input.description(
-          :tabindex="tabindex + 1"
-          v-model="description"
-          @change="checkValidState"
-        )
-  .row
-    .container-project-selector(
-      class="w-1/2"
+  div(
+    class="flex flex-row gap-4 flex-wrap justify-between"
+  )
+    tpl-faux-input(
+      :extraClasses="`${descriptionValidState.value} w-full lg:w-1/3 flex-grow`"
     )
-      selector-project(
-        :inputTabindex="tabindex + 2"
-        :project="project"
-        :projectNewHandler="projectNewHandler"
-        :projectAddHandler="projectAddHandler"
-        :projectRemoveHandler="projectRemoveHandler"
+      icon(
+        name="edit-3"
       )
-    .container-tag-selector(
-      class="w-1/2"
+      input(
+        :tabindex="tabindex + 1"
+        v-model="description"
+        @change="checkValidState"
+      )
+    selector-project(
+      extraClasses="w-full lg:w-1/3 flex-grow"
+      :inputTabindex="tabindex + 2"
+      :project="project"
+      :projectNewHandler="projectNewHandler"
+      :projectAddHandler="projectAddHandler"
+      :projectRemoveHandler="projectRemoveHandler"
     )
-      selector-tag(
-        :inputTabindex="tabindex + 3"
-        :tags="tags"
-        :tagNewHandler="tagNewHandler"
-        :tagAddHandler="tagAddHandler"
-        :tagRemoveHandler="tagRemoveHandler"
+    selector-tag(
+      extraClasses="w-full lg:w-1/3"
+      :inputTabindex="tabindex + 3"
+      :tags="tags"
+      :tagNewHandler="tagNewHandler"
+      :tagAddHandler="tagAddHandler"
+      :tagRemoveHandler="tagRemoveHandler"
+    )
+    tpl-faux-input(
+      extraClasses="w-full lg:w-40"
+    )
+      icon(
+        name="calendar"
       )
-  .row
-    .container-datepicker.no-grow
-      .theme.faux-input
-        icon(
-          name="calendar"
+      date-picker(
+        :input-attr="{ tabindex: tabindex + 4 }"
+        :clearable="false"
+        v-model="date"
+        format="DD/MM/YY"
+        value-type="date"
+        type="date"
+      )
+        template(
+          v-slot:icon-calendar
         )
-        date-picker(
-          :input-attr="{ tabindex: tabindex + 4 }"
-          :clearable="false"
-          v-model="date"
-          format="DD/MM/YY"
-          value-type="date"
-          type="date"
-        )
-          template(
-            v-slot:icon-calendar
-          )
-            .empty
-    .container-duration.no-grow
-      entry-input-duration(
-        :duration="duration"
-        :tabindex="tabindex + 5"
-        :validState="durationValidState"
-        @validState="durationValidState = $event"
-        @change="duration = $event"
-      )
-    .spacer
-    .container-button.no-grow
-      entry-input-save(
-        :entry="entry"
-        :date="date"
-        :description="description"
-        :project="project"
-        :duration="duration"
-        :tags="tags"
-        :validate="validate"
-        :isNewEntry="isNewEntry"
-        :tabindex="tabindex + 6"
-        :reset="reset"
-      )
+          .empty
+    entry-input-duration(
+      extraClasses="w-32"
+      :duration="duration"
+      :tabindex="tabindex + 5"
+      :validState="durationValidState"
+      @validState="durationValidState = $event"
+      @change="duration = $event"
+    )
+    .flex-grow
+    entry-input-save(
+      :entry="entry"
+      :date="date"
+      :description="description"
+      :project="project"
+      :duration="duration"
+      :tags="tags"
+      :validate="validate"
+      :isNewEntry="isNewEntry"
+      :tabindex="tabindex + 6"
+      :reset="reset"
+    )

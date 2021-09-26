@@ -6,6 +6,9 @@ import {
 import {
   UserPartialQ
 } from '../../../apollo/queries'
+import {
+  classes
+} from '../../../componentMixins'
 
 const User = {
   data () {
@@ -80,6 +83,7 @@ const User = {
     }, 500),
     resetHandler () {}
   },
+  mixins: [classes],
   props: {
     users: {
       required: true,

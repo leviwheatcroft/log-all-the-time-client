@@ -1,11 +1,14 @@
 import {
   isFunction,
   isFalse,
-  isItems
+  assert
 } from '../../../lib/types'
 import {
   hexFromString
 } from '../../../lib/colors'
+import {
+  classes
+} from '../../../componentMixins'
 
 const Base = {
   data () {
@@ -49,6 +52,7 @@ const Base = {
       this.reset()
     }
   },
+  mixins: [classes],
   model: {
     prop: 'selectedItems',
     event: 'change'
@@ -63,22 +67,14 @@ const Base = {
       required: true,
       type: Array,
       validator (items) {
-        console.assert(
-          isItems(items),
-          { items, msg: 'items is not items' }
-        )
-        return true
+        return assert('isItems', items)
       }
     },
     itemSuggestions: {
       required: true,
       type: Array,
       validator (items) {
-        console.assert(
-          isItems(items),
-          { items, msg: 'items is not items' }
-        )
-        return true
+        return assert('isItems', items)
       }
     },
     inputItemPartialHandler: {

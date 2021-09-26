@@ -4,7 +4,7 @@
 </template>
 <script>
 </script>
-<style lang="less">
+<style scoped lang="less">
   button {
     color: @light40;
     display: inline;

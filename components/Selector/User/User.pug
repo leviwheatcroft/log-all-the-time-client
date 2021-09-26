@@ -6,6 +6,7 @@ selector-base(
   :itemRemoveHandler="userRemoveHandler"
   :inputItemPartialHandler="inputItemPartialHandler"
   :resetHandler="resetHandler"
+  :extraClasses="extraClasses"
   @reset="itemSuggestions = []"
 )
   template(v-slot:icon-item)

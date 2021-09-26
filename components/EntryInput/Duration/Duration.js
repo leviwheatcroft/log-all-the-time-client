@@ -10,6 +10,9 @@ import {
   parseHumanDuration,
   durationAsHHMM
 } from '../../../lib/stringOps'
+import {
+  classes
+} from '../../../componentMixins'
 
 const Duration = {
   data () {
@@ -40,6 +43,7 @@ const Duration = {
       this.$emit('change', duration)
     },
   },
+  mixins: [classes],
   props: {
     duration: {
       required: true,

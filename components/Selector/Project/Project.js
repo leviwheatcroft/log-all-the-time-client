@@ -7,6 +7,9 @@ import {
 import {
   ProjectPartialQ
 } from '../../../apollo/queries'
+import {
+  classes
+} from '../../../componentMixins'
 
 const Project = {
   data () {
@@ -17,7 +20,12 @@ const Project = {
   },
   computed: {
     selectedItems () {
-      return this.project ? [this.project] : []
+      if (!this.project)
+        return []
+      return [{
+        ...this.project,
+        itemName: this.project.projectName
+      }]
     }
   },
   methods: {
@@ -76,6 +84,7 @@ const Project = {
     }, 500),
     resetHandler () {}
   },
+  mixins: [classes],
   props: {
     project: {
       required: true,

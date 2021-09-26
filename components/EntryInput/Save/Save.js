@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { gql } from 'graphql-tag'
 import {
   EntryCreateM
@@ -33,11 +32,6 @@ const Save = {
       let {
         date
       } = this
-
-      console.log(date)
-      console.log(date.getTime())
-      console.log(new Date().getTimezoneOffset() * -1000)
-      console.log(date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000 * -1))
 
       // for AWST getTimezoneOffset returns -480, that's 8hrs * -60 minutes
       date = date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000 * -1)

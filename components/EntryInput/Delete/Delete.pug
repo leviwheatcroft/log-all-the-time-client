@@ -1,5 +1,6 @@
-button.button.button-bare.delete(
-  @click="clickDelete"
+tpl-button(
+  extraClasses="bare"
+  @click.native="clickDelete"
 )
   icon(
     name="trash-2"

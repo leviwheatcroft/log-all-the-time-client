@@ -8,6 +8,9 @@ import {
 import {
   TagPartialQ
 } from '../../../apollo/queries'
+import {
+  classes
+} from '../../../componentMixins'
 
 const Tag = {
   data () {
@@ -86,6 +89,7 @@ const Tag = {
       this.lastItemPartial = false
     }
   },
+  mixins: [classes],
   props: {
     tags: {
       required: true,

@@ -1,5 +1,5 @@
-.duration.theme.faux-input(
-  :class="validState.value"
+tpl-faux-input(
+  :extraClasses="resolveClasses(validState.value)"
 )
   icon(
     name="clock"
