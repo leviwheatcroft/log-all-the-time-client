@@ -76,10 +76,6 @@ const Project = {
     }, 500),
     resetHandler () {}
   },
-  mounted () {
-    // eslint-disable-next-line
-    console.log(this.inputTabindex)
-  },
   props: {
     project: {
       required: true,

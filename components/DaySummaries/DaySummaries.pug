@@ -1,0 +1,71 @@
+tpl-shadow-box.day-summaries(
+  class="mx-6"
+)
+  tpl-label-bar
+    template(
+      v-slot:label
+    ) Summary
+    template(
+      v-slot:tools
+    )
+      | Days:
+      tpl-button-block
+        button(
+          :class="dayCount === 1 ? 'active' : ''"
+          @click="clickDayCount(1)"
+        ) 1
+        button(
+          :class="dayCount === 3 ? 'active' : ''"
+          @click="clickDayCount(3)"
+        ) 3
+        button(
+          :class="dayCount === 7 ? 'active' : ''"
+          @click="clickDayCount(7)"
+        ) 7
+      | Period:
+      tpl-button-block
+        button(
+          @click="clickPeriod(-1)"
+        )
+          icon(
+            name="chevron-up"
+          )
+        button(
+          @click="clickPeriod(1)"
+        )
+          icon(
+            name="chevron-down"
+          )
+  .loading(
+    v-if="$apollo.loading"
+  )
+    | Loading summaries ...
+    icon(
+      name="loader"
+    )
+  .day(
+    v-if="!$apollo.loading"
+    class="flex flex-row items-center"
+    v-for="(daySummary, idx) in daySummariesById"
+    :key="idx"
+  )
+    tpl-date(
+      :date="daySummary.date"
+      classMixins="py-0.5 px-2 mb-0"
+    )
+    .projects(
+      class="flex-grow m-2 mb-0 flex flex-row flex-nowrap gap-2"
+    )
+      .project(
+        class="leading-7 text-center inline-block whitespace-nowrap overflow-hidden overflow-ellipsis"
+        v-for="(projectSummary, idx) in daySummary.projectSummariesById"
+        :key="idx"
+        :style=`{
+          width: projectSummary.portion + '%',
+          backgroundColor: hexFromString(projectSummary.projectName)
+        }`
+      ) {{ projectSummary.projectName }}
+    tpl-duration(
+      :duration="daySummary.dayDuration"
+      classMixins="py-0.5 px-2 mb-0"
+    )

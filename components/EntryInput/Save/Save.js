@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { gql } from 'graphql-tag'
 import {
   EntryCreateM
@@ -5,9 +6,9 @@ import {
 import {
   EntryFilterQ
 } from '../../../apollo/queries'
-import {
-  midnightUtc
-} from '../../../lib/dates'
+// import {
+//   midnightUtcMs
+// } from '../../../lib/dates'
 import {
   assert
 } from '../../../lib/types'
@@ -21,7 +22,6 @@ const Save = {
   methods: {
     async clickSave () {
       const {
-        date,
         description,
         duration,
         id,
@@ -30,6 +30,18 @@ const Save = {
         isNewEntry,
         user
       } = this
+      let {
+        date
+      } = this
+
+      console.log(date)
+      console.log(date.getTime())
+      console.log(new Date().getTimezoneOffset() * -1000)
+      console.log(date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000 * -1))
+
+      // for AWST getTimezoneOffset returns -480, that's 8hrs * -60 minutes
+      date = date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000 * -1)
+      assert('isMidnightUtcMs', date)
 
       try {
         this.validate()
@@ -54,7 +66,7 @@ const Save = {
       const entry = {
         ...id ? { id } : {},
         active: true,
-        date: midnightUtc(date),
+        date,
         duration,
         description,
         project: {
@@ -84,7 +96,12 @@ const Save = {
           } = ctx
 
           if (isNewEntry) {
-            // we need to resolve hasMore for the EntryFilterQ response
+            // update daySummaries
+            // only for optimisticResponse, not for actual response
+            if (upsertedEntry.id === 'newId')
+              this.$store.commit('daySummaries/add', upsertedEntry)
+
+            // need to resolve hasMore for the EntryFilterQ response
             // in the unlikely case that EntryFilterQ has never been requested
             // store.readQuery will return null
             const cached = store.readQuery({
@@ -118,6 +135,13 @@ const Save = {
               }
             })
           } else {
+            // update daySummaries
+            // only for optimisticResponse, not for actual response
+            // TODO:
+            // - find a way to avoid doing this for actual response
+            // - need to know original duration so it can be removed
+            // this.$store.commit('daySummaries/add', upsertedEntry)
+
             // writeFragment would be intercepted by a typePolicy, but no
             // typePolicy exists for Entry.
             // https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment

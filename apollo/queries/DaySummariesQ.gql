@@ -1,0 +1,22 @@
+query DaySummariesQ(
+  $dateFrom: DateMidnightUtc!
+  $dateTo: DateMidnightUtc!
+) {
+  DaySummariesQ(
+    dateFrom: $dateFrom
+    dateTo: $dateTo
+  ) {
+    daySummaries {
+      id
+      date
+      dayDuration
+      projectSummaries {
+        id
+        projectName
+        projectDuration
+        portion
+      }
+    }
+    maxDayDuration
+  }
+}

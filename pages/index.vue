@@ -1,7 +1,7 @@
 <template lang="pug">
   .index
     entry-input
-    //- duration-by-day
+    day-summaries
     entry-list(
       :clickDateHandler="clickDateHandler"
       :clickTagHandler="clickTagHandler"
