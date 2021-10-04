@@ -1,0 +1,19 @@
+tpl-faux-input(
+  :extraClasses="resolveClasses()"
+)
+  icon(
+    name="calendar"
+  )
+  date-picker(
+    :input-attr="{ tabindex: inputTabindex }"
+    :clearable="false"
+    v-model="localDate"
+    format="DD/MM/YY"
+    value-type="date"
+    type="date"
+    @input="inputDate"
+  )
+    template(
+      v-slot:icon-calendar
+    )
+      .empty

@@ -2,9 +2,7 @@ import {
   ValidState
 } from '../../../lib/enums'
 import {
-  isInteger,
-  isEmptyString,
-  isValidState,
+  assert
 } from '../../../lib/types'
 import {
   parseHumanDuration,
@@ -17,10 +15,10 @@ import {
 const Duration = {
   data () {
     const durationRaw = this.duration ? durationAsHHMM(this.duration) : ''
-    const invalid = false
+    const validState = ValidState.unchecked
     return {
       durationRaw,
-      invalid,
+      validState,
     }
   },
   methods: {
@@ -32,41 +30,40 @@ const Duration = {
         duration = parseHumanDuration(this.durationRaw)
       } catch (err) {
         if (err.code === 'VALIDATION_ERROR')
-          return this.$emit('validState', ValidState.invalid)
-        throw err
+          this.validState = ValidState.invalid
+        else
+          throw err
       }
-
-      this.$emit('validState', ValidState.valid)
 
       this.durationRaw = durationAsHHMM(duration)
 
       this.$emit('change', duration)
     },
+    validate () {
+      if (this.validState === ValidState.unchecked) {
+        try {
+          parseHumanDuration(this.durationRaw)
+          this.validState = ValidState.valid
+        } catch (err) {
+          if (err.code === 'VALIDATION_ERROR')
+            this.validState = ValidState.invalid
+          else
+            throw err
+        }
+      }
+      return this.validState
+    }
   },
   mixins: [classes],
   props: {
     duration: {
       required: true,
       validator (duration) {
-        console.assert(
-          isInteger(duration) || isEmptyString(duration),
-          { duration, message: 'duration !isInteger && !isEmptyString' }
-        )
-        return true
+        return assert(['isInteger', 'isEmptyString'], duration)
       }
     },
     tabindex: {
       required: true
-    },
-    validState: {
-      required: true,
-      validator (validState) {
-        console.assert(
-          isValidState(validState),
-          { validState, msg: 'validState is !ValidState' }
-        )
-        return true
-      }
     }
   }
 }

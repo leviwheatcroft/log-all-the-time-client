@@ -1,6 +1,7 @@
 <template lang="pug">
   button(
     :class="resolveClasses()"
+    :tabindex="tabindex"
   )
     slot
 </template>
@@ -10,16 +11,31 @@ import {
 } from '../../componentMixins'
 
 const Button = {
-  mixins: [classes]
+  mixins: [classes],
+  props: {
+    // a nuxt-link included in the slot will always be focussable
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  }
 }
 
 export default Button
 </script>
 <style scoped lang="less">
 button {
+  outline: none;
   background-color: @unfocusField;
   padding: 0 0.5rem;
-  &:focus {
+  height: 2.5rem;
+  /**
+   * TODO:
+   * focus-within should work when a nuxt-link is focussed, but doesn't
+   */
+  &:focus,
+  &:focus-within {
     background-color: @focusField;
   }
   &.bare {
@@ -28,12 +44,17 @@ button {
       background-color: transparent;
     }
   }
-  svg {
+  /* /deep/ is necessary for buttons using nuxt-link */
+  /deep/ a {
+    outline: none;
+  }
+  /deep/ svg {
     top: 0rem !important;
     width: 1.25rem;
     height: 1.25rem;
   }
-  > * {
+  /deep/ svg,
+  /deep/ span {
     margin-right: 0.5rem;
     &:last-child {
       margin-right: 0;

@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="icon inline"
+    :class="resolveClasses()"
     width="24"
     height="24"
   >
@@ -9,11 +9,22 @@
 </template>
 
 <script>
+import {
+  classes
+} from '../componentMixins'
+
 export default {
+  mixins: [classes],
   props: {
     name: {
       type: String,
       required: true
+    }
+  },
+  data () {
+    const initialClasses = 'icon inline'
+    return {
+      initialClasses
     }
   }
 }

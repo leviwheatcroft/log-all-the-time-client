@@ -11,6 +11,9 @@
       :fieldsToggleBoundaries="fieldsToggleBoundaries"
       :loading="loading"
     )
+      template(
+        v-slot:no-entries
+      ) Your recent entries will be shown here.
 </template>
 
 <script>

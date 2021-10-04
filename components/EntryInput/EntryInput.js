@@ -1,7 +1,10 @@
-import DatePicker from 'vue2-datepicker'
+
+import {
+  midnightUtcMs
+} from '../../lib/dates'
 // TODO: these isX type checks are deprecated
 import {
-  isEntry,
+  assert,
   isTag,
   isNewTag,
   isProject,
@@ -15,34 +18,31 @@ import {
 } from '../../lib/enums'
 
 const EntryInput = {
-  components: {
-    DatePicker
-  },
   data () {
-    const descriptionValidState = ValidState.unchecked
-    const durationValidState = ValidState.unchecked
     const isNewEntry = !this.entry
     const tabindex = this.idx * 5
     const {
-      date = Date.now(),
+      date = midnightUtcMs(Date.now()),
+      createdAt = Date.now(),
       description = '',
       duration = '',
-      id = '',
+      id = 0,
       tags = [],
-      project = false
+      project = false,
+      user = false
     } = this.entry || {}
 
     return {
-      date: new Date(date),
+      date,
+      createdAt,
       description,
-      descriptionValidState,
       duration,
-      durationValidState,
       project,
       id,
       isNewEntry,
       tabindex,
       tags,
+      user
     }
   },
   methods: {
@@ -91,36 +91,17 @@ const EntryInput = {
     projectRemoveHandler () {
       this.project = false
     },
-    checkValidState ({ target }) {
-      if (target.classList.contains('description')) {
-        const {
-          description
-        } = this
-        if (description.length < 3)
-          this.descriptionValidState = ValidState.invalid
-        else
-          this.descriptionValidState = ValidState.valid
-      }
-    },
     clickCancel () {
       this.$emit('cancel')
     },
     validate () {
-      const {
-        descriptionValidState,
-        durationValidState
-      } = this
-
-      if (descriptionValidState === ValidState.unchecked)
-        this.descriptionValidState = ValidState.invalid
-
-      if (durationValidState === ValidState.unchecked)
-        this.durationValidState = ValidState.invalid
-
-      if (
-        descriptionValidState !== ValidState.valid ||
-        durationValidState !== ValidState.valid
-      )
+      const isValid = [
+        this.$refs.description,
+        this.$refs.duration
+      ].every((validateItem) => {
+        return validateItem.validate() === ValidState.valid
+      })
+      if (!isValid)
         throw new ValidationError()
     },
     reset () {
@@ -153,11 +134,7 @@ const EntryInput = {
     entry: {
       required: false,
       type: Object,
-      validator (entry) {
-        if (!entry)
-          return
-        return isEntry(entry)
-      }
+      validator (entry) { return assert('isEntry', entry) }
     },
     idx: {
       required: false,

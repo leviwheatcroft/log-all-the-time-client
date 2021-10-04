@@ -1,0 +1,12 @@
+tpl-faux-input(
+  :extraClasses="resolveClasses(validState.value, 'w-full lg:w-1/3 flex-grow')"
+)
+  icon(
+    name="edit-3"
+  )
+  input.description(
+    :tabindex="inputTabindex"
+    :value="description"
+    @input="$emit('input', $event.target.value)"
+    @change="validate"
+  )

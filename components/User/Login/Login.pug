@@ -1,26 +1,59 @@
-.user-register(
-  class="max-w-3xl mx-auto"
+div(
+  class="flex flex-col justify-center items-center"
 )
-  .row
-    label(
-      for="email"
-    ) Email
-    input(
-      name="email"
-      v-model="email"
-      placeholder="mcboatface@gmail.com"
+  tpl-shadow-box
+    h1 Log In
+    .row(
+      class="flex flex-row gap-4 mt-8"
     )
-  .row
-    label(
-      for="password"
-    ) Email
-    input(
-      name="password"
-      v-model="password"
-      type="password"
-      placeholder="password"
+      tpl-faux-input-label
+        label(
+          for="email"
+        ) Email :
+      tpl-faux-input
+        icon(
+          name="at-sign"
+        )
+        input(
+          name="email"
+          v-model="email"
+          placeholder="mcboatface@gmail.com"
+        )
+    .row(
+      class="flex flex-row gap-4 mt-4"
     )
-  .row
-    button(
-      @click="clickSubmit"
-    ) Submit
+      tpl-faux-input-label
+        label(
+          for="password"
+        ) Password :
+      tpl-faux-input
+        icon(
+          name="key"
+        )
+        input(
+          name="password"
+          type="password"
+          v-model="password"
+          placeholder="password"
+        )
+    .row(
+      class="flex flex-row gap-4 mt-4"
+    )
+      tpl-button.bare
+        nuxt-link(
+          to="/register"
+        )
+          icon(
+            name="user-plus"
+          )
+          span Register
+      .spacer(
+        class="flex-grow"
+      )
+      tpl-button(
+        @click.native="clickLogIn"
+      )
+        icon(
+          name="log-in"
+        )
+        span Log In

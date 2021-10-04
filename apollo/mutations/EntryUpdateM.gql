@@ -1,7 +1,7 @@
-mutation EntryCreateM(
+mutation EntryUpdateM(
   $entry: EntryI!
 ) {
-  EntryCreateM(
+  EntryUpdateM(
     entry: $entry
   ) {
     createdAt

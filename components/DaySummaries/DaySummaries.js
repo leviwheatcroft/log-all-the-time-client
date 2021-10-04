@@ -30,6 +30,11 @@ const DaySummaries = {
     }
   },
   computed: {
+    // isEmpty () {
+    //   return Object.values(
+    //     this.$store.state.daySummaries.daySummariesById
+    //   ).every(({ dayDuration }) => dayDuration === 0)
+    // },
     daySummariesById () {
       return this.$store.state.daySummaries.daySummariesById
     },

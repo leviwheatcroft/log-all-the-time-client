@@ -4,7 +4,11 @@
   div(
     class="flex justify-end mt-4"
   )
-    button-icon(
+    tpl-button(
       iconName="log-out"
       @click.native="clickOk"
-    ) Ok
+    )
+      icon(
+        name="log-out"
+      )
+      span Log Out

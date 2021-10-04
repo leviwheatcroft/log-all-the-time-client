@@ -6,12 +6,17 @@
     :fieldsToggle="fieldsToggle"
   )
   .no-entries(
+    class="flex flex-row justify-center items-center mt-16 color-light-60"
     v-if="!entries.length"
   )
-    | No Entries
-    icon(
-      name="meh"
+    slot(
+      name="no-entries"
     )
+      | No Entries
+      icon(
+        extraClasses="ml-4"
+        name="meh"
+      )
   entry-list-item(
     v-if="!entry.deleted"
     v-for="(entry, idx) in entries"

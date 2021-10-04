@@ -1,5 +1,5 @@
 import {
-  AuthState
+  AuthStatus
 } from '../../../lib/enums'
 import apollo from '../../../apollo'
 import {
@@ -29,7 +29,7 @@ const Register = {
     }
   },
   methods: {
-    async clickSubmit () {
+    async clickRegister () {
       const {
         email,
         username,
@@ -54,7 +54,7 @@ const Register = {
         data: { SelfQ: user }
       } = userResult
       this.$store.commit('user/logIn', { user })
-      this.$store.commit('auth/status', AuthState.loggedIn)
+      this.$store.commit('auth/status', AuthStatus.loggedIn)
     }
   }
 }
