@@ -4,6 +4,11 @@ import {
 
 const Item = {
   props: {
+    allowSetUser: {
+      required: false,
+      default: false,
+      type: Boolean
+    },
     entry: {
       type: Object,
       validator (entry) { return assert('isEntry', entry) }

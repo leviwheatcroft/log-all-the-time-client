@@ -85,6 +85,11 @@ const User = {
   },
   mixins: [classes],
   props: {
+    isMultiItem: {
+      required: false,
+      type: Boolean,
+      default: true
+    },
     users: {
       required: true,
       type: Array,

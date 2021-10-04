@@ -20,6 +20,7 @@
   entry-list-item(
     v-if="!entry.deleted"
     v-for="(entry, idx) in entries"
+    :allowSetUser="true"
     :key="entry.id"
     :entry="entry"
     :fieldsToggle="fieldsToggle"

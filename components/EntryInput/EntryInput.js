@@ -91,6 +91,13 @@ const EntryInput = {
     projectRemoveHandler () {
       this.project = false
     },
+    userAddHandler (user) {
+      assert('isUser', user)
+      this.user = user
+    },
+    userRemoveHandler () {
+      this.user = false
+    },
     clickCancel () {
       this.$emit('cancel')
     },
@@ -121,6 +128,11 @@ const EntryInput = {
     this.$el.querySelector('input.description').focus()
   },
   props: {
+    allowSetUser: {
+      required: false,
+      default: false,
+      type: Boolean
+    },
     cancelable: {
       required: false,
       default: false,
