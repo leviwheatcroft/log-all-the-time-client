@@ -12,7 +12,7 @@ export const classes = {
         ...classes,
         this.initialClasses || '',
         this.extraClasses
-      ].join(' ')
+      ].join(' ').trim()
     }
   }
 }

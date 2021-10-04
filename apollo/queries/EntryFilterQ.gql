@@ -38,6 +38,7 @@ query EntryFilterQ(
       user {
         id
         username
+        gravatar
       }
     }
   }

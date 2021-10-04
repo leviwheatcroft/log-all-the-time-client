@@ -1,7 +1,6 @@
 import _throttle from 'lodash/throttle'
 import {
-  isArray,
-  isUser
+  assert
 } from '../../../lib/types'
 import {
   UserPartialQ
@@ -10,7 +9,7 @@ import {
   classes
 } from '../../../componentMixins'
 
-const User = {
+const Users = {
   data () {
     return {
       itemPartial: '',
@@ -93,13 +92,7 @@ const User = {
     users: {
       required: true,
       type: Array,
-      validator (users) {
-        if (!isArray(users))
-          return false
-        if (!users.every((i) => isUser(i)))
-          return false
-        return true
-      }
+      validator (users) { return assert('isUsers', users) }
     },
     userAddHandler: {
       required: true,
@@ -112,4 +105,4 @@ const User = {
   }
 }
 
-export default User
+export default Users
