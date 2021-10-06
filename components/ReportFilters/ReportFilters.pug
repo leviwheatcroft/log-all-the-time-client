@@ -1,42 +1,39 @@
-.report-filters.theme.input-box
-  .row
-    .container-datepicker.no-grow
-      .theme.faux-input
-        icon(
-          name="calendar"
-        )
-        date-picker(
-          :input-attr="{ tabindex: 1 }"
-          :clearable="true"
-          v-model='dateRange'
-          type='date'
-          range
-          format='DD/MM/YY'
-          value-type="timestamp"
-        )
-          template(
-            v-slot:icon-calendar
-          )
-            .empty
-          template(
-            v-slot:icon-clear
-          )
-            icon(
-              name="x"
-            )
-  .row
-    selector-tag(
-      :tags="tags"
-      :tagAddHandler="tagAddHandler"
-      :tagRemoveHandler="tagRemoveHandler"
-      :inputTabindex="2"
-    )
-  .row
-    selector-user(
-      :users="users"
-      :userAddHandler="userAddHandler"
-      :userRemoveHandler="userRemoveHandler"
-    )
+tpl-shadow-box.report-filters
+  div(
+    class="flex flex-row gap-4 flex-wrap"
+  )
+  report-filters-date-range(
+    ref="dateRange"
+    extraClasses="w-full lg:w-40"
+  )
+  report-filters-projects(
+    ref="projects"
+  )
+  //- selector-project(
+  //-   extraClasses="w-full lg:w-1/3 flex-grow"
+  //-   :inputTabindex="2"
+  //-   :project="project"
+  //-   :projectNewHandler="projectNewHandler"
+  //-   :projectAddHandler="projectAddHandler"
+  //-   :projectRemoveHandler="projectRemoveHandler"
+  //- )
+  //- selector-tag(
+  //-   extraClasses="w-full lg:w-1/3"
+  //-   :inputTabindex="3"
+  //-   :tags="tags"
+  //-   :tagNewHandler="tagNewHandler"
+  //-   :tagAddHandler="tagAddHandler"
+  //-   :tagRemoveHandler="tagRemoveHandler"
+  //- )
+  //- selector-users(
+  //-   v-if="allowSetUser"
+  //-   extraClasses="w-full lg:w-1/3"
+  //-   :inputTabindex="4"
+  //-   :isMultiItem="false"
+  //-   :users="[user]"
+  //-   :userAddHandler="userAddHandler"
+  //-   :userRemoveHandler="userRemoveHandler"
+  //- )
   .row
     tpl-button-icon(
       :iconName="showExportOptions ? 'chevron-up' : 'chevron-down'"
@@ -47,7 +44,7 @@
     .spacer
     tpl-button-icon(
       iconName="file-text"
-      @click='apply'
+      @click.native='clickApplyHandler'
     ) Apply
   .export-options(
     v-if="showExportOptions"

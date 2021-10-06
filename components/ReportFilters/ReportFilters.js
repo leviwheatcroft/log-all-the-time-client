@@ -1,7 +1,7 @@
 import DatePicker from 'vue2-datepicker'
-import {
-  assert
-} from '../../lib/types'
+// import {
+//   assert
+// } from '../../lib/types'
 import {
   EntryFilterAsCsvQ
 } from '../../apollo/queries'
@@ -14,71 +14,66 @@ const ReportFilters = {
     DatePicker
   },
   data () {
-    const {
-      dateFrom,
-      dateTo,
-      tags,
-      project,
-      users
-    } = this.filters
-    // eslint-disable-next-line
-    console.log(tags)
+    // const {
+    //   dateFrom,
+    //   dateTo,
+    //   tags,
+    //   project,
+    //   users
+    // } = this.filters
     return {
-      dateRange: [dateFrom, dateTo],
-      tags,
-      project,
-      users,
+      // dateRange: [dateFrom, dateTo],
+      // tags,
+      // project,
+      // users,
       showExportOptions: false,
       exportDateFormat: 'DD/MM/YY',
       exportDurationFormat: 'HH:mm'
     }
   },
   methods: {
-    tagAddHandler (tag) {
-      assert('isTag', tag)
-      this.tags.push(tag)
-    },
-    tagRemoveHandler (tag) {
-      assert('isTag', tag)
-      const idx = this.tags.findIndex((t) => t.id === tag.id)
-      console.assert(
-        idx !== -1,
-        { tags: this.tags, tag, msg: 'tag not in tags' }
-      )
-      this.tags.splice(idx, 1)
-    },
-    userAddHandler (user) {
-      assert('isUser', user)
-      this.users.push(user)
-    },
-    userRemoveHandler (user) {
-      assert('isUser', user)
-      const idx = this.users.findIndex((u) => u.id === user.id)
-      console.assert(
-        idx !== -1,
-        { tags: this.users, user, msg: 'tag not in tags' }
-      )
-      this.users.splice(idx, 1)
-    },
-    apply () {
+    // tagAddHandler (tag) {
+    //   assert('isTag', tag)
+    //   this.tags.push(tag)
+    // },
+    // tagRemoveHandler (tag) {
+    //   assert('isTag', tag)
+    //   const idx = this.tags.findIndex((t) => t.id === tag.id)
+    //   console.assert(
+    //     idx !== -1,
+    //     { tags: this.tags, tag, msg: 'tag not in tags' }
+    //   )
+    //   this.tags.splice(idx, 1)
+    // },
+    // userAddHandler (user) {
+    //   assert('isUser', user)
+    //   this.users.push(user)
+    // },
+    // userRemoveHandler (user) {
+    //   assert('isUser', user)
+    //   const idx = this.users.findIndex((u) => u.id === user.id)
+    //   console.assert(
+    //     idx !== -1,
+    //     { tags: this.users, user, msg: 'tag not in tags' }
+    //   )
+    //   this.users.splice(idx, 1)
+    // },
+    clickApplyHandler () {
+      // eslint-disable-next-line
+      console.log('cph')
       const {
-        tags,
-        project,
-        users
-      } = this
-      let {
-        dateRange: [dateFrom, dateTo]
-      } = this
-      if (dateFrom)
-        dateFrom = midnightUtcMs(dateFrom)
-      if (dateTo)
-        dateTo = midnightUtcMs(dateTo)
-      this.applyFilters({
-        dateFrom,
-        dateTo,
-        tags,
-        project,
-        users,
+        dateRange,
+        // projects,
+        // tags,
+        // users
+      } = this.$refs
+      // eslint-disable-next-line
+      console.log(dateRange.getValue())
+      this.$store.commit('reportFilters/apply', {
+        dateRange: dateRange.getValue(),
+        // projects: projects.getValue(),
+        // tags: tags.getValue(),
+        // users: users.getValue()
       })
     },
     async exportCsv () {
@@ -120,14 +115,40 @@ const ReportFilters = {
     }
   },
   props: {
-    filters: {
-      required: true,
-      type: Object
-    },
-    applyFilters: {
-      required: true,
-      type: Function
-    }
+    // tagAddHandler (tag) {
+    //   assert('isTag', tag)
+    //   this.tags.push(tag)
+    // },
+    // tagRemoveHandler (tag) {
+    //   assert(['isTag', 'isNewTag'], tag)
+    //   const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
+    //   console.assert(
+    //     idx !== -1,
+    //     { tags: this.tags, tag, msg: 'tag not in tags' }
+    //   )
+    //   this.tags.splice(idx, 1)
+    // },
+    // projectAddHandler (project) {
+    //   this.project = assert('isNewProject', project)
+    // },
+    // projectRemoveHandler () {
+    //   this.project = false
+    // },
+    // userAddHandler (user) {
+    //   assert('isUser', user)
+    //   this.user = user
+    // },
+    // userRemoveHandler () {
+    //   this.user = false
+    // },
+    // filters: {
+    //   required: true,
+    //   type: Object
+    // },
+    // applyFilters: {
+    //   required: true,
+    //   type: Function
+    // }
   }
 }
 

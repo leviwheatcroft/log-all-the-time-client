@@ -1,5 +1,5 @@
 import {
-  assert
+  getValidator
 } from '../../../lib/types'
 import {
   ValidState
@@ -35,7 +35,7 @@ const Description = {
     },
     description: {
       required: true,
-      validator (description) { return assert('isString', description) }
+      validator: getValidator('isString')
     }
   }
 }

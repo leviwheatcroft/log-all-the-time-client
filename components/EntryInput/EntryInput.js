@@ -4,11 +4,7 @@ import {
 } from '../../lib/dates'
 // TODO: these isX type checks are deprecated
 import {
-  assert,
-  isTag,
-  isNewTag,
-  isProject,
-  isNewProject
+  assert
 } from '../../lib/types'
 import {
   ValidationError
@@ -48,24 +44,15 @@ const EntryInput = {
   methods: {
     tagNewHandler (tag) {
       tag.tagName = tag.itemName
-      console.assert(
-        isNewTag(tag),
-        { tag, msg: 'tag is not newTag' }
-      )
+      assert('isTag', tag)
       this.tags.push(tag)
     },
     tagAddHandler (tag) {
-      console.assert(
-        isTag(tag),
-        { tag, msg: 'tag is not tag' }
-      )
+      assert('isTag', tag)
       this.tags.push(tag)
     },
     tagRemoveHandler (tag) {
-      console.assert(
-        isTag(tag) || isNewTag(tag),
-        { tag, msg: 'tag is not tag or newTag' }
-      )
+      assert(['isTag', 'isNewTag'], tag)
       const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
       console.assert(
         idx !== -1,
@@ -75,18 +62,10 @@ const EntryInput = {
     },
     projectNewHandler (project) {
       project.projectName = project.itemName
-      console.assert(
-        isNewProject(project),
-        { project, msg: 'project is not newProject' }
-      )
-      this.project = project
+      this.project = assert('isNewProject', project)
     },
     projectAddHandler (project) {
-      console.assert(
-        isProject(project),
-        { project, msg: 'project is not project' }
-      )
-      this.project = project
+      this.project = assert('isNewProject', project)
     },
     projectRemoveHandler () {
       this.project = false

@@ -3,7 +3,7 @@
 //   midnightUtcMs
 // } from '../../../lib/dates'
 import {
-  assert
+  getValidator
 } from '../../../lib/types'
 import {
   createEntry
@@ -50,11 +50,11 @@ const Save = {
     },
     date: {
       required: true,
-      validator (date) { return assert('isMidnightUtcMs', date) }
+      validator: getValidator('isMidnightUtcMs')
     },
     createdAt: {
       required: true,
-      validator (date) { return assert('isDateMs', date) }
+      validator: getValidator('isDateMs')
     },
     description: {
       required: true,
@@ -65,9 +65,7 @@ const Save = {
     },
     project: {
       required: true,
-      validator (project) {
-        return assert(['isFalse', 'isProject', 'isNewProject'], project)
-      }
+      validator: getValidator(['isFalse', 'isProject', 'isNewProject'])
     },
     tags: {
       required: true,

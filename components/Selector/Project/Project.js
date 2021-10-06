@@ -86,7 +86,12 @@ const Project = {
   },
   mixins: [classes],
   props: {
-    project: {
+    isMultiItem: {
+      required: false,
+      type: Boolean,
+      default: true
+    },
+    projects: {
       required: true,
       validator (project) {
         console.assert(
@@ -105,7 +110,7 @@ const Project = {
       type: Function
     },
     projectNewHandler: {
-      required: true,
+      required: false,
       type: Function
     },
     inputTabindex: {

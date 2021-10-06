@@ -2,7 +2,7 @@ import {
   ValidState
 } from '../../../lib/enums'
 import {
-  assert
+  getValidator
 } from '../../../lib/types'
 import {
   parseHumanDuration,
@@ -58,9 +58,7 @@ const Duration = {
   props: {
     duration: {
       required: true,
-      validator (duration) {
-        return assert(['isInteger', 'isEmptyString'], duration)
-      }
+      validator: getValidator(['isInteger', 'isEmptyString'])
     },
     tabindex: {
       required: true
