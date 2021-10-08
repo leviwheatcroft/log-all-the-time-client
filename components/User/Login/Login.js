@@ -18,12 +18,12 @@ const {
 const Login = {
   data () {
     const email = ''
-    const username = ''
+    const name = ''
     const password = ''
     const passwordConfirmation = ''
     return {
       email,
-      username,
+      name,
       password,
       passwordConfirmation
     }

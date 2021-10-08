@@ -62,9 +62,9 @@ tpl-shadow-box.day-summaries(
         :key="idx"
         :style=`{
           width: projectSummary.portion + '%',
-          backgroundColor: hexFromString(projectSummary.projectName)
+          backgroundColor: hexFromString(projectSummary.name)
         }`
-      ) {{ projectSummary.projectName }}
+      ) {{ projectSummary.name }}
     tpl-duration(
       :duration="daySummary.dayDuration"
       classMixins="py-0.5 px-2 mb-0"

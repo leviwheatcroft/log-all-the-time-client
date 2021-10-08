@@ -36,31 +36,31 @@
   .project(
     class="cursor-pointer rounded m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
     v-if="fieldsToggle.project"
-    :style="{ backgroundColor: hexFromString(entry.project.projectName) }"
+    :style="{ backgroundColor: hexFromString(entry.project.name) }"
   )
     icon(
       class="mr-1 w-4 h-4 inline -t-2"
       name="folder"
     )
-    | {{ entry.project.projectName }}
+    | {{ entry.project.name }}
   .tag(
     class="cursor-pointer rounded m-2 p-2 whitespace-nowrap"
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
-    :style="{ backgroundColor: hexFromString(tag.tagName) }"
+    :style="{ backgroundColor: hexFromString(tag.name) }"
   )
     icon(
       class="mr-1 w-4 h-4 inline -t-2"
       name="tag"
     )
-    | {{ tag.tagName }}
+    | {{ tag.name }}
   .user(
     class="cursor-pointer rounded m-2 p-2"
     v-if="fieldsToggle.user"
-    :style="{ backgroundColor: hexFromString(entry.user.username) }"
+    :style="{ backgroundColor: hexFromString(entry.user.name) }"
   )
     icon(
       class="mr-1 w-4 h-4 inline -t-2"
       name="user"
     )
-    | {{ entry.user.username }}
+    | {{ entry.user.name }}

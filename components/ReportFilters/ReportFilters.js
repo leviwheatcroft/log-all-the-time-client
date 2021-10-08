@@ -121,7 +121,7 @@ const ReportFilters = {
     // },
     // tagRemoveHandler (tag) {
     //   assert(['isTag', 'isNewTag'], tag)
-    //   const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
+    //   const idx = this.tags.findIndex((t) => t.name === tag.name)
     //   console.assert(
     //     idx !== -1,
     //     { tags: this.tags, tag, msg: 'tag not in tags' }

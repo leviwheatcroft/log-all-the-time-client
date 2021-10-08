@@ -5,6 +5,6 @@ query ProjectPartialQ(
     projectPartial: $projectPartial
   ) {
     id
-    projectName
+    name
   }
 }

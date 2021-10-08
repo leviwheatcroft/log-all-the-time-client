@@ -24,13 +24,13 @@ export async function createEntry () {
     description,
     project: {
       ...project.id ? { id: project.id } : {},
-      projectName: project.projectName
+      name: project.name
     },
     // strip __typename (existing tags)
     // strip id: false (new tags)
     tags: tags.map((t) => ({
       ...t.id !== false ? { id: t.id } : {},
-      tagName: t.tagName
+      name: t.name
     }))
   }
 

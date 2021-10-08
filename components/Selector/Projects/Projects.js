@@ -1,19 +1,19 @@
 import {
-  UserPartialQ
+  ProjectPartialQ
 } from '../../../apollo/queries'
 import {
   classes
 } from '../../../componentMixins'
 
-const Users = {
+const Project = {
   methods: {
-    async usersQuery (userPartial) {
+    async projectsQuery (projectPartial) {
       const result = await this.$apollo.query({
-        query: UserPartialQ,
-        variables: { userPartial }
+        query: ProjectPartialQ,
+        variables: { projectPartial }
       })
-      const { data: { UserPartialQ: userSuggestions } } = result
-      return userSuggestions
+      const { data: { ProjectPartialQ: projectSuggestions } } = result
+      return projectSuggestions
     }
   },
   mixins: [classes],
@@ -27,7 +27,7 @@ const Users = {
       type: Boolean
     },
     items: {
-      required: true
+      required: true,
     },
     inputTabindex: {
       required: true,
@@ -36,4 +36,4 @@ const Users = {
   }
 }
 
-export default Users
+export default Project

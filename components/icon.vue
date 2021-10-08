@@ -3,6 +3,7 @@
     :class="resolveClasses()"
     width="24"
     height="24"
+    @click="$emit('click', $event)"
   >
     <use :href="`#i-${name}`" />
   </svg>

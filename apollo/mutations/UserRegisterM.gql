@@ -1,10 +1,10 @@
 mutation UserRegisterM(
-  $username: String!
+  $name: String!
   $email: String!
   $password: String!
 ) {
   UserRegisterM(
-    username: $username
+    name: $name
     email: $email
     password: $password
   ) {

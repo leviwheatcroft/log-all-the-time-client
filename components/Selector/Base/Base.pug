@@ -9,21 +9,21 @@ tpl-faux-input.item-selector(
   )
     .item-selected(
       class="flex flex-row items-center pl-3 pr-1 m-1 h-8 rounded"
-      v-for="selectedItem in selectedItems"
-      :style="{ backgroundColor: hexFromString(selectedItem.itemName) }"
+      v-for="selectedItem in _items"
+      :style="{ backgroundColor: hexFromString(selectedItem.name) }"
     )
-      | {{ selectedItem.itemName }}
+      | {{ selectedItem.name }}
       icon(
         class="cursor-pointer w-4 h-4"
         name="x"
-        @click="itemRemoveHandler(selectedItem)"
+        @click="clickItemRemove(selectedItem)"
       )
   .item-partial-container.grow
     input.item-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"
       v-model='itemPartial'
       @keydown='keydownItemPartial'
-      @input="inputItemPartialHandler($event.target.value)"
+      @input="inputItemPartial($event.target.value)"
     )
     .item-suggestions(v-if="itemPartial.length > 0")
       // suggestions from partial
@@ -33,18 +33,18 @@ tpl-faux-input.item-selector(
         v-for="itemSuggestion in itemSuggestions"
         :key="itemSuggestion.id"
         @click="clickItemAdd(itemSuggestion)"
-        :style="{ backgroundColor: hexFromString(itemSuggestion.itemName) }"
+        :style="{ backgroundColor: hexFromString(itemSuggestion.name) }"
       )
         slot(
           name="icon-item"
         )
-        | {{ itemSuggestion.itemName }}
+        | {{ itemSuggestion.name }}
 
       // new item
       .item-suggestion(
         class="flex flex-row items-center pl-2 pr-3 border-t-2 border-gray-600"
-        @click="clickItemNew({ id: false, itemName: itemPartial })"
-        v-if="itemPartial.length > 0 && itemNewHandler"
+        @click="clickItemAdd({ id: 0, name: itemPartial })"
+        v-if="itemPartial.length > 0 && allowNewItem"
       )
         icon(
           class="m-1"

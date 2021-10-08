@@ -26,7 +26,7 @@ export const mutations = {
     const {
       project: {
         id,
-        projectName
+        name
       },
       duration,
       date
@@ -47,7 +47,7 @@ export const mutations = {
     if (!daySummary.projectSummariesById[projectId]) {
       daySummary.projectSummariesById[projectId] = {
         id,
-        projectName,
+        name,
         projectDuration: duration
       }
     } else {
@@ -96,7 +96,7 @@ export const mutations = {
                 projectSummary.id,
                 {
                   id: projectSummary.id,
-                  projectName: projectSummary.projectName,
+                  name: projectSummary.name,
                   projectDuration: projectSummary.projectDuration,
                   portion: projectSummary.portion
                 }

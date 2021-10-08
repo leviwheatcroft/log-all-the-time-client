@@ -1,8 +1,8 @@
 
 const NavBar = {
   computed: {
-    username () {
-      return this.$store.state.user.username
+    name () {
+      return this.$store.state.user.name
     },
     gravatar () {
       return this.$store.state.user.gravatar

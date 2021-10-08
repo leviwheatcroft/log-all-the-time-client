@@ -1,19 +1,19 @@
 import {
-  UserPartialQ
+  TagPartialQ
 } from '../../../apollo/queries'
 import {
   classes
 } from '../../../componentMixins'
 
-const Users = {
+const Tag = {
   methods: {
-    async usersQuery (userPartial) {
+    async tagsQuery (tagPartial) {
       const result = await this.$apollo.query({
-        query: UserPartialQ,
-        variables: { userPartial }
+        query: TagPartialQ,
+        variables: { tagPartial }
       })
-      const { data: { UserPartialQ: userSuggestions } } = result
-      return userSuggestions
+      const { data: { TagPartialQ: tagSuggestions } } = result
+      return tagSuggestions
     }
   },
   mixins: [classes],
@@ -36,4 +36,4 @@ const Users = {
   }
 }
 
-export default Users
+export default Tag

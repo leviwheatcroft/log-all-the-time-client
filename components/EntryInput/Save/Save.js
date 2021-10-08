@@ -65,7 +65,7 @@ const Save = {
     },
     project: {
       required: true,
-      validator: getValidator(['isFalse', 'isProject', 'isNewProject'])
+      // validator: getValidator(['isFalse', 'isProject', 'isNewProject'])
     },
     tags: {
       required: true,

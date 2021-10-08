@@ -11,15 +11,15 @@ mutation EntryCreateM(
     id
     project {
       id
-      projectName
+      name
     }
     tags {
       id
-      tagName
+      name
     }
     user {
       id
-      username
+      name
       gravatar
     }
   }

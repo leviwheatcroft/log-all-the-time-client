@@ -1,17 +1,17 @@
 export const state = () => ({
   id: false,
-  username: false,
+  name: false,
   gravatar: false,
 })
 
 export const mutations = {
   logIn (state, user) {
     state.id = user.id
-    state.username = user.username
+    state.name = user.name
     state.gravatar = user.gravatar
   },
   logOut (state) {
     state.id = false
-    state.username = false
+    state.name = false
   }
 }

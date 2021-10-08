@@ -42,41 +42,41 @@ const EntryInput = {
     }
   },
   methods: {
-    tagNewHandler (tag) {
-      tag.tagName = tag.itemName
-      assert('isTag', tag)
-      this.tags.push(tag)
-    },
-    tagAddHandler (tag) {
-      assert('isTag', tag)
-      this.tags.push(tag)
-    },
-    tagRemoveHandler (tag) {
-      assert(['isTag', 'isNewTag'], tag)
-      const idx = this.tags.findIndex((t) => t.tagName === tag.tagName)
-      console.assert(
-        idx !== -1,
-        { tags: this.tags, tag, msg: 'tag not in tags' }
-      )
-      this.tags.splice(idx, 1)
-    },
-    projectNewHandler (project) {
-      project.projectName = project.itemName
-      this.project = assert('isNewProject', project)
-    },
-    projectAddHandler (project) {
-      this.project = assert('isNewProject', project)
-    },
-    projectRemoveHandler () {
-      this.project = false
-    },
-    userAddHandler (user) {
-      assert('isUser', user)
-      this.user = user
-    },
-    userRemoveHandler () {
-      this.user = false
-    },
+    // tagNewHandler (tag) {
+    //   tag.name = tag.itemName
+    //   assert('isTag', tag)
+    //   this.tags.push(tag)
+    // },
+    // tagAddHandler (tag) {
+    //   assert('isTag', tag)
+    //   this.tags.push(tag)
+    // },
+    // tagRemoveHandler (tag) {
+    //   assert(['isTag', 'isNewTag'], tag)
+    //   const idx = this.tags.findIndex((t) => t.name === tag.name)
+    //   console.assert(
+    //     idx !== -1,
+    //     { tags: this.tags, tag, msg: 'tag not in tags' }
+    //   )
+    //   this.tags.splice(idx, 1)
+    // },
+    // projectNewHandler (project) {
+    //   project.name = project.itemName
+    //   this.project = assert('isNewProject', project)
+    // },
+    // projectAddHandler (project) {
+    //   this.project = assert('isNewProject', project)
+    // },
+    // projectRemoveHandler () {
+    //   this.project = false
+    // },
+    // userAddHandler (user) {
+    //   assert('isUser', user)
+    //   this.user = user
+    // },
+    // userRemoveHandler () {
+    //   this.user = false
+    // },
     clickCancel () {
       this.$emit('cancel')
     },

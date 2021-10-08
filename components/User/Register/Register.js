@@ -18,12 +18,12 @@ const {
 const Register = {
   data () {
     const email = ''
-    const username = ''
+    const name = ''
     const password = ''
     const passwordConfirmation = ''
     return {
       email,
-      username,
+      name,
       password,
       passwordConfirmation
     }
@@ -32,7 +32,7 @@ const Register = {
     async clickRegister () {
       const {
         email,
-        username,
+        name,
         password,
         passwordConfirmation
       } = this
@@ -42,7 +42,7 @@ const Register = {
         mutation: UserRegisterM,
         variables: {
           email,
-          username,
+          name,
           password
         }
       })

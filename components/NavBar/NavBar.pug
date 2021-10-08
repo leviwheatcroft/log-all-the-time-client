@@ -31,16 +31,16 @@ nav.nav-bar(
   )
   .profile(
     class="flex flex-row items-center gap-4"
-    v-if="username"
+    v-if="name"
   )
     img.gravatar(
       class="rounded-full w-6 h-6"
       :src="gravatar"
     )
-    .username
-      | {{ username }}
+    .name
+      | {{ name }}
   .log-in(
-    v-if="!username"
+    v-if="!name"
   )
     nuxt-link(
       to="/login"

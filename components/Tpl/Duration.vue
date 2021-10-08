@@ -10,9 +10,6 @@
 </template>
 <script>
 import {
-  assert
-} from '../../lib/types'
-import {
   durationAsHHMM
 } from '../../lib/stringOps'
 
@@ -23,9 +20,9 @@ export default {
       type: String,
       default: ''
     },
+    // eslint-disable-next-line vue/require-prop-types
     duration: {
-      required: true,
-      validator (duration) { return assert('isInteger', duration) }
+      required: true
     }
   },
   data () {

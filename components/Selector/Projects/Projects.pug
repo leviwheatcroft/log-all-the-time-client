@@ -4,10 +4,11 @@ selector-base(
   :isMultiItem="isMultiItem"
   :items="items"
   @updateItems="$emit('updateItems', $event)"
-  :itemsQuery="usersQuery"
+  :itemsQuery="projectsQuery"
   :inputTabindex="inputTabindex"
 )
   template(v-slot:icon-item)
     icon(
-      name="user"
+      class="m-1"
+      name="folder"
     )
