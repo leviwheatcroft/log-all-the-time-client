@@ -2,6 +2,7 @@
   button(
     :class="resolveClasses()"
     :tabindex="tabindex"
+    @click="$emit('click', $event)"
   )
     slot
 </template>

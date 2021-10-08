@@ -32,6 +32,7 @@ export default FauxInput
   }
   svg.icon {
     top: 0 !important; // ugh
+    flex-shrink: 0;
     // margin: 0.5rem;
   }
   input {

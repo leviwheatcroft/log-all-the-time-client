@@ -1,51 +1,63 @@
 tpl-shadow-box.report-filters
+  tpl-label-bar
+    template(
+      v-slot:label
+    ) Filters
   div(
     class="flex flex-row gap-4 flex-wrap"
   )
-  report-filters-date-range(
-    ref="dateRange"
-    extraClasses="w-full lg:w-40"
+    report-filters-date-range(
+      ref="dateRange"
+      extraClasses="w-full lg:w-80"
+    )
+    selector-projects(
+      extraClasses="w-full lg:w-1/3"
+      :allowNewItem="false"
+      :isMultiItem="true"
+      :items="projects"
+      @updateItems="projects = $event"
+      :inputTabindex="2"
+    )
+    selector-tags(
+      extraClasses="w-full lg:w-1/3"
+      :allowNewItem="false"
+      :isMultiItem="true"
+      :items="tags"
+      @updateItems="tags = $event"
+      :inputTabindex="3"
+    )
+    selector-users(
+      extraClasses="w-full lg:w-1/3"
+      :allowNewItem="false"
+      :isMultiItem="true"
+      :items="users"
+      @updateItems="users = $event"
+      :inputTabindex="4"
+    )
+    div(
+      class="flex flex-row flex-grow"
+    )
+      .flex-grow
+      tpl-button(
+        :tabindex="4"
+        @click="clickApplyHandler"
+      )
+        icon(
+          name="file-text"
+        )
+        span Apply
+  .row(
+    class="mt-4"
   )
-  report-filters-projects(
-    ref="projects"
-  )
-  //- selector-project(
-  //-   extraClasses="w-full lg:w-1/3 flex-grow"
-  //-   :inputTabindex="2"
-  //-   :project="project"
-  //-   :projectNewHandler="projectNewHandler"
-  //-   :projectAddHandler="projectAddHandler"
-  //-   :projectRemoveHandler="projectRemoveHandler"
-  //- )
-  //- selector-tag(
-  //-   extraClasses="w-full lg:w-1/3"
-  //-   :inputTabindex="3"
-  //-   :tags="tags"
-  //-   :tagNewHandler="tagNewHandler"
-  //-   :tagAddHandler="tagAddHandler"
-  //-   :tagRemoveHandler="tagRemoveHandler"
-  //- )
-  //- selector-users(
-  //-   v-if="allowSetUser"
-  //-   extraClasses="w-full lg:w-1/3"
-  //-   :inputTabindex="4"
-  //-   :isMultiItem="false"
-  //-   :users="[user]"
-  //-   :userAddHandler="userAddHandler"
-  //-   :userRemoveHandler="userRemoveHandler"
-  //- )
-  .row
-    tpl-button-icon(
+    tpl-button(
       :iconName="showExportOptions ? 'chevron-up' : 'chevron-down'"
-      :after="true"
-      :bare="true"
       @click="showExportOptions = !showExportOptions"
-    ) Export
-    .spacer
-    tpl-button-icon(
-      iconName="file-text"
-      @click.native='clickApplyHandler'
-    ) Apply
+    )
+      span Export
+      icon(
+        :name="showExportOptions ? 'chevron-up' : 'chevron-down'"
+      )
+
   .export-options(
     v-if="showExportOptions"
   )

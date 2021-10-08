@@ -12,7 +12,7 @@ nav.nav-bar(
         'pb-4',
         'border-b-2',
         'border-gray-800',
-        $router.currentRoute.name === 'index' ? 'border-blue-50' : ''
+        $route.name === 'index' ? 'border-blue-50' : ''
       ]`
       to="/"
     ) Dashboard
@@ -22,7 +22,7 @@ nav.nav-bar(
         'pb-4',
         'border-b-2',
         'border-gray-800',
-        $router.currentRoute.name === 'reports' ? 'border-blue-50' : ''
+        $route.name === 'reports' ? 'border-blue-50' : ''
       ]`
       to="/reports"
     ) Reports

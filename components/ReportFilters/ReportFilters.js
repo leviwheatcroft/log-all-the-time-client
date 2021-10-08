@@ -14,6 +14,9 @@ const ReportFilters = {
     DatePicker
   },
   data () {
+    const tags = []
+    const projects = []
+    const users = []
     // const {
     //   dateFrom,
     //   dateTo,
@@ -21,43 +24,19 @@ const ReportFilters = {
     //   project,
     //   users
     // } = this.filters
+    const showExportOptions = false
     return {
       // dateRange: [dateFrom, dateTo],
-      // tags,
-      // project,
-      // users,
-      showExportOptions: false,
+      tags,
+      projects,
+      users,
+      showExportOptions,
       exportDateFormat: 'DD/MM/YY',
       exportDurationFormat: 'HH:mm'
     }
   },
   methods: {
-    // tagAddHandler (tag) {
-    //   assert('isTag', tag)
-    //   this.tags.push(tag)
-    // },
-    // tagRemoveHandler (tag) {
-    //   assert('isTag', tag)
-    //   const idx = this.tags.findIndex((t) => t.id === tag.id)
-    //   console.assert(
-    //     idx !== -1,
-    //     { tags: this.tags, tag, msg: 'tag not in tags' }
-    //   )
-    //   this.tags.splice(idx, 1)
-    // },
-    // userAddHandler (user) {
-    //   assert('isUser', user)
-    //   this.users.push(user)
-    // },
-    // userRemoveHandler (user) {
-    //   assert('isUser', user)
-    //   const idx = this.users.findIndex((u) => u.id === user.id)
-    //   console.assert(
-    //     idx !== -1,
-    //     { tags: this.users, user, msg: 'tag not in tags' }
-    //   )
-    //   this.users.splice(idx, 1)
-    // },
+
     clickApplyHandler () {
       // eslint-disable-next-line
       console.log('cph')
@@ -115,40 +94,6 @@ const ReportFilters = {
     }
   },
   props: {
-    // tagAddHandler (tag) {
-    //   assert('isTag', tag)
-    //   this.tags.push(tag)
-    // },
-    // tagRemoveHandler (tag) {
-    //   assert(['isTag', 'isNewTag'], tag)
-    //   const idx = this.tags.findIndex((t) => t.name === tag.name)
-    //   console.assert(
-    //     idx !== -1,
-    //     { tags: this.tags, tag, msg: 'tag not in tags' }
-    //   )
-    //   this.tags.splice(idx, 1)
-    // },
-    // projectAddHandler (project) {
-    //   this.project = assert('isNewProject', project)
-    // },
-    // projectRemoveHandler () {
-    //   this.project = false
-    // },
-    // userAddHandler (user) {
-    //   assert('isUser', user)
-    //   this.user = user
-    // },
-    // userRemoveHandler () {
-    //   this.user = false
-    // },
-    // filters: {
-    //   required: true,
-    //   type: Object
-    // },
-    // applyFilters: {
-    //   required: true,
-    //   type: Function
-    // }
   }
 }
 

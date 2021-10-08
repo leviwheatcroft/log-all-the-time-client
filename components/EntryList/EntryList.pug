@@ -1,10 +1,17 @@
 .entry-list(
   class="mx-6"
 )
-  entry-list-fields(
-    :fieldsToggleBoundaries="fieldsToggleBoundaries"
-    :fieldsToggle="fieldsToggle"
-  )
+  tpl-label-bar
+    template(
+      v-slot:label
+    ) Entries
+    template(
+      v-slot:tools
+    )
+      entry-list-fields(
+        :fieldsToggleBoundaries="fieldsToggleBoundaries"
+        :fieldsToggle="fieldsToggle"
+      )
   .no-entries(
     class="flex flex-row justify-center items-center mt-16 color-light-60"
     v-if="!entries.length"
