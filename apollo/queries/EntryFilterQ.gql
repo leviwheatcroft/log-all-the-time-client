@@ -3,21 +3,19 @@ query EntryFilterQ(
   $dateTo: DateMidnightUtc
   $limit: Int
   $offset: Int
-  $self: Boolean
   $order: OrderI
-  $project: Int
-  $tags: [Int!]
-  $users: [Int!]
+  $projects: [ProjectI]
+  $tags: [TagI]
+  $users: [UserI]
   ) {
   EntryFilterQ(
     dateFrom: $dateFrom
     dateTo: $dateTo
     limit: $limit
     offset: $offset
-    self: $self
     order: $order
+    projects: $projects
     tags: $tags
-    project: $project
     users: $users
   ) {
   docs {

@@ -1,8 +1,8 @@
 <template lang="pug">
   .index
     report-filters(
-      :applyFilters="applyFilters"
       :filters="filters"
+      @updateFilters="filters = $event"
     )
     //- duration-by-day
     entry-list(
@@ -52,7 +52,7 @@ const PageReport = {
         self: false,
         order: { createdAt: 'desc' },
         tags: [],
-        project: null,
+        projects: [],
         users: []
       },
       fieldsToggleBoundaries: {
@@ -69,11 +69,6 @@ const PageReport = {
     }
   },
   methods: {
-    applyFilters (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        this.filters[key] = value
-      })
-    },
     fetchMoreEntries () {
       if (this.loading)
         return

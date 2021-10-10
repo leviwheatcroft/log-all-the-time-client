@@ -14,16 +14,13 @@ const ReportFilters = {
     DatePicker
   },
   data () {
-    const tags = []
-    const projects = []
-    const users = []
-    // const {
-    //   dateFrom,
-    //   dateTo,
-    //   tags,
-    //   project,
-    //   users
-    // } = this.filters
+    const {
+      // dateFrom,
+      // dateTo,
+      tags,
+      projects,
+      users
+    } = this.filters
     const showExportOptions = false
     return {
       // dateRange: [dateFrom, dateTo],
@@ -36,23 +33,16 @@ const ReportFilters = {
     }
   },
   methods: {
-
     clickApplyHandler () {
-      // eslint-disable-next-line
-      console.log('cph')
       const {
-        dateRange,
-        // projects,
-        // tags,
-        // users
-      } = this.$refs
-      // eslint-disable-next-line
-      console.log(dateRange.getValue())
-      this.$store.commit('reportFilters/apply', {
-        dateRange: dateRange.getValue(),
-        // projects: projects.getValue(),
-        // tags: tags.getValue(),
-        // users: users.getValue()
+        tags,
+        projects,
+        users
+      } = this
+      this.$emit('updateFilters', {
+        tags,
+        projects,
+        users,
       })
     },
     async exportCsv () {
@@ -94,6 +84,10 @@ const ReportFilters = {
     }
   },
   props: {
+    filters: {
+      type: Object,
+      required: true
+    }
   }
 }
 

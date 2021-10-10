@@ -23,6 +23,9 @@ import {
 import {
   validator
 } from '../lib/types'
+import {
+  AuthStatus
+} from '../lib/enums'
 
 const PageDashboard = {
   apollo: {
@@ -32,7 +35,8 @@ const PageDashboard = {
         const limit = 24
         const offset = 0
         return {
-          ...this.filters,
+          users: [this.user],
+          sort: { createdAt: 'desc' },
           limit,
           offset
         }
@@ -46,15 +50,23 @@ const PageDashboard = {
       update ({ EntryFilterQ: { docs, hasMore } }) {
         this.hasMore = hasMore
         return docs
+      },
+      skip () {
+        return this.authStatus !== AuthStatus.loggedIn
       }
+    }
+  },
+  computed: {
+    user () {
+      const { id, name } = this.$store.state.user
+      return { id, name }
+    },
+    authStatus () {
+      return this.$store.state.auth.status
     }
   },
   data () {
     return {
-      filters: {
-        self: true,
-        sort: { createdAt: 'desc' }
-      },
       fieldsToggleBoundaries: {
         date: null,
         description: true,
