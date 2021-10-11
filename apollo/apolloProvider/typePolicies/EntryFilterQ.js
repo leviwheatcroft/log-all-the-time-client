@@ -4,10 +4,10 @@ const {
 
 const EntryFilterQ = {
   keyArgs: [
-    'self',
     'sort',
     'dateFrom',
     'dateTo',
+    'projects',
     'tags',
     'users'
   ],

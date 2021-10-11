@@ -1,24 +1,15 @@
 import DatePicker from 'vue2-datepicker'
 import {
-  isMidnightUtc,
-  isNull,
-  // assert
-} from '../../../lib/types'
-import {
   classes
 } from '../../../componentMixins'
 
+// for AWST getTimezoneOffset returns -480, that's 8hrs * -60 minutes
+const timezoneOffset = (new Date()).getTimezoneOffset() * -60000
+
 const DateRange = {
   data () {
-    const {
-      dateRange
-    } = this.$store.state.reportFilters
-
     return {
-      localDateRange: [
-        dateRange[0] ? new Date(dateRange[0]) : null,
-        dateRange[1] ? new Date(dateRange[1]) : null,
-      ]
+      localDateRange: [...this.dateRange]
     }
   },
   components: {
@@ -27,24 +18,45 @@ const DateRange = {
   methods: {
     inputDateRange () {
       const {
-        localDateRange
+        localDateRange: [dateFrom, dateTo]
       } = this
 
-      this.localDateRange = localDateRange.map((date) => {
-        if (isNull(date))
-          return date
-        if (isMidnightUtc(date))
-          return date
-        // for AWST getTimezoneOffset returns -480, that's 8hrs * -60 minutes
-        return new Date(date.getTime() + date.getTimezoneOffset() * -60000)
-      })
-    },
-    getValue () {
-      return this.localDateRange.map((d) => d ? d.getTime() : null)
+      this.$emit(
+        'updateDateRange',
+        [
+          dateFrom ? dateFrom + timezoneOffset : null,
+          dateTo ? dateTo + timezoneOffset : null
+        ]
+      )
+
+      // this.localDateRange = localDateRange.map((date) => {
+      //   if (isNull(date))
+      //     return date
+      //   if (isMidnightUtc(date))
+      //     return date
+      //   // for AWST getTimezoneOffset returns -480, that's 8hrs * -60 minutes
+      //   return new Date(date.getTime() + date.getTimezoneOffset() * -60000)
+      // })
     }
   },
   mixins: [classes],
-  props: {}
+  props: {
+    dateRange: {
+      type: Array,
+      validator (dateRange) {
+        return (
+          dateRange.length === 2 &&
+          dateRange.every((d) => (
+            d === null ||
+            (
+              Number.isInteger(d) &&
+              d % 86400000 === 0
+            )
+          ))
+        )
+      }
+    }
+  }
 }
 
 export default DateRange

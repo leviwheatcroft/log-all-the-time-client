@@ -9,6 +9,8 @@ tpl-shadow-box.report-filters
     report-filters-date-range(
       ref="dateRange"
       extraClasses="w-full lg:w-80"
+      :dateRange="dateRange"
+      @updateDateRange="dateRange = $event"
     )
     selector-projects(
       extraClasses="w-full lg:w-1/3"

@@ -15,19 +15,17 @@ const ReportFilters = {
   },
   data () {
     const {
-      // dateFrom,
-      // dateTo,
+      dateRange,
       tags,
       projects,
       users
     } = this.filters
-    const showExportOptions = false
     return {
-      // dateRange: [dateFrom, dateTo],
+      dateRange,
       tags,
       projects,
       users,
-      showExportOptions,
+      showExportOptions: false,
       exportDateFormat: 'DD/MM/YY',
       exportDurationFormat: 'HH:mm'
     }
@@ -35,11 +33,13 @@ const ReportFilters = {
   methods: {
     clickApplyHandler () {
       const {
+        dateRange,
         tags,
         projects,
         users
       } = this
       this.$emit('updateFilters', {
+        dateRange,
         tags,
         projects,
         users,

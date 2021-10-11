@@ -13,7 +13,7 @@ const Tag = {
         variables: { tagPartial }
       })
       const { data: { TagPartialQ: tagSuggestions } } = result
-      return tagSuggestions
+      return tagSuggestions.map(({ id, name }) => ({ id, name }))
     }
   },
   mixins: [classes],

@@ -13,7 +13,7 @@ const Project = {
         variables: { projectPartial }
       })
       const { data: { ProjectPartialQ: projectSuggestions } } = result
-      return projectSuggestions
+      return projectSuggestions.map(({ id, name }) => ({ id, name }))
     }
   },
   mixins: [classes],

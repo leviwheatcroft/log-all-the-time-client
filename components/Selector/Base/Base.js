@@ -116,6 +116,13 @@ const Base = {
     },
     items: {
       required: true,
+      validator (items) {
+        return [].concat(items).every((i) => (
+          Object.keys(i).length === 2 &&
+          i.id &&
+          i.name
+        ))
+      }
     },
     itemsQuery: {
       required: true,

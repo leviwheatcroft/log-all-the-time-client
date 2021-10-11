@@ -4,7 +4,6 @@
       :filters="filters"
       @updateFilters="filters = $event"
     )
-    //- duration-by-day
     entry-list(
       :entries="entries"
       :fetchMoreEntries="fetchMoreEntries"
@@ -17,12 +16,6 @@
 import {
   EntryFilterQ
 } from '../apollo/queries'
-// import {
-//   assert
-// } from '../lib/types'
-// import {
-//   midnightUtcMs
-// } from '../lib/dates'
 
 const PageReport = {
   apollo: {
@@ -31,8 +24,18 @@ const PageReport = {
       variables () {
         const limit = 24
         const offset = 0
+        const {
+          dateRange: [dateFrom, dateTo],
+          tags,
+          projects,
+          users
+        } = this.filters
         return {
-          ...this.filters,
+          dateFrom,
+          dateTo,
+          tags,
+          projects,
+          users,
           limit,
           offset
         }
@@ -47,9 +50,7 @@ const PageReport = {
   data () {
     return {
       filters: {
-        dateFrom: null,
-        dateTo: null,
-        self: false,
+        dateRange: [null, null],
         order: { createdAt: 'desc' },
         tags: [],
         projects: [],

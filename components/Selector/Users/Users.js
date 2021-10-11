@@ -13,7 +13,7 @@ const Users = {
         variables: { userPartial }
       })
       const { data: { UserPartialQ: userSuggestions } } = result
-      return userSuggestions
+      return userSuggestions.map(({ id, name }) => ({ id, name }))
     }
   },
   mixins: [classes],
