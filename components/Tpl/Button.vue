@@ -62,4 +62,7 @@ button {
     }
   }
 }
+button.bare {
+  background-color: transparent;
+}
 </style>

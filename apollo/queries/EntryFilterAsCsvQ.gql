@@ -1,0 +1,19 @@
+query EntryFilterAsCsvQ(
+  $dateFrom: DateMidnightUtc
+  $dateTo: DateMidnightUtc
+  $projects: [ProjectI]
+  $tags: [TagI]
+  $users: [UserI]
+  $limit: Int
+  $order: OrderI
+  ) {
+  EntryFilterAsCsvQ(
+    dateFrom: $dateFrom
+    dateTo: $dateTo
+    projects: $projects
+    tags: $tags
+    users: $users
+    limit: $limit
+    order: $order
+  )
+}

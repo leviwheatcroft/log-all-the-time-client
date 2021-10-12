@@ -1,13 +1,7 @@
 import DatePicker from 'vue2-datepicker'
-// import {
-//   assert
-// } from '../../lib/types'
 import {
   EntryFilterAsCsvQ
 } from '../../apollo/queries'
-import {
-  midnightUtcMs
-} from '../../lib/dates'
 
 const ReportFilters = {
   components: {
@@ -45,21 +39,25 @@ const ReportFilters = {
         users,
       })
     },
-    async exportCsv () {
+    async clickExportCsvHandler () {
       const {
         dateRange: [dateFrom, dateTo],
         tags,
-        exportDateFormat: dateFormat,
-        exportDurationFormat: durationFormat
+        projects,
+        users,
+        // exportDateFormat: dateFormat,
+        // exportDurationFormat: durationFormat
       } = this
       const result = await this.$apollo.query({
         query: EntryFilterAsCsvQ,
         variables: {
-          dateFrom: midnightUtcMs(dateFrom),
-          dateTo: midnightUtcMs(dateTo),
-          dateFormat,
-          durationFormat,
-          tags
+          dateFrom,
+          dateTo,
+          tags,
+          projects,
+          users,
+          // dateFormat,
+          // durationFormat,
         }
       })
       const {
@@ -77,6 +75,8 @@ const ReportFilters = {
         return
       }
       const a = this.$el.querySelector('a.download')
+      // eslint-disable-next-line no-console
+      console.log(a)
       a.href = window.URL.createObjectURL(blob)
       a.download = filename
       a.click()

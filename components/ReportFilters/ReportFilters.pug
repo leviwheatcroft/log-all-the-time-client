@@ -48,11 +48,11 @@ tpl-shadow-box.report-filters
           name="file-text"
         )
         span Apply
-  .row(
+  div(
     class="mt-4"
   )
     tpl-button(
-      :iconName="showExportOptions ? 'chevron-up' : 'chevron-down'"
+      extraClasses="bare"
       @click="showExportOptions = !showExportOptions"
     )
       span Export
@@ -63,33 +63,36 @@ tpl-shadow-box.report-filters
   .export-options(
     v-if="showExportOptions"
   )
-    h3 Export Options
-    .row
-      .container-export-date-format
-        .faux-input
-          icon(
-            name="calendar"
-          )
-          input.export-date-format(
-            v-model='exportDateFormat'
-          )
-    .row
-      .container-export-duration-format
-        .faux-input
-          icon(
-            name="clock"
-          )
-          input.export-duration-format(
-            v-model='exportDurationFormat'
-          )
-    .row
-      .spacer
-      .container-button
-        a.download
-        button.button.export(
-          @click='exportCsv'
+    tpl-label-bar
+      template(
+        v-slot:label
+      ) Export Options
+    div(
+      class="flex flex-row gap-4 flex-wrap"
+    )
+      tpl-faux-input
+        icon(
+          name="calendar"
+        )
+        input.export-date-format(
+          v-model='exportDateFormat'
+        )
+      tpl-faux-input
+        icon(
+          name="clock"
+        )
+        input.export-duration-format(
+          v-model='exportDurationFormat'
+        )
+      div(
+        class="flex flex-row flex-grow"
+      )
+        .flex-grow
+        tpl-button(
+          @click="clickExportCsvHandler"
         )
           icon(
-            name="download"
+            name="file-text"
           )
           span Export
+        a.download
