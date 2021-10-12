@@ -27,7 +27,7 @@ export default {
   },
   data () {
     const classList = [
-      'rounded m-2 p-2 background-blue w-24',
+      'rounded m-2 p-2 background-blue w-24 whitespace-nowrap',
       this.classMixins,
     ].join(' ')
     return {

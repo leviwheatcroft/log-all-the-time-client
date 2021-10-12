@@ -34,6 +34,6 @@ export default {
 <style scoped lang="less">
   svg.icon {
     position: relative;
-    top: 0.125rem;
+    /* top: 0.125rem; */
   }
 </style>

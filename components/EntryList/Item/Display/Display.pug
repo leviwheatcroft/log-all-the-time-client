@@ -1,23 +1,17 @@
 .entry-list-item-display(
   class="flex flex-row items-center"
 )
-  .date(
-    class="cursor-pointer rounded m-2 p-2 background-blue min-content"
+  tpl-meta.date(
     v-if="fieldsToggle.date"
+    extraClasses="w-24"
+    icon="calendar"
   )
-    icon(
-      class="mr-1 w-4 h-4 inline -t-2"
-      name="calendar"
-    )
     | {{ $dayjs(entry.date).format('D MMM') }}
-  .duration(
-    class="cursor-pointer rounded m-2 p-2 background-blue min-content"
+  tpl-meta.duration(
     v-if="fieldsToggle.duration"
+    extraClasses="w-20"
+    icon="clock"
   )
-    icon(
-      class="mr-1 w-4 h-4 inline -t-2"
-      name="clock"
-    )
     .
       {{
         $dayjs.duration({
@@ -33,34 +27,22 @@
     class="flex-grow h-px mx-10 min-w-4 bg-gray-300"
     v-if="fieldsToggle.tags || fieldsToggle.user || fieldsToggle.project"
   )
-  .project(
-    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap overflow-hidden overflow-ellipsis"
+  tpl-meta.project(
     v-if="fieldsToggle.project"
-    :style="{ backgroundColor: hexFromString(entry.project.name) }"
+    icon="folder"
+    :hashColor="entry.project.name"
   )
-    icon(
-      class="mr-1 w-4 h-4 inline -t-2"
-      name="folder"
-    )
     | {{ entry.project.name }}
-  .tag(
-    class="cursor-pointer rounded m-2 p-2 whitespace-nowrap"
+  tpl-meta.tag(
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
-    :style="{ backgroundColor: hexFromString(tag.name) }"
+    icon="tag"
+    :hashColor="tag.name"
   )
-    icon(
-      class="mr-1 w-4 h-4 inline -t-2"
-      name="tag"
-    )
     | {{ tag.name }}
-  .user(
-    class="cursor-pointer rounded m-2 p-2"
+  tpl-meta.user(
     v-if="fieldsToggle.user"
-    :style="{ backgroundColor: hexFromString(entry.user.name) }"
+    icon="user"
+    :hashColor="entry.user.name"
   )
-    icon(
-      class="mr-1 w-4 h-4 inline -t-2"
-      name="user"
-    )
     | {{ entry.user.name }}

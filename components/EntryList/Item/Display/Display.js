@@ -1,9 +1,6 @@
 import {
   assert
 } from '../../../../lib/types'
-import {
-  hexFromString
-} from '../../../../lib/colors'
 
 const EntryDisplay = {
   props: {
@@ -21,11 +18,7 @@ const EntryDisplay = {
     return {
     }
   },
-  methods: {
-    hexFromString (str) {
-      return hexFromString(str)
-    },
-  }
+  methods: {}
 }
 
 export default EntryDisplay
