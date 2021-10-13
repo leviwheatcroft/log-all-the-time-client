@@ -36,6 +36,7 @@
   tpl-meta.tag(
     v-if="fieldsToggle.tags"
     v-for="tag in entry.tags"
+    :key="tag.id"
     icon="tag"
     :hashColor="tag.name"
   )

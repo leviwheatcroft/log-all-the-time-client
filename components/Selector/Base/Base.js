@@ -117,6 +117,8 @@ const Base = {
     items: {
       required: true,
       validator (items) {
+        if (items === null)
+          return true
         return [].concat(items).every((i) => (
           Object.keys(i).length === 2 &&
           i.id &&

@@ -24,8 +24,8 @@ const EntryInput = {
       duration = '',
       id = 0,
       tags = [],
-      project = false,
-      user = false
+      project = null,
+      user = null
     } = this.entry || {}
 
     return {
