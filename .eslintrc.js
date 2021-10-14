@@ -36,7 +36,7 @@ module.exports = {
     //   'arrow-body-style': 'off',
     //   'consistent-return': 'off',
     //   'no-param-reassign': 'off',
-    'no-console': ['error', { allow: ['warn', 'error', 'assert'] }],
+    'no-console': ['warn', { allow: ['warn', 'error', 'assert'] }],
     //   'no-unused-vars': [
     //     'error',
     //     {

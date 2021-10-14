@@ -25,7 +25,7 @@ const EntryInput = {
       id = 0,
       tags = [],
       project = null,
-      user = null
+      user = this.$store.state.user
     } = this.entry || {}
 
     return {
@@ -42,41 +42,6 @@ const EntryInput = {
     }
   },
   methods: {
-    // tagNewHandler (tag) {
-    //   tag.name = tag.itemName
-    //   assert('isTag', tag)
-    //   this.tags.push(tag)
-    // },
-    // tagAddHandler (tag) {
-    //   assert('isTag', tag)
-    //   this.tags.push(tag)
-    // },
-    // tagRemoveHandler (tag) {
-    //   assert(['isTag', 'isNewTag'], tag)
-    //   const idx = this.tags.findIndex((t) => t.name === tag.name)
-    //   console.assert(
-    //     idx !== -1,
-    //     { tags: this.tags, tag, msg: 'tag not in tags' }
-    //   )
-    //   this.tags.splice(idx, 1)
-    // },
-    // projectNewHandler (project) {
-    //   project.name = project.itemName
-    //   this.project = assert('isNewProject', project)
-    // },
-    // projectAddHandler (project) {
-    //   this.project = assert('isNewProject', project)
-    // },
-    // projectRemoveHandler () {
-    //   this.project = false
-    // },
-    // userAddHandler (user) {
-    //   assert('isUser', user)
-    //   this.user = user
-    // },
-    // userRemoveHandler () {
-    //   this.user = false
-    // },
     clickCancel () {
       this.$emit('cancel')
     },
@@ -95,7 +60,8 @@ const EntryInput = {
       this.duration = ''
       this.description = ''
       this.tags = []
-      this.project = false
+      this.project = null
+      this.user = null
       this.$el.querySelector('input.description').focus()
     }
   },

@@ -3,14 +3,29 @@ const {
 } = require('../../../lib')
 
 const EntryFilterQ = {
-  keyArgs: [
-    'sort',
-    'dateFrom',
-    'dateTo',
-    'projects',
-    'tags',
-    'users'
-  ],
+  keyArgs (args) {
+    // https://www.apollographql.com/docs/react/caching/cache-field-behavior/#fieldpolicy-api-reference
+    // you can pass an array of variables for keyArgs, but then it won't
+    // deepEqual complex objects like projects tags or users
+    // we can use a function that returns a string instead
+    // queries will be cached according to this string
+    const {
+      sort,
+      dateFrom,
+      dateTo,
+      projects = [],
+      tags = [],
+      users = []
+    } = args
+    return JSON.stringify({
+      sort,
+      dateFrom,
+      dateTo,
+      projects: projects.map(({ id }) => id),
+      tags: tags.map(({ id }) => id),
+      users: users.map(({ id }) => id)
+    })
+  },
   merge (existing, incoming, ctx) {
     // this fn does need to be aware of sort order, but does not need to sort
     // everything every time.

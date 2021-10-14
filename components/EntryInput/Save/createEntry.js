@@ -59,7 +59,7 @@ export async function createEntry () {
       const cached = store.readQuery({
         query: EntryFilterQ,
         variables: {
-          self: true,
+          users: [user],
           sort: { createdAt: 'desc' }
         }
       })
@@ -75,7 +75,7 @@ export async function createEntry () {
       store.writeQuery({
         query: EntryFilterQ,
         variables: {
-          self: true,
+          users: [user],
           sort: { createdAt: 'desc' }
         },
         data: {

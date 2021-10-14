@@ -117,11 +117,13 @@ const Base = {
     items: {
       required: true,
       validator (items) {
+        // eslint-disable-next-line
+        console.log('items', items)
         if (items === null)
           return true
         return [].concat(items).every((i) => (
           Object.keys(i).length === 2 &&
-          i.id &&
+          i.id !== undefined && // id will be 0 (falsy) for new items
           i.name
         ))
       }
