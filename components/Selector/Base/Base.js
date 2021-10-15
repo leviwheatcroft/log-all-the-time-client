@@ -117,8 +117,6 @@ const Base = {
     items: {
       required: true,
       validator (items) {
-        // eslint-disable-next-line
-        console.log('items', items)
         if (items === null)
           return true
         return [].concat(items).every((i) => (

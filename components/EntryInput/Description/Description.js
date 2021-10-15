@@ -1,7 +1,4 @@
 import {
-  getValidator
-} from '../../../lib/types'
-import {
   ValidState
 } from '../../../lib/enums'
 import {
@@ -21,6 +18,13 @@ const Description = {
       return this.validState
     }
   },
+  watch: {
+    description () {
+      if (this.validState === ValidState.unchecked)
+        return
+      this.validate()
+    }
+  },
   data () {
     const validState = ValidState.unchecked
     return {
@@ -35,7 +39,7 @@ const Description = {
     },
     description: {
       required: true,
-      validator: getValidator('isString')
+      type: String
     }
   }
 }

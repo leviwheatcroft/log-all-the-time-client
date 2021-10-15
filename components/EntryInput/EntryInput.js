@@ -48,10 +48,11 @@ const EntryInput = {
     validate () {
       const isValid = [
         this.$refs.description,
-        this.$refs.duration
-      ].every((validateItem) => {
-        return validateItem.validate() === ValidState.valid
-      })
+        this.$refs.duration,
+        this.$refs.projects
+      ].reduce((ok, validateItem) => {
+        return validateItem.validate() === ValidState.valid && ok
+      }, true)
       if (!isValid)
         throw new ValidationError()
     },

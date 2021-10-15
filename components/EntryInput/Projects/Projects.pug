@@ -1,0 +1,8 @@
+selector-projects(
+  :extraClasses="resolveClasses(validState.value)"
+  :allowNewItem="true"
+  :isMultiItem="false"
+  :items="items"
+  @updateItems="$emit('updateItems', $event)"
+  :inputTabindex="inputTabindex"
+)

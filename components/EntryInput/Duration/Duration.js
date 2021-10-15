@@ -28,6 +28,7 @@ const Duration = {
       let duration
       try {
         duration = parseHumanDuration(this.durationRaw)
+        this.validState = ValidState.valid
       } catch (err) {
         if (err.code === 'VALIDATION_ERROR')
           this.validState = ValidState.invalid

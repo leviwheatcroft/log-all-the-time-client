@@ -1,0 +1,8 @@
+selector-users(
+  :extraClasses="resolveClasses(validState.value)"
+  :allowNewItem="false"
+  :isMultiItem="false"
+  :items="items"
+  @updateItems="$emit('updateItems', $event)"
+  :inputTabindex="inputTabindex"
+)
