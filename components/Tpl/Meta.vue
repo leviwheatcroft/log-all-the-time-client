@@ -21,7 +21,13 @@ import {
 const Meta = {
   data () {
     return {
-      initialClasses: 'rounded m-2 p-2 background-blue whitespace-nowrap min-content'
+      initialClasses: {
+        always: 'rounded whitespace-nowrap',
+        m: 'm-2',
+        p: 'p-2',
+        w: 'min-content',
+        background: 'background-blue',
+      }
     }
   },
   mixins: [classes],

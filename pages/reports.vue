@@ -22,23 +22,7 @@ const PageReport = {
     entries: {
       query: EntryFilterQ,
       variables () {
-        const limit = 24
-        const offset = 0
-        const {
-          dateRange: [dateFrom, dateTo],
-          tags,
-          projects,
-          users
-        } = this.filters
-        return {
-          dateFrom,
-          dateTo,
-          tags,
-          projects,
-          users,
-          limit,
-          offset
-        }
+        return this.getVariables()
       },
       nextFetchPolicy: 'cache-only',
       update ({ EntryFilterQ: { docs, hasMore } }) {
@@ -70,18 +54,32 @@ const PageReport = {
     }
   },
   methods: {
+    getVariables () {
+      const limit = 24
+      const offset = this.entries.length
+      const {
+        dateRange: [dateFrom, dateTo],
+        tags,
+        projects,
+        users
+      } = this.filters
+      return {
+        dateFrom,
+        dateTo,
+        tags,
+        projects,
+        users,
+        limit,
+        offset
+      }
+    },
     fetchMoreEntries () {
       if (this.loading)
         return
       if (!this.hasMore)
         return
-      const variables = {
-        ...this.filters,
-        offset: this.entries.length,
-        limit: 24
-      }
       this.$apollo.queries.entries.fetchMore({
-        variables
+        variables: this.getVariables()
       })
     }
   }

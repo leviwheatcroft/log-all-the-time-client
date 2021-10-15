@@ -2,17 +2,23 @@ export const classes = {
   props: {
     extraClasses: {
       required: false,
-      type: String,
       default: ''
     }
   },
   methods: {
     resolveClasses (...classes) {
-      return [
-        ...classes,
-        this.initialClasses || '',
-        this.extraClasses
-      ].join(' ').trim()
+      return Object.values(
+        [
+          ...classes,
+          this.initialClasses,
+          this.extraClasses,
+        ].reduce((_, classes, i) => {
+          return {
+            ..._,
+            ...typeof classes === 'string' ? { [i]: classes } : classes
+          }
+        }, {})
+      ).join(' ').trim()
     }
   }
 }

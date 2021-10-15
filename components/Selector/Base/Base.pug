@@ -7,17 +7,17 @@ tpl-faux-input.item-selector(
   .item-selected-group(
     class="flex flex-row"
   )
-    .item-selected(
-      class="flex flex-row items-center pl-3 pr-1 m-1 h-8 rounded"
-      v-for="selectedItem in _items"
-      :style="{ backgroundColor: hexFromString(selectedItem.name) }"
+  tpl-meta.item-selected(
+    v-for="selectedItem in _items"
+    :hashColor="selectedItem.name"
+    :extraClasses="{m: 'm-1', p: 'p-1 pl-2', h: 'h-8' }"
+  )
+    | {{ selectedItem.name }}
+    icon(
+      class="cursor-pointer w-4 h-4 inline mr-1"
+      name="x"
+      @click="clickItemRemove(selectedItem)"
     )
-      | {{ selectedItem.name }}
-      icon(
-        class="cursor-pointer w-4 h-4"
-        name="x"
-        @click="clickItemRemove(selectedItem)"
-      )
   .item-partial-container.grow
     input.item-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"

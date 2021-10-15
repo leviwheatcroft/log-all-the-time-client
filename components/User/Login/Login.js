@@ -1,5 +1,5 @@
 import {
-  AuthState
+  AuthStatus
 } from '../../../lib/enums'
 import apollo from '../../../apollo'
 import {
@@ -41,7 +41,7 @@ const Login = {
           password
         }
       })
-      cookies.setTokens(loginResult.data)
+      cookies.setTokens(loginResult.data.UserLoginM)
       const userResult = await this.$apollo.query({
         query: SelfQ
       })
@@ -49,7 +49,7 @@ const Login = {
         data: { SelfQ: user }
       } = userResult
       this.$store.commit('user/logIn', user)
-      this.$store.commit('auth/status', AuthState.loggedIn)
+      this.$store.commit('auth/status', AuthStatus.loggedIn)
     }
   }
 }

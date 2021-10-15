@@ -1,7 +1,5 @@
 <template lang="pug">
-.light-box-background(
-  v-if="errors.length"
-)
+.light-box-background
   .light-box(
     :class="resolveClasses()"
   )
@@ -29,6 +27,7 @@ export default LightBox
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
   .light-box {
     background-color: @light100;
     padding: 1.2rem 3.6rem;

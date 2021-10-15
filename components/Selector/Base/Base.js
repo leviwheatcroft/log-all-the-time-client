@@ -1,8 +1,5 @@
 import _throttle from 'lodash/throttle'
 import {
-  hexFromString
-} from '../../../lib/colors'
-import {
   classes
 } from '../../../componentMixins'
 
@@ -29,9 +26,6 @@ const Base = {
     }
   },
   methods: {
-    hexFromString (string) {
-      return hexFromString(string)
-    },
     clickItemAdd (item) {
       this.updateItems([...this._items, item])
       this.itemPartial = ''
@@ -120,9 +114,8 @@ const Base = {
         if (items === null)
           return true
         return [].concat(items).every((i) => (
-          Object.keys(i).length === 2 &&
-          i.id !== undefined && // id will be 0 (falsy) for new items
-          i.name
+          Number.isInteger(i.id) && // id will be 0 (falsy) for new items
+          typeof i.name === 'string'
         ))
       }
     },
