@@ -9,7 +9,7 @@ nav.nav-bar(
     nuxt-link(
       :class=`[
         'mx-4',
-        'pb-4',
+        'pb-2',
         'border-b-2',
         'border-gray-800',
         $route.name === 'index' ? 'border-blue-50' : ''
@@ -19,7 +19,7 @@ nav.nav-bar(
     nuxt-link(
       :class=`[
         'mx-4',
-        'pb-4',
+        'pb-2',
         'border-b-2',
         'border-gray-800',
         $route.name === 'reports' ? 'border-blue-50' : ''
@@ -30,15 +30,28 @@ nav.nav-bar(
     class="flex-grow"
   )
   .profile(
-    class="flex flex-row items-center gap-4"
     v-if="name"
   )
-    img.gravatar(
-      class="rounded-full w-6 h-6"
-      :src="gravatar"
+    nuxt-link(
+      :class=`[
+        'mx-4',
+        'pb-2',
+        'border-b-2',
+        'border-gray-800',
+        'flex',
+        'flex-row',
+        'items-center',
+        'gap-4',
+        $route.name === 'profile' ? 'border-blue-50' : ''
+      ]`
+      to="/profile"
     )
-    .name
-      | {{ name }}
+      img.gravatar(
+        class="rounded-full w-6 h-6"
+        :src="gravatar"
+      )
+      .name
+        | {{ name }}
   .log-in(
     v-if="!name"
   )
