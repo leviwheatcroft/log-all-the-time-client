@@ -13,6 +13,11 @@ import {
 
 const Button = {
   mixins: [classes],
+  data () {
+    return {
+      initialClasses: 'text-left'
+    }
+  },
   props: {
     // a nuxt-link included in the slot will always be focussable
     tabindex: {
@@ -35,6 +40,7 @@ button {
    * TODO:
    * focus-within should work when a nuxt-link is focussed, but doesn't
    */
+  &.active,
   &:focus,
   &:focus-within {
     background-color: @focusField;

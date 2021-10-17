@@ -13,12 +13,15 @@ export const classes = {
           this.initialClasses,
           this.extraClasses,
         ].reduce((_, classes, i) => {
-          return {
-            ..._,
-            ...typeof classes === 'string' ? { [i]: classes } : classes
-          }
+          if (typeof classes === 'string')
+            _[i] = classes
+          else if (Array.isArray(classes))
+            _[i] = classes
+          else
+            _ = { ..._, ...classes }
+          return _
         }, {})
-      ).join(' ').trim()
+      ).flat().join(' ').trim()
     }
   }
 }

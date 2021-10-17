@@ -26,6 +26,16 @@ nav.nav-bar(
       ]`
       to="/reports"
     ) Reports
+    nuxt-link(
+      :class=`[
+        'mx-4',
+        'pb-2',
+        'border-b-2',
+        'border-gray-800',
+        $route.name === 'reports' ? 'border-blue-50' : ''
+      ]`
+      to="/meta"
+    ) Meta
   .spacer(
     class="flex-grow"
   )

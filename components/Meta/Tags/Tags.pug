@@ -1,0 +1,45 @@
+.meta-tags(
+  class="w-2/4 mx-auto"
+)
+  tpl-label-bar
+    template(
+      v-slot:label
+    ) Tags
+  .search(
+    class="flex flex-row gap-4 mt-4 justify-center"
+  )
+    tpl-faux-input
+      icon(
+        name="tag"
+      )
+      input(
+        name="tag-partial"
+        v-model="tagPartial"
+        placeholder="tag"
+      )
+  div(
+    class="mx-auto"
+  )
+    .headings(
+      class="flex flex-row gap-4 mt-4 justify-between"
+    )
+      span
+        | Tag Name
+      span
+        | Archived
+    .tag(
+      class="flex flex-row gap-4 mt-4 justify-between items-center"
+      v-for="tag in tags"
+    )
+      | {{ tag.name }}
+      .spacer(
+        class="flex-grow h-px mx-10 min-w-4 bg-gray-300"
+      )
+      tpl-button(
+        extraClasses="bare"
+        @click="toggleArchived(tag)"
+      )
+        icon(
+          :name="tag.archived ? 'toggle-right' : 'toggle-left'"
+        )
+      

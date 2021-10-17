@@ -1,10 +1,20 @@
 query TagPartialQ(
   $tagPartial: String
+  $limit: Int
+  $offset: Int
 ) {
   TagPartialQ(
     tagPartial: $tagPartial
+    limit: $limit
+    offset: $offset
   ) {
-    id
-    name
+    docs {
+      ... on Tag {
+        id
+        name
+        archived
+      }
+    }
+    hasMore
   }
 }

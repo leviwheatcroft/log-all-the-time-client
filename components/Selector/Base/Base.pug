@@ -11,6 +11,7 @@ tpl-faux-input.item-selector(
     v-for="selectedItem in _items"
     :hashColor="selectedItem.name"
     :extraClasses="{m: 'm-1', p: 'p-1 pl-2', h: 'h-8' }"
+    :key="selectedItem.id"
   )
     | {{ selectedItem.name }}
     icon(

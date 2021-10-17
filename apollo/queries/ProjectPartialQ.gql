@@ -1,10 +1,20 @@
 query ProjectPartialQ(
   $projectPartial: String
+  $limit: Int
+  $offset: Int
 ) {
   ProjectPartialQ(
     projectPartial: $projectPartial
+    limit: $limit
+    offset: $offset
   ) {
-    id
-    name
+    docs {
+      ... on Project {
+        id
+        name
+        archived
+      }
+    }
+    hasMore
   }
 }

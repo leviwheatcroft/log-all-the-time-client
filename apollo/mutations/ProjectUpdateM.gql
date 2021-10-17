@@ -1,0 +1,11 @@
+mutation ProjectUpdateM(
+  $project: ProjectI!
+) {
+  ProjectUpdateM(
+    project: $project
+  ) {
+    id,
+    name,
+    archived
+  }
+}

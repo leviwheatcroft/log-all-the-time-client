@@ -1,0 +1,11 @@
+mutation TagUpdateM(
+  $tag: TagI!
+) {
+  TagUpdateM(
+    tag: $tag
+  ) {
+    id,
+    name,
+    archived
+  }
+}

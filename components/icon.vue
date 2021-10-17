@@ -36,4 +36,18 @@ export default {
     position: relative;
     /* top: 0.125rem; */
   }
+
+  @-moz-keyframes spin {
+    to { -moz-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    to {transform:rotate(360deg);}
+  }
+
+  svg.spin {
+    animation: spin 1500ms linear infinite;
+  }
 </style>

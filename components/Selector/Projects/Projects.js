@@ -12,7 +12,7 @@ const Project = {
         query: ProjectPartialQ,
         variables: { projectPartial }
       })
-      const { data: { ProjectPartialQ: projectSuggestions } } = result
+      const { data: { ProjectPartialQ: { docs: projectSuggestions } } } = result
       return projectSuggestions.map(({ id, name }) => ({ id, name }))
     }
   },
