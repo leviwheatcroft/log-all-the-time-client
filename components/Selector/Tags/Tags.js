@@ -10,9 +10,13 @@ const Tag = {
     async tagsQuery (tagPartial) {
       const result = await this.$apollo.query({
         query: TagPartialQ,
-        variables: { tagPartial }
+        variables: {
+          tagPartial,
+          limit: 12,
+          includeArchived: false
+        }
       })
-      const { data: { TagPartialQ: tagSuggestions } } = result
+      const { data: { TagPartialQ: { docs: tagSuggestions } } } = result
       return tagSuggestions.map(({ id, name }) => ({ id, name }))
     }
   },

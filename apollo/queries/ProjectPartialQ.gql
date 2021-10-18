@@ -2,11 +2,13 @@ query ProjectPartialQ(
   $projectPartial: String
   $limit: Int
   $offset: Int
+  $includeArchived: Boolean
 ) {
   ProjectPartialQ(
     projectPartial: $projectPartial
     limit: $limit
     offset: $offset
+    includeArchived: $includeArchived
   ) {
     docs {
       ... on Project {

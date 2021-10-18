@@ -10,7 +10,11 @@ const Project = {
     async projectsQuery (projectPartial) {
       const result = await this.$apollo.query({
         query: ProjectPartialQ,
-        variables: { projectPartial }
+        variables: {
+          projectPartial,
+          limit: 12,
+          includeArchived: false
+        }
       })
       const { data: { ProjectPartialQ: { docs: projectSuggestions } } } = result
       return projectSuggestions.map(({ id, name }) => ({ id, name }))

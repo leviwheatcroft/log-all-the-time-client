@@ -34,7 +34,7 @@ tpl-faux-input.item-selector(
         v-for="itemSuggestion in itemSuggestions"
         :key="itemSuggestion.id"
         @click="clickItemAdd(itemSuggestion)"
-        :style="{ backgroundColor: hexFromString(itemSuggestion.name) }"
+        :style="{ backgroundColor: asRgb(itemSuggestion.name) }"
       )
         slot(
           name="icon-item"

@@ -2,6 +2,9 @@ import _throttle from 'lodash/throttle'
 import {
   classes
 } from '../../../componentMixins'
+import {
+  asRgb
+} from '../../../lib/colors'
 
 const Base = {
   data () {
@@ -26,6 +29,9 @@ const Base = {
     }
   },
   methods: {
+    asRgb (str) {
+      return asRgb(str)
+    },
     clickItemAdd (item) {
       this.updateItems([...this._items, item])
       this.itemPartial = ''

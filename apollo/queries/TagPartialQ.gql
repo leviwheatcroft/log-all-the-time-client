@@ -2,11 +2,13 @@ query TagPartialQ(
   $tagPartial: String
   $limit: Int
   $offset: Int
+  $includeArchived: Boolean
 ) {
   TagPartialQ(
     tagPartial: $tagPartial
     limit: $limit
     offset: $offset
+    includeArchived: $includeArchived
   ) {
     docs {
       ... on Tag {
