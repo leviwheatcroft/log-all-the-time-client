@@ -5,7 +5,7 @@ const { UserRefreshM } = require('../mutations')
 const { cookies } = require('../../lib')
 
 const refreshHandlers = {
-  async AUTH_ACCESS_TIMEOUT (ctx) {
+  async AuthAccessTimeoutError (ctx) {
     const {
       getClient
     } = ctx
@@ -22,6 +22,7 @@ const refreshHandlers = {
         UserRefreshM: accessToken
       }
     } = result
+
     cookies.setAccessToken(accessToken)
     return result
   }
@@ -29,8 +30,8 @@ const refreshHandlers = {
 
 function getHandler (graphQLErrors = []) {
   const handlerName = graphQLErrors
-    .map(({ code }) => code)
-    .find((code) => refreshHandlers[code])
+    .map(({ name }) => name)
+    .find((name) => refreshHandlers[name])
   return handlerName ? refreshHandlers[handlerName] : false
 }
 
@@ -76,9 +77,6 @@ function getRefreshAuthTokenLink (ctx) {
         // successfully obtained new token, so update the auth header and
         // resend the original query
         const { headers } = operation.getContext()
-        // const authorization = getAuth()
-        // console.log('get auth')
-        // console.log(apolloProvider)
         const authorization = {
           Authorization: cookies.getAccessToken()
         }

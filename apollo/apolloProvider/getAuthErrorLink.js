@@ -62,8 +62,8 @@ function getAuthErrorLink (ctx) {
     // the data it's expecting
     if (graphQLErrors) {
       graphQLErrors.forEach((err) => {
-        if (errorHandlers[err.code])
-          errorHandlers[err.code](err, ctx)
+        if (errorHandlers[err.name])
+          errorHandlers[err.name](err, ctx)
         else
           console.error('unhandled graphQLError:', err)
       })
