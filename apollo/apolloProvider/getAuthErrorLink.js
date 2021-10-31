@@ -7,9 +7,9 @@ const errorHandlers = {
   // reference to vue-router here would be complex, and these arrors won't
   // occur during normal operation anyway, so `window.location.href` is an
   // easy work around.
-  AUTH_INACTIVE_USER (err) {
+  AuthInactiveUserError (err) {
     const detail = { err }
-    const customEvent = new CustomEvent('AUTH_INACTIVE_USER', { detail })
+    const customEvent = new CustomEvent('AuthInactiveUserError', { detail })
     document.dispatchEvent(customEvent)
     // console.error(err.message)
     // reduce({ USER_LOG_OUT: {} })
@@ -28,9 +28,9 @@ const errorHandlers = {
     const customEvent = new CustomEvent('NO_CONNECTION', { detail })
     document.dispatchEvent(customEvent)
   },
-  AUTH_REFRESH_TIMEOUT (err) {
+  AuthRefreshTimeoutError (err) {
     const detail = { err }
-    const customEvent = new CustomEvent('AUTH_REFRESH_TIMEOUT', { detail })
+    const customEvent = new CustomEvent('AuthRefreshTimeoutError', { detail })
     document.dispatchEvent(customEvent)
   },
   // BAD_PROJECT_ID (err) {

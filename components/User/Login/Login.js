@@ -29,7 +29,7 @@ const Login = {
     }
   },
   methods: {
-    async clickLogIn () {
+    async logIn () {
       const {
         email,
         password

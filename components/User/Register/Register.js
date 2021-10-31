@@ -29,7 +29,7 @@ const Register = {
     }
   },
   methods: {
-    async clickRegister () {
+    async register () {
       const {
         email,
         name,
@@ -53,7 +53,7 @@ const Register = {
       const {
         data: { SelfQ: user }
       } = userResult
-      this.$store.commit('user/logIn', { user })
+      this.$store.commit('user/logIn', user)
       this.$store.commit('auth/status', AuthStatus.loggedIn)
     }
   }

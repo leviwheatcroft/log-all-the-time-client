@@ -76,6 +76,7 @@ div(
           type="password"
           v-model="passwordConfirmation"
           placeholder="password"
+          v-on:keyup.enter="register"
         )
     .row(
       class="flex flex-row gap-4 mt-4"
@@ -92,7 +93,7 @@ div(
         class="flex-grow"
       )
       tpl-button(
-        @click.native="clickRegister"
+        @click.native="register"
       )
         icon(
           name="user-plus"

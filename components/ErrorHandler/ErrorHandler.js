@@ -4,9 +4,9 @@ const ErrorHandler = {
       errors: [],
       handlerComponents: {
         NO_CONNECTION: 'error-handler-bad-connection',
-        AUTH_INACTIVE_USER: 'error-handler-force-log-out',
+        AuthInactiveUserError: 'error-handler-force-log-out',
         AUTH_FAILED: 'error-handler-force-log-out',
-        AUTH_REFRESH_TIMEOUT: 'error-handler-force-log-out'
+        AuthRefreshTimeoutError: 'error-handler-force-log-out'
       }
     }
   },
