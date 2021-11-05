@@ -1,10 +1,14 @@
 import {
-  AuthStatus
+  AuthStatus,
+  ValidState
 } from '../../../lib/enums'
 import apollo from '../../../apollo'
 import {
   cookies
 } from '../../../lib'
+import {
+  gqlErrorManager
+} from '../../../componentMixins'
 
 const {
   mutations: {
@@ -16,16 +20,21 @@ const {
 } = apollo
 
 const Login = {
+  mixins: [gqlErrorManager],
   data () {
-    const email = ''
-    const name = ''
-    const password = ''
-    const passwordConfirmation = ''
     return {
-      email,
-      name,
-      password,
-      passwordConfirmation
+      email: '',
+      emailValidState: ValidState.unchecked,
+      managedErrorNames: ['AuthBadEmailError'],
+      password: ''
+    }
+  },
+  watch: {
+    email () {
+      if (this.emailValidState === ValidState.unchecked)
+        return
+      this.clearError('AuthBadEmailError')
+      this.emailValidState = ValidState.unchecked
     }
   },
   methods: {
@@ -34,13 +43,21 @@ const Login = {
         email,
         password
       } = this
-      const loginResult = await this.$apollo.mutate({
-        mutation: UserLoginM,
-        variables: {
-          email,
-          password
-        }
-      })
+      let loginResult
+      try {
+        loginResult = await this.$apollo.mutate({
+          mutation: UserLoginM,
+          variables: {
+            email,
+            password
+          }
+        })
+      } catch (err) {
+        this.manageErrors(err.graphQLErrors)
+        if (this.hasError('AuthBadEmailError'))
+          this.emailValidState = ValidState.invalid
+        return
+      }
       cookies.setTokens(loginResult.data.UserLoginM)
       const userResult = await this.$apollo.query({
         query: SelfQ

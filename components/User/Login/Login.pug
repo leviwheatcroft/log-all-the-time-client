@@ -10,7 +10,9 @@ div(
         label(
           for="email"
         ) Email :
-      tpl-faux-input
+      tpl-faux-input(
+        :extraClasses="emailValidState.value"
+      )
         icon(
           name="at-sign"
         )
@@ -19,6 +21,10 @@ div(
           v-model="email"
           placeholder="mcboatface@gmail.com"
         )
+    tpl-alert.mt-4(
+      v-if="hasError('AuthBadEmailError')"
+    )
+      | This email address is not registered.
     .row(
       class="flex flex-row gap-4 mt-4"
     )

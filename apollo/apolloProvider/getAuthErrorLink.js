@@ -15,7 +15,7 @@ const errorHandlers = {
     // reduce({ USER_LOG_OUT: {} })
     // window.location.href = '/#/login'
   },
-  AUTH_BAD_EMAIL () {},
+  AuthBadEmailError () {},
   AUTH_BAD_PASSWORD () {},
   NEW_USER_ERROR () {},
   AUTH_FAILED (err) {
@@ -62,6 +62,8 @@ function getAuthErrorLink (ctx) {
     // the data it's expecting
     if (graphQLErrors) {
       graphQLErrors.forEach((err) => {
+        // eslint-disable-next-line
+        console.log(err)
         if (errorHandlers[err.name])
           errorHandlers[err.name](err, ctx)
         else
