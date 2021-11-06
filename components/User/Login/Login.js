@@ -25,17 +25,31 @@ const Login = {
     return {
       email: '',
       emailValidState: ValidState.unchecked,
-      managedErrorNames: ['AuthBadEmailError'],
+      passwordValidState: ValidState.unchecked,
+      managedErrors: {
+        AuthBadEmailError: 'emailValidState',
+        AuthBadPasswordError: 'passwordValidState',
+        AuthInactiveUserError: 'emailValidState'
+      },
       password: ''
     }
   },
   watch: {
     email () {
-      if (this.emailValidState === ValidState.unchecked)
-        return
-      this.clearError('AuthBadEmailError')
-      this.emailValidState = ValidState.unchecked
-    }
+      this.clearValidState('emailValidState')
+      // if (this.emailValidState === ValidState.unchecked)
+      //   return
+      // this.clearError('AuthBadEmailError')
+      // this.clearError('AuthInactiveUserError')
+      // this.emailValidState = ValidState.unchecked
+    },
+    password () {
+      this.clearValidState('passwordValidState')
+      // if (this.passwordValidState === ValidState.unchecked)
+      //   return
+      // this.clearError('AuthBadPasswordError')
+      // this.passwordValidState = ValidState.unchecked
+    },
   },
   methods: {
     async logIn () {
@@ -54,8 +68,6 @@ const Login = {
         })
       } catch (err) {
         this.manageErrors(err.graphQLErrors)
-        if (this.hasError('AuthBadEmailError'))
-          this.emailValidState = ValidState.invalid
         return
       }
       cookies.setTokens(loginResult.data.UserLoginM)

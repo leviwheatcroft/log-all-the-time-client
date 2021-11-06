@@ -32,7 +32,9 @@ div(
         label(
           for="password"
         ) Password :
-      tpl-faux-input
+      tpl-faux-input(
+        :extraClasses="passwordValidState.value"
+      )
         icon(
           name="key"
         )
@@ -43,6 +45,10 @@ div(
           placeholder="password"
           v-on:keyup.enter="logIn"
         )
+    tpl-alert.mt-4(
+      v-if="hasError('AuthBadPasswordError')"
+    )
+      | That's not the right password.
     .row(
       class="flex flex-row gap-4 mt-4"
     )

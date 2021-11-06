@@ -1,33 +1,50 @@
+import {
+  ValidState
+} from '../lib/enums'
+
 export const gqlErrorManager = {
   data () {
     return {
-      managedErrorNames: [],
+      managedErrors: {},
       gqlErrors: {}
     }
   },
   methods: {
     hasError (errorName) {
-      if (!this.managedErrorNames.includes(errorName))
-        throw new Error(`${errorName} is not a managed error`)
       return this.gqlErrors[errorName]
     },
     clearError (errorName) {
-      if (!this.managedErrorNames.includes(errorName))
-        throw new Error(`${errorName} is not a managed error`)
       this.gqlErrors[errorName] = undefined
     },
-    manageErrors (gqlErrors) {
-      this.gqlErrors = Object.fromEntries(
-        gqlErrors
-          .filter((e) => this.managedErrorNames.includes(e.name))
-          .map((e) => [e.name, e])
-      )
-      if (Object.keys(this.gqlErrors).length === gqlErrors.length)
+    clearValidState (invalidKey) {
+      if (this[invalidKey] === ValidState.unchecked)
         return
-      const unmanaged =
-        gqlErrors.filter((e) => !this.managedErrorNames.includes(e.name))
+      Object.entries(this.managedErrors)
+        .filter(([_, errorInvalidKey]) => errorInvalidKey === invalidKey)
+        .forEach(([errorName]) => {
+          this.gqlErrors[errorName] = undefined
+        })
+      this[invalidKey] = ValidState.unchecked
+    },
+    manageErrors (gqlErrors) {
+      const {
+        managedErrors
+      } = this
+      const unmanagedErrors = []
+      this.gqlErrors = gqlErrors.reduce((acc, e) => {
+        if (Object.keys(managedErrors).includes(e.name))
+          acc[e.name] = e
+        else
+          unmanagedErrors.push(e)
+        return acc
+      }, {})
+      Object.keys(this.gqlErrors).forEach((e) => {
+        this[this.managedErrors[e]] = ValidState.invalid
+      })
+      if (!unmanagedErrors.length)
+        return
       const error = new Error('Unmanaged graphql errors')
-      error.graphQLErrors = unmanaged
+      error.graphQLErrors = unmanagedErrors
       throw error
     }
   }
