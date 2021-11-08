@@ -1,67 +1,67 @@
 nav.nav-bar(
-  class="flex flex-row self-stretch py-4 px-8 gap-4 bg-gray-800 text-blue-50"
+  class="flex flex-row self-stretch py-3 px-8 gap-4 bg-gray-800 text-blue-50"
 )
   .brand(
     class="mx-4"
   )
     | Log All The Time
   .menu
-    nuxt-link(
-      :class=`[
-        'mx-4',
-        'pb-2',
-        'border-b-2',
-        'border-gray-800',
-        $route.name === 'index' ? 'border-blue-50' : ''
-      ]`
+    nav-bar-horizontal-link(
+      :extraClasses="$route.name === 'index' ? 'border-blue-50' : ''"
       to="/"
     ) Dashboard
-    nuxt-link(
-      :class=`[
-        'mx-4',
-        'pb-2',
-        'border-b-2',
-        'border-gray-800',
-        $route.name === 'reports' ? 'border-blue-50' : ''
-      ]`
+    nav-bar-horizontal-link(
+      :extraClasses="$route.name === 'reports' ? 'border-blue-50' : ''"
       to="/reports"
     ) Reports
-    nuxt-link(
-      :class=`[
-        'mx-4',
-        'pb-2',
-        'border-b-2',
-        'border-gray-800',
-        $route.name === 'meta' ? 'border-blue-50' : ''
-      ]`
-      to="/meta"
-    ) Meta
+    nav-bar-horizontal-link(
+      :extraClasses="$route.name === 'tags' ? 'border-blue-50' : ''"
+      to="/projects"
+    ) Projects
+    nav-bar-horizontal-link(
+      :extraClasses="$route.name === 'projects' ? 'border-blue-50' : ''"
+      to="/projects"
+    ) Tags
   .spacer(
     class="flex-grow"
   )
   .profile(
     v-if="name"
   )
-    nuxt-link(
-      :class=`[
-        'mx-4',
-        'pb-2',
-        'border-b-2',
-        'border-gray-800',
-        'flex',
-        'flex-row',
-        'items-center',
-        'gap-4',
-        $route.name === 'profile' ? 'border-blue-50' : ''
-      ]`
-      to="/profile"
+    .userMenu(
+      @click="showUserMenu = !showUserMenu"
+      class="relative"
     )
-      img.gravatar(
-        class="rounded-full w-6 h-6"
-        :src="gravatar"
+      .userMenuToggle(
+        class="mx-4 flex flex-row items-center gap-4 cursor-pointer"
       )
-      .name
-        | {{ name }}
+        img.gravatar(
+          class="rounded-full w-6 h-6"
+          :src="gravatar"
+        )
+        .name
+          | {{ name }}
+      .userMenuItems(
+        v-if="showUserMenu"
+        class="absolute top-9 right-0 bg-gray-800 z-10"
+      )
+        nav-bar-vertical-link(
+          to="/profile"
+          icon="user"
+        ) Profile
+        nav-bar-vertical-link(
+          to="/team"
+          icon="users"
+        ) Team
+        nav-bar-vertical-link(
+          to="/options"
+          icon="settings"
+        ) Options
+        nav-bar-vertical-bare(
+          @click.native="clickLogOut"
+          icon="log-out"
+        ) Log Out
+
   .log-in(
     v-if="!name"
   )
