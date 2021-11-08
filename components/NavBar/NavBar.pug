@@ -15,12 +15,12 @@ nav.nav-bar(
       to="/reports"
     ) Reports
     nav-bar-horizontal-link(
-      :extraClasses="$route.name === 'tags' ? 'border-blue-50' : ''"
+      :extraClasses="$route.name === 'projects' ? 'border-blue-50' : ''"
       to="/projects"
     ) Projects
     nav-bar-horizontal-link(
-      :extraClasses="$route.name === 'projects' ? 'border-blue-50' : ''"
-      to="/projects"
+      :extraClasses="$route.name === 'tags' ? 'border-blue-50' : ''"
+      to="/tags"
     ) Tags
   .spacer(
     class="flex-grow"

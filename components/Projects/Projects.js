@@ -1,26 +1,26 @@
 import { gql } from 'graphql-tag'
 import {
-  TagPartialQ
-} from '../../../apollo/queries'
+  ProjectPartialQ
+} from '../../apollo/queries'
 import {
-  TagUpdateM
-} from '../../../apollo/mutations'
+  ProjectUpdateM
+} from '../../apollo/mutations'
 
-const Tags = {
+const Projects = {
   apollo: {
-    tags: {
-      query: TagPartialQ,
+    projects: {
+      query: ProjectPartialQ,
       variables () {
         const {
-          tagPartial
+          projectPartial
         } = this
         return {
           limit: 24,
           offset: 0,
-          tagPartial
+          projectPartial
         }
       },
-      update ({ TagPartialQ: { docs, hasMore } }) {
+      update ({ ProjectPartialQ: { docs, hasMore } }) {
         this.hasMore = hasMore
         return docs
       },
@@ -28,20 +28,20 @@ const Tags = {
   },
   data () {
     return {
-      tagPartial: ''
+      projectPartial: ''
     }
   },
   methods: {
-    async toggleArchived (tag) {
+    async toggleArchived (project) {
       const {
         id,
         name,
         archived
-      } = tag
+      } = project
       await this.$apollo.mutate({
-        mutation: TagUpdateM,
+        mutation: ProjectUpdateM,
         variables: {
-          tag: {
+          project: {
             id,
             name,
             archived: !archived
@@ -50,27 +50,27 @@ const Tags = {
         update: (store, ctx) => {
           const {
             data: {
-              TagUpdateM: updatedTag
+              ProjectUpdateM: updatedProject
             }
           } = ctx
           store.writeFragment({
-            id: `Tag:${tag.id}`,
+            id: `Project:${project.id}`,
             fragment: gql`
-              fragment UpdatedTag on Tag {
+              fragment UpdatedProject on Project {
                 id
                 name
                 archived
               }
             `,
-            data: updatedTag
+            data: updatedProject
           })
         },
         optimisticResponse: {
           __typename: 'Mutation',
-          TagUpdateM: {
-            __typename: 'Tag',
-            ...tag,
-            archived: !tag.archived
+          ProjectUpdateM: {
+            __typename: 'Project',
+            ...project,
+            archived: !project.archived
           }
         }
       })
@@ -78,4 +78,4 @@ const Tags = {
   }
 }
 
-export default Tags
+export default Projects
