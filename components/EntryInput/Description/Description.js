@@ -16,6 +16,9 @@ const Description = {
       else
         this.validState = ValidState.valid
       return this.validState
+    },
+    resetValidation () {
+      this.validState = ValidState.unchecked
     }
   },
   watch: {

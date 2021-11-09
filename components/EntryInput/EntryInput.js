@@ -63,6 +63,9 @@ const EntryInput = {
       this.tags = []
       this.project = null
       this.user = null
+      this.$refs.description.resetValidation()
+      this.$refs.duration.resetValidation()
+      this.$refs.projects.resetValidation()
       this.$el.querySelector('input.description').focus()
     }
   },

@@ -21,6 +21,11 @@ const Duration = {
       validState,
     }
   },
+  watch: {
+    duration (value) {
+      this.durationRaw = this.duration ? durationAsHHMM(this.duration) : ''
+    }
+  },
   methods: {
     blurDuration () {
       if (this.durationRaw.length === 0)
@@ -53,6 +58,9 @@ const Duration = {
         }
       }
       return this.validState
+    },
+    resetValidation () {
+      this.validState = ValidState.unchecked
     }
   },
   mixins: [classes],

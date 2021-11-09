@@ -22,6 +22,9 @@ const Projects = {
       else
         this.validState = ValidState.valid
       return this.validState
+    },
+    resetValidation () {
+      this.validState = ValidState.unchecked
     }
   },
   props: {
