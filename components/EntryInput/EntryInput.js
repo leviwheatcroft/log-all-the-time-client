@@ -17,6 +17,7 @@ const EntryInput = {
   data () {
     const isNewEntry = !this.entry
     const tabindex = this.idx * 5
+    const uneditedEntry = this.isNewEntry ? false : { ...this.entry }
     const {
       date = midnightUtcMs(Date.now()),
       createdAt = Date.now(),
@@ -38,7 +39,8 @@ const EntryInput = {
       isNewEntry,
       tabindex,
       tags,
-      user
+      user,
+      uneditedEntry
     }
   },
   methods: {

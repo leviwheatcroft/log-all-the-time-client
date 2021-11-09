@@ -20,108 +20,121 @@ export const state = () => {
 }
 
 export const mutations = {
+  add,
+  update,
+  remove,
+  set,
+  dayCount,
+  period
+}
 
-  add (state, entry) {
-    assert('isEntry', entry)
-    const {
-      project: {
-        id,
-        name
-      },
-      duration,
-      date
-    } = entry
-    if (
-      date < state.dateFrom ||
-      date > state.dateTo
-    )
-      return
-    if (!state.daySummariesById[date]) {
-      state.daySummariesById[date] = {
-        dayDuration: 0,
-        projectSummariesById: {}
-      }
+function add (state, entry) {
+  assert('isEntry', entry)
+  const {
+    project: {
+      id,
+      name
+    },
+    duration,
+    date
+  } = entry
+  if (
+    date < state.dateFrom ||
+    date > state.dateTo
+  )
+    return
+  if (!state.daySummariesById[date]) {
+    state.daySummariesById[date] = {
+      dayDuration: 0,
+      projectSummariesById: {}
     }
-    const daySummary = state.daySummariesById[date]
-    const projectId = `${date}-${id}`
-    if (!daySummary.projectSummariesById[projectId]) {
-      daySummary.projectSummariesById[projectId] = {
-        id,
-        name,
-        projectDuration: duration
-      }
-    } else {
-      daySummary.projectSummariesById[projectId].projectDuration += duration
-    }
-    setMeta(state)
-  },
-
-  remove (state, entry) {
-    assert('isEntry', entry)
-    const {
-      project: {
-        id
-      },
-      duration,
-      date
-    } = entry
-    if (
-      date < state.dateFrom ||
-      date > state.dateTo
-    )
-      return
-    state.daySummariesById[date].projectSummariesById[id].duration -= duration
-    // delete project but leave date
-    if (state.daySummariesById[date].projectSummariesById[id].duration === 0)
-      delete state.daySummariesById[date].projectSummariesById[id]
-    setMeta(state)
-  },
-
-  set (state, { daySummaries, maxDayDuration }) {
-    state.maxDayDuration = maxDayDuration
-    state.daySummariesById = Object.fromEntries(
-      // daySummaries will be immutable apollo response
-      daySummaries
-        .map((d) => d)
-        // .sort method is inplace, so you need to clone the array first
-        .sort((a, b) => b.date - a.date)
-        .map((daySummary) => [
-          daySummary.id,
-          {
-            id: daySummary.id,
-            date: daySummary.date,
-            dayDuration: daySummary.dayDuration,
-            projectSummariesById: Object.fromEntries(
-              daySummary.projectSummaries.map((projectSummary) => [
-                projectSummary.id,
-                {
-                  id: projectSummary.id,
-                  name: projectSummary.name,
-                  projectDuration: projectSummary.projectDuration,
-                  portion: projectSummary.portion
-                }
-              ])
-            )
-          }
-        ])
-    )
-  },
-
-  dayCount (state, dayCount) {
-    state.dayCount = dayCount
-    state.dateFrom = offsetByDaysMs(state.dateTo, (dayCount - 1) * -1)
-  },
-
-  period (state, direction) {
-    state.dateTo = offsetByDaysMs(
-      state.dateTo,
-      state.dayCount * direction
-    )
-    state.dateFrom = offsetByDaysMs(
-      state.dateFrom,
-      (state.dayCount - 1) * direction
-    )
   }
+  const daySummary = state.daySummariesById[date]
+  const projectId = `${date}-${id}`
+  if (!daySummary.projectSummariesById[projectId]) {
+    daySummary.projectSummariesById[projectId] = {
+      id,
+      name,
+      projectDuration: duration
+    }
+  } else {
+    daySummary.projectSummariesById[projectId].projectDuration += duration
+  }
+  setMeta(state)
+}
+
+function update (state, { uneditedEntry, updatedEntry }) {
+  remove(state, uneditedEntry)
+  add(state, updatedEntry)
+}
+
+function remove (state, entry) {
+  assert('isEntry', entry)
+  const {
+    project: {
+      id
+    },
+    duration,
+    date
+  } = entry
+
+  if (
+    date < state.dateFrom ||
+    date > state.dateTo
+  )
+    return
+  const daySummary = state.daySummariesById[date]
+  const projectId = `${date}-${id}`
+  daySummary.projectSummariesById[projectId].duration -= duration
+  if (daySummary.projectSummariesById[projectId].duration === 0)
+    delete daySummary.projectSummariesById[projectId]
+  setMeta(state)
+}
+
+function set (state, { daySummaries, maxDayDuration }) {
+  state.maxDayDuration = maxDayDuration
+  state.daySummariesById = Object.fromEntries(
+    // daySummaries will be immutable apollo response
+    daySummaries
+      .map((d) => d)
+      // .sort method is inplace, so you need to clone the array first
+      .sort((a, b) => b.date - a.date)
+      .map((daySummary) => [
+        daySummary.id,
+        {
+          id: daySummary.id,
+          date: daySummary.date,
+          dayDuration: daySummary.dayDuration,
+          projectSummariesById: Object.fromEntries(
+            daySummary.projectSummaries.map((projectSummary) => [
+              projectSummary.id,
+              {
+                id: projectSummary.id,
+                name: projectSummary.name,
+                projectDuration: projectSummary.projectDuration,
+                portion: projectSummary.portion
+              }
+            ])
+          )
+        }
+      ])
+  )
+}
+
+function dayCount (state, dayCount) {
+  state.dayCount = dayCount
+  state.dateFrom = offsetByDaysMs(state.dateTo, (dayCount - 1) * -1)
+}
+
+function period (state, direction) {
+  state.dateTo = offsetByDaysMs(
+    state.dateTo,
+    state.dayCount * direction
+  )
+  state.dateFrom = offsetByDaysMs(
+    state.dateFrom,
+    (state.dayCount - 1) * direction
+  )
 }
 
 function setMeta (state) {

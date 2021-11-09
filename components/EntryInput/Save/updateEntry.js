@@ -12,7 +12,8 @@ export async function updateEntry () {
     project,
     tags,
     createdAt,
-    user
+    user,
+    uneditedEntry
   } = this
 
   const entry = {
@@ -32,7 +33,7 @@ export async function updateEntry () {
     }))
   }
 
-  // let isOptimisticResponse = true
+  let isOptimisticResponse = true
 
   await this.$apollo.mutate({
     mutation: EntryUpdateM,
@@ -45,13 +46,14 @@ export async function updateEntry () {
           EntryUpdateM: updatedEntry
         }
       } = ctx
-
       // update daySummaries
       // only for optimisticResponse, not for actual response
-      // TODO:
-      // - find a way to avoid doing this for actual response
-      // - need to know original duration so it can be removed
-      // this.$store.commit('daySummaries/add', upsertedEntry)
+      if (isOptimisticResponse) {
+        this.$store.commit('daySummaries/update', {
+          uneditedEntry,
+          updatedEntry
+        })
+      }
 
       // writeFragment would be intercepted by a typePolicy, but no
       // typePolicy exists for Entry.
@@ -72,6 +74,7 @@ export async function updateEntry () {
         `,
         data: updatedEntry
       })
+      isOptimisticResponse = false
     },
     optimisticResponse: {
       __typename: 'Mutation',

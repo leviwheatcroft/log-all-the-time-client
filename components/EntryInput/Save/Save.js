@@ -81,6 +81,10 @@ const Save = {
     reset: {
       required: true,
       type: Function
+    },
+    uneditedEntry: {
+      required: true,
+      type: Object
     }
   }
 }
