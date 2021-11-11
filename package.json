@@ -28,6 +28,7 @@
     "pug": "^3.0.2",
     "pug-lexer": "^5.0.1",
     "pug-plain-loader": "^1.1.0",
+    "purgecss-from-js": "^1.0.0",
     "raw-loader": "^4.0.2",
     "vue-apollo": "^3.0.7",
     "vue2-datepicker": "^3.10.1"

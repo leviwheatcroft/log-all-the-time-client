@@ -1,6 +1,7 @@
 import lex from 'pug-lexer'
+import purgecssFromJs from 'purgecss-from-js'
 
-const purgeFromPug = (content) => {
+const purgecssFromPug = (content) => {
   // see:
   // https://github.com/pugjs/pug-lexer/blob/master/test/cases/classes.expected.json
   // for an example of what the lexer return structure looks like
@@ -17,6 +18,8 @@ const purgeFromPug = (content) => {
       (
         token.name === 'class' ||
         token.name === ':class' ||
+        token.name === 'extraClasses' ||
+        token.name === ':extraClasses' ||
         token.name === 'id'
       )
     )
@@ -38,8 +41,12 @@ export default {
     options: {
       extractors: [
         {
-          extractor: purgeFromPug,
+          extractor: purgecssFromPug,
           extensions: ['pug']
+        },
+        {
+          extractor: purgecssFromJs,
+          extensions: ['js']
         }
       ]
     },

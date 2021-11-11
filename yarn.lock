@@ -9262,6 +9262,13 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
+purgecss-from-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/purgecss-from-js/-/purgecss-from-js-1.0.0.tgz#fb075b596b79857860a69c00ab5087f2718b82dd"
+  integrity sha512-sTs61vO7gOl3irS8L0WmiadY+YAESMIfKqUd67SRdzVov2udevSEgMyPCgzfLbtxnGJxxeObR2FJ4CfPf2T6Cg==
+  dependencies:
+    esprima "^4.0.1"
+
 purgecss@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-4.0.3.tgz#8147b429f9c09db719e05d64908ea8b672913742"
