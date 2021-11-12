@@ -1,5 +1,5 @@
 import lex from 'pug-lexer'
-import purgecssFromJs from 'purgecss-from-js'
+// import purgecssFromJs from 'purgecss-from-js'
 
 const purgecssFromPug = (content) => {
   // see:
@@ -44,12 +44,33 @@ export default {
           extractor: purgecssFromPug,
           extensions: ['pug']
         },
-        {
-          extractor: purgecssFromJs,
-          extensions: ['js']
-        }
+        // doesn't work. See:
+        // https://github.com/FullHuman/purgecss-from-js/issues/7
+        // use safelist instead
+        // {
+        //   extractor: purgecssFromJs,
+        //   extensions: ['js']
+        // }
       ]
     },
+    safelist: [
+      'icon',
+      'inline',
+      'mx-4',
+      'pb-2',
+      'border-b-2',
+      'border-gray-800',
+      'danger',
+      'text-left',
+      'w-20',
+      'rounded',
+      'whitespace-nowrap',
+      'm-2',
+      'p-2',
+      'min-content',
+      'background-blue'
+    ],
+
     content: [
       'components/**/*.{vue,js,pug}',
       'layouts/**/*.{vue,js,pug}',
