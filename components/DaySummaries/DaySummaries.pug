@@ -25,13 +25,13 @@ tpl-shadow-box.day-summaries(
       | Period:
       tpl-button-block
         button(
-          @click="clickPeriod(-1)"
+          @click="clickPeriod(1)"
         )
           icon(
             name="chevron-up"
           )
         button(
-          @click="clickPeriod(1)"
+          @click="clickPeriod(-1)"
         )
           icon(
             name="chevron-down"

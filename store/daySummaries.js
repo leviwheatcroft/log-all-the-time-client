@@ -133,7 +133,8 @@ function period (state, direction) {
   )
   state.dateFrom = offsetByDaysMs(
     state.dateFrom,
-    (state.dayCount - 1) * direction
+    // (state.dayCount - 1) * direction
+    state.dayCount * direction
   )
 }
 

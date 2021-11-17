@@ -55,7 +55,7 @@ const DaySummaries = {
       this.$store.commit('daySummaries/dayCount', count)
     },
     clickPeriod (direction) {
-
+      this.$store.commit('daySummaries/period', direction)
     }
   }
 }
