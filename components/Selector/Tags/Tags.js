@@ -10,6 +10,7 @@ const Tag = {
     async tagsQuery (tagPartial) {
       const result = await this.$apollo.query({
         query: TagPartialQ,
+        fetchPolicy: 'no-cache',
         variables: {
           tagPartial,
           limit: 12,

@@ -32,14 +32,14 @@ function getClient () {
 }
 
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient
+  defaultClient: apolloClient,
   // defaultOptions: {
   //   query: {
-  //     errorPolicy: 'all'
+  //     fetchPolicy: 'cache-first'
   //   },
-  //   mutate: {
-  //     errorPolicy: 'all'
-  //   }
+  //   // mutate: {
+  //   //   errorPolicy: 'all'
+  //   // }
   // }
 })
 

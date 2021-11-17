@@ -10,6 +10,7 @@ const Project = {
     async projectsQuery (projectPartial) {
       const result = await this.$apollo.query({
         query: ProjectPartialQ,
+        fetchPolicy: 'no-cache',
         variables: {
           projectPartial,
           limit: 12,
