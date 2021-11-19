@@ -64,6 +64,7 @@ tpl-shadow-box.day-summaries(
           width: projectSummary.portion + '%',
           backgroundColor: hexFromString(projectSummary.name)
         }`
+        :title="projectSummary.name"
       ) {{ projectSummary.name }}
     tpl-duration(
       :duration="daySummary.dayDuration"

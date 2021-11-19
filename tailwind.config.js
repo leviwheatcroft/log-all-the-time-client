@@ -20,6 +20,8 @@ const purgecssFromPug = (content) => {
         token.name === ':class' ||
         token.name === 'extraClasses' ||
         token.name === ':extraClasses' ||
+        token.name === 'classMixins' ||
+        token.name === ':classMixins' ||
         token.name === 'id'
       )
     )
@@ -68,7 +70,8 @@ export default {
       'm-2',
       'p-2',
       'min-content',
-      'background-blue'
+      'background-blue',
+      'w-24'
     ],
 
     content: [
