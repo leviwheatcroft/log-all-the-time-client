@@ -6,15 +6,23 @@ import {
 } from '../../../componentMixins'
 
 const Project = {
+  data () {
+    return {
+      cacheBust: 0
+    }
+  },
   methods: {
     async projectsQuery (projectPartial) {
+      this.cacheBust += 1
       const result = await this.$apollo.query({
         query: ProjectPartialQ,
-        fetchPolicy: 'no-cache',
+        // fetchPolicy doesn't work
+        // fetchPolicy: 'network-only',
         variables: {
           projectPartial,
           limit: 12,
-          includeArchived: false
+          includeArchived: false,
+          cacheBust: this.cacheBust
         }
       })
       const { data: { ProjectPartialQ: { docs: projectSuggestions } } } = result
