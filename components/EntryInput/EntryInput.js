@@ -18,8 +18,9 @@ const EntryInput = {
     const isNewEntry = !this.entry
     const tabindex = this.idx * 5
     const uneditedEntry = this.isNewEntry ? false : { ...this.entry }
+    const utcOffset = (new Date()).getTimezoneOffset() * 60 * 1000
     const {
-      date = midnightUtcMs(Date.now()),
+      date = midnightUtcMs(Date.now() - utcOffset),
       createdAt = Date.now(),
       description = '',
       duration = '',
