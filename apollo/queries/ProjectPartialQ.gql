@@ -3,14 +3,12 @@ query ProjectPartialQ(
   $limit: Int
   $offset: Int
   $includeArchived: Boolean
-  $cacheBust: Int
 ) {
   ProjectPartialQ(
     projectPartial: $projectPartial
     limit: $limit
     offset: $offset
     includeArchived: $includeArchived
-    cacheBust: $cacheBust
   ) {
     docs {
       ... on Project {

@@ -6,23 +6,16 @@ import {
 } from '../../../componentMixins'
 
 const Tag = {
-  data () {
-    return {
-      cacheBust: 0
-    }
-  },
   methods: {
     async tagsQuery (tagPartial) {
       this.cacheBust += 1
       const result = await this.$apollo.query({
         query: TagPartialQ,
-        // fetchPolicy doesn't work
-        // fetchPolicy: 'network-only',
+        fetchPolicy: 'network-only',
         variables: {
           tagPartial,
           limit: 12,
-          includeArchived: false,
-          cacheBust: this.cacheBust
+          includeArchived: false
         }
       })
       const { data: { TagPartialQ: { docs: tagSuggestions } } } = result

@@ -49,8 +49,9 @@ export async function createEntry () {
       } = ctx
 
       // update daySummaries
-      // only for optimisticResponse, not for actual response
-      if (isOptimisticResponse)
+      // only for actual response not for optimisticResponse
+      // we need actual response so we have the correct projectId
+      if (!isOptimisticResponse)
         this.$store.commit('daySummaries/add', insertedEntry)
 
       // need to resolve hasMore for the EntryFilterQ response

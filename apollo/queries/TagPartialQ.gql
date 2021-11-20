@@ -3,14 +3,12 @@ query TagPartialQ(
   $limit: Int
   $offset: Int
   $includeArchived: Boolean
-  $cacheBust: Int
 ) {
   TagPartialQ(
     tagPartial: $tagPartial
     limit: $limit
     offset: $offset
     includeArchived: $includeArchived
-    cacheBust: $cacheBust
   ) {
     docs {
       ... on Tag {

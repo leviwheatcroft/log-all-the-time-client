@@ -9,6 +9,7 @@ import {
 const Base = {
   data () {
     return {
+      lastItemPartial: '',
       itemPartial: '',
       itemSuggestions: [],
       loading: false
@@ -34,11 +35,11 @@ const Base = {
     },
     clickItemAdd (item) {
       this.updateItems([...this._items, item])
-      this.itemPartial = ''
+      this.reset()
     },
     clickItemRemove ({ name }) {
       this.updateItems(this._items.filter((i) => i.name !== name))
-      this.itemPartial = ''
+      this.reset()
     },
     updateItems (items) {
       const {
@@ -65,7 +66,7 @@ const Base = {
         this.updateItems([...this._items, this.itemSuggestions[0]])
       else if (this.allowNewItem)
         this.updateItems([...this._items, { id: 0, name: this.itemPartial }])
-      this.itemPartial = ''
+      this.reset()
     },
     inputItemPartial (itemPartial) {
       this.itemPartial = itemPartial
@@ -102,7 +103,11 @@ const Base = {
       this.loading += 1
       this.itemSuggestions = await this.itemsQuery(this.itemPartial)
       this.loading -= 1
-    }, 500)
+    }, 500),
+    reset () {
+      this.itemPartial = ''
+      this.lastItemPartial = ''
+    }
   },
   mixins: [classes],
   props: {
