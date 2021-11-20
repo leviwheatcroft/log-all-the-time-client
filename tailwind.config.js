@@ -25,7 +25,7 @@ const purgecssFromPug = (content) => {
         token.name === 'id'
       )
     )
-      selectors.push(...(token.val.match(/[\w-/:]+(?<!:)/g) || []))
+      selectors.push(...(token.val.match(/[\w-./:]+(?<!:)/g) || []))
   }
   return selectors
 }
