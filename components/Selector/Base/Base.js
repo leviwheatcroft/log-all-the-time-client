@@ -34,10 +34,14 @@ const Base = {
       return asRgb(str)
     },
     clickItemAdd (item) {
+      // eslint-disable-next-line
+      console.log('cia')
       this.updateItems([...this._items, item])
       this.reset()
     },
     clickItemRemove ({ name }) {
+      // eslint-disable-next-line
+      console.log('cir')
       this.updateItems(this._items.filter((i) => i.name !== name))
       this.reset()
     },
@@ -45,6 +49,8 @@ const Base = {
       const {
         isMultiItem
       } = this
+      // eslint-disable-next-line
+      console.log({ isMultiItem, items })
       if (isMultiItem)
         this.$emit('updateItems', items)
       else if (items.length)
@@ -58,6 +64,8 @@ const Base = {
         event.keyCode !== 13
       )
         return
+      // eslint-disable-next-line
+      console.log({ keyCode: event.keyCode, itemPartial: this.itemPartial })
       if (this.itemPartial === '')
         return
       // don't preventDefault, tab should move to next field

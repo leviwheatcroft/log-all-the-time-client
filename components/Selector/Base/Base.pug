@@ -4,21 +4,12 @@ tpl-faux-input.item-selector(
   slot(
     name="icon-item"
   )
-  .item-selected-group(
-    class="flex flex-row"
-  )
-  tpl-meta.item-selected(
+  selector-base-item-selected(
     v-for="selectedItem in _items"
-    :hashColor="selectedItem.name"
-    :extraClasses="{m: 'm-1', p: 'p-1 pl-2', h: 'h-8' }"
+    :item="selectedItem"
     :key="selectedItem.id"
+    :clickItemRemove="clickItemRemove"
   )
-    | {{ selectedItem.name }}
-    icon(
-      class="cursor-pointer w-4 h-4 inline mr-1"
-      name="x"
-      @click="clickItemRemove(selectedItem)"
-    )
   .item-partial-container.grow
     input.item-partial(
       :tabindex="inputTabindex ? inputTabindex : ''"
