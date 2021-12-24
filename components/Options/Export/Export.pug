@@ -1,0 +1,59 @@
+.options-export(
+  class="w-2/4 mx-auto"
+)
+  tpl-label-bar
+    template(
+      v-slot:label
+    ) Export Options
+  .option-item(
+    class="flex flex-row gap-4 mt-4"
+  )
+    tpl-faux-input-label(
+      extraClasses="w-1/3"
+    )
+      label(
+        for="export-date-format"
+      ) Export Date Format
+    tpl-faux-input
+      icon(
+        name="calendar"
+      )
+      input.export-date-format(
+        name="export-date-format"
+        v-model='localExportDateFormat'
+      )
+  .option-item(
+    class="flex flex-row gap-4 mt-4"
+  )
+    tpl-faux-input-label(
+      extraClasses="w-1/3"
+    )
+      label(
+        for="export-duration-format"
+      ) Export Duration Format
+    tpl-faux-input
+      icon(
+        name="clock"
+      )
+      input.export-duration-format(
+        name="export-duration-format"
+        v-model='localExportDurationFormat'
+      )
+  .option-save(
+    class="flex flex-row gap-4 mt-4"
+  )
+    .flex-grow
+    tpl-button(
+      @click="clickSave"
+    )
+      icon(
+        v-if="savePending === 0"
+        name="file-text"
+      )
+      icon(
+        v-if="savePending > 0"
+        extraClasses="spin"
+        name="loader"
+      )
+      span Save
+      

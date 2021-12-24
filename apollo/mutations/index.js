@@ -5,6 +5,7 @@ const EntryCreateM = require('./EntryCreateM')
 const EntryUpdateM = require('./EntryUpdateM')
 const TagUpdateM = require('./TagUpdateM')
 const ProjectUpdateM = require('./ProjectUpdateM')
+const UserOptionM = require('./UserOptionM')
 
 module.exports = {
   UserRefreshM,
@@ -14,4 +15,5 @@ module.exports = {
   EntryUpdateM,
   TagUpdateM,
   ProjectUpdateM,
+  UserOptionM
 }

@@ -1,0 +1,12 @@
+mutation UserOptionM(
+  $exportDateFormat: String
+  $exportDurationFormat: String
+) {
+  UserOptionM(
+    exportDateFormat: $exportDateFormat
+    exportDurationFormat: $exportDurationFormat
+  ) {
+    exportDateFormat
+    exportDurationFormat
+  }
+}

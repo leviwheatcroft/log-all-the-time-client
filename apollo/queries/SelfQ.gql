@@ -3,5 +3,13 @@ query SelfQ {
     id
     name
     gravatar
+    dialogs {
+      key
+      hidden
+    }
+    options {
+      exportDateFormat
+      exportDurationFormat
+    }
   }
 }

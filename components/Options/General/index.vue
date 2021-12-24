@@ -1,2 +1,2 @@
-<template lang="pug" src="./General.pug">foo</template>
+<template lang="pug" src="./General.pug"></template>
 <script src="./General.js"></script>
