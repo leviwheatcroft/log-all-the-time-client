@@ -80,5 +80,10 @@ export default {
 
   styleResources: {
     less: './assets/css/vars/*.less'
+  },
+
+  server: {
+    host: '0.0.0.0',
+    port: 3000
   }
 }
