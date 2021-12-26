@@ -71,4 +71,8 @@ button {
 button.bare {
   background-color: transparent;
 }
+button.disabled {
+  cursor: not-allowed;
+  color: @light60;
+}
 </style>

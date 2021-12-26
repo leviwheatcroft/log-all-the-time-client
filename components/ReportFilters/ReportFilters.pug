@@ -37,9 +37,16 @@ tpl-shadow-box.report-filters
       :inputTabindex="4"
     )
     div(
-      class="flex flex-row flex-grow"
+      class="flex flex-row flex-grow gap-4"
     )
       .flex-grow
+      tpl-button(
+        @click="clickExportHandler"
+      )
+        icon(
+          name="file-text"
+        )
+        span Export
       tpl-button(
         :tabindex="4"
         @click="clickApplyHandler"
@@ -48,51 +55,5 @@ tpl-shadow-box.report-filters
           name="file-text"
         )
         span Apply
-  div(
-    class="mt-4"
-  )
-    tpl-button(
-      extraClasses="bare"
-      @click="showExportOptions = !showExportOptions"
-    )
-      span Export
-      icon(
-        :name="showExportOptions ? 'chevron-up' : 'chevron-down'"
-      )
+    a.download
 
-  .export-options(
-    v-if="showExportOptions"
-  )
-    tpl-label-bar
-      template(
-        v-slot:label
-      ) Export Options
-    div(
-      class="flex flex-row gap-4 flex-wrap"
-    )
-      tpl-faux-input
-        icon(
-          name="calendar"
-        )
-        input.export-date-format(
-          v-model='exportDateFormat'
-        )
-      tpl-faux-input
-        icon(
-          name="clock"
-        )
-        input.export-duration-format(
-          v-model='exportDurationFormat'
-        )
-      div(
-        class="flex flex-row flex-grow"
-      )
-        .flex-grow
-        tpl-button(
-          @click="clickExportCsvHandler"
-        )
-          icon(
-            name="file-text"
-          )
-          span Export
-        a.download

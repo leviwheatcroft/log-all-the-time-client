@@ -18,10 +18,7 @@ const ReportFilters = {
       dateRange,
       tags,
       projects,
-      users,
-      showExportOptions: false,
-      exportDateFormat: 'DD/MM/YY',
-      exportDurationFormat: 'HH:mm'
+      users
     }
   },
   methods: {
@@ -39,14 +36,12 @@ const ReportFilters = {
         users,
       })
     },
-    async clickExportCsvHandler () {
+    async clickExportHandler () {
       const {
         dateRange: [dateFrom, dateTo],
         tags,
         projects,
-        users,
-        // exportDateFormat: dateFormat,
-        // exportDurationFormat: durationFormat
+        users
       } = this
       const result = await this.$apollo.query({
         query: EntryFilterAsCsvQ,
@@ -55,9 +50,7 @@ const ReportFilters = {
           dateTo,
           tags,
           projects,
-          users,
-          // dateFormat,
-          // durationFormat,
+          users
         }
       })
       const {

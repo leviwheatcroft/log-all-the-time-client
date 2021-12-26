@@ -61,7 +61,7 @@ const Options = {
       await this.$apollo.mutate({
         mutation: UserOptionM,
         variables: {
-          options
+          ...options
         }
       })
       this.savePending -= 1

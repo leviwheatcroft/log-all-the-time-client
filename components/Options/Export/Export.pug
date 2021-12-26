@@ -45,6 +45,7 @@
     .flex-grow
     tpl-button(
       @click="clickSave"
+      :extraClasses="saveRequired ? '' : 'disabled'"
     )
       icon(
         v-if="savePending === 0"

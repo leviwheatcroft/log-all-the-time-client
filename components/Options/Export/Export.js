@@ -11,6 +11,14 @@ const Export = {
       durationFormatValidState: ValidState.unchecked
     }
   },
+  computed: {
+    saveRequired () {
+      return (
+        this.localExportDateFormat !== this.userOptions.exportDateFormat ||
+        this.localExportDurationFormat !== this.userOptions.exportDurationFormat
+      )
+    }
+  },
   methods: {
     validate () {
       const {
@@ -31,6 +39,8 @@ const Export = {
       )
     },
     clickSave () {
+      if (!this.saveRequired)
+        return
       this.$emit('save', {
         exportDateFormat: this.localExportDateFormat,
         exportDurationFormat: this.localExportDurationFormat
